@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import * as ort from 'onnxruntime-web';
 
 @Component({
   selector: 'app-starry-background',
@@ -40,6 +41,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   private mouseY = 0;
   private sparkleInterval: any;
   private current_pixel_val = 10;
+  private session: ort.InferenceSession | null = null;
   
   // Pixel font definitions for characters
   private pixelCharacters: number[][][] = [
@@ -165,6 +167,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       // Initialize the drawing recorder
       this.initializeDrawingRecorder();
     }
+    await this.loadModel();
   }
 
   ngOnDestroy(): void {
@@ -178,6 +181,15 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       if (this.recordingTimeout) {
         clearTimeout(this.recordingTimeout);
       }
+    }
+  }
+
+  private async loadModel() {
+    try {
+      this.session = await ort.InferenceSession.create('assets/mnist-12-int8.onnx');
+      console.log('Model loaded successfully');
+    } catch (error) {
+      console.error('Error loading model:', error);
     }
   }
 
