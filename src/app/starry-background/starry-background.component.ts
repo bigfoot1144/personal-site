@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, PLATFOR
 import { isPlatformBrowser } from '@angular/common';
 import * as ort from 'onnxruntime-web';
 
+ort.env.wasm.wasmPaths = 'onnxruntime/';
+
 @Component({
   selector: 'app-starry-background',
   standalone: true,
@@ -126,12 +128,12 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   
   // New properties for drawing recording
   private drawingRecorder: number[][] = [];
+  private resized: number[][] = [];
   private canvasWidth = 0;
   private canvasHeight = 0;
   private isRecording = false;
   private recordingTimeout: any;
   private recordingDuration = 2000; // 2 seconds
-
   private topLeft = {row: 0, col: 0};
   private topRight = {row: 0, col: 0};
   private bottomLeft = {row: 0, col: 0};
@@ -186,146 +188,177 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
   private async loadModel() {
     try {
+      ort.env.wasm.wasmPaths = "/onnxruntime/"
       this.session = await ort.InferenceSession.create('assets/mnist-12-int8.onnx');
       console.log('Model loaded successfully');
     } catch (error) {
       console.error('Error loading model:', error);
     }
   }
-
+  
   private getMnistInputArray(lineThickness = 1): void {
+    // Ensure drawingRecorder has valid data before proceeding
+    if (!this.drawingRecorder || this.drawingRecorder.length === 0 || !this.drawingRecorder[0] || this.drawingRecorder[0].length === 0) {
+        console.error("Drawing data is not available.");
+        this.resized = []; // Clear or set to default empty state
+        return;
+    }
+
     // Step 1: Extract bounding box coordinates with padding
     let minRow = this.topLeft.row;
-    let maxRow = this.bottomLeft.row;
-    let minCol = this.topLeft.col;
-    let maxCol = this.topRight.col;
-  
+    let maxRow = this.bottomLeft.row; // Assuming bottomLeft defines max row extent
+    let minCol = this.topLeft.col;    // Assuming topLeft defines min col extent
+    let maxCol = this.topRight.col;   // Assuming topRight defines max col extent
+
+    // Basic validation for coordinates
+      if (minRow > maxRow || minCol > maxCol) {
+          console.warn("Invalid bounding box coordinates detected.");
+          // You might want to calculate the actual min/max from drawingRecorder if points aren't guaranteed
+          // For now, let's just return or handle as an error state
+          this.resized = [];
+          return;
+      }
+
     // Calculate bounding box dimensions
     const bboxHeight = maxRow - minRow + 1;
     const bboxWidth = maxCol - minCol + 1;
-    
+
     // Calculate padding (20% of the bounding box size)
     const paddingVertical = Math.ceil(bboxHeight * 0.2);
     const paddingHorizontal = Math.ceil(bboxWidth * 0.2);
-    
-    // Apply padding to the bounding box (with boundary checks)
+
+    // Apply padding to the bounding box (with boundary checks against drawingRecorder dimensions)
+    const sourceHeight = this.drawingRecorder.length;
+    const sourceWidth = this.drawingRecorder[0].length;
     minRow = Math.max(0, minRow - paddingVertical);
-    maxRow = Math.min(this.drawingRecorder.length - 1, maxRow + paddingVertical);
+    maxRow = Math.min(sourceHeight - 1, maxRow + paddingVertical);
     minCol = Math.max(0, minCol - paddingHorizontal);
-    maxCol = Math.min(this.drawingRecorder[0].length - 1, maxCol + paddingHorizontal);
-    
+    maxCol = Math.min(sourceWidth - 1, maxCol + paddingHorizontal);
+
     // Recalculate dimensions with padding
     const newBboxHeight = maxRow - minRow + 1;
     const newBboxWidth = maxCol - minCol + 1;
     const maxDim = Math.max(newBboxHeight, newBboxWidth);
-  
+
     // Step 2: Create a square array for the padded bounding box
     const square = new Array(maxDim);
     for (let i = 0; i < maxDim; i++) {
       square[i] = new Array(maxDim).fill(0);
     }
-    
+
     // Copy data into square array, centered
     const offsetRow = Math.floor((maxDim - newBboxHeight) / 2);
     const offsetCol = Math.floor((maxDim - newBboxWidth) / 2);
-    
+
     for (let r = minRow; r <= maxRow; r++) {
+      // Ensure the row exists in the source data
+      if (r < 0 || r >= sourceHeight) continue;
       for (let c = minCol; c <= maxCol; c++) {
-        square[r - minRow + offsetRow][c - minCol + offsetCol] = this.drawingRecorder[r][c];
+          // Ensure the column exists in the source data
+          if (c < 0 || c >= sourceWidth) continue;
+
+          const targetRow = r - minRow + offsetRow;
+          const targetCol = c - minCol + offsetCol;
+
+          // Ensure target indices are within the 'square' bounds
+          if (targetRow >= 0 && targetRow < maxDim && targetCol >= 0 && targetCol < maxDim) {
+              square[targetRow][targetCol] = this.drawingRecorder[r][c] > 0 ? 255 : 0; // Assuming input is 0/1, output 0/255
+          }
       }
     }
-  
+
+
     // Step 3: Thicken the lines with configurable thickness
     // Calculate kernel size based on input parameter and scale
-    const baseKernelSize = Math.max(1, Math.floor(maxDim / 112)); // Base thickness (smaller than before)
-    const kernelSize = Math.max(1, Math.round(baseKernelSize * lineThickness));
-    
+    const baseKernelSize = Math.max(1, Math.floor(maxDim / 112)); // Base thickness
+    const kernelSize = Math.max(1, Math.round(baseKernelSize * lineThickness)); // Effective radius
+
     const thickened = new Array(maxDim);
     for (let i = 0; i < maxDim; i++) {
-      thickened[i] = new Array(maxDim).fill(0);
+        thickened[i] = new Array(maxDim).fill(0);
     }
-    
+
+    // Simple dilation logic
     for (let y = 0; y < maxDim; y++) {
-      for (let x = 0; x < maxDim; x++) {
-        // Only process this costly operation if there's content nearby
-        if (square[y][x] > 0) {
-          thickened[y][x] = 255;
-          continue;
-        }
-        
-        // Check neighborhood for content
-        let hasContent = false;
-        const yMin = Math.max(0, y - kernelSize);
-        const yMax = Math.min(maxDim - 1, y + kernelSize);
-        const xMin = Math.max(0, x - kernelSize);
-        const xMax = Math.min(maxDim - 1, x + kernelSize);
-        
-        for (let ny = yMin; ny <= yMax; ny++) {
-          for (let nx = xMin; nx <= xMax; nx++) {
-            if (square[ny][nx] > 0) {
-              hasContent = true;
-              break;
+        for (let x = 0; x < maxDim; x++) {
+            // If the pixel in the original square is set, the thickened one definitely is
+            if (square[y][x] > 0) {
+                thickened[y][x] = 255;
+                continue; // Skip neighborhood check if already white
             }
-          }
-          if (hasContent) break;
+
+            // Check neighborhood in 'square' array for any white pixel
+            let foundNeighbor = false;
+            const yStart = Math.max(0, y - kernelSize);
+            const yEnd = Math.min(maxDim - 1, y + kernelSize);
+            const xStart = Math.max(0, x - kernelSize);
+            const xEnd = Math.min(maxDim - 1, x + kernelSize);
+
+            for (let ny = yStart; ny <= yEnd; ny++) {
+                for (let nx = xStart; nx <= xEnd; nx++) {
+                    if (square[ny][nx] > 0) {
+                        thickened[y][x] = 255; // Set current pixel in thickened if neighbor found
+                        foundNeighbor = true;
+                        break; // Break inner loop
+                    }
+                }
+                if (foundNeighbor) break; // Break outer loop
+            }
         }
-        
-        thickened[y][x] = hasContent ? 255 : 0;
-      }
     }
-  
-    // Step 4: Resize to 28x28 using optimized area sampling
-    const resized = new Array(28);
+
+
+    // Step 4: Resize to 28x28 using optimized area sampling (from 'thickened' array)
+    const finalResizedOutput = new Array(28); // Use a distinct local variable name
     for (let i = 0; i < 28; i++) {
-      resized[i] = new Array(28).fill(0);
+      finalResizedOutput[i] = new Array(28).fill(0);
     }
-    
+
     const scale = maxDim / 28;
-    
+
     for (let y = 0; y < 28; y++) {
       const sourceYStart = Math.floor(y * scale);
-      const sourceYEnd = Math.min(maxDim - 1, Math.floor((y + 1) * scale - 1));
-      
+      // Correct end calculation: should go up to *next* pixel's start, minus epsilon, then floor/ceil.
+      // Simpler: map the *center* of the target pixel back to the source range.
+      // Or use the average of all source pixels that overlap the target pixel.
+      // The provided logic samples a block. Let's refine the end slightly.
+      const sourceYEnd = Math.min(maxDim, Math.ceil((y + 1) * scale)); // Use ceil for end, maxDim exclusive bound
+
       for (let x = 0; x < 28; x++) {
         const sourceXStart = Math.floor(x * scale);
-        const sourceXEnd = Math.min(maxDim - 1, Math.floor((x + 1) * scale - 1));
-        
+        const sourceXEnd = Math.min(maxDim, Math.ceil((x + 1) * scale)); // Use ceil for end, maxDim exclusive bound
+
         let sum = 0;
         let count = 0;
-        
-        // Optimized area sampling with early termination
-        for (let sy = sourceYStart; sy <= sourceYEnd; sy++) {
-          for (let sx = sourceXStart; sx <= sourceXEnd; sx++) {
-            sum += thickened[sy][sx];
-            count++;
-            
-            // Early termination if we've already found enough white pixels
-            if (sum > count * 127) {
-              // We'll definitely exceed the threshold, no need to check more pixels
-              resized[y][x] = 255;
-              sy = sourceYEnd + 1; // Break outer loop
-              break;
-            }
+
+        for (let sy = sourceYStart; sy < sourceYEnd; sy++) { // Iterate up to (but not including) sourceYEnd
+          // Ensure source row is valid
+          if (sy < 0 || sy >= maxDim) continue;
+          for (let sx = sourceXStart; sx < sourceXEnd; sx++) { // Iterate up to (but not including) sourceXEnd
+              // Ensure source col is valid
+              if (sx < 0 || sx >= maxDim) continue;
+              sum += thickened[sy][sx]; // Sample from the 'thickened' array
+              count++;
           }
         }
-        
-        // Only calculate average if we haven't already set the value
-        if (resized[y][x] === 0 && count > 0) {
-          resized[y][x] = (sum / count) > 127 ? 255 : 0;
+
+        // Calculate average and set pixel value (0 or 255)
+        if (count > 0) {
+            // Using > 0 instead of > 127 makes it sensitive to any white pixel in the area
+            // If you want average intensity, use: (sum / count) > threshold (e.g., 127)
+            finalResizedOutput[y][x] = (sum / count) > 1 ? 255 : 0; // Threshold slightly above 0 to catch any white
+        } else {
+            finalResizedOutput[y][x] = 0; // No source pixels mapped? Default to black.
         }
       }
     }
-  
-    // Step 5: Output to console
-    console.log(resized);
-    this.current_pixel_val += 1;
-    if(this.current_pixel_val > 10)
-    {
-      this.current_pixel_val = 0;
-    }
+
+    // Step 5: Assign the result to the class member variable
+    this.resized = finalResizedOutput; // <-- Assignment happens here
+
+    // Optional: Log if needed for debugging
+    console.log("Processed MNIST input saved to this.resized"); // You can log this.resized if you want to see it
   }
-
-
   
   // Function to draw a bounding box based on corner coordinates
   private drawBoundingBox(): void {
@@ -522,6 +555,96 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     }
   }
 
+  private async runInference(){ // Added Promise<void> for async
+    // --- 1. Check if session and input are ready ---
+    if (!this.session) {
+      console.error("Inference session not initialized yet.");
+      return;
+    }
+    if (!this.resized || this.resized.length !== 28 || !this.resized[0] || this.resized[0].length !== 28) {
+      console.error("Invalid input array prvided for inference.");
+      return;
+    }
+  
+    try {
+      // --- 2. Get Model Input/Output Names ---
+      // IMPORTANT: Replace 'Input3' and 'Plus214_Output_0' with the actual names
+      //            logged from `this.session.inputNames[0]` and `this.session.outputNames[0]`
+      //            after loading your specific model.
+      const inputName = this.session.inputNames[0];
+      const outputName = this.session.outputNames[0];
+      // console.log(`Using Input: ${inputName}, Output: ${outputName}`); // Uncomment for debugging
+  
+      // --- 3. Prepare Input Tensor ---
+      const height = 28;
+      const width = 28;
+      const channels = 1; // Grayscale for MNIST
+      const batchSize = 1;
+      const expectedInputShape = [batchSize, channels, height, width]; // Shape: [1, 1, 28, 28]
+      const inputSize = batchSize * channels * height * width; // 784
+  
+      // Flatten the 28x28 array and normalize (IMPORTANT STEP)
+      const flattenedData = new Float32Array(inputSize);
+      let k = 0;
+      for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+          // *** CRITICAL PREPROCESSING ***
+          // MNIST models usually expect input normalized to [0, 1] range.
+          // Assuming `this.resized` contains values 0 or 255 from your previous function:
+          flattenedData[k] = this.resized[i][j];
+          // If your model expects a different range (e.g., [-1, 1] or standardization), adjust accordingly!
+          k++;
+        }
+      }
+  
+      // Create the ONNX Runtime Tensor
+      // Assuming 'float32' input type, which is common. Change if your model differs.
+      const inputTensor = new ort.Tensor('float32', flattenedData, expectedInputShape);
+  
+      // --- 4. Prepare Feeds Object ---
+      // The key MUST match the model's input name
+      const feeds: Record<string, ort.Tensor> = {};
+      feeds[inputName] = inputTensor;
+  
+      // --- 5. Run Inference ---
+      // console.log('Running inference...'); // Uncomment for debugging
+      const results = await this.session.run(feeds);
+      // console.log('Inference completed.'); // Uncomment for debugging
+  
+      // --- 6. Process Output ---
+      const outputTensor = results[outputName]; // Access output tensor by its name
+      // Type assertion based on expected output (usually float32 probabilities for MNIST)
+      const outputData = outputTensor.data as Float32Array;
+      // const outputShape = outputTensor.dims; // e.g., [1, 10]
+  
+      // console.log('Output Shape:', outputShape); // Uncomment for debugging
+      // console.log('Raw Output Data:', outputData); // Uncomment for debugging
+  
+      // Find the predicted digit (index with the highest score/probability)
+      let maxProbability = -Infinity;
+      let predictedIndex = -1;
+      for (let i = 0; i < outputData.length; i++) {
+        if (outputData[i] > maxProbability) {
+          maxProbability = outputData[i];
+          predictedIndex = i;
+        }
+      }
+  
+      console.log(`Predicted Digit: ${predictedIndex}, Probability: ${maxProbability.toFixed(4)}`);
+  
+      // --- 7. (Optional) Update UI or state based on prediction ---
+      // Example: this.predictedDigit = predictedIndex;
+      //          this.predictionConfidence = maxProbability;
+
+      this.current_pixel_val = predictedIndex;
+  
+  
+    } catch (error) {
+      console.error('Error during inference:', error);
+      // Consider updating UI to show an error message
+    }
+  }
+
   private startRecording(): void {
     if (this.recordingTimeout) {
       clearTimeout(this.recordingTimeout);
@@ -545,6 +668,8 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       this.getBoundingBoxCorners();
 
       this.getMnistInputArray();
+
+      this.runInference();
       
       // Draw the bounding box
       //this.drawBoundingBox();
