@@ -1,0 +1,39 @@
+/* Styles for the content WITHIN the bio component */
+.bio-container {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+    padding: 20px; /* Add some spacing around the content */
+    max-width: 600px; /* Optional: prevent it from getting too wide */
+    margin: auto; /* Helps with centering if the parent isn't a flex/grid container */
+  }
+  
+  .bio-image {
+    max-width: 150px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: Make the image circular */
+    margin-bottom: 20px; /* Space between image and text */
+    border: 3px solid white; /* Optional: Add a white border */
+  }
+  
+  .bio-text {
+    color: white; /* Make the text white as requested */
+    text-align: center; /* Center the text paragraphs */
+  }
+  
+  .bio-text p {
+    margin-bottom: 15px; /* Space between paragraphs */
+    line-height: 1.6; /* Improve readability */
+  }
+  
+  .bio-text a {
+    color: #add8e6; /* Light blue for links, stands out on dark bg */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth color change on hover */
+  }
+  
+  .bio-text a:hover {
+    color: #f0f8ff; /* Lighter blue/alice blue on hover */
+    text-decoration: underline; /* Add underline on hover for clarity */
+  }
