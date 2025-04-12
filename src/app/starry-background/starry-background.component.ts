@@ -19,7 +19,6 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
       height: 100%;
       background: linear-gradient(to bottom, #000033 0%,rgb(0, 0, 102) 100%);
       overflow: hidden;
-      cursor: none; /* Hide the default cursor */
     }
 
     :host {
@@ -33,15 +32,12 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   private stars: HTMLElement[] = [];
   private shootingStars: HTMLElement[] = [];
   private shootingStarInterval: any;
-  private customCursor: HTMLElement | null = null;
-  private sparkles: HTMLElement[] = [];
   private drawingLines: HTMLElement[] = [];
   private isDrawing = false;
   private lastX = 0;
   private lastY = 0;
   private mouseX = 0;
   private mouseY = 0;
-  private sparkleInterval: any;
   private current_pixel_val = 10;
   private session: ort.InferenceSession | null = null;
   
@@ -159,10 +155,6 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       this.createShootingStars();
       this.shootingStarInterval = setInterval(() => this.createShootingStars(), 4000);
       
-      // Initialize cursor effects
-      this.createCustomCursor();
-      this.sparkleInterval = setInterval(() => this.updateSparkles(), 50);
-      
       // Create styles for animations
       this.createAnimationStyles();
       
@@ -176,9 +168,6 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       if (this.shootingStarInterval) {
         clearInterval(this.shootingStarInterval);
-      }
-      if (this.sparkleInterval) {
-        clearInterval(this.sparkleInterval);
       }
       if (this.recordingTimeout) {
         clearTimeout(this.recordingTimeout);
@@ -793,66 +782,6 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     }
   }
 
-  private createCustomCursor(): void {
-    const container = this.el.nativeElement.querySelector('.starry-background');
-    
-    // Create custom cursor
-    this.customCursor = document.createElement('div');
-    this.customCursor.style.position = 'absolute';
-    this.customCursor.style.width = '8px';
-    this.customCursor.style.height = '8px';
-    this.customCursor.style.borderRadius = '50%';
-    this.customCursor.style.backgroundColor = '#ffffff';
-    this.customCursor.style.boxShadow = '0 0 10px #ffffff, 0 0 20px #aaaaff';
-    this.customCursor.style.pointerEvents = 'none';
-    this.customCursor.style.zIndex = '1000';
-    this.customCursor.style.transform = 'translate(-50%, -50%)';
-    
-    container.appendChild(this.customCursor);
-  }
-
-  private updateSparkles(): void {
-    const container = this.el.nativeElement.querySelector('.starry-background');
-    
-    // Clean up old sparkles
-    this.sparkles.forEach((sparkle, index) => {
-      if (parseInt(sparkle.style.opacity) <= 0.1) {
-        sparkle.remove();
-        this.sparkles.splice(index, 1);
-      } else {
-        sparkle.style.opacity = (parseFloat(sparkle.style.opacity) - 0.05).toString();
-      }
-    });
-    
-    // Add new sparkle at cursor position
-    if (this.mouseX > 0 && this.mouseY > 0) {
-      const sparkle = document.createElement('div');
-      
-      sparkle.style.position = 'absolute';
-      sparkle.style.width = `${2 + Math.random() * 3}px`;
-      sparkle.style.height = sparkle.style.width;
-      sparkle.style.backgroundColor = this.getRandomSparkleColor();
-      sparkle.style.borderRadius = '50%';
-      sparkle.style.pointerEvents = 'none';
-      sparkle.style.zIndex = '999';
-      
-      // Position with slight random offset from cursor
-      sparkle.style.left = `${this.mouseX + (Math.random() * 20 - 10)}px`;
-      sparkle.style.top = `${this.mouseY + (Math.random() * 20 - 10)}px`;
-      
-      sparkle.style.opacity = '1';
-      sparkle.style.transition = 'opacity 1s';
-      
-      container.appendChild(sparkle);
-      this.sparkles.push(sparkle);
-    }
-  }
-
-  private getRandomSparkleColor(): string {
-    const colors = ['#ffffff', '#aaaaff', '#ffaaaa', '#ffffaa', '#aaffaa', '#ffaaff'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
-
   private createDrawingLine(fromX: number, fromY: number, toX: number, toY: number): void {
     const container = this.el.nativeElement.querySelector('.starry-background');
     
@@ -940,12 +869,6 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     
     this.mouseX = event.clientX;
     this.mouseY = event.clientY;
-    
-    // Update custom cursor position
-    if (this.customCursor) {
-      this.customCursor.style.left = `${this.mouseX}px`;
-      this.customCursor.style.top = `${this.mouseY}px`;
-    }
     
     // Draw line if currently drawing
     if (this.isDrawing && this.lastX !== 0 && this.lastY !== 0) {
