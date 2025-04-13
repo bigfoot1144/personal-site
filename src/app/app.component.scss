@@ -1,38 +1,5 @@
-/* Ensure the root elements take full height */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  /* Assuming your starry background is blue/dark */
-  background-color: #000020; /* Example dark blue fallback */
-  cursor: none; /* Hide the default cursor on the body */
-}
-  
-/* Styles for the main application container */
-.app-container {
-  position: relative; /* Establishes a positioning context for absolute children */
-  width: 100%;
-  min-height: 100vh; /* Ensure it takes at least the full viewport height */
-  overflow: hidden; /* Prevent scrollbars if background overflows slightly */
-  /* You can also try hiding the cursor here if hiding on body doesn't work as expected */
-  cursor: none;
-}
-
-/* Style the host element of starry-background */
-app-starry-background {
-  position: absolute; /* Or fixed, depending on your layout */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* Ensure it's behind the overlay content but potentially below the cursor */
-  pointer-events: auto; /* CRUCIAL: Make it clickable */
-}
-
-
-/* Styles for the overlay containing the bio */
 .content-overlay {
-  position: absolute; /* Position it relative to app-container */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -51,55 +18,18 @@ app-starry-background {
   pointer-events: none; /* Make the overlay non-interactive by default */
 }
 
-/* Styles for the bio component itself */
+app-starry-background {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto; 
+}
+
 app-bio {
-  /* Add styles to control the width and other visual aspects of your bio */
-  /* For example: */
-  /* width: 80%; */
-  /* max-width: 600px; */
-  /* background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
-  /* color: white; */
-  /* padding: 20px; */
-  /* border-radius: 8px; */
-  pointer-events: auto; /* Make the bio component interactive */
-}
-
-/* Style the image container within the bio component */
-app-bio .image-container {
-  text-align: center; /* Center the image horizontally */
-  margin-bottom: 20px;
-  pointer-events: none; /* Make the image container non-interactive */
-}
-
-/* Style the image within the bio component */
-app-bio .image-container img {
-  max-width: 200px; /* Adjust as needed */
-  border-radius: 50%; /* Make it circular if you like */
-  display: block; /* Remove extra space below inline images */
-  margin: 0 auto; /* Center the image */
-  pointer-events: none; /* Make the image itself non-interactive */
-}
-
-/* Style the text container within the bio component */
-app-bio .text-container {
-  text-align: center; /* Center the text */
-  color: white; /* Set white text color */
-}
-
-/* Style the links container within the bio component */
-app-bio .links {
-  margin-top: 15px;
-  pointer-events: auto; /* Ensure the links container can receive events */
-}
-
-/* Style the links within the bio component */
-app-bio .links a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-  pointer-events: auto; /* Make the links interactive */
-}
-
-app-bio .links a:hover {
-  text-decoration: underline;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white; 
+  pointer-events: auto;
 }
