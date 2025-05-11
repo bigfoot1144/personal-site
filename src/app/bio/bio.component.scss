@@ -1,9 +1,208 @@
-/* Styles for the content WITHIN the bio component */
-.bio-container {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center items horizontally */
-  padding: 20px; /* Add some spacing around the content */
-  max-width: 600px; /* Optional: prevent it from getting too wide */
-  margin: auto; /* Helps with centering if the parent isn't a flex/grid container */
+/* --- Base Space Theme for .bio-container --- */
+.bio-container.space-theme {
+  font-family: 'Orbitron', 'Roboto', 'Arial', sans-serif;
+  background-color:rgba(4, 7, 39, 0.8);
+  color: #e0e0e0;
+
+  border-radius: 30px;
+
+  box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+
+  margin-top: 20px;
+
+  padding: 20px 20px 30px 20px;
+}
+
+/* --- Profile Section (for centering image and text) --- */
+.profile-section {
+  text-align: center; /* Centers inline or inline-block children */
+  margin-bottom: 50px; /* Space below profile section, before timeline */
+}
+
+.portrait-container {
+  display: inline-block; /* Allows text-align:center on parent to work */
+  margin-bottom: 20px;
+}
+
+.portrait-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #4A90E2;
+  box-shadow: 0 0 25px rgba(74, 144, 226, 0.7),
+              0 0 10px rgba(255, 255, 255, 0.3) inset;
+  display: block; /* Ensures it behaves predictably */
+}
+
+.name {
+  font-size: 2.8em;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(125, 249, 255, 0.7);
+}
+.name .real-name {
+  font-size: 0.6em;
+  display: block;
+  color: #a0b0d0;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.tagline {
+  font-size: 1.3em;
+  color: #87CEEB;
+  margin-bottom: 20px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.links {
+  margin-bottom: 30px;
+}
+
+.links a {
+  color: #7DF9FF;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: bold;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.links a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #7DF9FF;
+  text-decoration: none;
+}
+
+.bio-summary {
+  max-width: 750px;
+  margin: 0 auto 30px auto;
+  line-height: 1.8;
+  font-size: 1.1em;
+  color: #c5d5f0;
+  text-align: left;
+  border-left: 3px solid #4A90E2;
+  padding: 15px 20px;
+  background-color: rgba(10, 20, 40, 0.3);
+  border-radius: 0 5px 5px 0;
+}
+
+/* --- Timeline Styles --- */
+.timeline-section {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline-section h2 {
+  text-align: center;
+  font-size: 2.2em;
+  margin-bottom: 50px;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+.timeline {
+  list-style: none;
+  padding: 20px 0 20px;
+  position: relative;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #4A90E2;
+  left: 30px;
+  margin-left: -2px;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.6);
+}
+
+.timeline-item {
+  margin-bottom: 25px;
+  position: relative;
+}
+.timeline-item:before,
+.timeline-item:after {
+  content: " "; display: table;
+}
+.timeline-item:after {
+  clear: both;
+}
+
+.timeline-badge {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  position: absolute;
+  top: 16px;
+  left: 30px;
+  margin-left: -25px;
+  background-color: #1a2a4a;
+  border: 3px solid #7DF9FF;
+  z-index: 100;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #4A90E2, 0 0 15px rgba(74, 144, 226, 0.5);
+  //background-image: url('./assets/timeline-dot-icon.svg');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.timeline-badge.mission-launch { border-color: #ff7874; }
+.timeline-badge.exploration-ops { border-color: #87CEEB; }
+.timeline-badge.discovery { border-color: #ffc975; }
+
+.icon-stardate:before { content: "📅"; margin-right: 5px;}
+
+.timeline-panel {
+  width: calc(100% - 90px);
+  float: right;
+  border: 1px solid #2c3e50;
+  background: rgba(15, 25, 55, 0.7);
+  backdrop-filter: blur(3px);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+  color: #c5d5f0;
+}
+
+.timeline-panel:before {
+  content: " "; display: block; position: absolute; top: 26px; right: auto;
+  left: -15px; border-style: solid; border-width: 15px 15px 15px 0;
+  border-color: transparent #2c3e50 transparent transparent;
+}
+.timeline-panel:after {
+  content: " "; display: block; position: absolute; top: 27px; right: auto;
+  left: -14px; border-style: solid; border-width: 14px 14px 14px 0;
+  border-color: transparent rgba(15, 25, 55, 0.7) transparent transparent;
+}
+
+.timeline-heading h4 { margin-top: 0; color: #ffffff; font-size: 1.5em; }
+.timeline-heading p small { font-size: 0.9em; color: #87CEEB; }
+.timeline-heading p small .icon-stardate { color: #F0AD4E; }
+
+.timeline-body > p, .timeline-body > ul { margin-bottom: 10px; line-height: 1.7; }
+.timeline-body > p:last-child { margin-bottom: 0; }
+.timeline-body a { color: #7DF9FF; text-decoration: underline; }
+.timeline-body a:hover { color: #ffffff; }
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .bio-container.space-theme {
+    padding: 15px 10px 20px 10px; /* Adjusted padding for mobile */
+    margin-top: 15px; /* Smaller top margin for mobile */
+  }
+  .timeline:before { left: 30px; }
+  .timeline-item .timeline-badge { left: 30px; margin-left: -25px; }
+  .timeline-item .timeline-panel { width: calc(100% - 70px); float: right; }
+  .timeline-panel:before { border-left-width: 0; border-right-width: 15px; left: -15px; right: auto; }
+  .timeline-panel:after { border-left-width: 0; border-right-width: 14px; left: -14px; right: auto; }
+  .name { font-size: 2.2em; }
+  .tagline { font-size: 1.1em; }
+  .bio-summary { padding: 15px; border-left-width: 2px; padding-left: 15px; }
 }
