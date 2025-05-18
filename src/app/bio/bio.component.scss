@@ -3,13 +3,9 @@
   font-family: 'Orbitron', 'Roboto', 'Arial', sans-serif;
   background-color:rgba(4, 7, 39, 0.8);
   color: #e0e0e0;
-
   border-radius: 30px;
-
   box-shadow: 0 5px 25px rgba(0,0,0,0.4);
-
   margin-top: 20px;
-
   padding: 20px 20px 30px 20px;
 }
 
@@ -142,20 +138,49 @@
   top: 16px;
   left: 30px;
   margin-left: -25px;
-  background-color: #1a2a4a;
-  border: 3px solid #7DF9FF;
+  background-color: #1a2a4a; /* Fallback color if image doesn't load or for transparency */
+  border: 3px solid #7DF9FF; /* Default border, can be overridden */
   z-index: 100;
   border-radius: 50%;
   box-shadow: 0 0 0 3px #4A90E2, 0 0 15px rgba(74, 144, 226, 0.5);
-  //background-image: url('./assets/timeline-dot-icon.svg');
-  background-size: 60%;
+  /* REMOVED/COMMENTED generic background-image: url('./assets/timeline-dot-icon.svg'); */
+  background-size: cover; /* Or 'contain' depending on your image aspect ratio and preference */
   background-repeat: no-repeat;
   background-position: center;
 }
 
+/* --- Individual Badge Images --- */
+.timeline-badge.badge-sanctuary {
+  //background-image: url('assets/sanctuary.jpg');
+  border-color: #2d2b4a; /* Example: Keep or customize border per badge */
+}
+
+.timeline-badge.badge-xadite {
+  //background-image: url('./assets/images/xadite-badge.png');
+  border-color: #0c14ff; /* Example: Keep or customize border per badge */
+}
+
+.timeline-badge.badge-research {
+  //background-image: url('./assets/images/research-badge.png');
+  border-color: #ffffff; /* Example: Keep or customize border per badge */
+}
+
+.timeline-badge.badge-masters {
+  //background-image: url('./assets/images/masters-badge.png');
+  border-color: #1a2a4a; /* Example: Keep or customize border per badge */
+}
+
+.timeline-badge.badge-bachelors {
+  //background-image: url('./assets/images/bachelors-badge.png');
+  border-color: #1a2a4a; /* Example: Keep or customize border per badge */
+}
+
+
+/* You can still keep these for badges that DON'T have a specific image, or remove if not needed */
 .timeline-badge.mission-launch { border-color: #ff7874; }
 .timeline-badge.exploration-ops { border-color: #87CEEB; }
 .timeline-badge.discovery { border-color: #ffc975; }
+
 
 .icon-stardate:before { content: "📅"; margin-right: 5px;}
 
