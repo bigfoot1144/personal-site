@@ -40,6 +40,34 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   private mouseY = 0;
   private current_pixel_val = 10;
   private session: ort.InferenceSession | null = null;
+
+  // star config!
+  // -------------------------------
+  private readonly MIN_SHOOTING_STARS: number = 3;
+  private readonly MAX_SHOOTING_STARS: number = 10;
+
+  // For shootingStarContainer.style.top = `${-(Math.random() * RANDOM_NEGATIVE + BASE_NEGATIVE)}%`;
+  // Original: -(Math.random() * 5 + 5)%  => results in a range like -5% to -10%
+  private readonly SHOOTING_STAR_TOP_OFFSET_BASE_NEGATIVE_PERCENT: number = 5;
+  private readonly SHOOTING_STAR_TOP_OFFSET_RANDOM_NEGATIVE_PERCENT: number = 2;
+
+  // For shootingStarContainer.style.left = `${Math.random() * RANDOM_RANGE + BASE_OFFSET}%`;
+  // Original: Math.random() * 100 - 20 => results in a range like -20% to 80%
+  private readonly SHOOTING_STAR_LEFT_OFFSET_BASE_PERCENT: number = -20;
+  private readonly SHOOTING_STAR_LEFT_OFFSET_RANDOM_RANGE_PERCENT: number = 120;
+
+  private readonly SHOOTING_STAR_MAX_ANIMATION_DELAY_S: number = 40; // Max random delay before animation starts
+  private readonly SHOOTING_STAR_BASE_ANIMATION_DURATION_S: number = 2; // Base duration for animation
+  private readonly SHOOTING_STAR_RANDOM_ANIMATION_DURATION_S: number = 10; // Random additional duration
+  private readonly SHOOTING_STAR_ANIMATION_NAME: string = 'shoot'; // CSS animation name
+
+  private readonly PIXEL_CHARACTER_SIZE_PX: number = 3; // Size of each pixel in the star character
+  private readonly PIXEL_BACKGROUND_COLOR: string = '#ffffff'; // Color of the star's pixels
+
+  // Assumed movement vector for calculating trail angle (e.g., Math.atan2(Y, X))
+  private readonly TRAIL_ASSUMED_MOVEMENT_VECTOR_Y: number = 1;
+  private readonly TRAIL_ASSUMED_MOVEMENT_VECTOR_X: number = 1;
+  private shootingStarIntervalMs = 5000;
   
   // Pixel font definitions for characters
   private pixelCharacters: number[][][] = [
@@ -153,7 +181,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       // Initialize main starry background
       this.generateStars();
       this.createShootingStars();
-      this.shootingStarInterval = setInterval(() => this.createShootingStars(), 4000);
+      this.shootingStarInterval = setInterval(() => this.createShootingStars(), this.shootingStarIntervalMs);
       
       // Create styles for animations
       this.createAnimationStyles();
@@ -183,6 +211,17 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error('Error loading model:', error);
     }
+  }
+
+  public restartShootingStarEffect(): void {
+    if (this.shootingStarInterval) {
+      clearInterval(this.shootingStarInterval);
+    }
+    this.createShootingStars();
+
+    this.shootingStarInterval = setInterval(() => {
+      this.createShootingStars();
+    }, this.shootingStarIntervalMs);
   }
   
   private getMnistInputArray(lineThickness = 1): void {
@@ -620,12 +659,9 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       }
   
       console.log(`Predicted Digit: ${predictedIndex}, Probability: ${maxProbability.toFixed(4)}`);
-  
-      // --- 7. (Optional) Update UI or state based on prediction ---
-      // Example: this.predictedDigit = predictedIndex;
-      //          this.predictionConfidence = maxProbability;
 
       this.current_pixel_val = predictedIndex;
+      this.restartShootingStarEffect();
   
   
     } catch (error) {
@@ -700,83 +736,81 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     }
   }
 
+
   private createShootingStars(): void {
     const container = this.el.nativeElement.querySelector('.starry-background');
-    
-    // Remove old shooting stars
-    this.shootingStars.forEach(star => {
-      star.remove();
-    });
-    this.shootingStars = [];
-    
-    // Create new shooting stars
-    const numberOfShootingStars = 2 + Math.floor(Math.random() * 3);
-    
+    if (!container) {
+      console.error('Starry background container not found!'); // Kept specific error message inline
+      return;
+    }
+
+    const minRange = this.MIN_SHOOTING_STARS;
+    const maxRange = this.MAX_SHOOTING_STARS;
+    const numberOfShootingStars = Math.floor(Math.random() * (maxRange - minRange + 1)) + minRange;
+
     for (let i = 0; i < numberOfShootingStars; i++) {
-      // Choose a random character from our pixel font
       const pixelMatrix = this.pixelCharacters[this.current_pixel_val];
-      
-      // Create a container for the character and its trail
       const shootingStarContainer = document.createElement('div');
       shootingStarContainer.style.position = 'absolute';
-      shootingStarContainer.style.left = `${Math.random() * 60}%`;
-      shootingStarContainer.style.top = `${Math.random() * 30}%`;
-      shootingStarContainer.style.zIndex = '1';
-      shootingStarContainer.style.transformOrigin = 'center';
-      
-      // Set the animation
-      const delay = Math.random() * 3;
+
+      shootingStarContainer.style.top = `${-(Math.random() * this.SHOOTING_STAR_TOP_OFFSET_RANDOM_NEGATIVE_PERCENT + this.SHOOTING_STAR_TOP_OFFSET_BASE_NEGATIVE_PERCENT)}%`;
+      shootingStarContainer.style.left = `${Math.random() * this.SHOOTING_STAR_LEFT_OFFSET_RANDOM_RANGE_PERCENT + this.SHOOTING_STAR_LEFT_OFFSET_BASE_PERCENT}%`;
+
+      shootingStarContainer.style.zIndex = '1'; // Hardcoded: Common default
+      shootingStarContainer.style.transformOrigin = 'center'; // Hardcoded: Common default
+
+      const delay = Math.random() * this.SHOOTING_STAR_MAX_ANIMATION_DELAY_S;
       shootingStarContainer.style.animationDelay = `${delay}s`;
-      
-      const duration = 2 + Math.random() * 3;
-      shootingStarContainer.style.animation = `shoot ${duration}s linear forwards`;
-      
-      // Create the pixel character
-      const characterSize = 3; // Size of each pixel in px
+
+      const duration = this.SHOOTING_STAR_BASE_ANIMATION_DURATION_S + Math.random() * this.SHOOTING_STAR_RANDOM_ANIMATION_DURATION_S;
+      shootingStarContainer.style.animation = `${this.SHOOTING_STAR_ANIMATION_NAME} ${duration}s linear forwards`; // Hardcoded: "linear forwards" is typical
+
+      shootingStarContainer.addEventListener('animationend', (event) => {
+        const endedStar = event.target as HTMLElement;
+        if (endedStar && endedStar.parentNode) {
+          endedStar.parentNode.removeChild(endedStar);
+        }
+        this.shootingStars = this.shootingStars.filter(s => s !== endedStar);
+      });
+
+      const characterSize = this.PIXEL_CHARACTER_SIZE_PX;
       const characterWidth = pixelMatrix[0].length * characterSize;
       const characterHeight = pixelMatrix.length * characterSize;
-      
-      // Create the character pixels
+
       for (let row = 0; row < pixelMatrix.length; row++) {
         for (let col = 0; col < pixelMatrix[row].length; col++) {
-          if (pixelMatrix[row][col] === 1) {
+          if (pixelMatrix[row][col] === 1) { // Hardcoded: PIXEL_DRAW_INDICATOR (1) is common
             const pixel = document.createElement('div');
             pixel.style.position = 'absolute';
             pixel.style.left = `${col * characterSize}px`;
             pixel.style.top = `${row * characterSize}px`;
             pixel.style.width = `${characterSize}px`;
             pixel.style.height = `${characterSize}px`;
-            pixel.style.backgroundColor = '#ffffff';
-            pixel.style.boxShadow = '0 0 4px #ffffff, 0 0 8px #aaaaff';
+            pixel.style.backgroundColor = this.PIXEL_BACKGROUND_COLOR;
+            pixel.style.boxShadow = '0 0 4px #ffffff, 0 0 8px #aaaaff'; // Hardcoded: Specific visual style
             shootingStarContainer.appendChild(pixel);
           }
         }
       }
-      
-      // Create trail effect behind the character
+
       const trail = document.createElement('div');
       trail.style.position = 'absolute';
-      trail.style.width = '30px'; // Length of trail
-      trail.style.height = '2px';
-      
-      // Calculate angle and position for the trail based on the shooting direction
-      // The direction is from top-left to bottom-right (as per your animation)
-      const angle = Math.atan2(1, 1); // 45 degrees, matching your shoot animation
-      trail.style.transformOrigin = '0 0'; // Origin at the left edge
-      trail.style.clipPath = 'polygon(0% 0%, 100% 50%, 0% 100%)';
-      trail.style.transform = `translate(-50%, -50%) rotate(${angle + Math.PI}rad) scaleX(2)`;
+      trail.style.width = '30px'; // Hardcoded: Specific visual style
+      trail.style.height = '2px'; // Hardcoded: Specific visual style
+      const angle = Math.atan2(this.TRAIL_ASSUMED_MOVEMENT_VECTOR_Y, this.TRAIL_ASSUMED_MOVEMENT_VECTOR_X);
+      trail.style.transformOrigin = '0 0'; // Hardcoded: Trail specific transform origin
+      trail.style.clipPath = 'polygon(0% 0%, 100% 50%, 0% 100%)'; // Hardcoded: Trail shape
+      trail.style.transform = `translate(-50%, -50%) rotate(${angle + Math.PI}rad) scaleX(2)`; // Hardcoded: Math.PI for reversal, scaleX for look
+      trail.style.background = 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(170,170,255,0.8) 50%, rgba(255,255,255,0) 100%)'; // Hardcoded: Specific gradient
+      trail.style.boxShadow = '0 0 8px rgba(255,255,255,0.6)'; // Hardcoded: Specific visual style
 
-      // Gradient direction
-      trail.style.background = 'linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(170,170,255,0.8) 50%, rgba(255,255,255,0) 100%)';
-      trail.style.boxShadow = '0 0 8px rgba(255,255,255,0.6)';
       const centerX = characterWidth / 2;
       const centerY = characterHeight / 2;
-      const offsetX = 10; // Negative value shifts left
+      const offsetX = 10; // Hardcoded: Trail placement adjustment
       trail.style.left = `${centerX + offsetX}px`;
       trail.style.top = `${centerY}px`;
-      
       shootingStarContainer.appendChild(trail);
-      
+
       container.appendChild(shootingStarContainer);
       this.shootingStars.push(shootingStarContainer);
     }
@@ -855,7 +889,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
           opacity: 1;
         }
         100% {
-          transform: translateX(300px) translateY(300px);
+          transform: translateX(800px) translateY(800px);
           opacity: 0;
         }
       }
