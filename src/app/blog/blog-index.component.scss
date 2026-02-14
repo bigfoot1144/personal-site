@@ -1,40 +1,63 @@
 .blog-page {
   margin-top: 20px;
-  padding: 24px;
-  border-radius: 20px;
-  background-color: rgba(5, 13, 44, 0.82);
-  color: #dbe8ff;
-  border: 1px solid rgba(91, 160, 255, 0.4);
-  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.4);
+  padding: 20px 20px 30px 20px;
+  border-radius: 30px;
+  font-family: 'Orbitron', 'Roboto', 'Arial', sans-serif;
+  background-color: rgba(4, 7, 39, 0.8);
+  color: #e0e0e0;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+}
+
+.blog-header {
+  margin-bottom: 24px;
 }
 
 .blog-header h1 {
   margin: 0 0 8px 0;
   color: #ffffff;
+  text-shadow: 0 0 10px rgba(125, 249, 255, 0.6);
+}
+
+.blog-header p {
+  color: #c5d5f0;
 }
 
 .blog-header a {
   color: #7df9ff;
+  text-decoration: none;
+}
+
+.blog-header a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .post-list {
   list-style: none;
   padding: 0;
-  margin: 24px 0 0 0;
+  margin: 0;
 }
 
 .post-list li {
-  padding: 16px 0;
-  border-top: 1px solid rgba(125, 249, 255, 0.2);
+  margin-bottom: 16px;
+  padding: 15px 20px;
+  background-color: rgba(10, 20, 40, 0.3);
+  border-left: 3px solid #4a90e2;
+  border-radius: 0 5px 5px 0;
+}
+
+.post-list li:last-child {
+  margin-bottom: 0;
 }
 
 .post-list h2 {
   margin: 0;
   font-size: 1.35rem;
+  color: #ffffff;
 }
 
 .post-list h2 a {
-  color: #d5f8ff;
+  color: #7df9ff;
   text-decoration: none;
 }
 
@@ -45,5 +68,17 @@
 
 .post-date {
   margin: 8px 0;
-  color: #9ec4ff;
+  color: #87ceeb;
+}
+
+@media (max-width: 767px) {
+  .blog-page {
+    margin-top: 15px;
+    padding: 15px 10px 20px 10px;
+  }
+
+  .post-list li {
+    padding: 14px 15px;
+    border-left-width: 2px;
+  }
 }
