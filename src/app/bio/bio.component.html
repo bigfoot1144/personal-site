@@ -17,6 +17,16 @@
     </p>
   </div>
 
+  <div class="blog-preview">
+    <h2>Blog Posts</h2>
+    <ul>
+      <li *ngFor="let post of blogPosts">
+        <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+        <span>{{ post.date }}</span>
+      </li>
+    </ul>
+  </div>
+
 <div class="timeline-section">
   <h2>My Journey</h2>
   <ul class="timeline">
@@ -52,7 +62,7 @@
         <div class="timeline-body">
           <p><strong>Xadite Perceptions</strong> | <a href="https://XADITE.COM" target="_blank">XADITE.COM</a></p>
           <p>
-            For my undergrad at the University of Akron, I graduated from the Williams Honors College with an honors diploma, specializing in the Systems Track. I graduated summa cum laude with a 3.89 GPA.
+            Xadite Perceptions is a startup I worked with during and right after college. We created a patented passive radar device tasked with identifying and locating RF sources like wifi, Bluetooth, and drones. I led the software team, focusing on delivering solutions efficiently even with limited resources. My technical leadership involved designing & building the embedded RF signal processing AI for our patented passive radar system, NED (n-phonic energy detector), using TensorFlow Lite to get optimized performance directly on the device. I also architected & deployed an AI training & deployment pipeline specifically for embedded systems, leveraging our small but mighty in-house server infrastructure.
           </p>
         </div>
       </div>

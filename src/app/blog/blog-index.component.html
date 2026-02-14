@@ -1,0 +1,17 @@
+<section class="blog-page">
+  <header class="blog-header">
+    <p><a routerLink="/">Back to Home</a></p>
+    <h1>Blog</h1>
+    <p>Random entries, experiments, and build logs.</p>
+  </header>
+
+  <ul class="post-list">
+    <li *ngFor="let post of posts">
+      <h2>
+        <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+      </h2>
+      <p class="post-date">{{ post.date }}</p>
+      <p>{{ post.summary }}</p>
+    </li>
+  </ul>
+</section>

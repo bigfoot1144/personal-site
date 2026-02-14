@@ -1,0 +1,19 @@
+<article class="post-page">
+  <p class="back-link"><a routerLink="/blog">Back to Blog</a></p>
+  <h1>Midnight Deploy and the 3:17 a.m. Cookie</h1>
+  <p class="post-date">January 8, 2026</p>
+
+  <p>
+    The release started quietly. CI passed, metrics were green, and every dashboard looked like a postcard from a perfect world.
+    Then exactly twelve minutes later, users began logging out at random. The only clue was a tiny mismatch in cookie attributes
+    between two environments that had looked identical all week.
+  </p>
+  <p>
+    We traced requests, diffed headers, and discovered one staging value had leaked into production during a hasty hotfix rehearsal.
+    The bug was small enough to hide from tests but big enough to annoy every third session. It felt personal.
+  </p>
+  <p>
+    The patch was a one-line fix, but the lesson was bigger: "looks the same" is not "is the same."
+    After that night we added a startup sanity check that validates auth cookie config before the app serves traffic.
+  </p>
+</article>
