@@ -44,6 +44,64 @@
   margin-bottom: 10px;
 }
 
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+  color: #ffffff;
+  margin: 18px 0 8px 0;
+}
+
+.post-content p {
+  margin-bottom: 14px;
+}
+
+.post-content ul,
+.post-content ol {
+  margin: 0 0 14px 24px;
+}
+
+.post-content li {
+  margin-bottom: 6px;
+}
+
+.post-content blockquote {
+  margin: 0 0 14px 0;
+  padding: 12px 16px;
+  background-color: rgba(10, 20, 40, 0.3);
+  border-left: 3px solid #7df9ff;
+  border-radius: 0 5px 5px 0;
+}
+
+.post-content code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background-color: rgba(10, 20, 40, 0.55);
+  color: #dff8ff;
+}
+
+.post-content pre {
+  margin: 0 0 14px 0;
+  padding: 14px;
+  border-radius: 8px;
+  overflow-x: auto;
+  background-color: rgba(10, 20, 40, 0.6);
+}
+
+.post-content pre code {
+  display: block;
+  padding: 0;
+  background: transparent;
+}
+
+.post-content hr {
+  border: 0;
+  height: 1px;
+  margin: 16px 0;
+  background: rgba(125, 249, 255, 0.35);
+}
+
 @media (max-width: 767px) {
   .post-page {
     margin-top: 15px;
