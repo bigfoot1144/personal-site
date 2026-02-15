@@ -1,0 +1,14 @@
+<article class="post-page">
+  <p class="back-link"><a routerLink="/blog">Back to Blog</a></p>
+
+  <ng-container *ngIf="post; else postNotFound">
+    <h1>{{ post.title }}</h1>
+    <p class="post-date">{{ post.date }}</p>
+    <div class="post-content" [innerHTML]="renderedHtml"></div>
+  </ng-container>
+
+  <ng-template #postNotFound>
+    <h1>Post not found</h1>
+    <p>The blog post you requested does not exist.</p>
+  </ng-template>
+</article>
