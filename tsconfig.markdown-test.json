@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./.tmp/markdown-test",
+    "module": "CommonJS",
+    "target": "ES2022",
+    "types": ["node"],
+    "lib": ["ES2022"],
+    "sourceMap": false,
+    "declaration": false
+  },
+  "include": [
+    "scripts/markdown-converter.test.ts",
+    "src/app/blog/markdown/markdown-converter.ts",
+    "src/app/blog/markdown/markdown-renderer.ts"
+  ]
+}

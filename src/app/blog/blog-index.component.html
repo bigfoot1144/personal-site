@@ -1,0 +1,45 @@
+<section class="blog-page">
+  <header class="blog-header">
+    <p class="back-link"><a routerLink="/">Back to Home</a></p>
+    <h1>Blog</h1>
+    <p class="subtitle">Random entries, experiments, and build logs.</p>
+  </header>
+
+  <ng-container *ngIf="featuredPost; else emptyBlog">
+    <article class="featured-post">
+      <p class="eyebrow">Featured Post</p>
+      <h2>
+        <a [routerLink]="['/blog', featuredPost.slug]">{{ featuredPost.title }}</a>
+      </h2>
+      <p class="post-date">{{ featuredPost.date }}</p>
+      <p class="summary">{{ featuredPost.summary }}</p>
+      <div class="tag-row">
+        <span class="tag-chip" *ngFor="let tag of tagsFor(featuredPost)">{{ tag }}</span>
+      </div>
+      <p class="read-link"><a [routerLink]="['/blog', featuredPost.slug]">Read post</a></p>
+    </article>
+
+    <ul class="post-list" *ngIf="otherPosts.length > 0">
+      <li class="post-card" *ngFor="let post of otherPosts; let i = index" [style.animationDelay.ms]="90 * (i + 1)">
+        <div class="card-meta">
+          <p class="post-date">{{ post.date }}</p>
+          <div class="tag-row">
+            <span class="tag-chip" *ngFor="let tag of tagsFor(post)">{{ tag }}</span>
+          </div>
+        </div>
+        <h3>
+          <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+        </h3>
+        <p class="summary">{{ post.summary }}</p>
+      </li>
+    </ul>
+  </ng-container>
+
+  <ng-template #emptyBlog>
+    <article class="empty-state">
+      <h2>No posts yet</h2>
+      <p>When a new post is published, it will appear here.</p>
+      <p>Use <code>npm run new-post -- --slug my-post</code> to create one quickly.</p>
+    </article>
+  </ng-template>
+</section>

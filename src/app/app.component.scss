@@ -22,6 +22,10 @@
   scrollbar-width: none;
 }
 
+.app-container {
+  min-height: 100vh;
+}
+
 app-starry-background {
   position: absolute;
   top: 0;
@@ -32,11 +36,8 @@ app-starry-background {
   pointer-events: auto;
 }
 
-app-bio {
-  // background-color: rgba(0, 0, 0, 0.5); /* This is now handled by .bio-container.space-theme */
-  // color: white; /* This is now handled by .bio-container.space-theme */
+.page-host {
   pointer-events: auto;
-  width: 100%; /* Optional: Make app-bio take full width within overlay's padding */
-  max-width: 800px; /* Optional: Constrain the max width of your bio content */
-  /* You might not need any specific styles on app-bio itself if .bio-container handles everything */
+  width: 100%;
+  max-width: 900px;
 }

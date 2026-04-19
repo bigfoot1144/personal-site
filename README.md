@@ -1,27 +1,69 @@
 # PersonalSite
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.9.
+## Local Dev (Docker)
 
-## Development server
+To serve locally, run:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```bash
+docker run --rm -it \
+  -v "$PWD":/workspace \
+  -w /workspace \
+  benyamin/codex-sandbox:latest
+```
 
-## Code scaffolding
+Inside the container, start the app:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm install -g ng
+cd /workspace/personal-site
+npm install
+npm run start -- --host 0.0.0.0
+```
 
-## Build
+Then open: `http://localhost:4200`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Useful Commands
 
-## Running unit tests
+```bash
+npm start            # Run dev server
+npm run build        # Production build
+npm run test         # Angular/Karma tests
+npm run test:markdown # Markdown converter fixture tests
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Blog Workflow
 
-## Running end-to-end tests
+Create a new blog post:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm run new-post -- --slug your-post-slug --title "Your Post Title" --date "February 14, 2026" --summary "Short summary"
+```
 
-## Further help
+This will:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Create `src/assets/blog/posts/your-post-slug.md`
+2. Add metadata in `src/app/blog/blog-posts.ts`
+3. Make the post available at `/blog/your-post-slug`
+
+Delete a blog post:
+
+1. Open `src/app/blog/blog-posts.ts`
+2. Remove the object with the matching `slug`
+3. Delete the markdown file:
+
+```bash
+rm src/assets/blog/posts/<slug>.md
+```
+
+4. Verify:
+
+```bash
+npm run test:markdown
+npm run build
+```
+
+## TODO
+
+- Figure out Firebase Hosting deployment flow
+- Debug behavoir on iphone (scrolling doesnt work)
+- Add RSS feed generator for blog posts
