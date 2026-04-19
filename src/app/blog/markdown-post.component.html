@@ -1,13 +1,22 @@
 <article class="post-page">
-  <p class="back-link"><a routerLink="/blog">Back to Blog</a></p>
-
   <ng-container *ngIf="post; else postNotFound">
-    <h1>{{ post.title }}</h1>
-    <p class="post-date">{{ post.date }}</p>
+    <header class="post-topbar">
+      <div class="topbar-main">
+        <p class="back-link"><a routerLink="/blog">Back to Blog</a></p>
+        <p class="reading-time">{{ readingTimeMinutes }} min read</p>
+      </div>
+      <p class="post-date">{{ post.date }}</p>
+      <h1>{{ post.title }}</h1>
+      <div class="tag-row">
+        <span class="tag-chip" *ngFor="let tag of postTags">{{ tag }}</span>
+      </div>
+    </header>
+
     <div class="post-content" [innerHTML]="renderedHtml"></div>
   </ng-container>
 
   <ng-template #postNotFound>
+    <p class="back-link"><a routerLink="/blog">Back to Blog</a></p>
     <h1>Post not found</h1>
     <p>The blog post you requested does not exist.</p>
   </ng-template>
