@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import curriculaJson from '../../assets/knowledge/curricula.json';
-import journalJson from '../../assets/knowledge/journal.json';
-import { Connection, CurriculaData, JournalData, JournalEntry, PositionedTopic, Topic, TopicPlacement, TopicStatus } from './knowledge.types';
+import runtimeJson from './knowledge.runtime.json';
+import { Connection, CurriculaData, JournalData, JournalEntry, KnowledgeRuntimeData, PositionedTopic, Topic, TopicPlacement, TopicStatus } from './knowledge.types';
 
 interface TopicSearchResult {
   placement: TopicPlacement;
@@ -26,6 +25,7 @@ interface OrbitPlanet {
 interface JourneyProgress {
   curriculumId: string;
   title: string;
+  shortTitle: string;
   color: string;
   start: TopicPlacement;
   current: TopicPlacement;
@@ -52,15 +52,28 @@ type JourneyMarkerRole = 'start' | 'next' | 'current' | 'goal';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './knowledge.component.html',
-  styleUrl: './knowledge.component.scss'
+  styleUrl: './knowledge.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KnowledgeComponent {
+  constructor(private readonly zone: NgZone, private readonly changeDetector: ChangeDetectorRef) {}
   @ViewChild('constellation') private graphSvg?: ElementRef<SVGSVGElement>;
+  @ViewChild('graphStage') private graphStage?: ElementRef<SVGGElement>;
   @ViewChild('searchInput') private searchInput?: ElementRef<HTMLInputElement>;
-  readonly data = curriculaJson as unknown as CurriculaData;
-  readonly journal = journalJson as unknown as JournalData;
+  readonly runtime = runtimeJson as unknown as KnowledgeRuntimeData;
+  readonly data = this.runtime as CurriculaData;
+  readonly journal = this.runtime.journal;
+  private readonly derived = this.runtime.derived;
+  private readonly topicById = new Map(this.data.topics.map(topic => [topic.id, topic]));
+  private readonly placementById = new Map(this.data.placements.map(placement => [placement.id, placement]));
+  private readonly curriculumById = new Map(this.data.curricula.map(curriculum => [curriculum.id, curriculum]));
   readonly baseNodes = this.createLayout();
+  private journeyProgressCache: JourneyProgress[] | null = null;
+  private galaxyStarsCache: { key: string; nodes: PositionedTopic[] } | null = null;
+  private searchCache: { key: string; results: TopicSearchResult[] } | null = null;
+  private readonly curriculumDockOrder = ['machine-learning', 'agentic', 'inference', 'gpu', 'statistics', 'robotics', 'compilers', 'hpc', 'physics'];
   activeCurricula = new Set(this.data.curricula.map(curriculum => curriculum.id));
+  selectedCurriculumId = 'machine-learning';
   selected: PositionedTopic | null = null;
   scale = 1;
   panX = 0;
@@ -92,10 +105,11 @@ export class KnowledgeComponent {
 
   get galaxyStars(): PositionedTopic[] {
     if (!this.selected || !this.isGalaxyView) return [];
-    return this.data.placements
-      .filter(placement => placement.parentPlacementId === this.selected!.placementId)
-      .sort((first, second) => first.order - second.order)
-      .map((placement, index) => this.positionGalaxyPlacement(placement, this.selected!, index));
+    const key = this.selected.placementId;
+    if (this.galaxyStarsCache?.key === key) return this.galaxyStarsCache.nodes;
+    const nodes = (this.derived.childrenByPlacement[key] as string[]).map((id: string) => this.nodeForPlacement(this.placementById.get(id)!));
+    this.galaxyStarsCache = { key, nodes };
+    return nodes;
   }
 
   get visibleNodes(): PositionedTopic[] {
@@ -113,7 +127,8 @@ export class KnowledgeComponent {
   }
 
   get journeyProgress(): JourneyProgress[] {
-    return this.data.curricula
+    if (this.journeyProgressCache) return this.journeyProgressCache;
+    const result = this.data.curricula
       .map(curriculum => {
         const ordered = this.orderedRootPlacements(curriculum.id);
         const stages = ordered.filter(placement => !this.topicForPlacement(placement).tags?.includes('goal'));
@@ -125,7 +140,7 @@ export class KnowledgeComponent {
           ?? ordered[ordered.length - 1];
         const completedCount = stages.filter(placement => this.aggregateStatusForPlacement(placement) === 'completed').length;
         return {
-          curriculumId: curriculum.id, title: curriculum.title, color: curriculum.color,
+          curriculumId: curriculum.id, title: curriculum.title, shortTitle: curriculum.shortTitle, color: curriculum.color,
           start: stages[0] ?? ordered[0], current, goal,
           currentTitle: this.topicForPlacement(current).title,
           currentIndex: Math.max(0, stages.findIndex(placement => placement.id === current.id)),
@@ -134,7 +149,14 @@ export class KnowledgeComponent {
           active: this.activeCurricula.has(curriculum.id)
         };
       })
-      .filter(progress => !!progress.start && !!progress.current && !!progress.goal);
+      .filter(progress => !!progress.start && !!progress.current && !!progress.goal)
+      .sort((first, second) => this.curriculumDockOrder.indexOf(first.curriculumId) - this.curriculumDockOrder.indexOf(second.curriculumId));
+    this.journeyProgressCache = result;
+    return result;
+  }
+
+  get selectedJourney(): JourneyProgress | null {
+    return this.journeyProgress.find(progress => progress.curriculumId === this.selectedCurriculumId) ?? this.journeyProgress[0] ?? null;
   }
 
   get galaxyJourneySegments(): JourneySegment[] {
@@ -149,33 +171,27 @@ export class KnowledgeComponent {
   get searchResults(): TopicSearchResult[] {
     const query = this.searchQuery.trim().toLocaleLowerCase();
     if (!query) return [];
-    return this.data.placements
-      .flatMap(placement => placement.curriculumIds
-        .filter(curriculumId => this.activeCurricula.has(curriculumId))
-        .map(curriculumId => ({
-          placement,
-          topic: this.topicForPlacement(placement),
-          path: this.placementPath(placement, curriculumId)
-        })))
-      .filter(result => (result.topic.title + ' ' + result.topic.summary + ' ' + result.path).toLocaleLowerCase().includes(query))
-      .slice(0, 8);
+    const key = query + '|' + [...this.activeCurricula].sort().join(',');
+    if (this.searchCache?.key === key) return this.searchCache.results;
+    const results = this.derived.searchRecords
+      .filter((record) => this.activeCurricula.has(record.curriculumId) && record.text.includes(query))
+      .slice(0, 8)
+      .map((record) => ({ placement: this.placementById.get(record.placementId)!, topic: this.topicForPlacement(this.placementById.get(record.placementId)!), path: record.path }));
+    this.searchCache = { key, results };
+    return results;
   }
 
   get alternatePlacements(): TopicPlacement[] {
     if (!this.selected) return [];
-    return this.data.placements.filter(placement =>
-      placement.topicId === this.selected!.id && placement.id !== this.selected!.placementId
-    );
+    return (this.derived.placementsByTopic[this.selected.id] as string[]).filter(id => id !== this.selected!.placementId).map(id => this.placementById.get(id)!);
   }
 
   get selectedPlacementPaths(): Array<{ placement: TopicPlacement; path: string }> {
     if (!this.selected) return [];
-    return this.data.placements
-      .filter(placement => placement.topicId === this.selected!.id)
-      .flatMap(placement => placement.curriculumIds.map(curriculumId => ({
-        placement,
-        path: this.placementPath(placement, curriculumId)
-      })));
+    return (this.derived.placementsByTopic[this.selected.id] as string[]).flatMap(id => {
+      const placement = this.placementById.get(id)!;
+      return placement.curriculumIds.map(curriculumId => ({ placement, path: this.placementPath(placement, curriculumId) }));
+    });
   }
 
   get detailTopic(): PositionedTopic | null {
@@ -184,9 +200,7 @@ export class KnowledgeComponent {
 
   get selectedEntries(): JournalEntry[] {
     if (!this.selected) return [];
-    return this.journal.entries
-      .filter(entry => entry.topicIds.includes(this.selected!.id))
-      .sort((a, b) => b.date.localeCompare(a.date));
+    return (this.derived.entriesByTopic[this.selected.id] as number[]).map(index => this.journal.entries[index]);
   }
 
   get orbitPlanets(): OrbitPlanet[] {
@@ -234,20 +248,8 @@ export class KnowledgeComponent {
   }
 
   placementPath(placement: TopicPlacement, curriculumId?: string): string {
-    const titles: string[] = [];
-    let current: TopicPlacement | undefined = placement;
-    while (current) {
-      titles.unshift(this.topicForPlacement(current).title);
-      current = current.parentPlacementId
-        ? this.data.placements.find(candidate => candidate.id === current!.parentPlacementId)
-        : undefined;
-    }
-    const ids = curriculumId ? [curriculumId] : placement.curriculumIds;
-    const curricula = ids
-      .map(id => this.data.curricula.find(curriculum => curriculum.id === id)?.title)
-      .filter((title): title is string => !!title)
-      .join(' + ');
-    return (curricula ? curricula + ' › ' : '') + titles.join(' › ');
+    const id = curriculumId ?? placement.curriculumIds[0];
+    return this.derived.placementPaths[placement.id][id];
   }
 
   openSearch(): void {
@@ -310,7 +312,7 @@ export class KnowledgeComponent {
   }
 
   placementColor(placement: TopicPlacement): string {
-    return this.data.curricula.find(curriculum => placement.curriculumIds.includes(curriculum.id))?.color ?? '#7df9ff';
+    return this.curriculumById.get(placement.curriculumIds[0])?.color ?? '#7df9ff';
   }
 
   placementLabel(placement: TopicPlacement): string {
@@ -348,11 +350,35 @@ export class KnowledgeComponent {
     this.highlightedEntryId = planet.entry?.id ?? null;
   }
 
+  selectCurriculum(id: string): void {
+    if (this.curriculumById.has(id)) this.selectedCurriculumId = id;
+  }
+
+  handleCurriculumDockKey(event: KeyboardEvent, index: number): void {
+    const last = this.journeyProgress.length - 1;
+    let nextIndex = index;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = index === last ? 0 : index + 1;
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = index === 0 ? last : index - 1;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = last;
+    else return;
+    event.preventDefault();
+    const next = this.journeyProgress[nextIndex];
+    this.selectCurriculum(next.curriculumId);
+    if (typeof document !== 'undefined') document.getElementById('curriculum-tab-' + next.curriculumId)?.focus();
+  }
+
+  trackJourney(_index: number, progress: JourneyProgress): string {
+    return progress.curriculumId;
+  }
+
   toggleCurriculum(id: string): void {
     const next = new Set(this.activeCurricula);
     if (next.has(id)) next.delete(id);
     else next.add(id);
     this.activeCurricula = next;
+    this.journeyProgressCache = null;
+    this.searchCache = null;
   }
 
   curriculumActive(id: string): boolean {
@@ -384,9 +410,7 @@ export class KnowledgeComponent {
   }
 
   edgePath(edge: Connection): string {
-    const source = this.nodeAt(edge.source);
-    const target = this.nodeAt(edge.target);
-    return 'M ' + source.x + ' ' + source.y + ' L ' + target.x + ' ' + target.y;
+    return this.derived.connectionPaths[edge.id];
   }
 
   segmentPath(segment: JourneySegment): string {
@@ -470,7 +494,7 @@ export class KnowledgeComponent {
   }
 
   childCount(node: PositionedTopic): number {
-    return this.data.placements.filter(placement => placement.parentPlacementId === node.placementId).length;
+    return (this.derived.childrenByPlacement[node.placementId] as string[]).length;
   }
 
   trackNode(_index: number, node: PositionedTopic): string {
@@ -522,6 +546,7 @@ export class KnowledgeComponent {
     this.scale = nextScale;
     this.panX = anchor.x - worldX * nextScale;
     this.panY = anchor.y - worldY * nextScale;
+    this.applyGraphTransform();
 
     if (event.deltaY < 0 && !this.selected) {
       const directTargetId = this.hoveredPlacementId
@@ -581,6 +606,7 @@ export class KnowledgeComponent {
       const distance = this.pointerDistance();
       if (this.lastPinchDistance) {
         this.scale = Math.max(.55, Math.min(3.2, this.scale * distance / this.lastPinchDistance));
+        this.applyGraphTransform();
       }
       this.lastPinchDistance = distance;
       return;
@@ -593,6 +619,7 @@ export class KnowledgeComponent {
     const unitScale = 1000 / Math.max(1, svg.clientWidth);
     this.panX += (event.clientX - this.lastPointer.x) * unitScale;
     this.panY += (event.clientY - this.lastPointer.y) * unitScale;
+    this.applyGraphTransform();
     this.lastPointer = { x: event.clientX, y: event.clientY };
   }
 
@@ -646,25 +673,33 @@ export class KnowledgeComponent {
   private animateView(targetScale: number, targetPanX: number, targetPanY: number): void {
     this.cancelCamera();
     if (typeof requestAnimationFrame === 'undefined') {
-      this.scale = targetScale;
-      this.panX = targetPanX;
-      this.panY = targetPanY;
+      this.scale = targetScale; this.panX = targetPanX; this.panY = targetPanY;
       return;
     }
     const startScale = this.scale;
     const startX = this.panX;
     const startY = this.panY;
     const started = performance.now();
-    const step = (now: number) => {
-      const progress = Math.min(1, (now - started) / 700);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      this.scale = startScale + (targetScale - startScale) * eased;
-      this.panX = startX + (targetPanX - startX) * eased;
-      this.panY = startY + (targetPanY - startY) * eased;
-      if (progress < 1) this.cameraFrame = requestAnimationFrame(step);
-      else this.cameraFrame = null;
-    };
-    this.cameraFrame = requestAnimationFrame(step);
+    this.zone.runOutsideAngular(() => {
+      const step = (now: number) => {
+        const progress = Math.min(1, (now - started) / 700);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        this.scale = startScale + (targetScale - startScale) * eased;
+        this.panX = startX + (targetPanX - startX) * eased;
+        this.panY = startY + (targetPanY - startY) * eased;
+        this.applyGraphTransform();
+        if (progress < 1) this.cameraFrame = requestAnimationFrame(step);
+        else {
+          this.cameraFrame = null;
+          this.zone.run(() => this.changeDetector.markForCheck());
+        }
+      };
+      this.cameraFrame = requestAnimationFrame(step);
+    });
+  }
+
+  private applyGraphTransform(): void {
+    this.graphStage?.nativeElement.setAttribute('transform', 'matrix(' + this.scale + ' 0 0 ' + this.scale + ' ' + this.panX + ' ' + this.panY + ')');
   }
 
   private cancelCamera(): void {
@@ -695,76 +730,30 @@ export class KnowledgeComponent {
   }
 
   private createLayout(): PositionedTopic[] {
-    const positions = new Map<string, Array<{ x: number; y: number }>>();
-    const laneCount = Math.max(1, this.data.curricula.length);
-    this.data.curricula.forEach((curriculum, curriculumIndex) => {
-      const path = this.orderedRootPlacements(curriculum.id);
-      const laneDirection = -.45 + curriculumIndex * Math.PI * 2 / laneCount;
-      const lanePhase = this.stableNumber(curriculum.id + '-ray') / 0xffffffff * Math.PI * 2;
-      path.forEach((placement, index) => {
-        const radiusJitter = index ? (this.stableNumber(placement.id + '-radial') % 9) - 4 : 0;
-        const radius = index === 0 ? 0 : 34 + index * 28 + radiusJitter;
-        const bend = index ? Math.sin(index * .72 + lanePhase) * .105 : 0;
-        const angle = laneDirection + bend;
-        const lateralJitter = index
-          ? ((this.stableNumber(placement.id + curriculum.id + '-lateral') % 81) - 40)
-          : 0;
-        const points = positions.get(placement.id) ?? [];
-        points.push({
-          x: 500 + Math.cos(angle) * radius + Math.cos(laneDirection + Math.PI / 2) * lateralJitter,
-          y: 350 + Math.sin(angle) * radius + Math.sin(laneDirection + Math.PI / 2) * lateralJitter
-        });
-        positions.set(placement.id, points);
-      });
-    });
-    return this.data.placements.filter(placement => !placement.parentPlacementId).map(placement => {
-      const points = positions.get(placement.id) ?? [{ x: 500, y: 350 }];
-      const x = points.reduce((sum, point) => sum + point.x, 0) / points.length;
-      const y = points.reduce((sum, point) => sum + point.y, 0) / points.length;
-      return this.positioned(this.topicForPlacement(placement), placement,
-        Math.max(80, Math.min(920, x)), Math.max(85, Math.min(615, y)));
-    });
+    return this.data.placements
+      .filter(placement => !placement.parentPlacementId)
+      .map(placement => this.nodeForPlacement(placement));
   }
 
-  private positionGalaxyPlacement(placement: TopicPlacement, parent: PositionedTopic, index: number): PositionedTopic {
-    const topic = this.topicForPlacement(placement);
-    const radius = 30 + index * 9.5;
-    const jitter = (this.stableNumber(placement.id) % 9 - 4) * .018;
-    const angle = -Math.PI / 2 + index * .72 + jitter;
-    return this.positioned(
-      topic,
-      placement,
-      parent.x + Math.cos(angle) * radius,
-      parent.y + Math.sin(angle) * radius
-    );
+  private positionGalaxyPlacement(placement: TopicPlacement, _parent: PositionedTopic, _index: number): PositionedTopic {
+    return this.nodeForPlacement(placement);
   }
 
   private topicForPlacement(placement: TopicPlacement): Topic {
-    const topic = this.data.topics.find(candidate => candidate.id === placement.topicId);
+    const topic = this.topicById.get(placement.topicId);
     if (!topic) throw new Error('Unknown topic for placement ' + placement.id);
     return topic;
   }
 
   private placementForNode(node: PositionedTopic): TopicPlacement {
-    const placement = this.data.placements.find(candidate => candidate.id === node.placementId);
+    const placement = this.placementById.get(node.placementId);
     if (!placement) throw new Error('Unknown placement ' + node.placementId);
     return placement;
   }
 
   private nodeForPlacement(placement: TopicPlacement): PositionedTopic {
-    const base = this.baseNodes.find(node => node.placementId === placement.id);
-    if (base) return base;
-    const parent = placement.parentPlacementId
-      ? this.data.placements.find(candidate => candidate.id === placement.parentPlacementId)
-      : undefined;
-    const parentNode = parent ? this.nodeForPlacement(parent) : undefined;
-    const siblings = this.data.placements
-      .filter(candidate => candidate.parentPlacementId === placement.parentPlacementId)
-      .sort((first, second) => first.order - second.order);
-    const index = siblings.findIndex(candidate => candidate.id === placement.id);
-    return parentNode
-      ? this.positionGalaxyPlacement(placement, parentNode, Math.max(0, index))
-      : this.positioned(this.topicForPlacement(placement), placement, 500, 350);
+    const position = this.derived.positions[placement.id] ?? { x: 500, y: 350 };
+    return this.positioned(this.topicForPlacement(placement), placement, position.x, position.y);
   }
 
   private stableNumber(value: string): number {
@@ -784,33 +773,17 @@ export class KnowledgeComponent {
       contextLabel: placement.contextLabel,
       x,
       y,
-      status: this.aggregateStatusForPlacement(placement),
+      status: this.derived.aggregateStatusByPlacement[placement.id] as TopicStatus,
       curriculumIds: this.data.curricula.filter(c => c.topicIds.includes(topic.id)).map(c => c.id)
     };
   }
 
   private statusFor(topicId: string): TopicStatus {
-    let status: TopicStatus = 'not-started';
-    const entries = [...this.journal.entries].sort((a, b) => a.date.localeCompare(b.date));
-    for (const entry of entries) {
-      const update = entry.statusUpdates?.find(item => item.topicId === topicId);
-      if (update) status = update.status;
-    }
-    return status;
+    return this.derived.statusByTopic[topicId] as TopicStatus;
   }
 
   private aggregateStatusForPlacement(placement: TopicPlacement): TopicStatus {
-    const direct = this.statusFor(placement.topicId);
-    if (direct === 'completed') return 'completed';
-    if (direct === 'in-progress') return 'in-progress';
-    const children = this.data.placements.filter(candidate => candidate.parentPlacementId === placement.id);
-    if (children.length) {
-      const childStatuses = children.map(child => this.aggregateStatusForPlacement(child));
-      if (childStatuses.every(status => status === 'completed')) return 'completed';
-      if (childStatuses.some(status => status !== 'not-started')) return 'in-progress';
-    }
-    if (this.journal.entries.some(entry => entry.topicIds.includes(placement.topicId))) return 'in-progress';
-    return 'not-started';
+    return this.derived.aggregateStatusByPlacement[placement.id] as TopicStatus;
   }
 
   private segmentStatus(source: PositionedTopic, target: PositionedTopic, curriculumIds: string[] = []): TopicStatus {
@@ -829,26 +802,6 @@ export class KnowledgeComponent {
   }
 
   private orderedRootPlacements(curriculumId: string): TopicPlacement[] {
-    const placements = this.data.placements.filter(placement => !placement.parentPlacementId && placement.curriculumIds.includes(curriculumId));
-    const ids = new Set(placements.map(placement => placement.id));
-    const edges = this.data.connections.filter(edge => edge.relation === 'prerequisite' && edge.curriculumIds.includes(curriculumId)
-      && ids.has(edge.source) && ids.has(edge.target));
-    const incoming = new Map(placements.map(placement => [placement.id, 0]));
-    edges.forEach(edge => incoming.set(edge.target, (incoming.get(edge.target) ?? 0) + 1));
-    const queue = placements.filter(placement => incoming.get(placement.id) === 0).sort((a, b) => a.order - b.order);
-    const ordered: TopicPlacement[] = [];
-    while (queue.length) {
-      const placement = queue.shift()!;
-      ordered.push(placement);
-      for (const edge of edges.filter(candidate => candidate.source === placement.id)) {
-        incoming.set(edge.target, (incoming.get(edge.target) ?? 1) - 1);
-        if (incoming.get(edge.target) === 0) {
-          const target = placements.find(candidate => candidate.id === edge.target);
-          if (target) queue.push(target);
-          queue.sort((a, b) => a.order - b.order);
-        }
-      }
-    }
-    return ordered.concat(placements.filter(placement => !ordered.some(item => item.id === placement.id)).sort((a, b) => a.order - b.order));
+    return (this.derived.orderedRootsByCurriculum[curriculumId] as string[]).map(id => this.placementById.get(id)!);
   }
 }

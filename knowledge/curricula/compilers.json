@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "compilers",
+    "title": "ML Systems & Compilers",
+    "description": "Transform tensor programs into optimized CPU and GPU kernels.",
+    "color": "#a7e163",
+    "goalTopicId": "ml-compiler-engineer",
+    "shortTitle": "Compilers"
+  },
+  "placements": [
+    {
+      "id": "place-compilers-compiler-systems-foundations",
+      "topicId": "compiler-systems-foundations",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-compiler-systems-foundations-cpp",
+      "topicId": "cpp",
+      "parentPlacementId": "place-compilers-compiler-systems-foundations",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-compiler-systems-foundations-software-engineering",
+      "topicId": "software-engineering",
+      "parentPlacementId": "place-compilers-compiler-systems-foundations",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-compiler-systems-foundations-computer-architecture",
+      "topicId": "computer-architecture",
+      "parentPlacementId": "place-compilers-compiler-systems-foundations",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-compiler-systems-foundations-parallel-algorithms",
+      "topicId": "parallel-algorithms",
+      "parentPlacementId": "place-compilers-compiler-systems-foundations",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals",
+      "topicId": "compiler-fundamentals",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals-lexing-parsing",
+      "topicId": "lexing-parsing",
+      "parentPlacementId": "place-compilers-compiler-fundamentals",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals-compiler-pipelines",
+      "topicId": "compiler-pipelines",
+      "parentPlacementId": "place-compilers-compiler-fundamentals",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals-abstract-syntax-trees",
+      "topicId": "abstract-syntax-trees",
+      "parentPlacementId": "place-compilers-compiler-fundamentals",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals-control-flow-graphs",
+      "topicId": "control-flow-graphs",
+      "parentPlacementId": "place-compilers-compiler-fundamentals",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals-dataflow-analysis",
+      "topicId": "dataflow-analysis",
+      "parentPlacementId": "place-compilers-compiler-fundamentals",
+      "order": 4
+    },
+    {
+      "id": "place-compilers-compiler-fundamentals-optimization-passes",
+      "topicId": "optimization-passes",
+      "parentPlacementId": "place-compilers-compiler-fundamentals",
+      "order": 5
+    },
+    {
+      "id": "place-compilers-intermediate-representations",
+      "topicId": "intermediate-representations",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-intermediate-representations-intermediate-representations",
+      "topicId": "intermediate-representations",
+      "parentPlacementId": "place-compilers-intermediate-representations",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-intermediate-representations-ssa",
+      "topicId": "ssa",
+      "parentPlacementId": "place-compilers-intermediate-representations",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-intermediate-representations-control-flow-graphs",
+      "topicId": "control-flow-graphs",
+      "parentPlacementId": "place-compilers-intermediate-representations",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-intermediate-representations-dataflow-analysis",
+      "topicId": "dataflow-analysis",
+      "parentPlacementId": "place-compilers-intermediate-representations",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-llvm-concepts",
+      "topicId": "llvm-concepts",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-llvm-concepts-llvm",
+      "topicId": "llvm",
+      "parentPlacementId": "place-compilers-llvm-concepts",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-llvm-concepts-llvm-ir",
+      "topicId": "llvm-ir",
+      "parentPlacementId": "place-compilers-llvm-concepts",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-llvm-concepts-compiler-backends",
+      "topicId": "compiler-backends",
+      "parentPlacementId": "place-compilers-llvm-concepts",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs",
+      "topicId": "tensor-computation-graphs",
+      "order": 4
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs-tensor-algebra",
+      "topicId": "tensor-algebra",
+      "parentPlacementId": "place-compilers-tensor-computation-graphs",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs-computational-graphs",
+      "topicId": "computational-graphs",
+      "parentPlacementId": "place-compilers-tensor-computation-graphs",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs-automatic-differentiation-compilers",
+      "topicId": "automatic-differentiation-compilers",
+      "parentPlacementId": "place-compilers-tensor-computation-graphs",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs-graph-optimization",
+      "topicId": "graph-optimization",
+      "parentPlacementId": "place-compilers-tensor-computation-graphs",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs-memory-planning",
+      "topicId": "memory-planning",
+      "parentPlacementId": "place-compilers-tensor-computation-graphs",
+      "order": 4
+    },
+    {
+      "id": "place-compilers-tensor-computation-graphs-layout-transformations",
+      "topicId": "layout-transformations",
+      "parentPlacementId": "place-compilers-tensor-computation-graphs",
+      "order": 5
+    },
+    {
+      "id": "place-compilers-mlir",
+      "topicId": "mlir",
+      "order": 5
+    },
+    {
+      "id": "place-compilers-mlir-mlir",
+      "topicId": "mlir",
+      "parentPlacementId": "place-compilers-mlir",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-mlir-mlir-dialects",
+      "topicId": "mlir-dialects",
+      "parentPlacementId": "place-compilers-mlir",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-mlir-compiler-lowering",
+      "topicId": "compiler-lowering",
+      "parentPlacementId": "place-compilers-mlir",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-kernel-fusion-lowering",
+      "topicId": "kernel-fusion-lowering",
+      "order": 6
+    },
+    {
+      "id": "place-compilers-kernel-fusion-lowering-operator-fusion",
+      "topicId": "operator-fusion",
+      "parentPlacementId": "place-compilers-kernel-fusion-lowering",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-kernel-fusion-lowering-memory-planning",
+      "topicId": "memory-planning",
+      "parentPlacementId": "place-compilers-kernel-fusion-lowering",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-kernel-fusion-lowering-layout-transformations",
+      "topicId": "layout-transformations",
+      "parentPlacementId": "place-compilers-kernel-fusion-lowering",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-kernel-fusion-lowering-scheduling",
+      "topicId": "scheduling",
+      "parentPlacementId": "place-compilers-kernel-fusion-lowering",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-kernel-fusion-lowering-autotuning",
+      "topicId": "autotuning",
+      "parentPlacementId": "place-compilers-kernel-fusion-lowering",
+      "order": 4
+    },
+    {
+      "id": "place-compilers-gpu-code-generation",
+      "topicId": "gpu-code-generation",
+      "order": 7
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-cuda",
+      "topicId": "cuda",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-gpu-architecture",
+      "topicId": "gpu-architecture",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-kernel-generation",
+      "topicId": "kernel-generation",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 2
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-gpu-lowering",
+      "topicId": "gpu-lowering",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 3
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-triton",
+      "topicId": "triton",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 4
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-torchinductor",
+      "topicId": "torchinductor",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 5
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-xla",
+      "topicId": "xla",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 6
+    },
+    {
+      "id": "place-compilers-gpu-code-generation-tvm",
+      "topicId": "tvm",
+      "parentPlacementId": "place-compilers-gpu-code-generation",
+      "order": 7
+    },
+    {
+      "id": "place-compilers-ml-compiler-milestones",
+      "topicId": "ml-compiler-milestones",
+      "order": 8
+    },
+    {
+      "id": "place-compilers-ml-compiler-milestones-ml-systems-engineer",
+      "topicId": "ml-systems-engineer",
+      "parentPlacementId": "place-compilers-ml-compiler-milestones",
+      "order": 0
+    },
+    {
+      "id": "place-compilers-ml-compiler-milestones-ai-systems-architect",
+      "topicId": "ai-systems-architect",
+      "parentPlacementId": "place-compilers-ml-compiler-milestones",
+      "order": 1
+    },
+    {
+      "id": "place-compilers-ml-compiler-engineer",
+      "topicId": "ml-compiler-engineer",
+      "order": 9
+    }
+  ],
+  "connections": [
+    {
+      "id": "compilers-root-0-compiler-systems-foundations-compiler-fundamentals",
+      "source": "place-compilers-compiler-systems-foundations",
+      "target": "place-compilers-compiler-fundamentals",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-1-compiler-fundamentals-intermediate-representations",
+      "source": "place-compilers-compiler-fundamentals",
+      "target": "place-compilers-intermediate-representations",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-2-intermediate-representations-llvm-concepts",
+      "source": "place-compilers-intermediate-representations",
+      "target": "place-compilers-llvm-concepts",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-3-llvm-concepts-tensor-computation-graphs",
+      "source": "place-compilers-llvm-concepts",
+      "target": "place-compilers-tensor-computation-graphs",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-4-tensor-computation-graphs-mlir",
+      "source": "place-compilers-tensor-computation-graphs",
+      "target": "place-compilers-mlir",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-5-mlir-kernel-fusion-lowering",
+      "source": "place-compilers-mlir",
+      "target": "place-compilers-kernel-fusion-lowering",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-6-kernel-fusion-lowering-gpu-code-generation",
+      "source": "place-compilers-kernel-fusion-lowering",
+      "target": "place-compilers-gpu-code-generation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-root-7-gpu-code-generation-ml-compiler-milestones",
+      "source": "place-compilers-gpu-code-generation",
+      "target": "place-compilers-ml-compiler-milestones",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "compilers-goal-0",
+      "source": "place-compilers-ml-compiler-milestones",
+      "target": "place-compilers-ml-compiler-engineer",
+      "relation": "prerequisite"
+    }
+  ]
+}

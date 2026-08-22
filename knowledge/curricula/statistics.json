@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "statistics",
+    "title": "Data Science / Statistics",
+    "description": "Statistical depth beyond routine ML engineering and dataframe tooling.",
+    "color": "#ff7fb6",
+    "goalTopicId": "advanced-data-scientist",
+    "shortTitle": "Stats"
+  },
+  "placements": [
+    {
+      "id": "place-statistics-probability-theory",
+      "topicId": "probability-theory",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-probability-theory-probability-distributions",
+      "topicId": "probability-distributions",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-probability-theory-expectation",
+      "topicId": "expectation",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-probability-theory-variance",
+      "topicId": "variance",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-probability-theory-conditional-probability",
+      "topicId": "conditional-probability",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-probability-theory-bayes-theorem",
+      "topicId": "bayes-theorem",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 4
+    },
+    {
+      "id": "place-statistics-probability-theory-law-of-large-numbers",
+      "topicId": "law-of-large-numbers",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 5
+    },
+    {
+      "id": "place-statistics-probability-theory-central-limit-theorem",
+      "topicId": "central-limit-theorem",
+      "parentPlacementId": "place-statistics-probability-theory",
+      "order": 6
+    },
+    {
+      "id": "place-statistics-statistical-inference",
+      "topicId": "statistical-inference",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-statistical-inference-likelihood",
+      "topicId": "likelihood",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-statistical-inference-maximum-likelihood",
+      "topicId": "maximum-likelihood",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-statistical-inference-estimators",
+      "topicId": "estimators",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-statistical-inference-estimator-bias",
+      "topicId": "estimator-bias",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-statistical-inference-estimator-variance",
+      "topicId": "estimator-variance",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 4
+    },
+    {
+      "id": "place-statistics-statistical-inference-consistency",
+      "topicId": "consistency",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 5
+    },
+    {
+      "id": "place-statistics-statistical-inference-confidence-intervals",
+      "topicId": "confidence-intervals",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 6
+    },
+    {
+      "id": "place-statistics-statistical-inference-hypothesis-testing",
+      "topicId": "hypothesis-testing",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 7
+    },
+    {
+      "id": "place-statistics-statistical-inference-statistical-power",
+      "topicId": "statistical-power",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 8
+    },
+    {
+      "id": "place-statistics-statistical-inference-multiple-testing",
+      "topicId": "multiple-testing",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 9
+    },
+    {
+      "id": "place-statistics-statistical-inference-mathematical-statistics",
+      "topicId": "mathematical-statistics",
+      "parentPlacementId": "place-statistics-statistical-inference",
+      "order": 10
+    },
+    {
+      "id": "place-statistics-regression-glms",
+      "topicId": "regression-glms",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-regression-glms-linear-regression",
+      "topicId": "linear-regression",
+      "parentPlacementId": "place-statistics-regression-glms",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-regression-glms-generalized-linear-models",
+      "topicId": "generalized-linear-models",
+      "parentPlacementId": "place-statistics-regression-glms",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-regression-glms-model-diagnostics",
+      "topicId": "model-diagnostics",
+      "parentPlacementId": "place-statistics-regression-glms",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-regression-glms-regularization",
+      "topicId": "regularization",
+      "parentPlacementId": "place-statistics-regression-glms",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-experimental-design",
+      "topicId": "experimental-design",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-experimental-design-experiment-design",
+      "topicId": "experiment-design",
+      "parentPlacementId": "place-statistics-experimental-design",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-experimental-design-randomized-controlled-experiments",
+      "topicId": "randomized-controlled-experiments",
+      "parentPlacementId": "place-statistics-experimental-design",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-experimental-design-ab-testing",
+      "topicId": "ab-testing",
+      "parentPlacementId": "place-statistics-experimental-design",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-experimental-design-sequential-testing",
+      "topicId": "sequential-testing",
+      "parentPlacementId": "place-statistics-experimental-design",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-bayesian-statistics",
+      "topicId": "bayesian-statistics",
+      "order": 4
+    },
+    {
+      "id": "place-statistics-bayesian-statistics-bayesian-inference",
+      "topicId": "bayesian-inference",
+      "parentPlacementId": "place-statistics-bayesian-statistics",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-bayesian-statistics-priors",
+      "topicId": "priors",
+      "parentPlacementId": "place-statistics-bayesian-statistics",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-bayesian-statistics-posterior-inference",
+      "topicId": "posterior-inference",
+      "parentPlacementId": "place-statistics-bayesian-statistics",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-bayesian-statistics-mcmc",
+      "topicId": "mcmc",
+      "parentPlacementId": "place-statistics-bayesian-statistics",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-bayesian-statistics-hierarchical-models",
+      "topicId": "hierarchical-models",
+      "parentPlacementId": "place-statistics-bayesian-statistics",
+      "order": 4
+    },
+    {
+      "id": "place-statistics-bayesian-statistics-bayesian-modeling-practitioner",
+      "topicId": "bayesian-modeling-practitioner",
+      "parentPlacementId": "place-statistics-bayesian-statistics",
+      "order": 5
+    },
+    {
+      "id": "place-statistics-causal-inference",
+      "topicId": "causal-inference",
+      "order": 5
+    },
+    {
+      "id": "place-statistics-causal-inference-causal-graphs",
+      "topicId": "causal-graphs",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-causal-inference-potential-outcomes",
+      "topicId": "potential-outcomes",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-causal-inference-confounding",
+      "topicId": "confounding",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-causal-inference-matching",
+      "topicId": "matching",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-causal-inference-propensity-scores",
+      "topicId": "propensity-scores",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 4
+    },
+    {
+      "id": "place-statistics-causal-inference-instrumental-variables",
+      "topicId": "instrumental-variables",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 5
+    },
+    {
+      "id": "place-statistics-causal-inference-difference-in-differences",
+      "topicId": "difference-in-differences",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 6
+    },
+    {
+      "id": "place-statistics-causal-inference-regression-discontinuity",
+      "topicId": "regression-discontinuity",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 7
+    },
+    {
+      "id": "place-statistics-causal-inference-causal-experimentation-scientist",
+      "topicId": "causal-experimentation-scientist",
+      "parentPlacementId": "place-statistics-causal-inference",
+      "order": 8
+    },
+    {
+      "id": "place-statistics-time-series",
+      "topicId": "time-series",
+      "order": 6
+    },
+    {
+      "id": "place-statistics-time-series-stationarity",
+      "topicId": "stationarity",
+      "parentPlacementId": "place-statistics-time-series",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-time-series-arima",
+      "topicId": "arima",
+      "parentPlacementId": "place-statistics-time-series",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-time-series-forecasting-evaluation",
+      "topicId": "forecasting-evaluation",
+      "parentPlacementId": "place-statistics-time-series",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-time-series-probabilistic-forecasting",
+      "topicId": "probabilistic-forecasting",
+      "parentPlacementId": "place-statistics-time-series",
+      "order": 3
+    },
+    {
+      "id": "place-statistics-advanced-applied-data-science",
+      "topicId": "advanced-applied-data-science",
+      "order": 7
+    },
+    {
+      "id": "place-statistics-advanced-applied-data-science-probabilistic-ml-engineer",
+      "topicId": "probabilistic-ml-engineer",
+      "parentPlacementId": "place-statistics-advanced-applied-data-science",
+      "order": 0
+    },
+    {
+      "id": "place-statistics-advanced-applied-data-science-advanced-statistical-modeling",
+      "topicId": "advanced-statistical-modeling",
+      "parentPlacementId": "place-statistics-advanced-applied-data-science",
+      "order": 1
+    },
+    {
+      "id": "place-statistics-advanced-applied-data-science-decision-science",
+      "topicId": "decision-science",
+      "parentPlacementId": "place-statistics-advanced-applied-data-science",
+      "order": 2
+    },
+    {
+      "id": "place-statistics-advanced-data-scientist",
+      "topicId": "advanced-data-scientist",
+      "order": 8
+    }
+  ],
+  "connections": [
+    {
+      "id": "statistics-root-0-probability-theory-statistical-inference",
+      "source": "place-statistics-probability-theory",
+      "target": "place-statistics-statistical-inference",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-1-statistical-inference-regression-glms",
+      "source": "place-statistics-statistical-inference",
+      "target": "place-statistics-regression-glms",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-2-regression-glms-experimental-design",
+      "source": "place-statistics-regression-glms",
+      "target": "place-statistics-experimental-design",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-3-experimental-design-bayesian-statistics",
+      "source": "place-statistics-experimental-design",
+      "target": "place-statistics-bayesian-statistics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-4-experimental-design-causal-inference",
+      "source": "place-statistics-experimental-design",
+      "target": "place-statistics-causal-inference",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-5-experimental-design-time-series",
+      "source": "place-statistics-experimental-design",
+      "target": "place-statistics-time-series",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-6-bayesian-statistics-advanced-applied-data-science",
+      "source": "place-statistics-bayesian-statistics",
+      "target": "place-statistics-advanced-applied-data-science",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-7-causal-inference-advanced-applied-data-science",
+      "source": "place-statistics-causal-inference",
+      "target": "place-statistics-advanced-applied-data-science",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-root-8-time-series-advanced-applied-data-science",
+      "source": "place-statistics-time-series",
+      "target": "place-statistics-advanced-applied-data-science",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "statistics-goal-0",
+      "source": "place-statistics-advanced-applied-data-science",
+      "target": "place-statistics-advanced-data-scientist",
+      "relation": "prerequisite"
+    }
+  ]
+}

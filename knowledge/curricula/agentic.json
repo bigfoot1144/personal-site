@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "agentic",
+    "title": "Agentic AI Engineering",
+    "description": "Reliable, secure, durable, tool-using AI systems above beginner LLM application development.",
+    "color": "#62e6c7",
+    "goalTopicId": "agentic-ai-systems-engineer",
+    "shortTitle": "Agents"
+  },
+  "placements": [
+    {
+      "id": "place-agentic-llm-applications",
+      "topicId": "llm-applications",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-llm-applications-transformers",
+      "topicId": "transformers",
+      "parentPlacementId": "place-agentic-llm-applications",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-llm-applications-llm-apis",
+      "topicId": "llm-apis",
+      "parentPlacementId": "place-agentic-llm-applications",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-llm-applications-rag",
+      "topicId": "rag",
+      "parentPlacementId": "place-agentic-llm-applications",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-llm-applications-embeddings",
+      "topicId": "embeddings",
+      "parentPlacementId": "place-agentic-llm-applications",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-llm-applications-prompt-system-design",
+      "topicId": "prompt-system-design",
+      "parentPlacementId": "place-agentic-llm-applications",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-llm-applications-software-engineering",
+      "topicId": "software-engineering",
+      "parentPlacementId": "place-agentic-llm-applications",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-structured-generation",
+      "topicId": "structured-generation",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-structured-generation-structured-outputs",
+      "topicId": "structured-outputs",
+      "parentPlacementId": "place-agentic-structured-generation",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-structured-generation-constrained-generation",
+      "topicId": "constrained-generation",
+      "parentPlacementId": "place-agentic-structured-generation",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-structured-generation-schema-validation",
+      "topicId": "schema-validation",
+      "parentPlacementId": "place-agentic-structured-generation",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-tool-use",
+      "topicId": "agent-tool-use",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-tool-use-function-calling",
+      "topicId": "function-calling",
+      "parentPlacementId": "place-agentic-agent-tool-use",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-tool-use-tool-schemas",
+      "topicId": "tool-schemas",
+      "parentPlacementId": "place-agentic-agent-tool-use",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-agent-tool-use-tool-selection",
+      "topicId": "tool-selection",
+      "parentPlacementId": "place-agentic-agent-tool-use",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-tool-use-context-engineering",
+      "topicId": "context-engineering",
+      "parentPlacementId": "place-agentic-agent-tool-use",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-tool-use-retrieval-systems",
+      "topicId": "retrieval-systems",
+      "parentPlacementId": "place-agentic-agent-tool-use",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agent-runtime-design",
+      "topicId": "agent-runtime-design",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-runtime-design-workflow-graphs",
+      "topicId": "workflow-graphs",
+      "parentPlacementId": "place-agentic-agent-runtime-design",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-runtime-design-state-machines",
+      "topicId": "state-machines",
+      "parentPlacementId": "place-agentic-agent-runtime-design",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-agent-runtime-design-event-driven-agents",
+      "topicId": "event-driven-agents",
+      "parentPlacementId": "place-agentic-agent-runtime-design",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-runtime-design-asynchronous-agents",
+      "topicId": "asynchronous-agents",
+      "parentPlacementId": "place-agentic-agent-runtime-design",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-runtime-design-durable-execution",
+      "topicId": "durable-execution",
+      "parentPlacementId": "place-agentic-agent-runtime-design",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agent-state-memory",
+      "topicId": "agent-state-memory",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agent-state-memory-state-management",
+      "topicId": "state-management",
+      "parentPlacementId": "place-agentic-agent-state-memory",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-state-memory-memory-architectures",
+      "topicId": "memory-architectures",
+      "parentPlacementId": "place-agentic-agent-state-memory",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-agent-state-memory-short-term-memory",
+      "topicId": "short-term-memory",
+      "parentPlacementId": "place-agentic-agent-state-memory",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-state-memory-long-term-memory",
+      "topicId": "long-term-memory",
+      "parentPlacementId": "place-agentic-agent-state-memory",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-planning-search",
+      "topicId": "agent-planning-search",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-agent-planning-search-planning",
+      "topicId": "planning",
+      "parentPlacementId": "place-agentic-agent-planning-search",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-planning-search-search",
+      "topicId": "search",
+      "parentPlacementId": "place-agentic-agent-planning-search",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-agent-planning-search-task-decomposition",
+      "topicId": "task-decomposition",
+      "parentPlacementId": "place-agentic-agent-planning-search",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-planning-search-reflection-critique",
+      "topicId": "reflection-critique",
+      "parentPlacementId": "place-agentic-agent-planning-search",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability",
+      "topicId": "agent-evaluation-reliability",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-agent-evaluations",
+      "topicId": "agent-evaluations",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-benchmark-design",
+      "topicId": "benchmark-design",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-trajectory-evaluation",
+      "topicId": "trajectory-evaluation",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-tool-use-evaluation",
+      "topicId": "tool-use-evaluation",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-trace-analysis",
+      "topicId": "trace-analysis",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-observability",
+      "topicId": "observability",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-retries",
+      "topicId": "retries",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-idempotency",
+      "topicId": "idempotency",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-failure-recovery",
+      "topicId": "failure-recovery",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-agent-evaluation-reliability-human-in-the-loop",
+      "topicId": "human-in-the-loop",
+      "parentPlacementId": "place-agentic-agent-evaluation-reliability",
+      "order": 9
+    },
+    {
+      "id": "place-agentic-agent-security-isolation",
+      "topicId": "agent-security-isolation",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-agent-security-isolation-prompt-injection",
+      "topicId": "prompt-injection",
+      "parentPlacementId": "place-agentic-agent-security-isolation",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-security-isolation-tool-authorization",
+      "topicId": "tool-authorization",
+      "parentPlacementId": "place-agentic-agent-security-isolation",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-agent-security-isolation-sandboxing",
+      "topicId": "sandboxing",
+      "parentPlacementId": "place-agentic-agent-security-isolation",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-agent-security-isolation-secrets-isolation",
+      "topicId": "secrets-isolation",
+      "parentPlacementId": "place-agentic-agent-security-isolation",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-production-agent-systems",
+      "topicId": "production-agent-systems",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-production-agent-systems-model-routing",
+      "topicId": "model-routing",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-production-agent-systems-latency-cost-optimization",
+      "topicId": "latency-cost-optimization",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-production-agent-systems-multi-agent-architectures",
+      "topicId": "multi-agent-architectures",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-production-agent-systems-distributed-systems",
+      "topicId": "distributed-systems",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-production-agent-systems-ai-systems-architect",
+      "topicId": "ai-systems-architect",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agentic-ai-systems-engineer",
+      "topicId": "agentic-ai-systems-engineer",
+      "order": 9
+    }
+  ],
+  "connections": [
+    {
+      "id": "agentic-root-0-llm-applications-structured-generation",
+      "source": "place-agentic-llm-applications",
+      "target": "place-agentic-structured-generation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-1-structured-generation-agent-tool-use",
+      "source": "place-agentic-structured-generation",
+      "target": "place-agentic-agent-tool-use",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-2-agent-tool-use-agent-runtime-design",
+      "source": "place-agentic-agent-tool-use",
+      "target": "place-agentic-agent-runtime-design",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-3-agent-runtime-design-agent-state-memory",
+      "source": "place-agentic-agent-runtime-design",
+      "target": "place-agentic-agent-state-memory",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-4-agent-state-memory-agent-planning-search",
+      "source": "place-agentic-agent-state-memory",
+      "target": "place-agentic-agent-planning-search",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-5-agent-planning-search-agent-evaluation-reliability",
+      "source": "place-agentic-agent-planning-search",
+      "target": "place-agentic-agent-evaluation-reliability",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-6-agent-evaluation-reliability-agent-security-isolation",
+      "source": "place-agentic-agent-evaluation-reliability",
+      "target": "place-agentic-agent-security-isolation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-7-agent-security-isolation-production-agent-systems",
+      "source": "place-agentic-agent-security-isolation",
+      "target": "place-agentic-production-agent-systems",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-goal-0",
+      "source": "place-agentic-production-agent-systems",
+      "target": "place-agentic-agentic-ai-systems-engineer",
+      "relation": "prerequisite"
+    }
+  ]
+}

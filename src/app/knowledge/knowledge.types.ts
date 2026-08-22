@@ -24,6 +24,7 @@ export interface TopicPlacement {
 export interface Curriculum {
   id: string;
   title: string;
+  shortTitle: string;
   description: string;
   color: string;
   goalTopicId: string;
@@ -71,4 +72,20 @@ export interface PositionedTopic extends Topic {
   y: number;
   status: TopicStatus;
   curriculumIds: string[];
+}
+
+export interface KnowledgeRuntimeData extends CurriculaData {
+  journal: JournalData;
+  derived: {
+    childrenByPlacement: Record<string, string[]>;
+    placementsByTopic: Record<string, string[]>;
+    orderedRootsByCurriculum: Record<string, string[]>;
+    statusByTopic: Record<string, TopicStatus>;
+    aggregateStatusByPlacement: Record<string, TopicStatus>;
+    entriesByTopic: Record<string, number[]>;
+    positions: Record<string, { x: number; y: number }>;
+    placementPaths: Record<string, Record<string, string>>;
+    searchRecords: Array<{ placementId: string; curriculumId: string; path: string; text: string }>;
+    connectionPaths: Record<string, string>;
+  };
 }

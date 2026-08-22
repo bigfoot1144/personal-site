@@ -1,0 +1,277 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "hpc",
+    "title": "HPC / Scientific Computing",
+    "description": "Numerically sound parallel computing from shared memory through distributed accelerators.",
+    "color": "#8ea8ff",
+    "goalTopicId": "hpc-scientific-computing-engineer",
+    "shortTitle": "HPC"
+  },
+  "placements": [
+    {
+      "id": "place-hpc-numerical-methods",
+      "topicId": "numerical-methods",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-numerical-methods-floating-point",
+      "topicId": "floating-point",
+      "parentPlacementId": "place-hpc-numerical-methods",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-numerical-methods-conditioning",
+      "topicId": "conditioning",
+      "parentPlacementId": "place-hpc-numerical-methods",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-numerical-methods-numerical-stability",
+      "topicId": "numerical-stability",
+      "parentPlacementId": "place-hpc-numerical-methods",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-numerical-methods-numerical-integration",
+      "topicId": "numerical-integration",
+      "parentPlacementId": "place-hpc-numerical-methods",
+      "order": 3
+    },
+    {
+      "id": "place-hpc-numerical-methods-ode-solvers",
+      "topicId": "ode-solvers",
+      "parentPlacementId": "place-hpc-numerical-methods",
+      "order": 4
+    },
+    {
+      "id": "place-hpc-numerical-methods-pde-methods",
+      "topicId": "pde-methods",
+      "parentPlacementId": "place-hpc-numerical-methods",
+      "order": 5
+    },
+    {
+      "id": "place-hpc-numerical-linear-algebra",
+      "topicId": "numerical-linear-algebra",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-numerical-linear-algebra-matrix-factorizations",
+      "topicId": "matrix-factorizations",
+      "parentPlacementId": "place-hpc-numerical-linear-algebra",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-numerical-linear-algebra-sparse-matrices",
+      "topicId": "sparse-matrices",
+      "parentPlacementId": "place-hpc-numerical-linear-algebra",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-numerical-linear-algebra-iterative-solvers",
+      "topicId": "iterative-solvers",
+      "parentPlacementId": "place-hpc-numerical-linear-algebra",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-numerical-linear-algebra-preconditioning",
+      "topicId": "preconditioning",
+      "parentPlacementId": "place-hpc-numerical-linear-algebra",
+      "order": 3
+    },
+    {
+      "id": "place-hpc-hpc-parallel-algorithms",
+      "topicId": "hpc-parallel-algorithms",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-hpc-parallel-algorithms-parallel-algorithms",
+      "topicId": "parallel-algorithms",
+      "parentPlacementId": "place-hpc-hpc-parallel-algorithms",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-hpc-parallel-algorithms-parallel-numerical-methods",
+      "topicId": "parallel-numerical-methods",
+      "parentPlacementId": "place-hpc-hpc-parallel-algorithms",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-hpc-parallel-algorithms-domain-decomposition",
+      "topicId": "domain-decomposition",
+      "parentPlacementId": "place-hpc-hpc-parallel-algorithms",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-openmp",
+      "topicId": "openmp",
+      "order": 3
+    },
+    {
+      "id": "place-hpc-openmp-openmp",
+      "topicId": "openmp",
+      "parentPlacementId": "place-hpc-openmp",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-openmp-thread-scheduling",
+      "topicId": "thread-scheduling",
+      "parentPlacementId": "place-hpc-openmp",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-openmp-shared-memory-scaling",
+      "topicId": "shared-memory-scaling",
+      "parentPlacementId": "place-hpc-openmp",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-mpi",
+      "topicId": "mpi",
+      "order": 4
+    },
+    {
+      "id": "place-hpc-mpi-mpi",
+      "topicId": "mpi",
+      "parentPlacementId": "place-hpc-mpi",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-mpi-message-passing",
+      "topicId": "message-passing",
+      "parentPlacementId": "place-hpc-mpi",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-mpi-collectives",
+      "topicId": "collectives",
+      "parentPlacementId": "place-hpc-mpi",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-mpi-domain-decomposition",
+      "topicId": "domain-decomposition",
+      "parentPlacementId": "place-hpc-mpi",
+      "order": 3
+    },
+    {
+      "id": "place-hpc-cuda-numerical-computing",
+      "topicId": "cuda-numerical-computing",
+      "order": 5
+    },
+    {
+      "id": "place-hpc-cuda-numerical-computing-cuda",
+      "topicId": "cuda",
+      "parentPlacementId": "place-hpc-cuda-numerical-computing",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-cuda-numerical-computing-gpu-architecture",
+      "topicId": "gpu-architecture",
+      "parentPlacementId": "place-hpc-cuda-numerical-computing",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-cuda-numerical-computing-cuda-numerical-computing",
+      "topicId": "cuda-numerical-computing",
+      "parentPlacementId": "place-hpc-cuda-numerical-computing",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-cuda-numerical-computing-tensor-cores",
+      "topicId": "tensor-cores",
+      "parentPlacementId": "place-hpc-cuda-numerical-computing",
+      "order": 3
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing",
+      "topicId": "distributed-numerical-computing",
+      "order": 6
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing-distributed-numerical-methods",
+      "topicId": "distributed-numerical-methods",
+      "parentPlacementId": "place-hpc-distributed-numerical-computing",
+      "order": 0
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing-profiling-scaling",
+      "topicId": "profiling-scaling",
+      "parentPlacementId": "place-hpc-distributed-numerical-computing",
+      "order": 1
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing-strong-scaling",
+      "topicId": "strong-scaling",
+      "parentPlacementId": "place-hpc-distributed-numerical-computing",
+      "order": 2
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing-weak-scaling",
+      "topicId": "weak-scaling",
+      "parentPlacementId": "place-hpc-distributed-numerical-computing",
+      "order": 3
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing-communication-overhead",
+      "topicId": "communication-overhead",
+      "parentPlacementId": "place-hpc-distributed-numerical-computing",
+      "order": 4
+    },
+    {
+      "id": "place-hpc-distributed-numerical-computing-communication-computation-overlap",
+      "topicId": "communication-computation-overlap",
+      "parentPlacementId": "place-hpc-distributed-numerical-computing",
+      "order": 5
+    },
+    {
+      "id": "place-hpc-hpc-scientific-computing-engineer",
+      "topicId": "hpc-scientific-computing-engineer",
+      "order": 7
+    }
+  ],
+  "connections": [
+    {
+      "id": "hpc-root-0-numerical-methods-numerical-linear-algebra",
+      "source": "place-hpc-numerical-methods",
+      "target": "place-hpc-numerical-linear-algebra",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "hpc-root-1-numerical-linear-algebra-hpc-parallel-algorithms",
+      "source": "place-hpc-numerical-linear-algebra",
+      "target": "place-hpc-hpc-parallel-algorithms",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "hpc-root-2-hpc-parallel-algorithms-openmp",
+      "source": "place-hpc-hpc-parallel-algorithms",
+      "target": "place-hpc-openmp",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "hpc-root-3-openmp-mpi",
+      "source": "place-hpc-openmp",
+      "target": "place-hpc-mpi",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "hpc-root-4-mpi-cuda-numerical-computing",
+      "source": "place-hpc-mpi",
+      "target": "place-hpc-cuda-numerical-computing",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "hpc-root-5-cuda-numerical-computing-distributed-numerical-computing",
+      "source": "place-hpc-cuda-numerical-computing",
+      "target": "place-hpc-distributed-numerical-computing",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "hpc-goal-0",
+      "source": "place-hpc-distributed-numerical-computing",
+      "target": "place-hpc-hpc-scientific-computing-engineer",
+      "relation": "prerequisite"
+    }
+  ]
+}

@@ -1,0 +1,5798 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "physics-goal",
+      "title": "Theoretical Physics",
+      "summary": "Reach the QFT–general-relativity frontier and evaluate proposed theories of quantum spacetime.",
+      "tags": [
+        "physics",
+        "goal"
+      ],
+      "duration": "2.5–4 years total",
+      "completionCriteria": "You can identify the degrees of freedom, low-energy limit, locality, unitarity, observables, and falsifiable predictions of a quantum-gravity proposal."
+    },
+    {
+      "id": "neural-networks",
+      "title": "Neural Networks",
+      "summary": "Representation learning, optimization, and modern architectures.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "mathematical-methods",
+      "title": "Mathematical Methods",
+      "summary": "Upgrade the mathematical language required for advanced theoretical physics.",
+      "duration": "2–4 months",
+      "completionCriteria": "Grad, div, and curl feel natural; basis changes and eigenvectors are routine; you can solve the harmonic ODE, Fourier-expand functions, and manipulate complex exponentials.",
+      "resources": [
+        {
+          "label": "Strang — Introduction to Linear Algebra"
+        },
+        {
+          "label": "Boas — Mathematical Methods in the Physical Sciences"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage",
+        "math"
+      ]
+    },
+    {
+      "id": "multivariable-calculus",
+      "title": "Multivariable Calculus",
+      "summary": "Partial derivatives, multiple integrals, coordinate systems, and multivariable change.",
+      "tags": [
+        "math",
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "vector-calculus",
+      "title": "Vector Calculus",
+      "summary": "Gradient, divergence, curl, flux, and integral theorems.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "linear-algebra",
+      "title": "Linear Algebra",
+      "summary": "Vector spaces, linear maps, matrices, bases, and decompositions.",
+      "tags": [
+        "math",
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "eigenvectors",
+      "title": "Eigenvectors & Spectral Methods",
+      "summary": "Eigenvalues, invariant directions, diagonalization, and normal modes.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "ordinary-differential-equations",
+      "title": "Ordinary Differential Equations",
+      "summary": "Linear ODEs, oscillators, boundary conditions, and dynamical systems.",
+      "tags": [
+        "math",
+        "robotics",
+        "background"
+      ]
+    },
+    {
+      "id": "partial-differential-equations",
+      "title": "PDE Foundations",
+      "summary": "Canonical PDEs, separation of variables, and boundary-value problems.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "complex-methods",
+      "title": "Complex Methods",
+      "summary": "Complex numbers, analytic functions, contour ideas, and complex exponentials.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "fourier-analysis",
+      "title": "Fourier Analysis",
+      "summary": "Fourier series, Fourier transforms, modes, and frequency-space reasoning.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "probability",
+      "title": "Probability",
+      "summary": "Random variables, distributions, expectation, and probabilistic inference.",
+      "tags": [
+        "math",
+        "machine-learning",
+        "robotics",
+        "background"
+      ]
+    },
+    {
+      "id": "analytical-mechanics",
+      "title": "Analytical Mechanics",
+      "summary": "Rebuild mechanics around actions, generalized coordinates, symmetry, and phase space.",
+      "duration": "2–3 months",
+      "completionCriteria": "You can derive equations of motion from an action instead of beginning with F = ma.",
+      "resources": [
+        {
+          "label": "Taylor — Classical Mechanics"
+        },
+        {
+          "label": "MIT 8.09 Classical Mechanics III",
+          "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "calculus-of-variations",
+      "title": "Calculus of Variations",
+      "summary": "Functionals, varied paths, and stationary-action methods.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "action-principle",
+      "title": "Action Principle",
+      "summary": "Dynamics organized by δS = 0 and the action functional.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "lagrangian-mechanics",
+      "title": "Lagrangian Mechanics",
+      "summary": "Euler–Lagrange equations, constraints, and coordinate-independent dynamics.",
+      "tags": [
+        "physics",
+        "robotics"
+      ]
+    },
+    {
+      "id": "hamiltonian-mechanics",
+      "title": "Hamiltonian Mechanics",
+      "summary": "Hamilton equations and energy-based evolution.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "generalized-coordinates",
+      "title": "Generalized Coordinates",
+      "summary": "Configuration spaces, constraints, and non-Cartesian variables.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "phase-space",
+      "title": "Phase Space",
+      "summary": "States as points in position–momentum space and Hamiltonian flow.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "poisson-brackets",
+      "title": "Poisson Brackets",
+      "summary": "Canonical algebra, generators, and time evolution.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "symmetry-conservation",
+      "title": "Symmetry & Conservation",
+      "summary": "Continuous symmetries, conserved quantities, and Noether-style reasoning.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "waves-electromagnetism",
+      "title": "Waves & Electromagnetism",
+      "summary": "Develop a field-based description through waves, Maxwell theory, radiation, and gauge freedom.",
+      "duration": "3–4 months",
+      "completionCriteria": "You see particles and fields as distinct but connected forms of physical description.",
+      "resources": [
+        {
+          "label": "Griffiths — Introduction to Electrodynamics"
+        },
+        {
+          "label": "MIT 8.07 Electromagnetism II"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "normal-modes",
+      "title": "Normal Modes",
+      "summary": "Coupled oscillations, eigenmodes, and collective motion.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "wave-equation",
+      "title": "Wave Equation",
+      "summary": "Derivation, solutions, propagation, and boundary conditions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "fourier-modes",
+      "title": "Fourier Modes",
+      "summary": "Decomposing fields and waves into momentum and frequency modes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "electrostatics",
+      "title": "Electrostatics",
+      "summary": "Electric fields, potentials, boundary problems, and multipoles.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "maxwell-equations",
+      "title": "Maxwell Equations",
+      "summary": "The unified dynamical laws of classical electromagnetism.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "electromagnetic-potentials",
+      "title": "Electromagnetic Potentials",
+      "summary": "Scalar and vector potentials and their physical use.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "electromagnetic-radiation",
+      "title": "Electromagnetic Radiation",
+      "summary": "Radiating sources, waves, energy, and momentum transport.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "gauge-freedom",
+      "title": "Gauge Freedom",
+      "summary": "Redundant field descriptions and gauge transformations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "special-relativity",
+      "title": "Special Relativity",
+      "summary": "Replace frame-dependent intuition with the geometry of Minkowski spacetime.",
+      "duration": "1–2 months",
+      "completionCriteria": "You reason geometrically with spacetime rather than treating relativity as a collection of clock effects.",
+      "resources": [
+        {
+          "label": "MIT 8.033 Relativity and Spacetime Physics",
+          "url": "https://ocw.mit.edu/courses/8-033-introduction-to-relativity-and-spacetime-physics-fall-2024/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "lorentz-transformations",
+      "title": "Lorentz Transformations",
+      "summary": "Changes of inertial frame preserving the spacetime interval.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "minkowski-spacetime",
+      "title": "Minkowski Spacetime",
+      "summary": "Events, intervals, light cones, and causal geometry.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "four-vectors",
+      "title": "Four-Vectors",
+      "summary": "Covariant position, velocity, momentum, and tensor notation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "relativistic-energy-momentum",
+      "title": "Relativistic Energy & Momentum",
+      "summary": "Four-momentum and E² = p²c² + m²c⁴.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "relativistic-electromagnetism",
+      "title": "Relativistic Electromagnetism",
+      "summary": "Electric and magnetic fields as parts of one covariant field.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "thermal-statistical-physics",
+      "title": "Thermal & Statistical Physics",
+      "summary": "Explain thermodynamics and macroscopic irreversibility through microscopic statistics.",
+      "duration": "2–3 months",
+      "completionCriteria": "You understand how thermodynamics and irreversible behavior emerge statistically.",
+      "resources": [
+        {
+          "label": "Schroeder — Thermal Physics"
+        },
+        {
+          "label": "MIT 8.044 Statistical Physics I"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "entropy",
+      "title": "Entropy",
+      "summary": "Thermodynamic and statistical meanings of entropy.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "statistical-ensembles",
+      "title": "Statistical Ensembles",
+      "summary": "Microcanonical, canonical, and grand-canonical descriptions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "partition-functions",
+      "title": "Partition Functions",
+      "summary": "Generating thermodynamic quantities from statistical weights.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "bose-statistics",
+      "title": "Bose Statistics",
+      "summary": "Indistinguishable bosons and Bose–Einstein distributions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "fermi-statistics",
+      "title": "Fermi Statistics",
+      "summary": "Fermions, exclusion, and Fermi–Dirac distributions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "black-body-radiation",
+      "title": "Black-Body Radiation",
+      "summary": "Thermal radiation, Planck spectrum, and quantum motivation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "statistical-phase-space",
+      "title": "Statistical Phase Space",
+      "summary": "Probability distributions over microscopic states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-mechanics-i",
+      "title": "Quantum Mechanics I",
+      "summary": "Learn wave mechanics and the structural principles of quantum states and observables.",
+      "duration": "3 months",
+      "completionCriteria": "You can solve one-dimensional quantum systems and treat superposition as a structural principle.",
+      "resources": [
+        {
+          "label": "Griffiths — Introduction to Quantum Mechanics"
+        },
+        {
+          "label": "Zwiebach — Mastering Quantum Mechanics"
+        },
+        {
+          "label": "MIT 8.04 Quantum Physics I",
+          "url": "https://ocw.mit.edu/courses/8-04-quantum-physics-i-spring-2016/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "quantum-states-amplitudes",
+      "title": "States & Amplitudes",
+      "summary": "Quantum states, probability amplitudes, and superposition.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "wavefunctions",
+      "title": "Wavefunctions",
+      "summary": "Position-space states, normalization, and probability density.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "schrodinger-equation",
+      "title": "Schrödinger Equation",
+      "summary": "Unitary time evolution and stationary states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-operators",
+      "title": "Quantum Operators",
+      "summary": "Observables, eigenstates, commutators, and measurement.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "uncertainty-principle",
+      "title": "Uncertainty Principle",
+      "summary": "Noncommuting observables and uncertainty relations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-tunneling",
+      "title": "Quantum Tunneling",
+      "summary": "Barrier penetration and classically forbidden behavior.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-harmonic-oscillator",
+      "title": "Quantum Harmonic Oscillator",
+      "summary": "Ladder operators, energy spectrum, and oscillator states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "advanced-quantum-mechanics",
+      "title": "Advanced Quantum Mechanics",
+      "summary": "Move from wave mechanics to the general operator and Hilbert-space formalism.",
+      "duration": "4–6 months",
+      "completionCriteria": "You think primarily in states, operators, and unitary evolution rather than particle-wave analogies.",
+      "resources": [
+        {
+          "label": "MIT 8.05 Quantum Physics II",
+          "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/"
+        },
+        {
+          "label": "MIT 8.06 Quantum Physics III",
+          "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2018/"
+        },
+        {
+          "label": "Shankar — Principles of Quantum Mechanics"
+        },
+        {
+          "label": "Sakurai — Modern Quantum Mechanics"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "hilbert-spaces",
+      "title": "Hilbert Spaces",
+      "summary": "Inner-product spaces, bases, completeness, and state geometry.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "bra-ket-notation",
+      "title": "Bra–Ket Notation",
+      "summary": "Abstract states, dual vectors, operators, and matrix elements.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-spin",
+      "title": "Quantum Spin",
+      "summary": "Intrinsic angular momentum and two-level systems.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "angular-momentum",
+      "title": "Angular Momentum",
+      "summary": "Rotation generators, addition rules, and spherical systems.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "identical-particles",
+      "title": "Identical Particles",
+      "summary": "Bosonic and fermionic symmetry and many-particle states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "perturbation-theory",
+      "title": "Perturbation Theory",
+      "summary": "Approximate spectra and dynamics for weakly changed systems.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-scattering",
+      "title": "Quantum Scattering",
+      "summary": "Cross sections, amplitudes, partial waves, and interactions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "unitary-evolution",
+      "title": "Unitary Evolution",
+      "summary": "Quantum dynamics, pictures of motion, and conservation of probability.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "astrophysics",
+      "title": "Astrophysics",
+      "summary": "Apply mechanics, fields, quantum physics, and statistics to stars and compact objects.",
+      "duration": "3–4 months",
+      "completionCriteria": "You can trace astrophysical objects back to mechanics, E&M, quantum mechanics, and statistical mechanics.",
+      "resources": [
+        {
+          "label": "Carroll & Ostlie — An Introduction to Modern Astrophysics"
+        },
+        {
+          "label": "MIT 8.284 Modern Astrophysics",
+          "url": "https://ocw.mit.edu/courses/8-284-modern-astrophysics-spring-2006/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "stellar-structure",
+      "title": "Stellar Structure",
+      "summary": "Hydrostatic balance, transport, and stellar equilibrium.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "nuclear-burning",
+      "title": "Nuclear Burning",
+      "summary": "Fusion chains, reaction rates, and stellar energy production.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "degeneracy-pressure",
+      "title": "Degeneracy Pressure",
+      "summary": "Quantum statistics supporting dense astrophysical matter.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "white-dwarfs",
+      "title": "White Dwarfs",
+      "summary": "Electron degeneracy, mass limits, and stellar remnants.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "neutron-stars",
+      "title": "Neutron Stars",
+      "summary": "Dense nuclear matter, structure, and relativistic compactness.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "supernovae",
+      "title": "Supernovae",
+      "summary": "Core collapse, explosions, nucleosynthesis, and remnants.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "astrophysical-black-holes",
+      "title": "Astrophysical Black Holes",
+      "summary": "Formation, accretion, horizons, and observations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "galaxies",
+      "title": "Galaxies",
+      "summary": "Structure, dynamics, populations, and large-scale context.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "general-relativity",
+      "title": "General Relativity",
+      "summary": "Understand gravity as dynamical spacetime geometry.",
+      "duration": "4–6 months",
+      "completionCriteria": "You understand gravity as geometry rather than a force field living in spacetime.",
+      "resources": [
+        {
+          "label": "Carroll — Spacetime and Geometry"
+        },
+        {
+          "label": "MIT 8.962 General Relativity",
+          "url": "https://ocw.mit.edu/courses/8-962-general-relativity-spring-2020/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "tensors",
+      "title": "Tensors",
+      "summary": "Coordinate-independent multilinear objects and index notation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "manifolds",
+      "title": "Manifolds",
+      "summary": "Smooth spaces, charts, tangent vectors, and differential structure.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "metric-geometry",
+      "title": "Metric Geometry",
+      "summary": "Distances, causal structure, raising/lowering, and volume.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "spacetime-curvature",
+      "title": "Spacetime Curvature",
+      "summary": "Connections, Riemann curvature, Ricci tensors, and invariants.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "geodesics",
+      "title": "Geodesics",
+      "summary": "Free fall and extremal paths in curved spacetime.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "einstein-equation",
+      "title": "Einstein Equation",
+      "summary": "Geometry sourced by stress-energy and cosmological constant.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "schwarzschild-spacetime",
+      "title": "Schwarzschild Spacetime",
+      "summary": "Spherical vacuum gravity, horizons, and orbits.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "gravitational-waves",
+      "title": "Gravitational Waves",
+      "summary": "Linearized gravity, wave solutions, and observables.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "frw-geometry",
+      "title": "FRW Geometry",
+      "summary": "Homogeneous and isotropic expanding spacetimes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmology",
+      "title": "Cosmology",
+      "summary": "Connect relativistic expansion, thermal history, and particle physics to the universe.",
+      "duration": "2–4 months",
+      "completionCriteria": "You can derive the basic expansion history and connect particle physics to cosmology.",
+      "resources": [
+        {
+          "label": "Ryden — Introduction to Cosmology"
+        },
+        {
+          "label": "MIT 8.286 The Early Universe",
+          "url": "https://ocw.mit.edu/courses/8-286-the-early-universe-fall-2013/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "expanding-universe",
+      "title": "Expanding Universe",
+      "summary": "Cosmological redshift, scale factor, and observational expansion.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "friedmann-equations",
+      "title": "Friedmann Equations",
+      "summary": "Dynamics of homogeneous universes and cosmic components.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "thermal-history",
+      "title": "Thermal History",
+      "summary": "Cooling, freeze-out, transitions, and the early universe.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "nucleosynthesis",
+      "title": "Nucleosynthesis",
+      "summary": "Primordial element production and abundance constraints.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmic-microwave-background",
+      "title": "Cosmic Microwave Background",
+      "summary": "Recombination, anisotropies, and early-universe evidence.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "dark-matter",
+      "title": "Dark Matter",
+      "summary": "Gravitational evidence and candidate microscopic explanations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "dark-energy",
+      "title": "Dark Energy",
+      "summary": "Accelerated expansion and cosmological-constant phenomenology.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "inflation",
+      "title": "Inflation",
+      "summary": "Accelerated early expansion and quantum-seeded structure.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "classical-fields-qft",
+      "title": "Classical Fields & QFT",
+      "summary": "Quantize relativistic fields and develop the language of modern particle physics.",
+      "duration": "5–8 months",
+      "completionCriteria": "You understand why combining special relativity with quantum mechanics leads to quantum fields.",
+      "resources": [
+        {
+          "label": "Schwartz — Quantum Field Theory and the Standard Model"
+        },
+        {
+          "label": "MIT 8.323 Relativistic Quantum Field Theory I",
+          "url": "https://ocw.mit.edu/courses/8-323-relativistic-quantum-field-theory-i-spring-2023/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "field-actions",
+      "title": "Field Actions",
+      "summary": "Lagrangian densities and equations of motion for fields.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "noether-theorem",
+      "title": "Noether Theorem",
+      "summary": "Continuous symmetries, currents, and conserved charges.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "canonical-quantization",
+      "title": "Canonical Quantization",
+      "summary": "Promoting fields and conjugate momenta to operators.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "creation-annihilation",
+      "title": "Creation & Annihilation Operators",
+      "summary": "Fock space and particle excitations of fields.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "propagators",
+      "title": "Propagators",
+      "summary": "Green functions, correlations, and relativistic propagation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "path-integrals",
+      "title": "Path Integrals",
+      "summary": "Quantum amplitudes as weighted sums over field histories.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "feynman-diagrams",
+      "title": "Feynman Diagrams",
+      "summary": "Perturbative organization of interactions and amplitudes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "renormalization",
+      "title": "Renormalization",
+      "summary": "Scale dependence, divergences, counterterms, and effective theories.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "standard-model",
+      "title": "Particle Physics & Standard Model",
+      "summary": "Understand the Standard Model as a gauge quantum field theory.",
+      "duration": "3–4 months",
+      "completionCriteria": "You see the Standard Model as a structured gauge theory rather than a catalog of particles.",
+      "resources": [
+        {
+          "label": "Griffiths — Introduction to Elementary Particles"
+        },
+        {
+          "label": "Schwartz — Quantum Field Theory and the Standard Model"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "gauge-symmetry",
+      "title": "Gauge Symmetry",
+      "summary": "Local symmetry, gauge connections, and interactions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "u1-symmetry",
+      "title": "U(1)",
+      "summary": "Abelian gauge symmetry and electromagnetism.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "su2-symmetry",
+      "title": "SU(2)",
+      "summary": "Weak isospin and non-Abelian gauge structure.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "su3-symmetry",
+      "title": "SU(3)",
+      "summary": "Color symmetry and the gauge structure of QCD.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-electrodynamics",
+      "title": "Quantum Electrodynamics",
+      "summary": "Relativistic quantum theory of charged matter and photons.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "weak-interaction",
+      "title": "Weak Interaction",
+      "summary": "Charged and neutral currents, parity violation, and flavor.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-chromodynamics",
+      "title": "Quantum Chromodynamics",
+      "summary": "Quarks, gluons, confinement, and asymptotic freedom.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "higgs-mechanism",
+      "title": "Higgs Mechanism",
+      "summary": "Gauge-field masses through symmetry breaking.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "spontaneous-symmetry-breaking",
+      "title": "Spontaneous Symmetry Breaking",
+      "summary": "Vacuum structure, order parameters, and emergent excitations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "qft-curved-spacetime",
+      "title": "QFT in Curved Spacetime",
+      "summary": "Study quantum fields when spacetime is curved and particle notions become observer-dependent.",
+      "duration": "2–4 months",
+      "completionCriteria": "You can work at the genuine semiclassical interface between quantum fields and gravity.",
+      "resources": [
+        {
+          "label": "Birrell & Davies — Quantum Fields in Curved Space"
+        },
+        {
+          "label": "Selected lecture notes and reviews"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "vacuum-ambiguity",
+      "title": "Vacuum Ambiguity",
+      "summary": "Why curved spacetime lacks a unique global particle vacuum.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "unruh-effect",
+      "title": "Unruh Effect",
+      "summary": "Acceleration, horizons, and observer-dependent thermality.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "hawking-radiation",
+      "title": "Hawking Radiation",
+      "summary": "Black-hole particle creation and thermal spectra.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmological-particle-creation",
+      "title": "Cosmological Particle Creation",
+      "summary": "Quantum fields and particles in expanding universes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "semiclassical-einstein-equation",
+      "title": "Semiclassical Einstein Equation",
+      "summary": "Classical geometry sourced by quantum stress-energy expectation values.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-gravity-frontier",
+      "title": "Quantum-Gravity Frontier",
+      "summary": "Study where quantum field theory and dynamical spacetime demand a deeper description.",
+      "duration": "Ongoing",
+      "completionCriteria": "You can distinguish genuine open problems from rhetoric and evaluate what a proposed quantum-gravity theory must recover and predict.",
+      "resources": [
+        {
+          "label": "Donoghue — The Effective Field Theory Treatment of Quantum Gravity",
+          "url": "https://arxiv.org/abs/1209.3511"
+        },
+        {
+          "label": "Harlow — Black Holes in Quantum Gravity",
+          "url": "https://arxiv.org/abs/2304.10367"
+        },
+        {
+          "label": "General Relativity as an Effective Field Theory",
+          "url": "https://journals.aps.org/prd/abstract/10.1103/PhysRevD.50.3874"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "effective-field-theory-gravity",
+      "title": "Effective-Field-Theory Gravity",
+      "summary": "Low-energy quantum gravity and the limits of perturbative Einstein theory.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "black-hole-entropy",
+      "title": "Black-Hole Entropy",
+      "summary": "Horizon area, microscopic states, and gravitational thermodynamics.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "black-hole-information",
+      "title": "Black-Hole Information",
+      "summary": "Evaporation, unitarity, entropy, and information recovery.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmological-constant-problem",
+      "title": "Cosmological Constant Problem",
+      "summary": "Vacuum energy, gravity, naturalness, and observed acceleration.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "singularities",
+      "title": "Singularities",
+      "summary": "Classical breakdown in black holes and the early universe.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "problem-of-time",
+      "title": "Problem of Time",
+      "summary": "Quantum evolution without an external universal clock.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "locality-observables",
+      "title": "Locality & Observables",
+      "summary": "Gauge-invariant observables when coordinates are redundant.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "holography",
+      "title": "Holography",
+      "summary": "Encoding gravitational regions through lower-dimensional quantum descriptions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "string-theory",
+      "title": "String Theory",
+      "summary": "Extended degrees of freedom and quantum-consistent gravity.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "loop-quantum-gravity",
+      "title": "Loop Quantum Gravity",
+      "summary": "Background-independent quantization of geometric variables.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "emergent-spacetime",
+      "title": "Emergent Spacetime",
+      "summary": "Geometry arising from more microscopic quantum degrees of freedom.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "advanced-efficient-ml-engineer",
+      "title": "Advanced ML / Efficient ML Engineer",
+      "summary": "Engineer accurate learning systems under real hardware, latency, memory, and deployment constraints.",
+      "tags": [
+        "goal",
+        "machine-learning"
+      ],
+      "completionCriteria": "You can profile a model, identify its bottlenecks, choose compression, precision, or architectural changes, and demonstrate measured gains without unacceptable degradation."
+    },
+    {
+      "id": "ml-mathematical-foundations",
+      "title": "Mathematical Foundations",
+      "summary": "Rigorous shared mathematics for advanced machine learning.",
+      "tags": [
+        "stage",
+        "machine-learning"
+      ],
+      "completionCriteria": "You can apply the core ideas in Mathematical Foundations independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "calculus-i",
+      "title": "Calculus I",
+      "summary": "Develop practical and theoretical command of Calculus I.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "calculus-ii",
+      "title": "Calculus Ii",
+      "summary": "Develop practical and theoretical command of Calculus Ii.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "discrete-mathematics",
+      "title": "Discrete Mathematics",
+      "summary": "Develop practical and theoretical command of Discrete Mathematics.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "applied-statistics",
+      "title": "Applied Statistics",
+      "summary": "Develop practical and theoretical command of Applied Statistics.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "numerical-linear-algebra",
+      "title": "Numerical Linear Algebra",
+      "summary": "Dense and sparse numerical matrix computation.",
+      "tags": [
+        "machine-learning",
+        "stage",
+        "hpc",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Numerical Linear Algebra independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "mathematical-statistics",
+      "title": "Mathematical Statistics",
+      "summary": "Develop practical and theoretical command of Mathematical Statistics.",
+      "tags": [
+        "machine-learning",
+        "statistics",
+        "background"
+      ]
+    },
+    {
+      "id": "optimization",
+      "title": "Optimization",
+      "summary": "Develop practical and theoretical command of Optimization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "numerical-optimization",
+      "title": "Numerical Optimization",
+      "summary": "Develop practical and theoretical command of Numerical Optimization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "information-theory",
+      "title": "Information Theory",
+      "summary": "Develop practical and theoretical command of Information Theory.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "classical-machine-learning",
+      "title": "Classical Machine Learning",
+      "summary": "Core predictive and unsupervised learning methods.",
+      "tags": [
+        "stage",
+        "machine-learning",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Classical Machine Learning independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "linear-regression",
+      "title": "Linear Regression",
+      "summary": "Develop practical and theoretical command of Linear Regression.",
+      "tags": [
+        "machine-learning",
+        "statistics",
+        "background"
+      ]
+    },
+    {
+      "id": "logistic-regression",
+      "title": "Logistic Regression",
+      "summary": "Develop practical and theoretical command of Logistic Regression.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "regularization",
+      "title": "Regularization",
+      "summary": "Develop practical and theoretical command of Regularization.",
+      "tags": [
+        "machine-learning",
+        "statistics",
+        "background"
+      ]
+    },
+    {
+      "id": "bias-variance",
+      "title": "Bias Variance",
+      "summary": "Develop practical and theoretical command of Bias Variance.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "decision-trees",
+      "title": "Decision Trees",
+      "summary": "Develop practical and theoretical command of Decision Trees.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "random-forests",
+      "title": "Random Forests",
+      "summary": "Develop practical and theoretical command of Random Forests.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "gradient-boosting",
+      "title": "Gradient Boosting",
+      "summary": "Develop practical and theoretical command of Gradient Boosting.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "support-vector-machines",
+      "title": "Support Vector Machines",
+      "summary": "Develop practical and theoretical command of Support Vector Machines.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "kernel-methods",
+      "title": "Kernel Methods",
+      "summary": "Develop practical and theoretical command of Kernel Methods.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "dimensionality-reduction",
+      "title": "Dimensionality Reduction",
+      "summary": "Develop practical and theoretical command of Dimensionality Reduction.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "clustering",
+      "title": "Clustering",
+      "summary": "Develop practical and theoretical command of Clustering.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "feature-engineering",
+      "title": "Feature Engineering",
+      "summary": "Develop practical and theoretical command of Feature Engineering.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "model-selection",
+      "title": "Model Selection",
+      "summary": "Develop practical and theoretical command of Model Selection.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "cross-validation",
+      "title": "Cross Validation",
+      "summary": "Develop practical and theoretical command of Cross Validation.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "model-calibration",
+      "title": "Model Calibration",
+      "summary": "Develop practical and theoretical command of Model Calibration.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "evaluation-metrics",
+      "title": "Evaluation Metrics",
+      "summary": "Develop practical and theoretical command of Evaluation Metrics.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "deep-learning",
+      "title": "Deep Learning",
+      "summary": "Modern differentiable representation learning.",
+      "tags": [
+        "stage",
+        "machine-learning",
+        "robotics",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Deep Learning independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "backpropagation",
+      "title": "Backpropagation",
+      "summary": "Develop practical and theoretical command of Backpropagation.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "automatic-differentiation",
+      "title": "Automatic Differentiation",
+      "summary": "Develop practical and theoretical command of Automatic Differentiation.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "weight-initialization",
+      "title": "Weight Initialization",
+      "summary": "Develop practical and theoretical command of Weight Initialization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "deep-learning-optimization",
+      "title": "Deep Learning Optimization",
+      "summary": "Develop practical and theoretical command of Deep Learning Optimization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "normalization",
+      "title": "Normalization",
+      "summary": "Develop practical and theoretical command of Normalization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "convolutional-neural-networks",
+      "title": "Convolutional Neural Networks",
+      "summary": "Develop practical and theoretical command of Convolutional Neural Networks.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "sequence-models",
+      "title": "Sequence Models",
+      "summary": "Develop practical and theoretical command of Sequence Models.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "embeddings",
+      "title": "Embeddings",
+      "summary": "Develop practical and theoretical command of Embeddings.",
+      "tags": [
+        "machine-learning",
+        "agentic",
+        "background"
+      ]
+    },
+    {
+      "id": "attention",
+      "title": "Attention",
+      "summary": "Develop practical and theoretical command of Attention.",
+      "tags": [
+        "machine-learning",
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "transformers",
+      "title": "Transformers",
+      "summary": "Develop practical and theoretical command of Transformers.",
+      "tags": [
+        "machine-learning",
+        "agentic",
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "specialized-machine-learning",
+      "title": "Specialized ML",
+      "summary": "Applied areas backed by professional project evidence.",
+      "tags": [
+        "stage",
+        "machine-learning",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Specialized ML independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "computer-vision",
+      "title": "Computer Vision",
+      "summary": "Develop practical and theoretical command of Computer Vision.",
+      "tags": [
+        "machine-learning",
+        "robotics",
+        "background"
+      ]
+    },
+    {
+      "id": "ocr",
+      "title": "OCR",
+      "summary": "Develop practical and theoretical command of OCR.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "object-detection",
+      "title": "Object Detection",
+      "summary": "Develop practical and theoretical command of Object Detection.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "pose-estimation",
+      "title": "Pose Estimation",
+      "summary": "Develop practical and theoretical command of Pose Estimation.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "reinforcement-learning",
+      "title": "Reinforcement Learning",
+      "summary": "Develop practical and theoretical command of Reinforcement Learning.",
+      "tags": [
+        "machine-learning",
+        "robotics",
+        "background"
+      ]
+    },
+    {
+      "id": "policy-gradients",
+      "title": "Policy Gradients",
+      "summary": "Develop practical and theoretical command of Policy Gradients.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "ppo",
+      "title": "PPO",
+      "summary": "Develop practical and theoretical command of PPO.",
+      "tags": [
+        "machine-learning",
+        "robotics",
+        "background"
+      ]
+    },
+    {
+      "id": "representation-learning",
+      "title": "Representation Learning",
+      "summary": "Develop practical and theoretical command of Representation Learning.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "production-ml-systems",
+      "title": "Production ML Systems",
+      "summary": "Repeatable training, deployment, evaluation, and monitoring systems.",
+      "tags": [
+        "stage",
+        "machine-learning",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Production ML Systems independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "programming",
+      "title": "Programming",
+      "summary": "Develop practical and theoretical command of Programming.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "object-oriented-programming",
+      "title": "Object Oriented Programming",
+      "summary": "Develop practical and theoretical command of Object Oriented Programming.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "data-structures",
+      "title": "Data Structures",
+      "summary": "Develop practical and theoretical command of Data Structures.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "algorithms",
+      "title": "Algorithms",
+      "summary": "Develop practical and theoretical command of Algorithms.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "operating-systems",
+      "title": "Operating Systems",
+      "summary": "Develop practical and theoretical command of Operating Systems.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "computer-systems",
+      "title": "Computer Systems",
+      "summary": "Develop practical and theoretical command of Computer Systems.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "databases",
+      "title": "Databases",
+      "summary": "Develop practical and theoretical command of Databases.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "software-engineering",
+      "title": "Software Engineering",
+      "summary": "Develop practical and theoretical command of Software Engineering.",
+      "tags": [
+        "machine-learning",
+        "agentic",
+        "compilers",
+        "background"
+      ]
+    },
+    {
+      "id": "dataset-pipelines",
+      "title": "Dataset Pipelines",
+      "summary": "Develop practical and theoretical command of Dataset Pipelines.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "training-pipelines",
+      "title": "Training Pipelines",
+      "summary": "Develop practical and theoretical command of Training Pipelines.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "training-systems",
+      "title": "Training Systems",
+      "summary": "Develop practical and theoretical command of Training Systems.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "experiment-tracking",
+      "title": "Experiment Tracking",
+      "summary": "Develop practical and theoretical command of Experiment Tracking.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "model-versioning",
+      "title": "Model Versioning",
+      "summary": "Develop practical and theoretical command of Model Versioning.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "model-deployment",
+      "title": "Model Deployment",
+      "summary": "Develop practical and theoretical command of Model Deployment.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "inference-services",
+      "title": "Inference Services",
+      "summary": "Develop practical and theoretical command of Inference Services.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "ml-monitoring",
+      "title": "ML Monitoring",
+      "summary": "Develop practical and theoretical command of ML Monitoring.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "model-drift",
+      "title": "Model Drift",
+      "summary": "Develop practical and theoretical command of Model Drift.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "reproducibility",
+      "title": "Reproducibility",
+      "summary": "Develop practical and theoretical command of Reproducibility.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "evaluation-infrastructure",
+      "title": "Evaluation Infrastructure",
+      "summary": "Develop practical and theoretical command of Evaluation Infrastructure.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "feature-data-pipelines",
+      "title": "Feature Data Pipelines",
+      "summary": "Develop practical and theoretical command of Feature Data Pipelines.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "embedded-ml",
+      "title": "Embedded ML",
+      "summary": "Develop practical and theoretical command of Embedded ML.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "tensorflow-lite",
+      "title": "Tensorflow Lite",
+      "summary": "Develop practical and theoretical command of Tensorflow Lite.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "efficient-machine-learning",
+      "title": "Efficient ML",
+      "summary": "The active frontier of compression and hardware-aware optimization.",
+      "tags": [
+        "stage",
+        "machine-learning",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Efficient ML independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "ml-workload-profiling",
+      "title": "ML Workload Profiling",
+      "summary": "Develop practical and theoretical command of ML Workload Profiling.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "memory-compute-tradeoffs",
+      "title": "Memory Compute Tradeoffs",
+      "summary": "Develop practical and theoretical command of Memory Compute Tradeoffs.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "pruning",
+      "title": "Pruning",
+      "summary": "Develop practical and theoretical command of Pruning.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "structured-pruning",
+      "title": "Structured Pruning",
+      "summary": "Develop practical and theoretical command of Structured Pruning.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "knowledge-distillation",
+      "title": "Knowledge Distillation",
+      "summary": "Develop practical and theoretical command of Knowledge Distillation.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "quantization",
+      "title": "Quantization",
+      "summary": "Develop practical and theoretical command of Quantization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "mixed-precision",
+      "title": "Mixed Precision",
+      "summary": "Develop practical and theoretical command of Mixed Precision.",
+      "tags": [
+        "machine-learning",
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "sparsity",
+      "title": "Sparsity",
+      "summary": "Develop practical and theoretical command of Sparsity.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "low-rank-methods",
+      "title": "Low Rank Methods",
+      "summary": "Develop practical and theoretical command of Low Rank Methods.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "hardware-aware-optimization",
+      "title": "Hardware Aware Optimization",
+      "summary": "Develop practical and theoretical command of Hardware Aware Optimization.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "efficient-architectures",
+      "title": "Efficient Architectures",
+      "summary": "Develop practical and theoretical command of Efficient Architectures.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "edge-inference",
+      "title": "Edge Inference",
+      "summary": "Develop practical and theoretical command of Edge Inference.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "model-compression",
+      "title": "Model Compression",
+      "summary": "Develop practical and theoretical command of Model Compression.",
+      "tags": [
+        "machine-learning",
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "benchmarking-methodology",
+      "title": "Benchmarking Methodology",
+      "summary": "Develop practical and theoretical command of Benchmarking Methodology.",
+      "tags": [
+        "machine-learning",
+        "background"
+      ]
+    },
+    {
+      "id": "ml-research-literacy",
+      "title": "ML Research Literacy",
+      "summary": "Read, reproduce, critique, and extend machine-learning research.",
+      "tags": [
+        "stage",
+        "machine-learning"
+      ],
+      "completionCriteria": "You can apply the core ideas in ML Research Literacy independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "paper-reading",
+      "title": "Paper Reading",
+      "summary": "Develop practical and theoretical command of Paper Reading.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "experimental-methodology",
+      "title": "Experimental Methodology",
+      "summary": "Develop practical and theoretical command of Experimental Methodology.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "ablation-studies",
+      "title": "Ablation Studies",
+      "summary": "Develop practical and theoretical command of Ablation Studies.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "statistical-significance",
+      "title": "Statistical Significance",
+      "summary": "Develop practical and theoretical command of Statistical Significance.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "research-reproduction",
+      "title": "Research Reproduction",
+      "summary": "Develop practical and theoretical command of Research Reproduction.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "research-communication",
+      "title": "Research Communication",
+      "summary": "Develop practical and theoretical command of Research Communication.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "ml-research-readiness",
+      "title": "ML Research Readiness",
+      "summary": "Develop practical and theoretical command of ML Research Readiness.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "advanced-ml-engineering",
+      "title": "Advanced ML Engineering",
+      "summary": "Integrate modeling, systems, evidence, and technical leadership.",
+      "tags": [
+        "stage",
+        "machine-learning"
+      ],
+      "completionCriteria": "You can apply the core ideas in Advanced ML Engineering independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "ml-systems-engineer",
+      "title": "ML Systems Engineer",
+      "summary": "Develop practical and theoretical command of ML Systems Engineer.",
+      "tags": [
+        "machine-learning",
+        "compilers"
+      ]
+    },
+    {
+      "id": "ml-research-engineer",
+      "title": "ML Research Engineer",
+      "summary": "Develop practical and theoretical command of ML Research Engineer.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "ai-systems-architecture",
+      "title": "AI Systems Architecture",
+      "summary": "Develop practical and theoretical command of AI Systems Architecture.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "technical-ml-leadership",
+      "title": "Technical ML Leadership",
+      "summary": "Develop practical and theoretical command of Technical ML Leadership.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "agentic-ai-systems-engineer",
+      "title": "Agentic AI Systems Engineer",
+      "summary": "Design, evaluate, secure, debug, and operate durable tool-using AI systems.",
+      "tags": [
+        "goal",
+        "agentic"
+      ],
+      "completionCriteria": "You can operate a long-running agent with controlled tools, measurable trajectory quality, failure recovery, observability, and defensible security boundaries."
+    },
+    {
+      "id": "llm-applications",
+      "title": "LLM Applications",
+      "summary": "Established foundations for production LLM applications.",
+      "tags": [
+        "stage",
+        "agentic",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in LLM Applications independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "llm-apis",
+      "title": "LLM Apis",
+      "summary": "Develop practical and theoretical command of LLM Apis.",
+      "tags": [
+        "agentic",
+        "background"
+      ]
+    },
+    {
+      "id": "rag",
+      "title": "RAG",
+      "summary": "Develop practical and theoretical command of RAG.",
+      "tags": [
+        "agentic",
+        "background"
+      ]
+    },
+    {
+      "id": "prompt-system-design",
+      "title": "Prompt System Design",
+      "summary": "Develop practical and theoretical command of Prompt System Design.",
+      "tags": [
+        "agentic",
+        "background"
+      ]
+    },
+    {
+      "id": "structured-generation",
+      "title": "Structured Generation",
+      "summary": "Reliable machine-readable generation and constraints.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Structured Generation independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "structured-outputs",
+      "title": "Structured Outputs",
+      "summary": "Develop practical and theoretical command of Structured Outputs.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "constrained-generation",
+      "title": "Constrained Generation",
+      "summary": "Develop practical and theoretical command of Constrained Generation.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "schema-validation",
+      "title": "Schema Validation",
+      "summary": "Develop practical and theoretical command of Schema Validation.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "agent-tool-use",
+      "title": "Tool Use",
+      "summary": "Controlled model interaction with external capabilities.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Tool Use independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "function-calling",
+      "title": "Function Calling",
+      "summary": "Develop practical and theoretical command of Function Calling.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "tool-schemas",
+      "title": "Tool Schemas",
+      "summary": "Develop practical and theoretical command of Tool Schemas.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "tool-selection",
+      "title": "Tool Selection",
+      "summary": "Develop practical and theoretical command of Tool Selection.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "context-engineering",
+      "title": "Context Engineering",
+      "summary": "Develop practical and theoretical command of Context Engineering.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "retrieval-systems",
+      "title": "Retrieval Systems",
+      "summary": "Develop practical and theoretical command of Retrieval Systems.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "agent-runtime-design",
+      "title": "Agent Runtime Design",
+      "summary": "Execution models for durable agent workflows.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Agent Runtime Design independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "workflow-graphs",
+      "title": "Workflow Graphs",
+      "summary": "Develop practical and theoretical command of Workflow Graphs.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "state-machines",
+      "title": "State Machines",
+      "summary": "Develop practical and theoretical command of State Machines.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "event-driven-agents",
+      "title": "Event Driven Agents",
+      "summary": "Develop practical and theoretical command of Event Driven Agents.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "asynchronous-agents",
+      "title": "Asynchronous Agents",
+      "summary": "Develop practical and theoretical command of Asynchronous Agents.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "durable-execution",
+      "title": "Durable Execution",
+      "summary": "Develop practical and theoretical command of Durable Execution.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "agent-state-memory",
+      "title": "State & Memory",
+      "summary": "Explicit state and useful short- and long-term memory.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in State & Memory independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "state-management",
+      "title": "State Management",
+      "summary": "Develop practical and theoretical command of State Management.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "memory-architectures",
+      "title": "Memory Architectures",
+      "summary": "Develop practical and theoretical command of Memory Architectures.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "short-term-memory",
+      "title": "Short Term Memory",
+      "summary": "Develop practical and theoretical command of Short Term Memory.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "long-term-memory",
+      "title": "Long Term Memory",
+      "summary": "Develop practical and theoretical command of Long Term Memory.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "agent-planning-search",
+      "title": "Planning & Search",
+      "summary": "Decomposition and search over actions and intermediate states.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Planning & Search independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "planning",
+      "title": "Planning",
+      "summary": "Develop practical and theoretical command of Planning.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "search",
+      "title": "Search",
+      "summary": "Develop practical and theoretical command of Search.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "task-decomposition",
+      "title": "Task Decomposition",
+      "summary": "Develop practical and theoretical command of Task Decomposition.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "reflection-critique",
+      "title": "Reflection Critique",
+      "summary": "Develop practical and theoretical command of Reflection Critique.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "agent-evaluation-reliability",
+      "title": "Evaluation & Reliability",
+      "summary": "Trajectory-centered measurement and recovery engineering.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Evaluation & Reliability independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "agent-evaluations",
+      "title": "Agent Evaluations",
+      "summary": "Develop practical and theoretical command of Agent Evaluations.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "benchmark-design",
+      "title": "Benchmark Design",
+      "summary": "Develop practical and theoretical command of Benchmark Design.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "trajectory-evaluation",
+      "title": "Trajectory Evaluation",
+      "summary": "Develop practical and theoretical command of Trajectory Evaluation.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "tool-use-evaluation",
+      "title": "Tool Use Evaluation",
+      "summary": "Develop practical and theoretical command of Tool Use Evaluation.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "trace-analysis",
+      "title": "Trace Analysis",
+      "summary": "Develop practical and theoretical command of Trace Analysis.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "observability",
+      "title": "Observability",
+      "summary": "Develop practical and theoretical command of Observability.",
+      "tags": [
+        "agentic",
+        "robotics"
+      ]
+    },
+    {
+      "id": "retries",
+      "title": "Retries",
+      "summary": "Develop practical and theoretical command of Retries.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "idempotency",
+      "title": "Idempotency",
+      "summary": "Develop practical and theoretical command of Idempotency.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "failure-recovery",
+      "title": "Failure Recovery",
+      "summary": "Develop practical and theoretical command of Failure Recovery.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "human-in-the-loop",
+      "title": "Human In The Loop",
+      "summary": "Develop practical and theoretical command of Human In The Loop.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "agent-security-isolation",
+      "title": "Security & Isolation",
+      "summary": "Constrain untrusted model behavior and tool access.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Security & Isolation independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "prompt-injection",
+      "title": "Prompt Injection",
+      "summary": "Develop practical and theoretical command of Prompt Injection.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "tool-authorization",
+      "title": "Tool Authorization",
+      "summary": "Develop practical and theoretical command of Tool Authorization.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "sandboxing",
+      "title": "Sandboxing",
+      "summary": "Develop practical and theoretical command of Sandboxing.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "secrets-isolation",
+      "title": "Secrets Isolation",
+      "summary": "Develop practical and theoretical command of Secrets Isolation.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "production-agent-systems",
+      "title": "Production Agent Systems",
+      "summary": "Operate agent systems under cost, latency, and scale constraints.",
+      "tags": [
+        "stage",
+        "agentic"
+      ],
+      "completionCriteria": "You can apply the core ideas in Production Agent Systems independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "model-routing",
+      "title": "Model Routing",
+      "summary": "Develop practical and theoretical command of Model Routing.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "latency-cost-optimization",
+      "title": "Latency Cost Optimization",
+      "summary": "Develop practical and theoretical command of Latency Cost Optimization.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "multi-agent-architectures",
+      "title": "Multi Agent Architectures",
+      "summary": "Develop practical and theoretical command of Multi Agent Architectures.",
+      "tags": [
+        "agentic"
+      ]
+    },
+    {
+      "id": "distributed-systems",
+      "title": "Distributed Systems",
+      "summary": "Develop practical and theoretical command of Distributed Systems.",
+      "tags": [
+        "agentic",
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "ai-systems-architect",
+      "title": "AI Systems Architect",
+      "summary": "Develop practical and theoretical command of AI Systems Architect.",
+      "tags": [
+        "agentic",
+        "inference",
+        "compilers"
+      ]
+    },
+    {
+      "id": "distributed-inference-architect",
+      "title": "Distributed Inference Architect",
+      "summary": "Design multi-node inference systems across model, memory, communication, and serving layers.",
+      "tags": [
+        "goal",
+        "inference"
+      ],
+      "completionCriteria": "You can quantitatively design and diagnose a distributed inference architecture, including parallelism, topology, scheduling, memory, tail latency, and cost."
+    },
+    {
+      "id": "transformer-inference-internals",
+      "title": "Transformer Inference Internals",
+      "summary": "Execution and memory behavior of decoder-only transformers.",
+      "tags": [
+        "stage",
+        "inference",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Transformer Inference Internals independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "decoder-only-transformers",
+      "title": "Decoder Only Transformers",
+      "summary": "Develop practical and theoretical command of Decoder Only Transformers.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "rope",
+      "title": "RoPE",
+      "summary": "Develop practical and theoretical command of RoPE.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "multi-head-attention",
+      "title": "Multi Head Attention",
+      "summary": "Develop practical and theoretical command of Multi Head Attention.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "multi-query-attention",
+      "title": "Multi Query Attention",
+      "summary": "Develop practical and theoretical command of Multi Query Attention.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "grouped-query-attention",
+      "title": "Grouped Query Attention",
+      "summary": "Develop practical and theoretical command of Grouped Query Attention.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "mixture-of-experts",
+      "title": "Mixture Of Experts",
+      "summary": "Develop practical and theoretical command of Mixture Of Experts.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "kv-cache",
+      "title": "KV Cache",
+      "summary": "Develop practical and theoretical command of KV Cache.",
+      "tags": [
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "prefill",
+      "title": "Prefill",
+      "summary": "Develop practical and theoretical command of Prefill.",
+      "tags": [
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "decode",
+      "title": "Decode",
+      "summary": "Develop practical and theoretical command of Decode.",
+      "tags": [
+        "inference",
+        "background"
+      ]
+    },
+    {
+      "id": "autoregressive-execution",
+      "title": "Autoregressive Execution",
+      "summary": "Develop practical and theoretical command of Autoregressive Execution.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "model-memory-analysis",
+      "title": "Model Memory Analysis",
+      "summary": "Develop practical and theoretical command of Model Memory Analysis.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "inference-performance-modeling",
+      "title": "Inference Performance Modeling",
+      "summary": "Quantitative models of latency, throughput, compute, and memory.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in Inference Performance Modeling independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "floating-point-operations",
+      "title": "Floating Point Operations",
+      "summary": "Develop practical and theoretical command of Floating Point Operations.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "memory-bandwidth",
+      "title": "Memory Bandwidth",
+      "summary": "Develop practical and theoretical command of Memory Bandwidth.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "arithmetic-intensity",
+      "title": "Arithmetic Intensity",
+      "summary": "Develop practical and theoretical command of Arithmetic Intensity.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "roofline-model",
+      "title": "Roofline Model",
+      "summary": "Develop practical and theoretical command of Roofline Model.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "latency-throughput",
+      "title": "Latency Throughput",
+      "summary": "Develop practical and theoretical command of Latency Throughput.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "memory-vs-compute-bound",
+      "title": "Memory Vs Compute Bound",
+      "summary": "Develop practical and theoretical command of Memory Vs Compute Bound.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "batch-size-effects",
+      "title": "Batch Size Effects",
+      "summary": "Develop practical and theoretical command of Batch Size Effects.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "sequence-length-effects",
+      "title": "Sequence Length Effects",
+      "summary": "Develop practical and theoretical command of Sequence Length Effects.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "inference-model-compression",
+      "title": "Inference Model Compression",
+      "summary": "Precision and quantization choices for inference.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in Inference Model Compression independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "fp32",
+      "title": "Fp32",
+      "summary": "Develop practical and theoretical command of Fp32.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "fp16",
+      "title": "Fp16",
+      "summary": "Develop practical and theoretical command of Fp16.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "bf16",
+      "title": "Bf16",
+      "summary": "Develop practical and theoretical command of Bf16.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "fp8",
+      "title": "Fp8",
+      "summary": "Develop practical and theoretical command of Fp8.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "int8",
+      "title": "Int8",
+      "summary": "Develop practical and theoretical command of Int8.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "int4",
+      "title": "Int4",
+      "summary": "Develop practical and theoretical command of Int4.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "fp4",
+      "title": "Fp4",
+      "summary": "Develop practical and theoretical command of Fp4.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "weight-only-quantization",
+      "title": "Weight Only Quantization",
+      "summary": "Develop practical and theoretical command of Weight Only Quantization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "activation-quantization",
+      "title": "Activation Quantization",
+      "summary": "Develop practical and theoretical command of Activation Quantization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "kv-cache-quantization",
+      "title": "KV Cache Quantization",
+      "summary": "Develop practical and theoretical command of KV Cache Quantization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "quantization-calibration",
+      "title": "Quantization Calibration",
+      "summary": "Develop practical and theoretical command of Quantization Calibration.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "quantization-error",
+      "title": "Quantization Error",
+      "summary": "Develop practical and theoretical command of Quantization Error.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "groupwise-quantization",
+      "title": "Groupwise Quantization",
+      "summary": "Develop practical and theoretical command of Groupwise Quantization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "gpu-inference-kernels",
+      "title": "GPU Inference Kernels",
+      "summary": "Core transformer operators and fused implementations.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in GPU Inference Kernels independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "cuda",
+      "title": "CUDA",
+      "summary": "Develop practical and theoretical command of CUDA.",
+      "tags": [
+        "inference",
+        "gpu",
+        "compilers",
+        "hpc"
+      ]
+    },
+    {
+      "id": "gemm",
+      "title": "GEMM",
+      "summary": "Develop practical and theoretical command of GEMM.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "gemv",
+      "title": "GEMV",
+      "summary": "Develop practical and theoretical command of GEMV.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "reductions",
+      "title": "Reductions",
+      "summary": "Develop practical and theoretical command of Reductions.",
+      "tags": [
+        "inference",
+        "gpu"
+      ]
+    },
+    {
+      "id": "softmax",
+      "title": "Softmax",
+      "summary": "Develop practical and theoretical command of Softmax.",
+      "tags": [
+        "inference",
+        "gpu"
+      ]
+    },
+    {
+      "id": "layer-normalization",
+      "title": "Layer Normalization",
+      "summary": "Develop practical and theoretical command of Layer Normalization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "rmsnorm",
+      "title": "RMSNorm",
+      "summary": "Develop practical and theoretical command of RMSNorm.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "attention-kernels",
+      "title": "Attention Kernels",
+      "summary": "Develop practical and theoretical command of Attention Kernels.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "fused-kernels",
+      "title": "Fused Kernels",
+      "summary": "Develop practical and theoretical command of Fused Kernels.",
+      "tags": [
+        "inference",
+        "gpu"
+      ]
+    },
+    {
+      "id": "flash-attention",
+      "title": "Flash Attention",
+      "summary": "Develop practical and theoretical command of Flash Attention.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "quantized-matmul",
+      "title": "Quantized Matmul",
+      "summary": "Develop practical and theoretical command of Quantized Matmul.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "triton",
+      "title": "Triton",
+      "summary": "Develop practical and theoretical command of Triton.",
+      "tags": [
+        "inference",
+        "compilers"
+      ]
+    },
+    {
+      "id": "serving-engine-architecture",
+      "title": "Serving Engine Architecture",
+      "summary": "Scheduling and memory systems for high-throughput serving.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in Serving Engine Architecture independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "batching",
+      "title": "Batching",
+      "summary": "Develop practical and theoretical command of Batching.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "dynamic-batching",
+      "title": "Dynamic Batching",
+      "summary": "Develop practical and theoretical command of Dynamic Batching.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "continuous-batching",
+      "title": "Continuous Batching",
+      "summary": "Develop practical and theoretical command of Continuous Batching.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "chunked-prefill",
+      "title": "Chunked Prefill",
+      "summary": "Develop practical and theoretical command of Chunked Prefill.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "paged-attention",
+      "title": "Paged Attention",
+      "summary": "Develop practical and theoretical command of Paged Attention.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "memory-paging",
+      "title": "Memory Paging",
+      "summary": "Develop practical and theoretical command of Memory Paging.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "prefix-caching",
+      "title": "Prefix Caching",
+      "summary": "Develop practical and theoretical command of Prefix Caching.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "speculative-decoding",
+      "title": "Speculative Decoding",
+      "summary": "Develop practical and theoretical command of Speculative Decoding.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "scheduler-design",
+      "title": "Scheduler Design",
+      "summary": "Develop practical and theoretical command of Scheduler Design.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "request-prioritization",
+      "title": "Request Prioritization",
+      "summary": "Develop practical and theoretical command of Request Prioritization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "gpu-memory-management",
+      "title": "GPU Memory Management",
+      "summary": "Develop practical and theoretical command of GPU Memory Management.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "distributed-inference",
+      "title": "Distributed Inference",
+      "summary": "Parallel execution and communication across accelerators.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in Distributed Inference independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "tensor-parallelism",
+      "title": "Tensor Parallelism",
+      "summary": "Develop practical and theoretical command of Tensor Parallelism.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "pipeline-parallelism",
+      "title": "Pipeline Parallelism",
+      "summary": "Develop practical and theoretical command of Pipeline Parallelism.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "expert-parallelism",
+      "title": "Expert Parallelism",
+      "summary": "Develop practical and theoretical command of Expert Parallelism.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "data-parallelism",
+      "title": "Data Parallelism",
+      "summary": "Develop practical and theoretical command of Data Parallelism.",
+      "tags": [
+        "inference",
+        "gpu"
+      ]
+    },
+    {
+      "id": "nccl",
+      "title": "NCCL",
+      "summary": "Develop practical and theoretical command of NCCL.",
+      "tags": [
+        "inference",
+        "gpu"
+      ]
+    },
+    {
+      "id": "collectives",
+      "title": "Collectives",
+      "summary": "Develop practical and theoretical command of Collectives.",
+      "tags": [
+        "inference",
+        "gpu",
+        "hpc"
+      ]
+    },
+    {
+      "id": "all-reduce",
+      "title": "All Reduce",
+      "summary": "Develop practical and theoretical command of All Reduce.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "all-gather",
+      "title": "All Gather",
+      "summary": "Develop practical and theoretical command of All Gather.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "reduce-scatter",
+      "title": "Reduce Scatter",
+      "summary": "Develop practical and theoretical command of Reduce Scatter.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "communication-computation-overlap",
+      "title": "Communication Computation Overlap",
+      "summary": "Develop practical and theoretical command of Communication Computation Overlap.",
+      "tags": [
+        "inference",
+        "gpu",
+        "hpc"
+      ]
+    },
+    {
+      "id": "gpu-interconnects",
+      "title": "GPU Interconnects",
+      "summary": "Develop practical and theoretical command of GPU Interconnects.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "multi-gpu-topology",
+      "title": "Multi GPU Topology",
+      "summary": "Develop practical and theoretical command of Multi GPU Topology.",
+      "tags": [
+        "inference",
+        "gpu"
+      ]
+    },
+    {
+      "id": "disaggregated-prefill-decode",
+      "title": "Disaggregated Prefill Decode",
+      "summary": "Develop practical and theoretical command of Disaggregated Prefill Decode.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "production-inference-benchmarking",
+      "title": "Production Benchmarking",
+      "summary": "Measure user-visible performance, utilization, capacity, and cost.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in Production Benchmarking independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "time-to-first-token",
+      "title": "Time To First Token",
+      "summary": "Develop practical and theoretical command of Time To First Token.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "inter-token-latency",
+      "title": "Inter Token Latency",
+      "summary": "Develop practical and theoretical command of Inter Token Latency.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "tokens-per-second",
+      "title": "Tokens Per Second",
+      "summary": "Develop practical and theoretical command of Tokens Per Second.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "inference-throughput",
+      "title": "Inference Throughput",
+      "summary": "Develop practical and theoretical command of Inference Throughput.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "tail-latency",
+      "title": "Tail Latency",
+      "summary": "Develop practical and theoretical command of Tail Latency.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "serving-concurrency",
+      "title": "Serving Concurrency",
+      "summary": "Develop practical and theoretical command of Serving Concurrency.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "gpu-utilization",
+      "title": "GPU Utilization",
+      "summary": "Develop practical and theoretical command of GPU Utilization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "memory-utilization",
+      "title": "Memory Utilization",
+      "summary": "Develop practical and theoretical command of Memory Utilization.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "cost-per-token",
+      "title": "Cost Per Token",
+      "summary": "Develop practical and theoretical command of Cost Per Token.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "capacity-planning",
+      "title": "Capacity Planning",
+      "summary": "Develop practical and theoretical command of Capacity Planning.",
+      "tags": [
+        "inference"
+      ]
+    },
+    {
+      "id": "inference-career-milestones",
+      "title": "Inference Milestones",
+      "summary": "Demonstrated end-to-end inference engineering capability.",
+      "tags": [
+        "stage",
+        "inference"
+      ],
+      "completionCriteria": "You can apply the core ideas in Inference Milestones independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "llm-inference-engineer",
+      "title": "LLM Inference Engineer",
+      "summary": "Profile, modify, and reason quantitatively about a production inference stack.",
+      "tags": [
+        "milestone"
+      ],
+      "completionCriteria": "You can implement a small inference server, add KV caching and batching, quantize a model, profile prefill versus decode, and explain TTFT and inter-token latency."
+    },
+    {
+      "id": "cuda-gpu-performance-engineer",
+      "title": "CUDA / GPU Performance Engineer",
+      "summary": "Diagnose and improve GPU workloads from evidence.",
+      "tags": [
+        "goal",
+        "gpu"
+      ],
+      "completionCriteria": "You can identify whether a workload is compute-, memory-, latency-, occupancy-, launch-, synchronization-, or communication-limited and improve it based on measurements."
+    },
+    {
+      "id": "performance-oriented-cpp",
+      "title": "Performance-Oriented C++",
+      "summary": "Modern C++ and CPU performance fundamentals.",
+      "tags": [
+        "stage",
+        "gpu",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Performance-Oriented C++ independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "cpp",
+      "title": "C++",
+      "summary": "Develop practical and theoretical command of C++.",
+      "tags": [
+        "gpu",
+        "compilers",
+        "background"
+      ]
+    },
+    {
+      "id": "memory-layout",
+      "title": "Memory Layout",
+      "summary": "Develop practical and theoretical command of Memory Layout.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "stack-and-heap",
+      "title": "Stack And Heap",
+      "summary": "Develop practical and theoretical command of Stack And Heap.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "raii",
+      "title": "Raii",
+      "summary": "Develop practical and theoretical command of Raii.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "move-semantics",
+      "title": "Move Semantics",
+      "summary": "Develop practical and theoretical command of Move Semantics.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cpp-templates",
+      "title": "C++ Templates",
+      "summary": "Develop practical and theoretical command of C++ Templates.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "compilation-linking",
+      "title": "Compilation Linking",
+      "summary": "Develop practical and theoretical command of Compilation Linking.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "abi",
+      "title": "ABI",
+      "summary": "Develop practical and theoretical command of ABI.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cache-hierarchy",
+      "title": "Cache Hierarchy",
+      "summary": "Develop practical and theoretical command of Cache Hierarchy.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cache-locality",
+      "title": "Cache Locality",
+      "summary": "Develop practical and theoretical command of Cache Locality.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "branch-prediction",
+      "title": "Branch Prediction",
+      "summary": "Develop practical and theoretical command of Branch Prediction.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "simd",
+      "title": "SIMD",
+      "summary": "Develop practical and theoretical command of SIMD.",
+      "tags": [
+        "gpu",
+        "background"
+      ]
+    },
+    {
+      "id": "vectorization",
+      "title": "Vectorization",
+      "summary": "Develop practical and theoretical command of Vectorization.",
+      "tags": [
+        "gpu",
+        "background"
+      ]
+    },
+    {
+      "id": "compiler-optimization",
+      "title": "Compiler Optimization",
+      "summary": "Develop practical and theoretical command of Compiler Optimization.",
+      "tags": [
+        "gpu",
+        "background"
+      ]
+    },
+    {
+      "id": "benchmarking",
+      "title": "Benchmarking",
+      "summary": "Develop practical and theoretical command of Benchmarking.",
+      "tags": [
+        "gpu",
+        "background"
+      ]
+    },
+    {
+      "id": "profiling",
+      "title": "Profiling",
+      "summary": "Develop practical and theoretical command of Profiling.",
+      "tags": [
+        "gpu",
+        "background"
+      ]
+    },
+    {
+      "id": "computer-architecture",
+      "title": "Computer Architecture",
+      "summary": "Hardware execution and memory behavior relevant to performance.",
+      "tags": [
+        "stage",
+        "gpu",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in Computer Architecture independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "instruction-execution",
+      "title": "Instruction Execution",
+      "summary": "Develop practical and theoretical command of Instruction Execution.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "memory-hierarchy",
+      "title": "Memory Hierarchy",
+      "summary": "Develop practical and theoretical command of Memory Hierarchy.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "virtual-memory",
+      "title": "Virtual Memory",
+      "summary": "Develop practical and theoretical command of Virtual Memory.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cache-coherence",
+      "title": "Cache Coherence",
+      "summary": "Develop practical and theoretical command of Cache Coherence.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cpu-pipelines",
+      "title": "CPU Pipelines",
+      "summary": "Develop practical and theoretical command of CPU Pipelines.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "performance-counters",
+      "title": "Performance Counters",
+      "summary": "Develop practical and theoretical command of Performance Counters.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "concurrency",
+      "title": "Concurrency",
+      "summary": "Correct and efficient shared-memory concurrency.",
+      "tags": [
+        "stage",
+        "gpu",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in Concurrency independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "threads",
+      "title": "Threads",
+      "summary": "Develop practical and theoretical command of Threads.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "atomics",
+      "title": "Atomics",
+      "summary": "Develop practical and theoretical command of Atomics.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cpp-memory-model",
+      "title": "C++ Memory Model",
+      "summary": "Develop practical and theoretical command of C++ Memory Model.",
+      "tags": [
+        "gpu",
+        "background"
+      ]
+    },
+    {
+      "id": "synchronization",
+      "title": "Synchronization",
+      "summary": "Develop practical and theoretical command of Synchronization.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "lock-free-concepts",
+      "title": "Lock Free Concepts",
+      "summary": "Develop practical and theoretical command of Lock Free Concepts.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "concurrent-data-structures",
+      "title": "Concurrent Data Structures",
+      "summary": "Develop practical and theoretical command of Concurrent Data Structures.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "parallel-algorithms",
+      "title": "Parallel Algorithms",
+      "summary": "Work, span, decomposition, and parallel primitives.",
+      "tags": [
+        "stage",
+        "gpu",
+        "compilers",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in Parallel Algorithms independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "work-span-model",
+      "title": "Work Span Model",
+      "summary": "Develop practical and theoretical command of Work Span Model.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "task-parallelism",
+      "title": "Task Parallelism",
+      "summary": "Develop practical and theoretical command of Task Parallelism.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "scans",
+      "title": "Scans",
+      "summary": "Develop practical and theoretical command of Scans.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "histograms",
+      "title": "Histograms",
+      "summary": "Develop practical and theoretical command of Histograms.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "parallel-sorting",
+      "title": "Parallel Sorting",
+      "summary": "Develop practical and theoretical command of Parallel Sorting.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "gpu-architecture",
+      "title": "GPU Architecture",
+      "summary": "Execution and memory architecture of modern GPUs.",
+      "tags": [
+        "stage",
+        "gpu",
+        "compilers",
+        "hpc",
+        "background"
+      ],
+      "completionCriteria": "You can apply the core ideas in GPU Architecture independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "simt",
+      "title": "SIMT",
+      "summary": "Develop practical and theoretical command of SIMT.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "warps",
+      "title": "Warps",
+      "summary": "Develop practical and theoretical command of Warps.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "streaming-multiprocessors",
+      "title": "Streaming Multiprocessors",
+      "summary": "Develop practical and theoretical command of Streaming Multiprocessors.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "occupancy",
+      "title": "Occupancy",
+      "summary": "Develop practical and theoretical command of Occupancy.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "registers",
+      "title": "Registers",
+      "summary": "Develop practical and theoretical command of Registers.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "shared-memory",
+      "title": "Shared Memory",
+      "summary": "Develop practical and theoretical command of Shared Memory.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "gpu-cache-hierarchy",
+      "title": "GPU Cache Hierarchy",
+      "summary": "Develop practical and theoretical command of GPU Cache Hierarchy.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "hbm",
+      "title": "HBM",
+      "summary": "Develop practical and theoretical command of HBM.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "global-memory",
+      "title": "Global Memory",
+      "summary": "Develop practical and theoretical command of Global Memory.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "memory-transactions",
+      "title": "Memory Transactions",
+      "summary": "Develop practical and theoretical command of Memory Transactions.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "memory-coalescing",
+      "title": "Memory Coalescing",
+      "summary": "Develop practical and theoretical command of Memory Coalescing.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "warp-divergence",
+      "title": "Warp Divergence",
+      "summary": "Develop practical and theoretical command of Warp Divergence.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "latency-hiding",
+      "title": "Latency Hiding",
+      "summary": "Develop practical and theoretical command of Latency Hiding.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "tensor-cores",
+      "title": "Tensor Cores",
+      "summary": "Develop practical and theoretical command of Tensor Cores.",
+      "tags": [
+        "gpu",
+        "hpc"
+      ]
+    },
+    {
+      "id": "cuda-fundamentals",
+      "title": "CUDA Fundamentals",
+      "summary": "CUDA execution, memory, synchronization, and libraries.",
+      "tags": [
+        "stage",
+        "gpu"
+      ],
+      "completionCriteria": "You can apply the core ideas in CUDA Fundamentals independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "cuda-kernels",
+      "title": "CUDA Kernels",
+      "summary": "Develop practical and theoretical command of CUDA Kernels.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-grids",
+      "title": "CUDA Grids",
+      "summary": "Develop practical and theoretical command of CUDA Grids.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-blocks",
+      "title": "CUDA Blocks",
+      "summary": "Develop practical and theoretical command of CUDA Blocks.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-threads",
+      "title": "CUDA Threads",
+      "summary": "Develop practical and theoretical command of CUDA Threads.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-synchronization",
+      "title": "CUDA Synchronization",
+      "summary": "Develop practical and theoretical command of CUDA Synchronization.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-streams",
+      "title": "CUDA Streams",
+      "summary": "Develop practical and theoretical command of CUDA Streams.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "asynchronous-copies",
+      "title": "Asynchronous Copies",
+      "summary": "Develop practical and theoretical command of Asynchronous Copies.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "pinned-memory",
+      "title": "Pinned Memory",
+      "summary": "Develop practical and theoretical command of Pinned Memory.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "unified-memory",
+      "title": "Unified Memory",
+      "summary": "Develop practical and theoretical command of Unified Memory.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-events",
+      "title": "CUDA Events",
+      "summary": "Develop practical and theoretical command of CUDA Events.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cublas",
+      "title": "Cublas",
+      "summary": "Develop practical and theoretical command of Cublas.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "cuda-performance-engineering",
+      "title": "CUDA Performance Engineering",
+      "summary": "Measurement-driven optimization with NVIDIA tooling.",
+      "tags": [
+        "stage",
+        "gpu"
+      ],
+      "completionCriteria": "You can apply the core ideas in CUDA Performance Engineering independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "nsight-systems",
+      "title": "Nsight Systems",
+      "summary": "Develop practical and theoretical command of Nsight Systems.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "nsight-compute",
+      "title": "Nsight Compute",
+      "summary": "Develop practical and theoretical command of Nsight Compute.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "compiler-reports",
+      "title": "Compiler Reports",
+      "summary": "Develop practical and theoretical command of Compiler Reports.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "roofline-analysis",
+      "title": "Roofline Analysis",
+      "summary": "Develop practical and theoretical command of Roofline Analysis.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "kernel-benchmarking",
+      "title": "Kernel Benchmarking",
+      "summary": "Develop practical and theoretical command of Kernel Benchmarking.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "gpu-kernel-engineering",
+      "title": "GPU Kernel Engineering",
+      "summary": "Implement and tune essential parallel operators.",
+      "tags": [
+        "stage",
+        "gpu"
+      ],
+      "completionCriteria": "You can apply the core ideas in GPU Kernel Engineering independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "matrix-multiplication",
+      "title": "Matrix Multiplication",
+      "summary": "Develop practical and theoretical command of Matrix Multiplication.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "tiling",
+      "title": "Tiling",
+      "summary": "Develop practical and theoretical command of Tiling.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "matrix-transpose",
+      "title": "Matrix Transpose",
+      "summary": "Develop practical and theoretical command of Matrix Transpose.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "convolution-kernels",
+      "title": "Convolution Kernels",
+      "summary": "Develop practical and theoretical command of Convolution Kernels.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "normalization-kernels",
+      "title": "Normalization Kernels",
+      "summary": "Develop practical and theoretical command of Normalization Kernels.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "tensor-core-gemm",
+      "title": "Tensor Core GEMM",
+      "summary": "Develop practical and theoretical command of Tensor Core GEMM.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "precision-tradeoffs",
+      "title": "Precision Tradeoffs",
+      "summary": "Develop practical and theoretical command of Precision Tradeoffs.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "gpu-kernel-engineer",
+      "title": "GPU Kernel Engineer",
+      "summary": "Implement and optimize production-quality GPU kernels.",
+      "tags": [
+        "milestone"
+      ],
+      "completionCriteria": "You can implement tiled matrix multiplication, profile it with Nsight, reason about occupancy and memory traffic, and explain the gap to optimized libraries."
+    },
+    {
+      "id": "multi-gpu-programming",
+      "title": "Multi-GPU Programming",
+      "summary": "Topology-aware communication and computation across GPUs.",
+      "tags": [
+        "stage",
+        "gpu"
+      ],
+      "completionCriteria": "You can apply the core ideas in Multi-GPU Programming independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "gpu-peer-to-peer",
+      "title": "GPU Peer To Peer",
+      "summary": "Develop practical and theoretical command of GPU Peer To Peer.",
+      "tags": [
+        "gpu"
+      ]
+    },
+    {
+      "id": "advanced-data-scientist",
+      "title": "Advanced Data Scientist",
+      "summary": "Use rigorous statistical reasoning to design studies and make defensible decisions.",
+      "tags": [
+        "goal",
+        "statistics"
+      ],
+      "completionCriteria": "You can choose and defend an inferential strategy, diagnose its assumptions, quantify uncertainty, and communicate limitations and decisions."
+    },
+    {
+      "id": "probability-theory",
+      "title": "Probability",
+      "summary": "Probability foundations for serious statistical inference.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Probability independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "probability-distributions",
+      "title": "Probability Distributions",
+      "summary": "Develop practical and theoretical command of Probability Distributions.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "expectation",
+      "title": "Expectation",
+      "summary": "Develop practical and theoretical command of Expectation.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "variance",
+      "title": "Variance",
+      "summary": "Develop practical and theoretical command of Variance.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "conditional-probability",
+      "title": "Conditional Probability",
+      "summary": "Develop practical and theoretical command of Conditional Probability.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "bayes-theorem",
+      "title": "Bayes Theorem",
+      "summary": "Develop practical and theoretical command of Bayes Theorem.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "law-of-large-numbers",
+      "title": "Law Of Large Numbers",
+      "summary": "Develop practical and theoretical command of Law Of Large Numbers.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "central-limit-theorem",
+      "title": "Central Limit Theorem",
+      "summary": "Develop practical and theoretical command of Central Limit Theorem.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "statistical-inference",
+      "title": "Statistical Inference",
+      "summary": "Likelihood, estimation, uncertainty, and testing.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Statistical Inference independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "likelihood",
+      "title": "Likelihood",
+      "summary": "Develop practical and theoretical command of Likelihood.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "maximum-likelihood",
+      "title": "Maximum Likelihood",
+      "summary": "Develop practical and theoretical command of Maximum Likelihood.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "estimators",
+      "title": "Estimators",
+      "summary": "Develop practical and theoretical command of Estimators.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "estimator-bias",
+      "title": "Estimator Bias",
+      "summary": "Develop practical and theoretical command of Estimator Bias.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "estimator-variance",
+      "title": "Estimator Variance",
+      "summary": "Develop practical and theoretical command of Estimator Variance.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "consistency",
+      "title": "Consistency",
+      "summary": "Develop practical and theoretical command of Consistency.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "confidence-intervals",
+      "title": "Confidence Intervals",
+      "summary": "Develop practical and theoretical command of Confidence Intervals.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "hypothesis-testing",
+      "title": "Hypothesis Testing",
+      "summary": "Develop practical and theoretical command of Hypothesis Testing.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "statistical-power",
+      "title": "Statistical Power",
+      "summary": "Develop practical and theoretical command of Statistical Power.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "multiple-testing",
+      "title": "Multiple Testing",
+      "summary": "Develop practical and theoretical command of Multiple Testing.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "regression-glms",
+      "title": "Regression & GLMs",
+      "summary": "Regression families, assumptions, and diagnostics.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Regression & GLMs independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "generalized-linear-models",
+      "title": "Generalized Linear Models",
+      "summary": "Develop practical and theoretical command of Generalized Linear Models.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "model-diagnostics",
+      "title": "Model Diagnostics",
+      "summary": "Develop practical and theoretical command of Model Diagnostics.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "experimental-design",
+      "title": "Experimental Design",
+      "summary": "Credible randomized experiments and operational analysis.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Experimental Design independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "experiment-design",
+      "title": "Experiment Design",
+      "summary": "Develop practical and theoretical command of Experiment Design.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "randomized-controlled-experiments",
+      "title": "Randomized Controlled Experiments",
+      "summary": "Develop practical and theoretical command of Randomized Controlled Experiments.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "ab-testing",
+      "title": "Ab Testing",
+      "summary": "Develop practical and theoretical command of Ab Testing.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "sequential-testing",
+      "title": "Sequential Testing",
+      "summary": "Develop practical and theoretical command of Sequential Testing.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "bayesian-statistics",
+      "title": "Bayesian Statistics",
+      "summary": "Generative modeling and posterior uncertainty.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Bayesian Statistics independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "bayesian-inference",
+      "title": "Bayesian Inference",
+      "summary": "Develop practical and theoretical command of Bayesian Inference.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "priors",
+      "title": "Priors",
+      "summary": "Develop practical and theoretical command of Priors.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "posterior-inference",
+      "title": "Posterior Inference",
+      "summary": "Develop practical and theoretical command of Posterior Inference.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "mcmc",
+      "title": "MCMC",
+      "summary": "Develop practical and theoretical command of MCMC.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "hierarchical-models",
+      "title": "Hierarchical Models",
+      "summary": "Develop practical and theoretical command of Hierarchical Models.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "bayesian-modeling-practitioner",
+      "title": "Bayesian Modeling Practitioner",
+      "summary": "Build, diagnose, and communicate useful Bayesian models.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "causal-inference",
+      "title": "Causal Inference",
+      "summary": "Identification and estimation of causal effects.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Causal Inference independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "causal-graphs",
+      "title": "Causal Graphs",
+      "summary": "Develop practical and theoretical command of Causal Graphs.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "potential-outcomes",
+      "title": "Potential Outcomes",
+      "summary": "Develop practical and theoretical command of Potential Outcomes.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "confounding",
+      "title": "Confounding",
+      "summary": "Develop practical and theoretical command of Confounding.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "matching",
+      "title": "Matching",
+      "summary": "Develop practical and theoretical command of Matching.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "propensity-scores",
+      "title": "Propensity Scores",
+      "summary": "Develop practical and theoretical command of Propensity Scores.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "instrumental-variables",
+      "title": "Instrumental Variables",
+      "summary": "Develop practical and theoretical command of Instrumental Variables.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "difference-in-differences",
+      "title": "Difference In Differences",
+      "summary": "Develop practical and theoretical command of Difference In Differences.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "regression-discontinuity",
+      "title": "Regression Discontinuity",
+      "summary": "Develop practical and theoretical command of Regression Discontinuity.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "causal-experimentation-scientist",
+      "title": "Causal / Experimentation Scientist",
+      "summary": "Design experiments and credible quasi-experimental analyses.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "time-series",
+      "title": "Time Series",
+      "summary": "Temporal dependence and calibrated forecasting.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Time Series independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "stationarity",
+      "title": "Stationarity",
+      "summary": "Develop practical and theoretical command of Stationarity.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "arima",
+      "title": "Arima",
+      "summary": "Develop practical and theoretical command of Arima.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "forecasting-evaluation",
+      "title": "Forecasting Evaluation",
+      "summary": "Develop practical and theoretical command of Forecasting Evaluation.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "probabilistic-forecasting",
+      "title": "Probabilistic Forecasting",
+      "summary": "Develop practical and theoretical command of Probabilistic Forecasting.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "advanced-applied-data-science",
+      "title": "Advanced Applied Data Science",
+      "summary": "Integrate statistical modeling, experimentation, and decision-making.",
+      "tags": [
+        "stage",
+        "statistics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Advanced Applied Data Science independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "probabilistic-ml-engineer",
+      "title": "Probabilistic ML Engineer",
+      "summary": "Build ML systems that represent and evaluate predictive uncertainty.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "advanced-statistical-modeling",
+      "title": "Advanced Statistical Modeling",
+      "summary": "Develop practical and theoretical command of Advanced Statistical Modeling.",
+      "tags": [
+        "statistics",
+        "background"
+      ]
+    },
+    {
+      "id": "decision-science",
+      "title": "Decision Science",
+      "summary": "Develop practical and theoretical command of Decision Science.",
+      "tags": [
+        "statistics"
+      ]
+    },
+    {
+      "id": "autonomous-robotics-engineer",
+      "title": "Autonomous Robotics Engineer",
+      "summary": "Integrate perception, estimation, planning, control, and robot software into autonomous systems.",
+      "tags": [
+        "goal",
+        "robotics"
+      ],
+      "completionCriteria": "You can build and diagnose an autonomous robot stack across sensing, localization, planning, control, safety, and deployment."
+    },
+    {
+      "id": "robotics-mathematics",
+      "title": "Robotics Mathematics",
+      "summary": "Spatial geometry and differential tools for robotics.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Robotics Mathematics independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "coordinate-frames",
+      "title": "Coordinate Frames",
+      "summary": "Develop practical and theoretical command of Coordinate Frames.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "rotation-matrices",
+      "title": "Rotation Matrices",
+      "summary": "Develop practical and theoretical command of Rotation Matrices.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "homogeneous-transforms",
+      "title": "Homogeneous Transforms",
+      "summary": "Develop practical and theoretical command of Homogeneous Transforms.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "so2",
+      "title": "SO(2)",
+      "summary": "Develop practical and theoretical command of SO(2).",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "so3",
+      "title": "SO(3)",
+      "summary": "Develop practical and theoretical command of SO(3).",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "se2",
+      "title": "SE(2)",
+      "summary": "Develop practical and theoretical command of SE(2).",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "se3",
+      "title": "SE(3)",
+      "summary": "Develop practical and theoretical command of SE(3).",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "quaternions",
+      "title": "Quaternions",
+      "summary": "Develop practical and theoretical command of Quaternions.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "twists",
+      "title": "Twists",
+      "summary": "Develop practical and theoretical command of Twists.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "exponential-coordinates",
+      "title": "Exponential Coordinates",
+      "summary": "Develop practical and theoretical command of Exponential Coordinates.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "jacobians",
+      "title": "Jacobians",
+      "summary": "Develop practical and theoretical command of Jacobians.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-kinematics",
+      "title": "Robot Kinematics",
+      "summary": "Position and velocity relationships in articulated robots.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Robot Kinematics independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "forward-kinematics",
+      "title": "Forward Kinematics",
+      "summary": "Develop practical and theoretical command of Forward Kinematics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "inverse-kinematics",
+      "title": "Inverse Kinematics",
+      "summary": "Develop practical and theoretical command of Inverse Kinematics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "velocity-kinematics",
+      "title": "Velocity Kinematics",
+      "summary": "Develop practical and theoretical command of Velocity Kinematics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "kinematic-singularities",
+      "title": "Kinematic Singularities",
+      "summary": "Develop practical and theoretical command of Kinematic Singularities.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "manipulator-jacobians",
+      "title": "Manipulator Jacobians",
+      "summary": "Develop practical and theoretical command of Manipulator Jacobians.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-dynamics",
+      "title": "Robot Dynamics",
+      "summary": "Forces and motion in rigid-body robot systems.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Robot Dynamics independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "rigid-body-mechanics",
+      "title": "Rigid Body Mechanics",
+      "summary": "Develop practical and theoretical command of Rigid Body Mechanics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "newton-euler",
+      "title": "Newton Euler",
+      "summary": "Develop practical and theoretical command of Newton Euler.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-equations-of-motion",
+      "title": "Robot Equations Of Motion",
+      "summary": "Develop practical and theoretical command of Robot Equations Of Motion.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "inverse-dynamics",
+      "title": "Inverse Dynamics",
+      "summary": "Develop practical and theoretical command of Inverse Dynamics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "forward-dynamics",
+      "title": "Forward Dynamics",
+      "summary": "Develop practical and theoretical command of Forward Dynamics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-control",
+      "title": "Signals & Control",
+      "summary": "Feedback and optimal control of dynamical systems.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Signals & Control independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "signals-and-systems",
+      "title": "Signals And Systems",
+      "summary": "Develop practical and theoretical command of Signals And Systems.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "feedback-control",
+      "title": "Feedback Control",
+      "summary": "Develop practical and theoretical command of Feedback Control.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "pid-control",
+      "title": "PID Control",
+      "summary": "Develop practical and theoretical command of PID Control.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "state-space-systems",
+      "title": "State Space Systems",
+      "summary": "Develop practical and theoretical command of State Space Systems.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "stability",
+      "title": "Stability",
+      "summary": "Develop practical and theoretical command of Stability.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "controllability",
+      "title": "Controllability",
+      "summary": "Develop practical and theoretical command of Controllability.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "lqr",
+      "title": "LQR",
+      "summary": "Develop practical and theoretical command of LQR.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "optimal-control",
+      "title": "Optimal Control",
+      "summary": "Develop practical and theoretical command of Optimal Control.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "model-predictive-control",
+      "title": "Model Predictive Control",
+      "summary": "Develop practical and theoretical command of Model Predictive Control.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "trajectory-optimization",
+      "title": "Trajectory Optimization",
+      "summary": "Develop practical and theoretical command of Trajectory Optimization.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "controls-motion-engineer",
+      "title": "Controls / Motion Engineer",
+      "summary": "Design and tune model-based motion and control systems.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "state-estimation",
+      "title": "State Estimation",
+      "summary": "Probabilistic inference from noisy robot sensors.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in State Estimation independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "gaussian-estimation",
+      "title": "Gaussian Estimation",
+      "summary": "Develop practical and theoretical command of Gaussian Estimation.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "bayes-filters",
+      "title": "Bayes Filters",
+      "summary": "Develop practical and theoretical command of Bayes Filters.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "kalman-filter",
+      "title": "Kalman Filter",
+      "summary": "Develop practical and theoretical command of Kalman Filter.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "extended-kalman-filter",
+      "title": "Extended Kalman Filter",
+      "summary": "Develop practical and theoretical command of Extended Kalman Filter.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "unscented-kalman-filter",
+      "title": "Unscented Kalman Filter",
+      "summary": "Develop practical and theoretical command of Unscented Kalman Filter.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "particle-filters",
+      "title": "Particle Filters",
+      "summary": "Develop practical and theoretical command of Particle Filters.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "sensor-fusion",
+      "title": "Sensor Fusion",
+      "summary": "Develop practical and theoretical command of Sensor Fusion.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "imu-integration",
+      "title": "IMU Integration",
+      "summary": "Develop practical and theoretical command of IMU Integration.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "motion-planning",
+      "title": "Motion Planning",
+      "summary": "Search and optimization through constrained configuration spaces.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Motion Planning independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "graph-search",
+      "title": "Graph Search",
+      "summary": "Develop practical and theoretical command of Graph Search.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "a-star",
+      "title": "A Star",
+      "summary": "Develop practical and theoretical command of A Star.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "dijkstra",
+      "title": "Dijkstra",
+      "summary": "Develop practical and theoretical command of Dijkstra.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "configuration-spaces",
+      "title": "Configuration Spaces",
+      "summary": "Develop practical and theoretical command of Configuration Spaces.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "collision-checking",
+      "title": "Collision Checking",
+      "summary": "Develop practical and theoretical command of Collision Checking.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "sampling-based-planning",
+      "title": "Sampling Based Planning",
+      "summary": "Develop practical and theoretical command of Sampling Based Planning.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "prm",
+      "title": "PRM",
+      "summary": "Develop practical and theoretical command of PRM.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "rrt",
+      "title": "RRT",
+      "summary": "Develop practical and theoretical command of RRT.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "rrt-star",
+      "title": "RRT Star",
+      "summary": "Develop practical and theoretical command of RRT Star.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "slam-localization",
+      "title": "SLAM & Localization",
+      "summary": "Geometric perception, optimization, mapping, and localization.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in SLAM & Localization independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "geometric-computer-vision",
+      "title": "Geometric Computer Vision",
+      "summary": "Develop practical and theoretical command of Geometric Computer Vision.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "camera-models",
+      "title": "Camera Models",
+      "summary": "Develop practical and theoretical command of Camera Models.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "epipolar-geometry",
+      "title": "Epipolar Geometry",
+      "summary": "Develop practical and theoretical command of Epipolar Geometry.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "bundle-adjustment",
+      "title": "Bundle Adjustment",
+      "summary": "Develop practical and theoretical command of Bundle Adjustment.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "feature-tracking",
+      "title": "Feature Tracking",
+      "summary": "Develop practical and theoretical command of Feature Tracking.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "visual-odometry",
+      "title": "Visual Odometry",
+      "summary": "Develop practical and theoretical command of Visual Odometry.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "factor-graphs",
+      "title": "Factor Graphs",
+      "summary": "Develop practical and theoretical command of Factor Graphs.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "pose-graphs",
+      "title": "Pose Graphs",
+      "summary": "Develop practical and theoretical command of Pose Graphs.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "slam",
+      "title": "SLAM",
+      "summary": "Develop practical and theoretical command of SLAM.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "visual-inertial-odometry",
+      "title": "Visual Inertial Odometry",
+      "summary": "Develop practical and theoretical command of Visual Inertial Odometry.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "slam-localization-engineer",
+      "title": "SLAM / Localization Engineer",
+      "summary": "Build and meaningfully modify localization and mapping systems.",
+      "tags": [
+        "milestone"
+      ],
+      "completionCriteria": "You can reason about sensor uncertainty, pose graphs, bundle adjustment, drift, and loop closure and modify a working SLAM pipeline."
+    },
+    {
+      "id": "robotics-perception-engineer",
+      "title": "Robotics Perception Engineer",
+      "summary": "Develop geometric and learned perception for robots.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "ros2-robot-software",
+      "title": "ROS2 & Robot Software",
+      "summary": "Middleware, models, communication, timing, and simulation.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in ROS2 & Robot Software independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "ros2",
+      "title": "ROS2",
+      "summary": "Develop practical and theoretical command of ROS2.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "ros2-nodes",
+      "title": "ROS2 Nodes",
+      "summary": "Develop practical and theoretical command of ROS2 Nodes.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "ros2-topics",
+      "title": "ROS2 Topics",
+      "summary": "Develop practical and theoretical command of ROS2 Topics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "ros2-services",
+      "title": "ROS2 Services",
+      "summary": "Develop practical and theoretical command of ROS2 Services.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "ros2-actions",
+      "title": "ROS2 Actions",
+      "summary": "Develop practical and theoretical command of ROS2 Actions.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "tf",
+      "title": "TF",
+      "summary": "Develop practical and theoretical command of TF.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "urdf",
+      "title": "URDF",
+      "summary": "Develop practical and theoretical command of URDF.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "ros2-launch",
+      "title": "ROS2 Launch",
+      "summary": "Develop practical and theoretical command of ROS2 Launch.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "dds",
+      "title": "DDS",
+      "summary": "Develop practical and theoretical command of DDS.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-middleware",
+      "title": "Robot Middleware",
+      "summary": "Develop practical and theoretical command of Robot Middleware.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "real-time-constraints",
+      "title": "Real Time Constraints",
+      "summary": "Develop practical and theoretical command of Real Time Constraints.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-simulation",
+      "title": "Robot Simulation",
+      "summary": "Develop practical and theoretical command of Robot Simulation.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robotics-software-engineer",
+      "title": "Robotics Software Engineer",
+      "summary": "Build maintainable ROS2 robot systems with appropriate timing and interfaces.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "robot-manipulation",
+      "title": "Manipulation",
+      "summary": "Contact-rich planning and control for robot interaction.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Manipulation independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "grasping",
+      "title": "Grasping",
+      "summary": "Develop practical and theoretical command of Grasping.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "force-control",
+      "title": "Force Control",
+      "summary": "Develop practical and theoretical command of Force Control.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "impedance-control",
+      "title": "Impedance Control",
+      "summary": "Develop practical and theoretical command of Impedance Control.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "contact-mechanics",
+      "title": "Contact Mechanics",
+      "summary": "Develop practical and theoretical command of Contact Mechanics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "trajectory-generation",
+      "title": "Trajectory Generation",
+      "summary": "Develop practical and theoretical command of Trajectory Generation.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-learning",
+      "title": "Robot Learning",
+      "summary": "Learn robot behavior from data, demonstrations, and interaction.",
+      "tags": [
+        "stage",
+        "robotics"
+      ],
+      "completionCriteria": "You can apply the core ideas in Robot Learning independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "imitation-learning",
+      "title": "Imitation Learning",
+      "summary": "Develop practical and theoretical command of Imitation Learning.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "behavior-cloning",
+      "title": "Behavior Cloning",
+      "summary": "Develop practical and theoretical command of Behavior Cloning.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "offline-reinforcement-learning",
+      "title": "Offline Reinforcement Learning",
+      "summary": "Develop practical and theoretical command of Offline Reinforcement Learning.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "sim-to-real",
+      "title": "Sim To Real",
+      "summary": "Develop practical and theoretical command of Sim To Real.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "domain-randomization",
+      "title": "Domain Randomization",
+      "summary": "Develop practical and theoretical command of Domain Randomization.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "learned-dynamics",
+      "title": "Learned Dynamics",
+      "summary": "Develop practical and theoretical command of Learned Dynamics.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "visuomotor-policies",
+      "title": "Visuomotor Policies",
+      "summary": "Develop practical and theoretical command of Visuomotor Policies.",
+      "tags": [
+        "robotics"
+      ]
+    },
+    {
+      "id": "robot-learning-engineer",
+      "title": "Robot Learning Engineer",
+      "summary": "Develop and evaluate learned policies that connect perception to action.",
+      "tags": [
+        "milestone"
+      ]
+    },
+    {
+      "id": "ml-compiler-engineer",
+      "title": "ML Compiler Engineer",
+      "summary": "Develop compiler transformations and code generation for machine-learning workloads.",
+      "tags": [
+        "goal",
+        "compilers"
+      ],
+      "completionCriteria": "You can trace a tensor program through graph and intermediate representations into optimized kernels and implement a meaningful transformation or lowering."
+    },
+    {
+      "id": "compiler-systems-foundations",
+      "title": "Systems & C++",
+      "summary": "Systems foundations for compiler implementation.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in Systems & C++ independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "compiler-fundamentals",
+      "title": "Compiler Fundamentals",
+      "summary": "Core representations and phases of modern compilers.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in Compiler Fundamentals independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "lexing-parsing",
+      "title": "Lexing Parsing",
+      "summary": "Develop practical and theoretical command of Lexing Parsing.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "compiler-pipelines",
+      "title": "Compiler Pipelines",
+      "summary": "Develop practical and theoretical command of Compiler Pipelines.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "abstract-syntax-trees",
+      "title": "Abstract Syntax Trees",
+      "summary": "Develop practical and theoretical command of Abstract Syntax Trees.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "control-flow-graphs",
+      "title": "Control Flow Graphs",
+      "summary": "Develop practical and theoretical command of Control Flow Graphs.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "dataflow-analysis",
+      "title": "Dataflow Analysis",
+      "summary": "Develop practical and theoretical command of Dataflow Analysis.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "optimization-passes",
+      "title": "Optimization Passes",
+      "summary": "Develop practical and theoretical command of Optimization Passes.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "intermediate-representations",
+      "title": "Intermediate Representations",
+      "summary": "IR design and program analysis.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in Intermediate Representations independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "ssa",
+      "title": "SSA",
+      "summary": "Develop practical and theoretical command of SSA.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "llvm-concepts",
+      "title": "LLVM Concepts",
+      "summary": "Understand the LLVM compilation ecosystem and IR model.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in LLVM Concepts independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "llvm",
+      "title": "LLVM",
+      "summary": "Develop practical and theoretical command of LLVM.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "llvm-ir",
+      "title": "LLVM IR",
+      "summary": "Develop practical and theoretical command of LLVM IR.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "compiler-backends",
+      "title": "Compiler Backends",
+      "summary": "Develop practical and theoretical command of Compiler Backends.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "tensor-computation-graphs",
+      "title": "Tensor Computation Graphs",
+      "summary": "Represent and transform tensor programs.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in Tensor Computation Graphs independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "tensor-algebra",
+      "title": "Tensor Algebra",
+      "summary": "Develop practical and theoretical command of Tensor Algebra.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "computational-graphs",
+      "title": "Computational Graphs",
+      "summary": "Develop practical and theoretical command of Computational Graphs.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "automatic-differentiation-compilers",
+      "title": "Automatic Differentiation Compilers",
+      "summary": "Develop practical and theoretical command of Automatic Differentiation Compilers.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "graph-optimization",
+      "title": "Graph Optimization",
+      "summary": "Develop practical and theoretical command of Graph Optimization.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "memory-planning",
+      "title": "Memory Planning",
+      "summary": "Develop practical and theoretical command of Memory Planning.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "layout-transformations",
+      "title": "Layout Transformations",
+      "summary": "Develop practical and theoretical command of Layout Transformations.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "mlir",
+      "title": "MLIR",
+      "summary": "Multi-level IRs, dialects, and progressive lowering.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in MLIR independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "mlir-dialects",
+      "title": "MLIR Dialects",
+      "summary": "Develop practical and theoretical command of MLIR Dialects.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "compiler-lowering",
+      "title": "Compiler Lowering",
+      "summary": "Develop practical and theoretical command of Compiler Lowering.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "kernel-fusion-lowering",
+      "title": "Kernel Fusion & Lowering",
+      "summary": "Fuse, schedule, and lower tensor operations.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in Kernel Fusion & Lowering independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "operator-fusion",
+      "title": "Operator Fusion",
+      "summary": "Develop practical and theoretical command of Operator Fusion.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "scheduling",
+      "title": "Scheduling",
+      "summary": "Develop practical and theoretical command of Scheduling.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "autotuning",
+      "title": "Autotuning",
+      "summary": "Develop practical and theoretical command of Autotuning.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "gpu-code-generation",
+      "title": "GPU Code Generation",
+      "summary": "Generate and tune accelerator kernels.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in GPU Code Generation independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "kernel-generation",
+      "title": "Kernel Generation",
+      "summary": "Develop practical and theoretical command of Kernel Generation.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "gpu-lowering",
+      "title": "GPU Lowering",
+      "summary": "Develop practical and theoretical command of GPU Lowering.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "torchinductor",
+      "title": "Torchinductor",
+      "summary": "Develop practical and theoretical command of Torchinductor.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "xla",
+      "title": "XLA",
+      "summary": "Develop practical and theoretical command of XLA.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "tvm",
+      "title": "Tvm",
+      "summary": "Develop practical and theoretical command of Tvm.",
+      "tags": [
+        "compilers"
+      ]
+    },
+    {
+      "id": "ml-compiler-milestones",
+      "title": "ML Systems Milestones",
+      "summary": "Connect compilers with production ML systems.",
+      "tags": [
+        "stage",
+        "compilers"
+      ],
+      "completionCriteria": "You can apply the core ideas in ML Systems Milestones independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "hpc-scientific-computing-engineer",
+      "title": "HPC / Scientific Computing Engineer",
+      "summary": "Build and scale reliable numerical software across CPUs, GPUs, and clusters.",
+      "tags": [
+        "goal",
+        "hpc"
+      ],
+      "completionCriteria": "You can assess numerical stability, parallel efficiency, communication cost, and strong or weak scaling in a scientific workload."
+    },
+    {
+      "id": "numerical-methods",
+      "title": "Numerical Methods",
+      "summary": "Stable numerical computation and approximation.",
+      "tags": [
+        "stage",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in Numerical Methods independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "floating-point",
+      "title": "Floating Point",
+      "summary": "Develop practical and theoretical command of Floating Point.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "conditioning",
+      "title": "Conditioning",
+      "summary": "Develop practical and theoretical command of Conditioning.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "numerical-stability",
+      "title": "Numerical Stability",
+      "summary": "Develop practical and theoretical command of Numerical Stability.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "numerical-integration",
+      "title": "Numerical Integration",
+      "summary": "Develop practical and theoretical command of Numerical Integration.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "ode-solvers",
+      "title": "ODE Solvers",
+      "summary": "Develop practical and theoretical command of ODE Solvers.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "pde-methods",
+      "title": "Pde Methods",
+      "summary": "Develop practical and theoretical command of Pde Methods.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "matrix-factorizations",
+      "title": "Matrix Factorizations",
+      "summary": "Develop practical and theoretical command of Matrix Factorizations.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "sparse-matrices",
+      "title": "Sparse Matrices",
+      "summary": "Develop practical and theoretical command of Sparse Matrices.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "iterative-solvers",
+      "title": "Iterative Solvers",
+      "summary": "Develop practical and theoretical command of Iterative Solvers.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "preconditioning",
+      "title": "Preconditioning",
+      "summary": "Develop practical and theoretical command of Preconditioning.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "hpc-parallel-algorithms",
+      "title": "Parallel Algorithms",
+      "summary": "Parallel decomposition for numerical workloads.",
+      "tags": [
+        "stage",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in Parallel Algorithms independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "parallel-numerical-methods",
+      "title": "Parallel Numerical Methods",
+      "summary": "Develop practical and theoretical command of Parallel Numerical Methods.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "domain-decomposition",
+      "title": "Domain Decomposition",
+      "summary": "Develop practical and theoretical command of Domain Decomposition.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "openmp",
+      "title": "OpenMP",
+      "summary": "Shared-memory parallel scientific programming.",
+      "tags": [
+        "stage",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in OpenMP independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "thread-scheduling",
+      "title": "Thread Scheduling",
+      "summary": "Develop practical and theoretical command of Thread Scheduling.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "shared-memory-scaling",
+      "title": "Shared Memory Scaling",
+      "summary": "Develop practical and theoretical command of Shared Memory Scaling.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "mpi",
+      "title": "MPI",
+      "summary": "Distributed-memory programming and collectives.",
+      "tags": [
+        "stage",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in MPI independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "message-passing",
+      "title": "Message Passing",
+      "summary": "Develop practical and theoretical command of Message Passing.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "cuda-numerical-computing",
+      "title": "CUDA Numerical Computing",
+      "summary": "Accelerated numerical kernels and libraries.",
+      "tags": [
+        "stage",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in CUDA Numerical Computing independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "distributed-numerical-computing",
+      "title": "Distributed Numerical Computing",
+      "summary": "Scale numerical work while managing communication.",
+      "tags": [
+        "stage",
+        "hpc"
+      ],
+      "completionCriteria": "You can apply the core ideas in Distributed Numerical Computing independently and explain the relevant tradeoffs."
+    },
+    {
+      "id": "distributed-numerical-methods",
+      "title": "Distributed Numerical Methods",
+      "summary": "Develop practical and theoretical command of Distributed Numerical Methods.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "profiling-scaling",
+      "title": "Profiling Scaling",
+      "summary": "Develop practical and theoretical command of Profiling Scaling.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "strong-scaling",
+      "title": "Strong Scaling",
+      "summary": "Develop practical and theoretical command of Strong Scaling.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "weak-scaling",
+      "title": "Weak Scaling",
+      "summary": "Develop practical and theoretical command of Weak Scaling.",
+      "tags": [
+        "hpc"
+      ]
+    },
+    {
+      "id": "communication-overhead",
+      "title": "Communication Overhead",
+      "summary": "Develop practical and theoretical command of Communication Overhead.",
+      "tags": [
+        "hpc"
+      ]
+    }
+  ]
+}

@@ -29,6 +29,7 @@ npm start            # Run dev server
 npm run build        # Production build
 npm run test         # Angular/Karma tests
 npm run test:markdown # Markdown converter fixture tests
+npm run test:knowledge # Knowledge compiler and performance tests
 ```
 
 ## Blog Workflow
@@ -59,6 +60,7 @@ rm src/assets/blog/posts/<slug>.md
 
 ```bash
 npm run test:markdown
+npm run test:knowledge # Knowledge compiler and performance tests
 npm run build
 ```
 
@@ -66,19 +68,20 @@ npm run build
 
 The read-only constellation at `/knowledge` is generated from:
 
-- `src/assets/knowledge/curricula.json` for canonical topics, curricula, and connections
-- `src/assets/knowledge/journal.json` for dated work, notes, projects, and status updates
+- `knowledge/topics.json` and `knowledge/curricula/*.json` for canonical topics, curricula, placements, and connections
+- `knowledge/journal.json` for dated work, notes, projects, and status updates
 
-After editing or generating either file, validate and preview it:
+After editing a topic, curriculum, or journal file, compile, validate, and preview it:
 
 ```bash
+npm run knowledge:compile
 npm run validate:knowledge
 npm run start
 ```
 
 Topic IDs are stable references. Shared topics should remain single canonical topics listed in each relevant curriculum.
 
-Detailed authoring instructions for humans and agents: [Knowledge Constellation Authoring Guide](src/assets/knowledge/README.md)
+Detailed authoring instructions for humans and agents: [Knowledge Constellation Authoring Guide](knowledge/README.md)
 
 ## TODO
 

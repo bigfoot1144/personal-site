@@ -1,0 +1,834 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "physics",
+    "title": "Physics Foundations",
+    "description": "AP Physics C to the quantum-field-theory and general-relativity frontier.",
+    "color": "#7df9ff",
+    "goalTopicId": "physics-goal",
+    "shortTitle": "Physics"
+  },
+  "placements": [
+    {
+      "id": "place-physics-goal",
+      "topicId": "physics-goal",
+      "order": 0
+    },
+    {
+      "id": "place-mathematical-methods",
+      "topicId": "mathematical-methods",
+      "order": 3
+    },
+    {
+      "id": "place-multivariable-calculus",
+      "topicId": "multivariable-calculus",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 0
+    },
+    {
+      "id": "place-vector-calculus",
+      "topicId": "vector-calculus",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 1
+    },
+    {
+      "id": "place-linear-algebra",
+      "topicId": "linear-algebra",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 2
+    },
+    {
+      "id": "place-eigenvectors",
+      "topicId": "eigenvectors",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 3
+    },
+    {
+      "id": "place-ordinary-differential-equations",
+      "topicId": "ordinary-differential-equations",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 4
+    },
+    {
+      "id": "place-partial-differential-equations",
+      "topicId": "partial-differential-equations",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 5
+    },
+    {
+      "id": "place-complex-methods",
+      "topicId": "complex-methods",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 6
+    },
+    {
+      "id": "place-fourier-analysis",
+      "topicId": "fourier-analysis",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 7
+    },
+    {
+      "id": "place-probability",
+      "topicId": "probability",
+      "parentPlacementId": "place-mathematical-methods",
+      "order": 8
+    },
+    {
+      "id": "place-analytical-mechanics",
+      "topicId": "analytical-mechanics",
+      "order": 4
+    },
+    {
+      "id": "place-calculus-of-variations",
+      "topicId": "calculus-of-variations",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 0
+    },
+    {
+      "id": "place-action-principle",
+      "topicId": "action-principle",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 1
+    },
+    {
+      "id": "place-lagrangian-mechanics",
+      "topicId": "lagrangian-mechanics",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 2
+    },
+    {
+      "id": "place-hamiltonian-mechanics",
+      "topicId": "hamiltonian-mechanics",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 3
+    },
+    {
+      "id": "place-generalized-coordinates",
+      "topicId": "generalized-coordinates",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 4
+    },
+    {
+      "id": "place-phase-space",
+      "topicId": "phase-space",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 5
+    },
+    {
+      "id": "place-poisson-brackets",
+      "topicId": "poisson-brackets",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 6
+    },
+    {
+      "id": "place-symmetry-conservation",
+      "topicId": "symmetry-conservation",
+      "parentPlacementId": "place-analytical-mechanics",
+      "order": 7
+    },
+    {
+      "id": "place-waves-electromagnetism",
+      "topicId": "waves-electromagnetism",
+      "order": 5
+    },
+    {
+      "id": "place-normal-modes",
+      "topicId": "normal-modes",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 0
+    },
+    {
+      "id": "place-wave-equation",
+      "topicId": "wave-equation",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 1
+    },
+    {
+      "id": "place-fourier-modes",
+      "topicId": "fourier-modes",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 2
+    },
+    {
+      "id": "place-electrostatics",
+      "topicId": "electrostatics",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 3
+    },
+    {
+      "id": "place-maxwell-equations",
+      "topicId": "maxwell-equations",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 4
+    },
+    {
+      "id": "place-electromagnetic-potentials",
+      "topicId": "electromagnetic-potentials",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 5
+    },
+    {
+      "id": "place-electromagnetic-radiation",
+      "topicId": "electromagnetic-radiation",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 6
+    },
+    {
+      "id": "place-gauge-freedom",
+      "topicId": "gauge-freedom",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "order": 7
+    },
+    {
+      "id": "place-special-relativity",
+      "topicId": "special-relativity",
+      "order": 6
+    },
+    {
+      "id": "place-lorentz-transformations",
+      "topicId": "lorentz-transformations",
+      "parentPlacementId": "place-special-relativity",
+      "order": 0
+    },
+    {
+      "id": "place-minkowski-spacetime",
+      "topicId": "minkowski-spacetime",
+      "parentPlacementId": "place-special-relativity",
+      "order": 1
+    },
+    {
+      "id": "place-four-vectors",
+      "topicId": "four-vectors",
+      "parentPlacementId": "place-special-relativity",
+      "order": 2
+    },
+    {
+      "id": "place-relativistic-energy-momentum",
+      "topicId": "relativistic-energy-momentum",
+      "parentPlacementId": "place-special-relativity",
+      "order": 3
+    },
+    {
+      "id": "place-relativistic-electromagnetism",
+      "topicId": "relativistic-electromagnetism",
+      "parentPlacementId": "place-special-relativity",
+      "order": 4
+    },
+    {
+      "id": "place-thermal-statistical-physics",
+      "topicId": "thermal-statistical-physics",
+      "order": 7
+    },
+    {
+      "id": "place-entropy",
+      "topicId": "entropy",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 0
+    },
+    {
+      "id": "place-statistical-ensembles",
+      "topicId": "statistical-ensembles",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 1
+    },
+    {
+      "id": "place-partition-functions",
+      "topicId": "partition-functions",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 2
+    },
+    {
+      "id": "place-bose-statistics",
+      "topicId": "bose-statistics",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 3
+    },
+    {
+      "id": "place-fermi-statistics",
+      "topicId": "fermi-statistics",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 4
+    },
+    {
+      "id": "place-black-body-radiation",
+      "topicId": "black-body-radiation",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 5
+    },
+    {
+      "id": "place-statistical-phase-space",
+      "topicId": "statistical-phase-space",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "order": 6
+    },
+    {
+      "id": "place-quantum-mechanics-i",
+      "topicId": "quantum-mechanics-i",
+      "order": 8
+    },
+    {
+      "id": "place-quantum-states-amplitudes",
+      "topicId": "quantum-states-amplitudes",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 0
+    },
+    {
+      "id": "place-wavefunctions",
+      "topicId": "wavefunctions",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 1
+    },
+    {
+      "id": "place-schrodinger-equation",
+      "topicId": "schrodinger-equation",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 2
+    },
+    {
+      "id": "place-quantum-operators",
+      "topicId": "quantum-operators",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 3
+    },
+    {
+      "id": "place-uncertainty-principle",
+      "topicId": "uncertainty-principle",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 4
+    },
+    {
+      "id": "place-quantum-tunneling",
+      "topicId": "quantum-tunneling",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 5
+    },
+    {
+      "id": "place-quantum-harmonic-oscillator",
+      "topicId": "quantum-harmonic-oscillator",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "order": 6
+    },
+    {
+      "id": "place-advanced-quantum-mechanics",
+      "topicId": "advanced-quantum-mechanics",
+      "order": 9
+    },
+    {
+      "id": "place-hilbert-spaces",
+      "topicId": "hilbert-spaces",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 0
+    },
+    {
+      "id": "place-bra-ket-notation",
+      "topicId": "bra-ket-notation",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 1
+    },
+    {
+      "id": "place-quantum-spin",
+      "topicId": "quantum-spin",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 2
+    },
+    {
+      "id": "place-angular-momentum",
+      "topicId": "angular-momentum",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 3
+    },
+    {
+      "id": "place-identical-particles",
+      "topicId": "identical-particles",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 4
+    },
+    {
+      "id": "place-perturbation-theory",
+      "topicId": "perturbation-theory",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 5
+    },
+    {
+      "id": "place-quantum-scattering",
+      "topicId": "quantum-scattering",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 6
+    },
+    {
+      "id": "place-unitary-evolution",
+      "topicId": "unitary-evolution",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "order": 7
+    },
+    {
+      "id": "place-astrophysics",
+      "topicId": "astrophysics",
+      "order": 10
+    },
+    {
+      "id": "place-stellar-structure",
+      "topicId": "stellar-structure",
+      "parentPlacementId": "place-astrophysics",
+      "order": 0
+    },
+    {
+      "id": "place-nuclear-burning",
+      "topicId": "nuclear-burning",
+      "parentPlacementId": "place-astrophysics",
+      "order": 1
+    },
+    {
+      "id": "place-degeneracy-pressure",
+      "topicId": "degeneracy-pressure",
+      "parentPlacementId": "place-astrophysics",
+      "order": 2
+    },
+    {
+      "id": "place-white-dwarfs",
+      "topicId": "white-dwarfs",
+      "parentPlacementId": "place-astrophysics",
+      "order": 3
+    },
+    {
+      "id": "place-neutron-stars",
+      "topicId": "neutron-stars",
+      "parentPlacementId": "place-astrophysics",
+      "order": 4
+    },
+    {
+      "id": "place-supernovae",
+      "topicId": "supernovae",
+      "parentPlacementId": "place-astrophysics",
+      "order": 5
+    },
+    {
+      "id": "place-astrophysical-black-holes",
+      "topicId": "astrophysical-black-holes",
+      "parentPlacementId": "place-astrophysics",
+      "order": 6
+    },
+    {
+      "id": "place-galaxies",
+      "topicId": "galaxies",
+      "parentPlacementId": "place-astrophysics",
+      "order": 7
+    },
+    {
+      "id": "place-general-relativity",
+      "topicId": "general-relativity",
+      "order": 11
+    },
+    {
+      "id": "place-tensors",
+      "topicId": "tensors",
+      "parentPlacementId": "place-general-relativity",
+      "order": 0
+    },
+    {
+      "id": "place-manifolds",
+      "topicId": "manifolds",
+      "parentPlacementId": "place-general-relativity",
+      "order": 1
+    },
+    {
+      "id": "place-metric-geometry",
+      "topicId": "metric-geometry",
+      "parentPlacementId": "place-general-relativity",
+      "order": 2
+    },
+    {
+      "id": "place-spacetime-curvature",
+      "topicId": "spacetime-curvature",
+      "parentPlacementId": "place-general-relativity",
+      "order": 3
+    },
+    {
+      "id": "place-geodesics",
+      "topicId": "geodesics",
+      "parentPlacementId": "place-general-relativity",
+      "order": 4
+    },
+    {
+      "id": "place-einstein-equation",
+      "topicId": "einstein-equation",
+      "parentPlacementId": "place-general-relativity",
+      "order": 5
+    },
+    {
+      "id": "place-schwarzschild-spacetime",
+      "topicId": "schwarzschild-spacetime",
+      "parentPlacementId": "place-general-relativity",
+      "order": 6
+    },
+    {
+      "id": "place-gravitational-waves",
+      "topicId": "gravitational-waves",
+      "parentPlacementId": "place-general-relativity",
+      "order": 7
+    },
+    {
+      "id": "place-frw-geometry",
+      "topicId": "frw-geometry",
+      "parentPlacementId": "place-general-relativity",
+      "order": 8
+    },
+    {
+      "id": "place-cosmology",
+      "topicId": "cosmology",
+      "order": 12
+    },
+    {
+      "id": "place-expanding-universe",
+      "topicId": "expanding-universe",
+      "parentPlacementId": "place-cosmology",
+      "order": 0
+    },
+    {
+      "id": "place-friedmann-equations",
+      "topicId": "friedmann-equations",
+      "parentPlacementId": "place-cosmology",
+      "order": 1
+    },
+    {
+      "id": "place-thermal-history",
+      "topicId": "thermal-history",
+      "parentPlacementId": "place-cosmology",
+      "order": 2
+    },
+    {
+      "id": "place-nucleosynthesis",
+      "topicId": "nucleosynthesis",
+      "parentPlacementId": "place-cosmology",
+      "order": 3
+    },
+    {
+      "id": "place-cosmic-microwave-background",
+      "topicId": "cosmic-microwave-background",
+      "parentPlacementId": "place-cosmology",
+      "order": 4
+    },
+    {
+      "id": "place-dark-matter",
+      "topicId": "dark-matter",
+      "parentPlacementId": "place-cosmology",
+      "order": 5
+    },
+    {
+      "id": "place-dark-energy",
+      "topicId": "dark-energy",
+      "parentPlacementId": "place-cosmology",
+      "order": 6
+    },
+    {
+      "id": "place-inflation",
+      "topicId": "inflation",
+      "parentPlacementId": "place-cosmology",
+      "order": 7
+    },
+    {
+      "id": "place-classical-fields-qft",
+      "topicId": "classical-fields-qft",
+      "order": 13
+    },
+    {
+      "id": "place-field-actions",
+      "topicId": "field-actions",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 0
+    },
+    {
+      "id": "place-noether-theorem",
+      "topicId": "noether-theorem",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 1
+    },
+    {
+      "id": "place-canonical-quantization",
+      "topicId": "canonical-quantization",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 2
+    },
+    {
+      "id": "place-creation-annihilation",
+      "topicId": "creation-annihilation",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 3
+    },
+    {
+      "id": "place-propagators",
+      "topicId": "propagators",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 4
+    },
+    {
+      "id": "place-path-integrals",
+      "topicId": "path-integrals",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 5
+    },
+    {
+      "id": "place-feynman-diagrams",
+      "topicId": "feynman-diagrams",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 6
+    },
+    {
+      "id": "place-renormalization",
+      "topicId": "renormalization",
+      "parentPlacementId": "place-classical-fields-qft",
+      "order": 7
+    },
+    {
+      "id": "place-standard-model",
+      "topicId": "standard-model",
+      "order": 14
+    },
+    {
+      "id": "place-gauge-symmetry",
+      "topicId": "gauge-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "order": 0
+    },
+    {
+      "id": "place-u1-symmetry",
+      "topicId": "u1-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "order": 1
+    },
+    {
+      "id": "place-su2-symmetry",
+      "topicId": "su2-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "order": 2
+    },
+    {
+      "id": "place-su3-symmetry",
+      "topicId": "su3-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "order": 3
+    },
+    {
+      "id": "place-quantum-electrodynamics",
+      "topicId": "quantum-electrodynamics",
+      "parentPlacementId": "place-standard-model",
+      "order": 4
+    },
+    {
+      "id": "place-weak-interaction",
+      "topicId": "weak-interaction",
+      "parentPlacementId": "place-standard-model",
+      "order": 5
+    },
+    {
+      "id": "place-quantum-chromodynamics",
+      "topicId": "quantum-chromodynamics",
+      "parentPlacementId": "place-standard-model",
+      "order": 6
+    },
+    {
+      "id": "place-higgs-mechanism",
+      "topicId": "higgs-mechanism",
+      "parentPlacementId": "place-standard-model",
+      "order": 7
+    },
+    {
+      "id": "place-spontaneous-symmetry-breaking",
+      "topicId": "spontaneous-symmetry-breaking",
+      "parentPlacementId": "place-standard-model",
+      "order": 8
+    },
+    {
+      "id": "place-qft-curved-spacetime",
+      "topicId": "qft-curved-spacetime",
+      "order": 15
+    },
+    {
+      "id": "place-vacuum-ambiguity",
+      "topicId": "vacuum-ambiguity",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "order": 0
+    },
+    {
+      "id": "place-unruh-effect",
+      "topicId": "unruh-effect",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "order": 1
+    },
+    {
+      "id": "place-hawking-radiation",
+      "topicId": "hawking-radiation",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "order": 2
+    },
+    {
+      "id": "place-cosmological-particle-creation",
+      "topicId": "cosmological-particle-creation",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "order": 3
+    },
+    {
+      "id": "place-semiclassical-einstein-equation",
+      "topicId": "semiclassical-einstein-equation",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "order": 4
+    },
+    {
+      "id": "place-quantum-gravity-frontier",
+      "topicId": "quantum-gravity-frontier",
+      "order": 16
+    },
+    {
+      "id": "place-effective-field-theory-gravity",
+      "topicId": "effective-field-theory-gravity",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 0
+    },
+    {
+      "id": "place-black-hole-entropy",
+      "topicId": "black-hole-entropy",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 1
+    },
+    {
+      "id": "place-black-hole-information",
+      "topicId": "black-hole-information",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 2
+    },
+    {
+      "id": "place-cosmological-constant-problem",
+      "topicId": "cosmological-constant-problem",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 3
+    },
+    {
+      "id": "place-singularities",
+      "topicId": "singularities",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 4
+    },
+    {
+      "id": "place-problem-of-time",
+      "topicId": "problem-of-time",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 5
+    },
+    {
+      "id": "place-locality-observables",
+      "topicId": "locality-observables",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 6
+    },
+    {
+      "id": "place-holography",
+      "topicId": "holography",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 7
+    },
+    {
+      "id": "place-string-theory",
+      "topicId": "string-theory",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 8
+    },
+    {
+      "id": "place-loop-quantum-gravity",
+      "topicId": "loop-quantum-gravity",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 9
+    },
+    {
+      "id": "place-emergent-spacetime",
+      "topicId": "emergent-spacetime",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "order": 10
+    }
+  ],
+  "connections": [
+    {
+      "id": "physics-stage-0-1",
+      "source": "place-mathematical-methods",
+      "target": "place-analytical-mechanics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-1-2",
+      "source": "place-analytical-mechanics",
+      "target": "place-waves-electromagnetism",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-2-3",
+      "source": "place-waves-electromagnetism",
+      "target": "place-special-relativity",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-3-4",
+      "source": "place-special-relativity",
+      "target": "place-thermal-statistical-physics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-4-5",
+      "source": "place-thermal-statistical-physics",
+      "target": "place-quantum-mechanics-i",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-5-6",
+      "source": "place-quantum-mechanics-i",
+      "target": "place-advanced-quantum-mechanics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-6-7",
+      "source": "place-advanced-quantum-mechanics",
+      "target": "place-astrophysics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-7-8",
+      "source": "place-astrophysics",
+      "target": "place-general-relativity",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-8-9",
+      "source": "place-general-relativity",
+      "target": "place-cosmology",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-9-10",
+      "source": "place-cosmology",
+      "target": "place-classical-fields-qft",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-10-11",
+      "source": "place-classical-fields-qft",
+      "target": "place-standard-model",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-11-12",
+      "source": "place-standard-model",
+      "target": "place-qft-curved-spacetime",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-stage-12-13",
+      "source": "place-qft-curved-spacetime",
+      "target": "place-quantum-gravity-frontier",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "physics-frontier-goal",
+      "source": "place-quantum-gravity-frontier",
+      "target": "place-physics-goal",
+      "relation": "prerequisite"
+    }
+  ]
+}

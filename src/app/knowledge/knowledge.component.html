@@ -47,7 +47,7 @@
     <defs>
       <filter id="star-glow"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
-    <g class="graph-stage" [attr.transform]="'matrix(' + scale + ' 0 0 ' + scale + ' ' + panX + ' ' + panY + ')'">
+    <g #graphStage class="graph-stage" [attr.transform]="'matrix(' + scale + ' 0 0 ' + scale + ' ' + panX + ' ' + panY + ')'">
       <g class="edges">
         <path *ngFor="let edge of visibleConnections"
           [attr.d]="edgePath(edge)"
@@ -201,51 +201,56 @@
     </g>
   </svg>
 
-  <section class="journey-hud" aria-label="Curriculum controls and journey progress">
-    <article *ngFor="let progress of journeyProgress"
+  <section *ngIf="selectedJourney as progress" class="journey-hud" aria-label="Curriculum controls and journey progress">
+    <article class="journey-card"
+      role="tabpanel"
+      [id]="'curriculum-panel-' + progress.curriculumId"
+      [attr.aria-labelledby]="'curriculum-tab-' + progress.curriculumId"
       [class.active]="progress.active"
-      [style.--journey-color]="progress.color"
-      [attr.aria-label]="progress.title + (progress.active ? ', constellation visible' : ', constellation hidden')">
+      [style.--journey-color]="progress.color">
       <div class="journey-heading">
-        <button class="journey-toggle" type="button"
-          [attr.aria-pressed]="progress.active"
-          (pointerdown)="toggleCurriculum(progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
-          (keydown.enter)="toggleCurriculum(progress.curriculumId)"
-          (keydown.space)="toggleCurriculum(progress.curriculumId); $event.preventDefault()">
-          <i aria-hidden="true">✦</i><span>{{ progress.title }}</span>
-        </button>
-        <button class="next-up-button" type="button"
-          (pointerdown)="jumpToNext(progress); $event.preventDefault(); $event.stopPropagation()"
-          (keydown.enter)="jumpToNext(progress)"
-          (keydown.space)="jumpToNext(progress); $event.preventDefault()">Next up</button>
+        <div class="journey-title"><i aria-hidden="true">✦</i><span>{{ progress.title }}</span></div>
+        <div class="journey-actions">
+          <button class="journey-visibility" type="button"
+            [attr.aria-pressed]="progress.active"
+            (click)="toggleCurriculum(progress.curriculumId)">{{ progress.active ? 'Hide' : 'Show' }}</button>
+          <button class="next-up-button" type="button" (click)="jumpToNext(progress)">Next up</button>
+        </div>
       </div>
-      <button class="journey-current" type="button"
-        (pointerdown)="jumpToNext(progress); $event.preventDefault(); $event.stopPropagation()"
-        (keydown.enter)="jumpToNext(progress)"
-        (keydown.space)="jumpToNext(progress); $event.preventDefault()">{{ progress.currentTitle }}</button>
+      <button class="journey-current" type="button" (click)="jumpToNext(progress)">{{ progress.currentTitle }}</button>
       <div class="journey-summary"><span>Stage {{ progress.currentIndex + 1 }} of {{ progress.total }}</span><span>{{ progress.completedCount }}/{{ progress.total }} complete</span></div>
-      <button class="journey-track-toggle" type="button"
-        [attr.aria-pressed]="progress.active"
-        [attr.aria-label]="(progress.active ? 'Hide ' : 'Show ') + progress.title + ' constellation'"
-        (pointerdown)="toggleCurriculum(progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
-        (keydown.enter)="toggleCurriculum(progress.curriculumId)"
-        (keydown.space)="toggleCurriculum(progress.curriculumId); $event.preventDefault()">
-        <span class="journey-track" role="progressbar" [attr.aria-valuenow]="progress.completedCount" aria-valuemin="0" [attr.aria-valuemax]="progress.total">
-          <i [style.width.%]="progress.percent"></i><b [style.left.%]="progress.total ? progress.currentIndex / progress.total * 100 : 0"></b>
-        </span>
-      </button>
+      <span class="journey-track" role="progressbar"
+        [attr.aria-label]="progress.title + ' completion'"
+        [attr.aria-valuenow]="progress.completedCount"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="progress.total">
+        <i [style.width.%]="progress.percent"></i><b [style.left.%]="progress.total ? progress.currentIndex / progress.total * 100 : 0"></b>
+      </span>
       <div class="journey-jumps">
-        <button type="button"
-          (pointerdown)="focusJourneyPlacement(progress.start, progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
-          (keydown.enter)="focusJourneyPlacement(progress.start, progress.curriculumId)">Start</button>
-        <button type="button"
-          (pointerdown)="focusJourneyPlacement(progress.goal, progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
-          (keydown.enter)="focusJourneyPlacement(progress.goal, progress.curriculumId)">Goal</button>
+        <button type="button" (click)="focusJourneyPlacement(progress.start, progress.curriculumId)">Start</button>
+        <button type="button" (click)="focusJourneyPlacement(progress.goal, progress.curriculumId)">Goal</button>
       </div>
     </article>
-  </section>
 
-  <aside *ngIf="detailTopic as topic" class="detail-panel" aria-live="polite">
+    <nav class="curriculum-dock" role="tablist" aria-label="Choose curriculum progress">
+      <button *ngFor="let item of journeyProgress; let index = index; trackBy: trackJourney"
+        type="button"
+        role="tab"
+        [id]="'curriculum-tab-' + item.curriculumId"
+        [class.selected]="item.curriculumId === selectedCurriculumId"
+        [class.visible]="item.active"
+        [style.--journey-color]="item.color"
+        [attr.aria-selected]="item.curriculumId === selectedCurriculumId"
+        [attr.aria-controls]="'curriculum-panel-' + item.curriculumId"
+        [attr.aria-label]="item.title + (item.active ? ', constellation visible' : ', constellation hidden')"
+        [attr.title]="item.title"
+        [attr.tabindex]="item.curriculumId === selectedCurriculumId ? 0 : -1"
+        (click)="selectCurriculum(item.curriculumId)"
+        (keydown)="handleCurriculumDockKey($event, index)">
+        <i aria-hidden="true">✦</i><span>{{ item.shortTitle }}</span>
+      </button>
+    </nav>
+  </section>  <aside *ngIf="detailTopic as topic" class="detail-panel" aria-live="polite">
     <div class="detail-heading">
       <span class="eyebrow">{{ topic.parentPlacementId ? 'Topic system' : 'Galaxy' }} · {{ statusLabel(topic.status) }}</span>
       <button class="panel-up" type="button" (click)="goUpLevel()"><span aria-hidden="true">↑</span> Up</button>

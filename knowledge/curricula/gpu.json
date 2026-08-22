@@ -1,0 +1,648 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "gpu",
+    "title": "Parallel Programming / GPU / CUDA",
+    "description": "Performance-oriented C++, GPU architecture, CUDA kernels, profiling, and multi-GPU execution.",
+    "color": "#6eb6ff",
+    "goalTopicId": "cuda-gpu-performance-engineer",
+    "shortTitle": "GPU"
+  },
+  "placements": [
+    {
+      "id": "place-gpu-performance-oriented-cpp",
+      "topicId": "performance-oriented-cpp",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-cpp",
+      "topicId": "cpp",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-memory-layout",
+      "topicId": "memory-layout",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-stack-and-heap",
+      "topicId": "stack-and-heap",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-raii",
+      "topicId": "raii",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-move-semantics",
+      "topicId": "move-semantics",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-cpp-templates",
+      "topicId": "cpp-templates",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-compilation-linking",
+      "topicId": "compilation-linking",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 6
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-abi",
+      "topicId": "abi",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 7
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-cache-hierarchy",
+      "topicId": "cache-hierarchy",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 8
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-cache-locality",
+      "topicId": "cache-locality",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 9
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-branch-prediction",
+      "topicId": "branch-prediction",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 10
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-simd",
+      "topicId": "simd",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 11
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-vectorization",
+      "topicId": "vectorization",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 12
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-compiler-optimization",
+      "topicId": "compiler-optimization",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 13
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-benchmarking",
+      "topicId": "benchmarking",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 14
+    },
+    {
+      "id": "place-gpu-performance-oriented-cpp-profiling",
+      "topicId": "profiling",
+      "parentPlacementId": "place-gpu-performance-oriented-cpp",
+      "order": 15
+    },
+    {
+      "id": "place-gpu-computer-architecture",
+      "topicId": "computer-architecture",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-computer-architecture-instruction-execution",
+      "topicId": "instruction-execution",
+      "parentPlacementId": "place-gpu-computer-architecture",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-computer-architecture-memory-hierarchy",
+      "topicId": "memory-hierarchy",
+      "parentPlacementId": "place-gpu-computer-architecture",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-computer-architecture-virtual-memory",
+      "topicId": "virtual-memory",
+      "parentPlacementId": "place-gpu-computer-architecture",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-computer-architecture-cache-coherence",
+      "topicId": "cache-coherence",
+      "parentPlacementId": "place-gpu-computer-architecture",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-computer-architecture-cpu-pipelines",
+      "topicId": "cpu-pipelines",
+      "parentPlacementId": "place-gpu-computer-architecture",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-computer-architecture-performance-counters",
+      "topicId": "performance-counters",
+      "parentPlacementId": "place-gpu-computer-architecture",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-concurrency",
+      "topicId": "concurrency",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-concurrency-threads",
+      "topicId": "threads",
+      "parentPlacementId": "place-gpu-concurrency",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-concurrency-atomics",
+      "topicId": "atomics",
+      "parentPlacementId": "place-gpu-concurrency",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-concurrency-cpp-memory-model",
+      "topicId": "cpp-memory-model",
+      "parentPlacementId": "place-gpu-concurrency",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-concurrency-synchronization",
+      "topicId": "synchronization",
+      "parentPlacementId": "place-gpu-concurrency",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-concurrency-lock-free-concepts",
+      "topicId": "lock-free-concepts",
+      "parentPlacementId": "place-gpu-concurrency",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-concurrency-concurrent-data-structures",
+      "topicId": "concurrent-data-structures",
+      "parentPlacementId": "place-gpu-concurrency",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-parallel-algorithms",
+      "topicId": "parallel-algorithms",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-work-span-model",
+      "topicId": "work-span-model",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-data-parallelism",
+      "topicId": "data-parallelism",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-task-parallelism",
+      "topicId": "task-parallelism",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-reductions",
+      "topicId": "reductions",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-scans",
+      "topicId": "scans",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-histograms",
+      "topicId": "histograms",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-parallel-algorithms-parallel-sorting",
+      "topicId": "parallel-sorting",
+      "parentPlacementId": "place-gpu-parallel-algorithms",
+      "order": 6
+    },
+    {
+      "id": "place-gpu-gpu-architecture",
+      "topicId": "gpu-architecture",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-gpu-architecture-simt",
+      "topicId": "simt",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-gpu-architecture-warps",
+      "topicId": "warps",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-gpu-architecture-streaming-multiprocessors",
+      "topicId": "streaming-multiprocessors",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-gpu-architecture-occupancy",
+      "topicId": "occupancy",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-gpu-architecture-registers",
+      "topicId": "registers",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-gpu-architecture-shared-memory",
+      "topicId": "shared-memory",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-gpu-architecture-gpu-cache-hierarchy",
+      "topicId": "gpu-cache-hierarchy",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 6
+    },
+    {
+      "id": "place-gpu-gpu-architecture-hbm",
+      "topicId": "hbm",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 7
+    },
+    {
+      "id": "place-gpu-gpu-architecture-global-memory",
+      "topicId": "global-memory",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 8
+    },
+    {
+      "id": "place-gpu-gpu-architecture-memory-transactions",
+      "topicId": "memory-transactions",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 9
+    },
+    {
+      "id": "place-gpu-gpu-architecture-memory-coalescing",
+      "topicId": "memory-coalescing",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 10
+    },
+    {
+      "id": "place-gpu-gpu-architecture-warp-divergence",
+      "topicId": "warp-divergence",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 11
+    },
+    {
+      "id": "place-gpu-gpu-architecture-latency-hiding",
+      "topicId": "latency-hiding",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 12
+    },
+    {
+      "id": "place-gpu-gpu-architecture-tensor-cores",
+      "topicId": "tensor-cores",
+      "parentPlacementId": "place-gpu-gpu-architecture",
+      "order": 13
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals",
+      "topicId": "cuda-fundamentals",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda",
+      "topicId": "cuda",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-kernels",
+      "topicId": "cuda-kernels",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-grids",
+      "topicId": "cuda-grids",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-blocks",
+      "topicId": "cuda-blocks",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-threads",
+      "topicId": "cuda-threads",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-synchronization",
+      "topicId": "cuda-synchronization",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-shared-memory",
+      "topicId": "shared-memory",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 6
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-memory-coalescing",
+      "topicId": "memory-coalescing",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 7
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-occupancy",
+      "topicId": "occupancy",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 8
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-streams",
+      "topicId": "cuda-streams",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 9
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-asynchronous-copies",
+      "topicId": "asynchronous-copies",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 10
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-pinned-memory",
+      "topicId": "pinned-memory",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 11
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-unified-memory",
+      "topicId": "unified-memory",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 12
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cuda-events",
+      "topicId": "cuda-events",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 13
+    },
+    {
+      "id": "place-gpu-cuda-fundamentals-cublas",
+      "topicId": "cublas",
+      "parentPlacementId": "place-gpu-cuda-fundamentals",
+      "order": 14
+    },
+    {
+      "id": "place-gpu-cuda-performance-engineering",
+      "topicId": "cuda-performance-engineering",
+      "order": 6
+    },
+    {
+      "id": "place-gpu-cuda-performance-engineering-nsight-systems",
+      "topicId": "nsight-systems",
+      "parentPlacementId": "place-gpu-cuda-performance-engineering",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-cuda-performance-engineering-nsight-compute",
+      "topicId": "nsight-compute",
+      "parentPlacementId": "place-gpu-cuda-performance-engineering",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-cuda-performance-engineering-compiler-reports",
+      "topicId": "compiler-reports",
+      "parentPlacementId": "place-gpu-cuda-performance-engineering",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-cuda-performance-engineering-roofline-analysis",
+      "topicId": "roofline-analysis",
+      "parentPlacementId": "place-gpu-cuda-performance-engineering",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-cuda-performance-engineering-kernel-benchmarking",
+      "topicId": "kernel-benchmarking",
+      "parentPlacementId": "place-gpu-cuda-performance-engineering",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering",
+      "topicId": "gpu-kernel-engineering",
+      "order": 7
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-reductions",
+      "topicId": "reductions",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-scans",
+      "topicId": "scans",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-histograms",
+      "topicId": "histograms",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-matrix-multiplication",
+      "topicId": "matrix-multiplication",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-tiling",
+      "topicId": "tiling",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-matrix-transpose",
+      "topicId": "matrix-transpose",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 5
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-convolution-kernels",
+      "topicId": "convolution-kernels",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 6
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-softmax",
+      "topicId": "softmax",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 7
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-normalization-kernels",
+      "topicId": "normalization-kernels",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 8
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-fused-kernels",
+      "topicId": "fused-kernels",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 9
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-tensor-core-gemm",
+      "topicId": "tensor-core-gemm",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 10
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-precision-tradeoffs",
+      "topicId": "precision-tradeoffs",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 11
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-gpu-kernel-engineer",
+      "topicId": "gpu-kernel-engineer",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 12
+    },
+    {
+      "id": "place-gpu-multi-gpu-programming",
+      "topicId": "multi-gpu-programming",
+      "order": 8
+    },
+    {
+      "id": "place-gpu-multi-gpu-programming-nccl",
+      "topicId": "nccl",
+      "parentPlacementId": "place-gpu-multi-gpu-programming",
+      "order": 0
+    },
+    {
+      "id": "place-gpu-multi-gpu-programming-gpu-peer-to-peer",
+      "topicId": "gpu-peer-to-peer",
+      "parentPlacementId": "place-gpu-multi-gpu-programming",
+      "order": 1
+    },
+    {
+      "id": "place-gpu-multi-gpu-programming-collectives",
+      "topicId": "collectives",
+      "parentPlacementId": "place-gpu-multi-gpu-programming",
+      "order": 2
+    },
+    {
+      "id": "place-gpu-multi-gpu-programming-multi-gpu-topology",
+      "topicId": "multi-gpu-topology",
+      "parentPlacementId": "place-gpu-multi-gpu-programming",
+      "order": 3
+    },
+    {
+      "id": "place-gpu-multi-gpu-programming-communication-computation-overlap",
+      "topicId": "communication-computation-overlap",
+      "parentPlacementId": "place-gpu-multi-gpu-programming",
+      "order": 4
+    },
+    {
+      "id": "place-gpu-cuda-gpu-performance-engineer",
+      "topicId": "cuda-gpu-performance-engineer",
+      "order": 9
+    },
+    {
+      "id": "place-gpu-gpu-kernel-engineering-quantization",
+      "topicId": "quantization",
+      "parentPlacementId": "place-gpu-gpu-kernel-engineering",
+      "order": 13,
+      "contextLabel": "Shared compression competency"
+    }
+  ],
+  "connections": [
+    {
+      "id": "gpu-root-0-performance-oriented-cpp-computer-architecture",
+      "source": "place-gpu-performance-oriented-cpp",
+      "target": "place-gpu-computer-architecture",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-1-computer-architecture-concurrency",
+      "source": "place-gpu-computer-architecture",
+      "target": "place-gpu-concurrency",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-2-concurrency-parallel-algorithms",
+      "source": "place-gpu-concurrency",
+      "target": "place-gpu-parallel-algorithms",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-3-parallel-algorithms-gpu-architecture",
+      "source": "place-gpu-parallel-algorithms",
+      "target": "place-gpu-gpu-architecture",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-4-gpu-architecture-cuda-fundamentals",
+      "source": "place-gpu-gpu-architecture",
+      "target": "place-gpu-cuda-fundamentals",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-5-cuda-fundamentals-cuda-performance-engineering",
+      "source": "place-gpu-cuda-fundamentals",
+      "target": "place-gpu-cuda-performance-engineering",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-6-cuda-performance-engineering-gpu-kernel-engineering",
+      "source": "place-gpu-cuda-performance-engineering",
+      "target": "place-gpu-gpu-kernel-engineering",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-root-7-gpu-kernel-engineering-multi-gpu-programming",
+      "source": "place-gpu-gpu-kernel-engineering",
+      "target": "place-gpu-multi-gpu-programming",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "gpu-goal-0",
+      "source": "place-gpu-multi-gpu-programming",
+      "target": "place-gpu-cuda-gpu-performance-engineer",
+      "relation": "prerequisite"
+    }
+  ]
+}
