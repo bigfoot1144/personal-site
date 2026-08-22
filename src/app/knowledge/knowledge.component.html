@@ -1,4 +1,7 @@
-<section class="knowledge-shell" [class.motion-paused]="motionPaused" aria-label="Knowledge constellation">
+<section class="knowledge-shell"
+  [class.motion-paused]="motionPaused"
+  [class.overview-detail]="!selected && scale >= 1.3"
+  aria-label="Knowledge constellation">
   <header class="constellation-header">
     <div>
       <a routerLink="/" class="back-link" aria-label="Return to homepage">← Home</a>
@@ -8,16 +11,7 @@
     <button class="reset-button" type="button" (click)="resetView()">Reset view</button>
   </header>
 
-  <nav class="curriculum-filters" aria-label="Curriculum filters">
-    <button
-      *ngFor="let curriculum of data.curricula"
-      type="button"
-      [class.active]="curriculumActive(curriculum.id)"
-      [style.--curriculum-color]="curriculum.color"
-      [attr.aria-pressed]="curriculumActive(curriculum.id)"
-      (click)="toggleCurriculum(curriculum.id)">
-      <span class="filter-star">✦</span>{{ curriculum.title }}
-    </button>
+  <nav class="curriculum-filters" aria-label="Knowledge controls">
     <button class="search-trigger" type="button" (click)="openSearch()" aria-label="Search topics">
       <span aria-hidden="true">⌕</span> Search <kbd>/</kbd>
     </button>
@@ -58,7 +52,10 @@
         <path *ngFor="let edge of visibleConnections"
           [attr.d]="edgePath(edge)"
           [attr.stroke]="edgeColor(edge)"
-          [class.related]="edge.relation === 'related'"/>
+          [class.related]="edge.relation === 'related'"
+          [class.edge-not-started]="edgeStatus(edge) === 'not-started'"
+          [class.edge-in-progress]="edgeStatus(edge) === 'in-progress'"
+          [class.edge-completed]="edgeStatus(edge) === 'completed'"/>
       </g>
 
       <g class="topic-layer"
@@ -72,10 +69,20 @@
           [attr.to]="'360 ' + selected.x + ' ' + selected.y"
           dur="24s"
           repeatCount="indefinite"/>
+      <g *ngIf="isGalaxyView" class="galaxy-route">
+        <path *ngFor="let segment of galaxyJourneySegments" [attr.d]="segmentPath(segment)"
+          [class.edge-not-started]="segment.status === 'not-started'"
+          [class.edge-in-progress]="segment.status === 'in-progress'"
+          [class.edge-completed]="segment.status === 'completed'"/>
+      </g>
       <g *ngFor="let node of visibleNodes; trackBy: trackNode"
         class="topic-node"
         [class.galaxy-node]="isGalaxyView"
         [class.hidden-node]="!nodeVisible(node)"
+        [class.journey-node]="!!journeyMarker(node)"
+        [class.next-node]="journeyMarker(node) === 'next' || journeyMarker(node) === 'current'"
+        [class.goal-node]="journeyMarker(node) === 'goal'"
+        [class.jump-focused]="focusedJourneyPlacementId === node.placementId"
         [class.selected]="selected?.placementId === node.placementId"
         [class.goal]="node.tags?.includes('goal')"
         [class.in-progress]="node.status === 'in-progress'"
@@ -85,6 +92,7 @@
         role="button"
         [attr.aria-label]="node.title + ', ' + statusLabel(node.status)"
         [attr.data-placement-id]="node.placementId"
+        [style.--node-color]="nodeColor(node)"
         (click)="select(node)"
         (keydown.enter)="select(node)"
         (keydown.space)="select(node); $event.preventDefault()"
@@ -111,7 +119,16 @@
               to="-360"
               dur="24s"
               repeatCount="indefinite"/>
-            <text [attr.y]="isGalaxyView ? 13 : 25" text-anchor="middle">{{ node.title }}</text>
+            <text class="topic-title" [attr.y]="isGalaxyView ? 13 : 25" text-anchor="middle">{{ node.title }}</text>
+            <text *ngIf="journeyOrdinal(node) as ordinal" class="journey-ordinal" [attr.y]="isGalaxyView ? -9 : -13" text-anchor="middle">{{ ordinal < 10 ? '0' + ordinal : ordinal }}</text>
+            <g *ngIf="journeyMarker(node) as marker" class="journey-marker"
+              [class.marker-start]="marker === 'start'" [class.marker-next]="marker === 'next'"
+              [class.marker-current]="marker === 'current'" [class.marker-goal]="marker === 'goal'"
+              [attr.transform]="isGalaxyView ? 'translate(0 22)' : 'translate(0 37)'">
+              <line class="marker-stem" x1="0" y1="-8" x2="0" y2="-3"/>
+              <text x="0" y="3" text-anchor="middle">{{ journeyMarkerLabel(marker, node) }}</text>
+              <line class="marker-rule" x1="-13" y1="7" x2="13" y2="7"/>
+            </g>
           </g>
           <g *ngIf="childCount(node) && selected?.id !== node.id"
             class="child-badge"
@@ -183,6 +200,50 @@
       </g>
     </g>
   </svg>
+
+  <section class="journey-hud" aria-label="Curriculum controls and journey progress">
+    <article *ngFor="let progress of journeyProgress"
+      [class.active]="progress.active"
+      [style.--journey-color]="progress.color"
+      [attr.aria-label]="progress.title + (progress.active ? ', constellation visible' : ', constellation hidden')">
+      <div class="journey-heading">
+        <button class="journey-toggle" type="button"
+          [attr.aria-pressed]="progress.active"
+          (pointerdown)="toggleCurriculum(progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
+          (keydown.enter)="toggleCurriculum(progress.curriculumId)"
+          (keydown.space)="toggleCurriculum(progress.curriculumId); $event.preventDefault()">
+          <i aria-hidden="true">✦</i><span>{{ progress.title }}</span>
+        </button>
+        <button class="next-up-button" type="button"
+          (pointerdown)="jumpToNext(progress); $event.preventDefault(); $event.stopPropagation()"
+          (keydown.enter)="jumpToNext(progress)"
+          (keydown.space)="jumpToNext(progress); $event.preventDefault()">Next up</button>
+      </div>
+      <button class="journey-current" type="button"
+        (pointerdown)="jumpToNext(progress); $event.preventDefault(); $event.stopPropagation()"
+        (keydown.enter)="jumpToNext(progress)"
+        (keydown.space)="jumpToNext(progress); $event.preventDefault()">{{ progress.currentTitle }}</button>
+      <div class="journey-summary"><span>Stage {{ progress.currentIndex + 1 }} of {{ progress.total }}</span><span>{{ progress.completedCount }}/{{ progress.total }} complete</span></div>
+      <button class="journey-track-toggle" type="button"
+        [attr.aria-pressed]="progress.active"
+        [attr.aria-label]="(progress.active ? 'Hide ' : 'Show ') + progress.title + ' constellation'"
+        (pointerdown)="toggleCurriculum(progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
+        (keydown.enter)="toggleCurriculum(progress.curriculumId)"
+        (keydown.space)="toggleCurriculum(progress.curriculumId); $event.preventDefault()">
+        <span class="journey-track" role="progressbar" [attr.aria-valuenow]="progress.completedCount" aria-valuemin="0" [attr.aria-valuemax]="progress.total">
+          <i [style.width.%]="progress.percent"></i><b [style.left.%]="progress.total ? progress.currentIndex / progress.total * 100 : 0"></b>
+        </span>
+      </button>
+      <div class="journey-jumps">
+        <button type="button"
+          (pointerdown)="focusJourneyPlacement(progress.start, progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
+          (keydown.enter)="focusJourneyPlacement(progress.start, progress.curriculumId)">Start</button>
+        <button type="button"
+          (pointerdown)="focusJourneyPlacement(progress.goal, progress.curriculumId); $event.preventDefault(); $event.stopPropagation()"
+          (keydown.enter)="focusJourneyPlacement(progress.goal, progress.curriculumId)">Goal</button>
+      </div>
+    </article>
+  </section>
 
   <aside *ngIf="detailTopic as topic" class="detail-panel" aria-live="polite">
     <div class="detail-heading">
@@ -267,5 +328,5 @@
     </section>
   </div>
 
-  <p class="interaction-hint">Drag to move · Scroll over a star to enter · Backspace or Esc to go up</p>
+  <p class="interaction-hint">Drag to move · Zoom to reveal labels · Click or zoom deeply to enter · Backspace or Esc to go up</p>
 </section>

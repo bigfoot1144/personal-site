@@ -23,6 +23,30 @@ interface OrbitPlanet {
   entry?: JournalEntry;
 }
 
+interface JourneyProgress {
+  curriculumId: string;
+  title: string;
+  color: string;
+  start: TopicPlacement;
+  current: TopicPlacement;
+  goal: TopicPlacement;
+  currentTitle: string;
+  currentIndex: number;
+  completedCount: number;
+  total: number;
+  percent: number;
+  active: boolean;
+}
+
+interface JourneySegment {
+  id: string;
+  source: PositionedTopic;
+  target: PositionedTopic;
+  status: TopicStatus;
+}
+
+type JourneyMarkerRole = 'start' | 'next' | 'current' | 'goal';
+
 @Component({
   selector: 'app-knowledge',
   standalone: true,
@@ -48,6 +72,7 @@ export class KnowledgeComponent {
   searchActiveIndex = 0;
   motionPaused = false;
   hoveredPlacementId: string | null = null;
+  focusedJourneyPlacementId: string | null = null;
   private zoomTargetId: string | null = null;
   private dragging = false;
   private lastPointer = { x: 0, y: 0 };
@@ -85,6 +110,40 @@ export class KnowledgeComponent {
       ids.has(edge.source) && ids.has(edge.target) &&
       edge.curriculumIds.some(id => this.activeCurricula.has(id))
     );
+  }
+
+  get journeyProgress(): JourneyProgress[] {
+    return this.data.curricula
+      .map(curriculum => {
+        const ordered = this.orderedRootPlacements(curriculum.id);
+        const stages = ordered.filter(placement => !this.topicForPlacement(placement).tags?.includes('goal'));
+        const explicitCurrent = stages.find(placement => this.statusFor(placement.topicId) === 'in-progress');
+        const current = explicitCurrent
+          ?? stages.find(placement => this.aggregateStatusForPlacement(placement) !== 'completed')
+          ?? ordered[ordered.length - 1];
+        const goal = ordered.find(placement => this.topicForPlacement(placement).tags?.includes('goal'))
+          ?? ordered[ordered.length - 1];
+        const completedCount = stages.filter(placement => this.aggregateStatusForPlacement(placement) === 'completed').length;
+        return {
+          curriculumId: curriculum.id, title: curriculum.title, color: curriculum.color,
+          start: stages[0] ?? ordered[0], current, goal,
+          currentTitle: this.topicForPlacement(current).title,
+          currentIndex: Math.max(0, stages.findIndex(placement => placement.id === current.id)),
+          completedCount, total: stages.length,
+          percent: stages.length ? completedCount / stages.length * 100 : 0,
+          active: this.activeCurricula.has(curriculum.id)
+        };
+      })
+      .filter(progress => !!progress.start && !!progress.current && !!progress.goal);
+  }
+
+  get galaxyJourneySegments(): JourneySegment[] {
+    const stars = this.galaxyStars;
+    return stars.slice(1).map((target, index) => ({
+      id: stars[index].placementId + '-' + target.placementId,
+      source: stars[index], target,
+      status: this.segmentStatus(stars[index], target)
+    }));
   }
 
   get searchResults(): TopicSearchResult[] {
@@ -260,6 +319,7 @@ export class KnowledgeComponent {
   }
 
   select(node: PositionedTopic): void {
+    this.focusedJourneyPlacementId = null;
     this.selected = node;
     this.detailsVisible = true;
     this.highlightedEntryId = null;
@@ -290,7 +350,7 @@ export class KnowledgeComponent {
 
   toggleCurriculum(id: string): void {
     const next = new Set(this.activeCurricula);
-    if (next.has(id) && next.size > 1) next.delete(id);
+    if (next.has(id)) next.delete(id);
     else next.add(id);
     this.activeCurricula = next;
   }
@@ -327,6 +387,82 @@ export class KnowledgeComponent {
     const source = this.nodeAt(edge.source);
     const target = this.nodeAt(edge.target);
     return 'M ' + source.x + ' ' + source.y + ' L ' + target.x + ' ' + target.y;
+  }
+
+  segmentPath(segment: JourneySegment): string {
+    return 'M ' + segment.source.x + ' ' + segment.source.y + ' L ' + segment.target.x + ' ' + segment.target.y;
+  }
+
+  edgeStatus(edge: Connection): TopicStatus {
+    return this.segmentStatus(this.nodeAt(edge.source), this.nodeAt(edge.target), edge.curriculumIds);
+  }
+
+  journeyMarker(node: PositionedTopic): JourneyMarkerRole | null {
+    if (this.isGalaxyView) {
+      const stars = this.galaxyStars;
+      const index = stars.findIndex(star => star.placementId === node.placementId);
+      if (index < 0) return null;
+      const explicit = stars.find(star => this.statusFor(star.id) === 'in-progress');
+      const current = explicit ?? stars.find(star => star.status !== 'completed') ?? stars[stars.length - 1];
+      if (node.placementId === current?.placementId) return explicit ? 'current' : 'next';
+      if (index === 0) return 'start';
+      return null;
+    }
+    const matching = this.journeyProgress.filter(progress =>
+      this.orderedRootPlacements(progress.curriculumId).some(placement => placement.id === node.placementId));
+    if (matching.some(progress => progress.current.id === node.placementId)) {
+      return this.statusFor(node.id) === 'in-progress' ? 'current' : 'next';
+    }
+    if (matching.some(progress => progress.start.id === node.placementId)) return 'start';
+    if (matching.some(progress => progress.goal.id === node.placementId)) return 'goal';
+    return null;
+  }
+
+  journeyMarkerLabel(role: JourneyMarkerRole, node: PositionedTopic): string {
+    if (role === 'next') {
+      const startsHere = this.isGalaxyView
+        ? this.galaxyStars[0]?.placementId === node.placementId
+        : this.journeyProgress.some(progress => progress.start.id === node.placementId);
+      return startsHere ? 'START · NEXT UP' : 'NEXT UP';
+    }
+    if (role === 'current') return 'YOU ARE HERE';
+    if (role === 'goal') return 'DESTINATION';
+    return 'START';
+  }
+
+  journeyOrdinal(node: PositionedTopic): number | null {
+    if (this.isGalaxyView) {
+      const index = this.galaxyStars.findIndex(star => star.placementId === node.placementId);
+      return index < 0 ? null : index + 1;
+    }
+    for (const progress of this.journeyProgress) {
+      const stages = this.orderedRootPlacements(progress.curriculumId)
+        .filter(placement => !this.topicForPlacement(placement).tags?.includes('goal'));
+      const index = stages.findIndex(placement => placement.id === node.placementId);
+      if (index >= 0) return index + 1;
+    }
+    return null;
+  }
+
+  focusJourneyPlacement(placement: TopicPlacement, curriculumId?: string): void {
+    if (curriculumId && !this.activeCurricula.has(curriculumId)) {
+      this.activeCurricula = new Set([...this.activeCurricula, curriculumId]);
+    }
+    this.select(this.nodeForPlacement(placement));
+  }
+
+  jumpToNext(progress: JourneyProgress): void {
+    if (!this.activeCurricula.has(progress.curriculumId)) {
+      this.activeCurricula = new Set([...this.activeCurricula, progress.curriculumId]);
+    }
+    const node = this.nodeForPlacement(progress.current);
+    this.selected = null;
+    this.detailsVisible = false;
+    this.highlightedEntryId = null;
+    this.zoomTargetId = null;
+    this.focusedJourneyPlacementId = node.placementId;
+    this.setMotionPaused(false);
+    this.animateCamera(node, 1.55);
   }
 
   nodeAt(id: string): PositionedTopic {
@@ -379,7 +515,9 @@ export class KnowledgeComponent {
     const previousScale = this.scale;
     const worldX = (anchor.x - this.panX) / previousScale;
     const worldY = (anchor.y - this.panY) / previousScale;
-    const nextScale = Math.max(.55, Math.min(2.4, previousScale * (event.deltaY > 0 ? .9 : 1.1)));
+    const rawZoomFactor = Math.exp(-event.deltaY * .001);
+    const zoomFactor = Math.max(.94, Math.min(1.06, rawZoomFactor));
+    const nextScale = Math.max(.55, Math.min(3.2, previousScale * zoomFactor));
 
     this.scale = nextScale;
     this.panX = anchor.x - worldX * nextScale;
@@ -391,7 +529,7 @@ export class KnowledgeComponent {
         ?? null;
       if (directTargetId) this.zoomTargetId = directTargetId;
 
-      if (nextScale >= 1.15 && this.zoomTargetId) {
+      if (nextScale >= 2.15 && this.zoomTargetId) {
         const targetNode = this.baseNodes.find(node =>
           node.placementId === this.zoomTargetId && this.nodeVisible(node)
         );
@@ -442,7 +580,7 @@ export class KnowledgeComponent {
       this.panMoved = true;
       const distance = this.pointerDistance();
       if (this.lastPinchDistance) {
-        this.scale = Math.max(.55, Math.min(2.4, this.scale * distance / this.lastPinchDistance));
+        this.scale = Math.max(.55, Math.min(3.2, this.scale * distance / this.lastPinchDistance));
       }
       this.lastPinchDistance = distance;
       return;
@@ -495,6 +633,7 @@ export class KnowledgeComponent {
 
   resetView(): void {
     this.selected = null;
+    this.focusedJourneyPlacementId = null;
     this.detailsVisible = false;
     this.highlightedEntryId = null;
     this.animateView(1, 0, 0);
@@ -556,58 +695,42 @@ export class KnowledgeComponent {
   }
 
   private createLayout(): PositionedTopic[] {
-    const placements = this.data.placements
-      .filter(placement => !placement.parentPlacementId)
-      .sort((first, second) => first.order - second.order);
-    const nodes = placements.map(placement => {
-      const topic = this.topicForPlacement(placement);
-      return this.positioned(
-        topic,
-        placement,
-        120 + this.stableNumber(placement.id + '-x') % 760,
-        100 + this.stableNumber(placement.id + '-y') % 500
-      );
+    const positions = new Map<string, Array<{ x: number; y: number }>>();
+    const laneCount = Math.max(1, this.data.curricula.length);
+    this.data.curricula.forEach((curriculum, curriculumIndex) => {
+      const path = this.orderedRootPlacements(curriculum.id);
+      const laneDirection = -.45 + curriculumIndex * Math.PI * 2 / laneCount;
+      const lanePhase = this.stableNumber(curriculum.id + '-ray') / 0xffffffff * Math.PI * 2;
+      path.forEach((placement, index) => {
+        const radiusJitter = index ? (this.stableNumber(placement.id + '-radial') % 9) - 4 : 0;
+        const radius = index === 0 ? 0 : 34 + index * 28 + radiusJitter;
+        const bend = index ? Math.sin(index * .72 + lanePhase) * .105 : 0;
+        const angle = laneDirection + bend;
+        const lateralJitter = index
+          ? ((this.stableNumber(placement.id + curriculum.id + '-lateral') % 81) - 40)
+          : 0;
+        const points = positions.get(placement.id) ?? [];
+        points.push({
+          x: 500 + Math.cos(angle) * radius + Math.cos(laneDirection + Math.PI / 2) * lateralJitter,
+          y: 350 + Math.sin(angle) * radius + Math.sin(laneDirection + Math.PI / 2) * lateralJitter
+        });
+        positions.set(placement.id, points);
+      });
     });
-
-    for (let iteration = 0; iteration < 36; iteration++) {
-      for (let firstIndex = 0; firstIndex < nodes.length; firstIndex++) {
-        for (let secondIndex = firstIndex + 1; secondIndex < nodes.length; secondIndex++) {
-          const first = nodes[firstIndex];
-          const second = nodes[secondIndex];
-          let dx = second.x - first.x;
-          let dy = second.y - first.y;
-          let distance = Math.hypot(dx, dy);
-          if (distance === 0) {
-            const angle = this.stableNumber(first.placementId + second.placementId) / 0xffffffff * Math.PI * 2;
-            dx = Math.cos(angle);
-            dy = Math.sin(angle);
-            distance = 1;
-          }
-          const minimumDistance = 145;
-          if (distance >= minimumDistance) continue;
-          const shift = (minimumDistance - distance) / 2;
-          first.x -= dx / distance * shift;
-          first.y -= dy / distance * shift;
-          second.x += dx / distance * shift;
-          second.y += dy / distance * shift;
-        }
-      }
-      for (const node of nodes) {
-        node.x = Math.max(90, Math.min(910, node.x));
-        node.y = Math.max(80, Math.min(620, node.y));
-      }
-    }
-    return nodes;
+    return this.data.placements.filter(placement => !placement.parentPlacementId).map(placement => {
+      const points = positions.get(placement.id) ?? [{ x: 500, y: 350 }];
+      const x = points.reduce((sum, point) => sum + point.x, 0) / points.length;
+      const y = points.reduce((sum, point) => sum + point.y, 0) / points.length;
+      return this.positioned(this.topicForPlacement(placement), placement,
+        Math.max(80, Math.min(920, x)), Math.max(85, Math.min(615, y)));
+    });
   }
 
   private positionGalaxyPlacement(placement: TopicPlacement, parent: PositionedTopic, index: number): PositionedTopic {
     const topic = this.topicForPlacement(placement);
-    const armCount = 3;
-    const arm = index % armCount;
-    const step = Math.floor(index / armCount);
-    const radius = 34 + step * 22;
-    const jitter = (this.stableNumber(placement.id) % 9 - 4) * .012;
-    const angle = arm * Math.PI * 2 / armCount + step * .5 + jitter;
+    const radius = 30 + index * 9.5;
+    const jitter = (this.stableNumber(placement.id) % 9 - 4) * .018;
+    const angle = -Math.PI / 2 + index * .72 + jitter;
     return this.positioned(
       topic,
       placement,
@@ -661,7 +784,7 @@ export class KnowledgeComponent {
       contextLabel: placement.contextLabel,
       x,
       y,
-      status: this.statusFor(topic.id),
+      status: this.aggregateStatusForPlacement(placement),
       curriculumIds: this.data.curricula.filter(c => c.topicIds.includes(topic.id)).map(c => c.id)
     };
   }
@@ -674,5 +797,58 @@ export class KnowledgeComponent {
       if (update) status = update.status;
     }
     return status;
+  }
+
+  private aggregateStatusForPlacement(placement: TopicPlacement): TopicStatus {
+    const direct = this.statusFor(placement.topicId);
+    if (direct === 'completed') return 'completed';
+    if (direct === 'in-progress') return 'in-progress';
+    const children = this.data.placements.filter(candidate => candidate.parentPlacementId === placement.id);
+    if (children.length) {
+      const childStatuses = children.map(child => this.aggregateStatusForPlacement(child));
+      if (childStatuses.every(status => status === 'completed')) return 'completed';
+      if (childStatuses.some(status => status !== 'not-started')) return 'in-progress';
+    }
+    if (this.journal.entries.some(entry => entry.topicIds.includes(placement.topicId))) return 'in-progress';
+    return 'not-started';
+  }
+
+  private segmentStatus(source: PositionedTopic, target: PositionedTopic, curriculumIds: string[] = []): TopicStatus {
+    if (target.status === 'completed') return 'completed';
+    const currentIds = curriculumIds.length
+      ? this.journeyProgress.filter(progress => curriculumIds.includes(progress.curriculumId)).map(progress => progress.current.id)
+      : [];
+    if (source.status === 'in-progress' || target.status === 'in-progress' || currentIds.includes(target.placementId)) return 'in-progress';
+    if (!curriculumIds.length && this.isGalaxyView) {
+      const stars = this.galaxyStars;
+      const explicit = stars.find(star => this.statusFor(star.id) === 'in-progress');
+      const current = explicit ?? stars.find(star => star.status !== 'completed');
+      if (current?.placementId === target.placementId) return 'in-progress';
+    }
+    return 'not-started';
+  }
+
+  private orderedRootPlacements(curriculumId: string): TopicPlacement[] {
+    const placements = this.data.placements.filter(placement => !placement.parentPlacementId && placement.curriculumIds.includes(curriculumId));
+    const ids = new Set(placements.map(placement => placement.id));
+    const edges = this.data.connections.filter(edge => edge.relation === 'prerequisite' && edge.curriculumIds.includes(curriculumId)
+      && ids.has(edge.source) && ids.has(edge.target));
+    const incoming = new Map(placements.map(placement => [placement.id, 0]));
+    edges.forEach(edge => incoming.set(edge.target, (incoming.get(edge.target) ?? 0) + 1));
+    const queue = placements.filter(placement => incoming.get(placement.id) === 0).sort((a, b) => a.order - b.order);
+    const ordered: TopicPlacement[] = [];
+    while (queue.length) {
+      const placement = queue.shift()!;
+      ordered.push(placement);
+      for (const edge of edges.filter(candidate => candidate.source === placement.id)) {
+        incoming.set(edge.target, (incoming.get(edge.target) ?? 1) - 1);
+        if (incoming.get(edge.target) === 0) {
+          const target = placements.find(candidate => candidate.id === edge.target);
+          if (target) queue.push(target);
+          queue.sort((a, b) => a.order - b.order);
+        }
+      }
+    }
+    return ordered.concat(placements.filter(placement => !ordered.some(item => item.id === placement.id)).sort((a, b) => a.order - b.order));
   }
 }

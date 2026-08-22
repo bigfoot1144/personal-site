@@ -78,6 +78,8 @@ npm run start
 
 Topic IDs are stable references. Shared topics should remain single canonical topics listed in each relevant curriculum.
 
+Detailed authoring instructions for humans and agents: [Knowledge Constellation Authoring Guide](src/assets/knowledge/README.md)
+
 ## TODO
 
 - Figure out Firebase Hosting deployment flow
