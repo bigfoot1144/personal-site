@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 import { StarryBackgroundComponent } from './starry-background/starry-background.component';
 import { SparkleCursorComponent } from './sparkle-cursor/sparkle-cursor.component';
 
@@ -10,4 +11,13 @@ import { SparkleCursorComponent } from './sparkle-cursor/sparkle-cursor.componen
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+export class AppComponent {
+  knowledgeMode = false;
+
+  constructor(router: Router) {
+    this.knowledgeMode = router.url.startsWith('/knowledge');
+    router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+      this.knowledgeMode = (event as NavigationEnd).urlAfterRedirects.startsWith('/knowledge');
+    });
+  }
+}

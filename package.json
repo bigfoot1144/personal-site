@@ -4,12 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm run validate:knowledge && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:markdown": "tsc -p tsconfig.markdown-test.json && node .tmp/markdown-test/scripts/markdown-converter.test.js",
     "serve:ssr:personal-site": "node dist/personal-site/server/server.mjs",
-    "new-post": "node scripts/new-post.mjs"
+    "new-post": "node scripts/new-post.mjs",
+    "validate:knowledge": "node scripts/validate-knowledge.mjs"
   },
   "private": true,
   "dependencies": {

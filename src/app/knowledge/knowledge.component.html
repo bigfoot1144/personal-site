@@ -1,0 +1,271 @@
+<section class="knowledge-shell" [class.motion-paused]="motionPaused" aria-label="Knowledge constellation">
+  <header class="constellation-header">
+    <div>
+      <a routerLink="/" class="back-link" aria-label="Return to homepage">← Home</a>
+      <h1>Knowledge Constellation</h1>
+      <p>Follow the paths. Select a star to explore its orbit.</p>
+    </div>
+    <button class="reset-button" type="button" (click)="resetView()">Reset view</button>
+  </header>
+
+  <nav class="curriculum-filters" aria-label="Curriculum filters">
+    <button
+      *ngFor="let curriculum of data.curricula"
+      type="button"
+      [class.active]="curriculumActive(curriculum.id)"
+      [style.--curriculum-color]="curriculum.color"
+      [attr.aria-pressed]="curriculumActive(curriculum.id)"
+      (click)="toggleCurriculum(curriculum.id)">
+      <span class="filter-star">✦</span>{{ curriculum.title }}
+    </button>
+    <button class="search-trigger" type="button" (click)="openSearch()" aria-label="Search topics">
+      <span aria-hidden="true">⌕</span> Search <kbd>/</kbd>
+    </button>
+  </nav>
+
+  <nav *ngIf="selected" class="focus-breadcrumbs" aria-label="Focused topic path">
+    <button class="level-up" type="button" (click)="goUpLevel()" aria-label="Go up one level">
+      <span aria-hidden="true">↑</span> Up one level
+    </button>
+    <span class="breadcrumb-divider" aria-hidden="true"></span>
+    <button type="button" (click)="resetView()">Overview</button>
+    <ng-container *ngFor="let node of breadcrumbs">
+      <span>›</span>
+      <button type="button" (click)="navigateBreadcrumb(node)">{{ node.title }}</button>
+    </ng-container>
+  </nav>
+
+  <div class="legend" aria-label="Progress legend">
+    <span><i class="not-started"></i>Not started</span>
+    <span><i class="in-progress"></i>In progress</span>
+    <span><i class="completed"></i>Completed</span>
+  </div>
+
+  <svg #constellation class="constellation"
+    viewBox="0 0 1000 700"
+    role="group"
+    aria-label="Interactive curriculum graph"
+    (wheel)="onWheel($event)"
+    (pointerdown)="startPan($event)"
+    (pointermove)="movePan($event)"
+    (pointerup)="endPan($event)"
+    (pointercancel)="cancelPan($event)">
+    <defs>
+      <filter id="star-glow"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g class="graph-stage" [attr.transform]="'matrix(' + scale + ' 0 0 ' + scale + ' ' + panX + ' ' + panY + ')'">
+      <g class="edges">
+        <path *ngFor="let edge of visibleConnections"
+          [attr.d]="edgePath(edge)"
+          [attr.stroke]="edgeColor(edge)"
+          [class.related]="edge.relation === 'related'"/>
+      </g>
+
+      <g class="topic-layer"
+        [class.galaxy-field]="isGalaxyView"
+        [style.--galaxy-x]="(selected?.x || 500) + 'px'"
+        [style.--galaxy-y]="(selected?.y || 350) + 'px'">
+        <animateTransform *ngIf="isGalaxyView && selected"
+          attributeName="transform"
+          type="rotate"
+          [attr.from]="'0 ' + selected.x + ' ' + selected.y"
+          [attr.to]="'360 ' + selected.x + ' ' + selected.y"
+          dur="24s"
+          repeatCount="indefinite"/>
+      <g *ngFor="let node of visibleNodes; trackBy: trackNode"
+        class="topic-node"
+        [class.galaxy-node]="isGalaxyView"
+        [class.hidden-node]="!nodeVisible(node)"
+        [class.selected]="selected?.placementId === node.placementId"
+        [class.goal]="node.tags?.includes('goal')"
+        [class.in-progress]="node.status === 'in-progress'"
+        [class.completed]="node.status === 'completed'"
+        [attr.transform]="'translate(' + node.x + ' ' + node.y + ')'"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="node.title + ', ' + statusLabel(node.status)"
+        [attr.data-placement-id]="node.placementId"
+        (click)="select(node)"
+        (keydown.enter)="select(node)"
+        (keydown.space)="select(node); $event.preventDefault()"
+        (pointerenter)="hoveredPlacementId = node.placementId; setMotionPaused(true)"
+        (pointerleave)="hoveredPlacementId = null; setMotionPaused(false)"
+        (focusin)="setMotionPaused(true)"
+        (focusout)="setMotionPaused(false)">
+        <g class="star-gather"
+          [style.--scatter-x]="spawnX(node) + 'px'"
+          [style.--scatter-y]="spawnY(node) + 'px'"
+          [style.--galaxy-delay]="galaxyDelay(node) + 'ms'">
+          <circle class="star-hit-area" r="22"/>
+          <rect class="star-core"
+            [attr.x]="-starSize(node) / 2"
+            [attr.y]="-starSize(node) / 2"
+            [attr.width]="starSize(node)"
+            [attr.height]="starSize(node)"
+            [attr.fill]="nodeColor(node)"/>
+          <g class="star-label">
+            <animateTransform *ngIf="isGalaxyView"
+              attributeName="transform"
+              type="rotate"
+              from="0"
+              to="-360"
+              dur="24s"
+              repeatCount="indefinite"/>
+            <text [attr.y]="isGalaxyView ? 13 : 25" text-anchor="middle">{{ node.title }}</text>
+          </g>
+          <g *ngIf="childCount(node) && selected?.id !== node.id"
+            class="child-badge"
+            transform="translate(10 -10)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'Focus ' + node.title + ' and reveal ' + childCount(node) + ' child topic'"
+            (click)="select(node); $event.stopPropagation()"
+            (keydown.enter)="select(node); $event.stopPropagation()"
+            (keydown.space)="select(node); $event.preventDefault(); $event.stopPropagation()">
+            <circle class="child-badge-hit-area" r="11"/>
+            <text text-anchor="middle" dominant-baseline="central">+{{ childCount(node) }}</text>
+          </g>
+        </g>
+      </g>
+      </g>
+
+      <g *ngIf="selected && orbitPlanets.length"
+        class="planet-system"
+        [attr.transform]="'translate(' + selected.x + ' ' + selected.y + ')'">
+        <circle *ngFor="let radius of orbitRadii" class="orbit-path" [attr.r]="radius"/>
+        <g *ngFor="let planet of orbitPlanets; trackBy: trackPlanet"
+          class="planet-orbit"
+          [style.--planet-angle]="planet.angle + 'deg'"
+          [style.--planet-duration]="planet.duration + 's'">
+          <g [attr.transform]="'translate(' + planet.radius + ' 0)'">
+            <g class="planet-facing"
+              [style.--planet-counter-angle]="(-planet.angle) + 'deg'"
+              [style.--planet-duration]="planet.duration + 's'">
+              <g class="planet-node"
+                [class.topic-planet]="planet.kind === 'topic'"
+                [class.highlighted]="highlightedEntryId === planet.entry?.id"
+                tabindex="0"
+                role="button"
+                [attr.aria-label]="planet.kind + ': ' + planet.title"
+                (click)="activatePlanet(planet)"
+                (keydown.enter)="activatePlanet(planet)"
+                (keydown.space)="activatePlanet(planet); $event.preventDefault()"
+                (pointerenter)="setMotionPaused(true)"
+                (pointerleave)="setMotionPaused(false)"
+                (focusin)="setMotionPaused(true)"
+                (focusout)="setMotionPaused(false)">
+                <circle class="planet-hit-area" [attr.r]="planet.size + 8"/>
+                <circle class="planet-core" [attr.r]="planet.size" [attr.fill]="planetColor(planet)"/>
+                <text class="planet-title" [attr.y]="planet.size + 11" text-anchor="middle">{{ planet.title }}</text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g *ngIf="selected && alternatePlacements.length"
+        class="curriculum-bridges"
+        [attr.transform]="'translate(' + selected.x + ' ' + selected.y + ')'">
+        <g *ngFor="let placement of alternatePlacements; let bridgeIndex = index">
+          <line x1="0" y1="0" [attr.x2]="bridgeX(bridgeIndex)" [attr.y2]="bridgeY(bridgeIndex)" [attr.stroke]="placementColor(placement)"/>
+          <g class="curriculum-bridge"
+            [attr.transform]="'translate(' + bridgeX(bridgeIndex) + ' ' + bridgeY(bridgeIndex) + ')'"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'Open ' + placementLabel(placement) + ' placement'"
+            (click)="activatePlacement(placement); $event.stopPropagation()"
+            (keydown.enter)="activatePlacement(placement)"
+            (keydown.space)="activatePlacement(placement); $event.preventDefault()">
+            <circle class="bridge-hit-area" r="18"/>
+            <circle class="bridge-core" r="7" [attr.fill]="placementColor(placement)"/>
+            <text y="22" text-anchor="middle">{{ placementLabel(placement) }}</text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <aside *ngIf="detailTopic as topic" class="detail-panel" aria-live="polite">
+    <div class="detail-heading">
+      <span class="eyebrow">{{ topic.parentPlacementId ? 'Topic system' : 'Galaxy' }} · {{ statusLabel(topic.status) }}</span>
+      <button class="panel-up" type="button" (click)="goUpLevel()"><span aria-hidden="true">↑</span> Up</button>
+    </div>
+    <h2>{{ topic.title }}</h2>
+    <p>{{ topic.summary }}</p>
+    <dl class="topic-metadata" *ngIf="topic.duration || topic.completionCriteria">
+      <div *ngIf="topic.duration">
+        <dt>Estimated time</dt>
+        <dd>{{ topic.duration }}</dd>
+      </div>
+      <div *ngIf="topic.completionCriteria">
+        <dt>Ready to advance when</dt>
+        <dd>{{ topic.completionCriteria }}</dd>
+      </div>
+    </dl>
+    <div class="membership">
+      <span *ngFor="let curriculum of data.curricula"
+        [hidden]="!topic.curriculumIds.includes(curriculum.id)"
+        [style.border-color]="curriculum.color">{{ curriculum.title }}</span>
+    </div>
+    <section class="placement-paths" *ngIf="selectedPlacementPaths.length > 1">
+      <h3>Used in</h3>
+      <button *ngFor="let item of selectedPlacementPaths"
+        type="button"
+        [class.current]="item.placement.id === topic.placementId"
+        (click)="activatePlacement(item.placement)">{{ item.path }}</button>
+    </section>
+    <section class="topic-resources" *ngIf="topic.resources?.length">
+      <h3>Primary resources</h3>
+      <ul>
+        <li *ngFor="let resource of topic.resources">
+          <a *ngIf="resource.url; else resourceLabel" [href]="resource.url" target="_blank" rel="noopener">{{ resource.label }} ↗</a>
+          <ng-template #resourceLabel>{{ resource.label }}</ng-template>
+        </li>
+      </ul>
+    </section>
+    <section *ngIf="selectedEntries.length">
+      <h3>Activity</h3>
+      <article *ngFor="let entry of selectedEntries"
+        [class.highlighted]="highlightedEntryId === entry.id">
+        <div><span>{{ entry.type }}</span><time>{{ entry.date | date:'mediumDate':'UTC' }}</time></div>
+        <h4>{{ entry.title }}</h4>
+        <p>{{ entry.body }}</p>
+        <a *ngIf="entry.url" [href]="entry.url" target="_blank" rel="noopener">Open project ↗</a>
+      </article>
+    </section>
+    <p class="empty-activity" *ngIf="!selectedEntries.length">No activity logged yet.</p>
+  </aside>
+
+  <div *ngIf="searchOpen" class="search-backdrop" (pointerdown)="closeSearch()">
+    <section class="search-palette" role="dialog" aria-modal="true" aria-label="Search knowledge topics" (pointerdown)="$event.stopPropagation()">
+      <label for="knowledge-search">Jump to a topic</label>
+      <div class="search-input-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input #searchInput
+          id="knowledge-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search titles and summaries…"
+          [value]="searchQuery"
+          (input)="updateSearch($any($event.target).value)"
+          (keydown)="handleSearchKey($event)"/>
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" role="listbox" *ngIf="searchQuery.trim()">
+        <button *ngFor="let result of searchResults; let index = index"
+          type="button"
+          role="option"
+          [class.active]="index === searchActiveIndex"
+          [attr.aria-selected]="index === searchActiveIndex"
+          (pointerenter)="searchActiveIndex = index"
+          (click)="selectSearchResult(result)">
+          <strong>{{ result.topic.title }}</strong>
+          <span>{{ result.path }}</span>
+        </button>
+        <p *ngIf="!searchResults.length">No matching topics in the active curricula.</p>
+      </div>
+      <p class="search-help" *ngIf="!searchQuery.trim()">Type to search the active curricula.</p>
+    </section>
+  </div>
+
+  <p class="interaction-hint">Drag to move · Scroll over a star to enter · Backspace or Esc to go up</p>
+</section>

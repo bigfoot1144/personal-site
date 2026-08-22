@@ -62,6 +62,22 @@ npm run test:markdown
 npm run build
 ```
 
+## Knowledge Constellation
+
+The read-only constellation at `/knowledge` is generated from:
+
+- `src/assets/knowledge/curricula.json` for canonical topics, curricula, and connections
+- `src/assets/knowledge/journal.json` for dated work, notes, projects, and status updates
+
+After editing or generating either file, validate and preview it:
+
+```bash
+npm run validate:knowledge
+npm run start
+```
+
+Topic IDs are stable references. Shared topics should remain single canonical topics listed in each relevant curriculum.
+
 ## TODO
 
 - Figure out Firebase Hosting deployment flow

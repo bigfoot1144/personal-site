@@ -1,0 +1,2763 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "physics-goal",
+      "title": "Theoretical Physics",
+      "summary": "Reach the QFT–general-relativity frontier and evaluate proposed theories of quantum spacetime.",
+      "tags": [
+        "physics",
+        "goal"
+      ],
+      "duration": "2.5–4 years total",
+      "completionCriteria": "You can identify the degrees of freedom, low-energy limit, locality, unitarity, observables, and falsifiable predictions of a quantum-gravity proposal."
+    },
+    {
+      "id": "ml-goal",
+      "title": "Machine Learning",
+      "summary": "Understand and build learning systems from mathematical first principles.",
+      "tags": [
+        "machine-learning",
+        "goal"
+      ]
+    },
+    {
+      "id": "neural-networks",
+      "title": "Neural Networks",
+      "summary": "Representation learning, optimization, and modern architectures.",
+      "tags": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "mathematical-methods",
+      "title": "Mathematical Methods",
+      "summary": "Upgrade the mathematical language required for advanced theoretical physics.",
+      "duration": "2–4 months",
+      "completionCriteria": "Grad, div, and curl feel natural; basis changes and eigenvectors are routine; you can solve the harmonic ODE, Fourier-expand functions, and manipulate complex exponentials.",
+      "resources": [
+        {
+          "label": "Strang — Introduction to Linear Algebra"
+        },
+        {
+          "label": "Boas — Mathematical Methods in the Physical Sciences"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage",
+        "math"
+      ]
+    },
+    {
+      "id": "multivariable-calculus",
+      "title": "Multivariable Calculus",
+      "summary": "Partial derivatives, multiple integrals, coordinate systems, and multivariable change.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "vector-calculus",
+      "title": "Vector Calculus",
+      "summary": "Gradient, divergence, curl, flux, and integral theorems.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "linear-algebra",
+      "title": "Linear Algebra",
+      "summary": "Vector spaces, linear maps, matrices, bases, and decompositions.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "eigenvectors",
+      "title": "Eigenvectors & Spectral Methods",
+      "summary": "Eigenvalues, invariant directions, diagonalization, and normal modes.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "ordinary-differential-equations",
+      "title": "Ordinary Differential Equations",
+      "summary": "Linear ODEs, oscillators, boundary conditions, and dynamical systems.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "partial-differential-equations",
+      "title": "PDE Foundations",
+      "summary": "Canonical PDEs, separation of variables, and boundary-value problems.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "complex-methods",
+      "title": "Complex Methods",
+      "summary": "Complex numbers, analytic functions, contour ideas, and complex exponentials.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "fourier-analysis",
+      "title": "Fourier Analysis",
+      "summary": "Fourier series, Fourier transforms, modes, and frequency-space reasoning.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "probability",
+      "title": "Probability",
+      "summary": "Random variables, distributions, expectation, and probabilistic inference.",
+      "tags": [
+        "math"
+      ]
+    },
+    {
+      "id": "analytical-mechanics",
+      "title": "Analytical Mechanics",
+      "summary": "Rebuild mechanics around actions, generalized coordinates, symmetry, and phase space.",
+      "duration": "2–3 months",
+      "completionCriteria": "You can derive equations of motion from an action instead of beginning with F = ma.",
+      "resources": [
+        {
+          "label": "Taylor — Classical Mechanics"
+        },
+        {
+          "label": "MIT 8.09 Classical Mechanics III",
+          "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "calculus-of-variations",
+      "title": "Calculus of Variations",
+      "summary": "Functionals, varied paths, and stationary-action methods.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "action-principle",
+      "title": "Action Principle",
+      "summary": "Dynamics organized by δS = 0 and the action functional.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "lagrangian-mechanics",
+      "title": "Lagrangian Mechanics",
+      "summary": "Euler–Lagrange equations, constraints, and coordinate-independent dynamics.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "hamiltonian-mechanics",
+      "title": "Hamiltonian Mechanics",
+      "summary": "Hamilton equations and energy-based evolution.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "generalized-coordinates",
+      "title": "Generalized Coordinates",
+      "summary": "Configuration spaces, constraints, and non-Cartesian variables.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "phase-space",
+      "title": "Phase Space",
+      "summary": "States as points in position–momentum space and Hamiltonian flow.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "poisson-brackets",
+      "title": "Poisson Brackets",
+      "summary": "Canonical algebra, generators, and time evolution.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "symmetry-conservation",
+      "title": "Symmetry & Conservation",
+      "summary": "Continuous symmetries, conserved quantities, and Noether-style reasoning.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "waves-electromagnetism",
+      "title": "Waves & Electromagnetism",
+      "summary": "Develop a field-based description through waves, Maxwell theory, radiation, and gauge freedom.",
+      "duration": "3–4 months",
+      "completionCriteria": "You see particles and fields as distinct but connected forms of physical description.",
+      "resources": [
+        {
+          "label": "Griffiths — Introduction to Electrodynamics"
+        },
+        {
+          "label": "MIT 8.07 Electromagnetism II"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "normal-modes",
+      "title": "Normal Modes",
+      "summary": "Coupled oscillations, eigenmodes, and collective motion.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "wave-equation",
+      "title": "Wave Equation",
+      "summary": "Derivation, solutions, propagation, and boundary conditions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "fourier-modes",
+      "title": "Fourier Modes",
+      "summary": "Decomposing fields and waves into momentum and frequency modes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "electrostatics",
+      "title": "Electrostatics",
+      "summary": "Electric fields, potentials, boundary problems, and multipoles.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "maxwell-equations",
+      "title": "Maxwell Equations",
+      "summary": "The unified dynamical laws of classical electromagnetism.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "electromagnetic-potentials",
+      "title": "Electromagnetic Potentials",
+      "summary": "Scalar and vector potentials and their physical use.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "electromagnetic-radiation",
+      "title": "Electromagnetic Radiation",
+      "summary": "Radiating sources, waves, energy, and momentum transport.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "gauge-freedom",
+      "title": "Gauge Freedom",
+      "summary": "Redundant field descriptions and gauge transformations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "special-relativity",
+      "title": "Special Relativity",
+      "summary": "Replace frame-dependent intuition with the geometry of Minkowski spacetime.",
+      "duration": "1–2 months",
+      "completionCriteria": "You reason geometrically with spacetime rather than treating relativity as a collection of clock effects.",
+      "resources": [
+        {
+          "label": "MIT 8.033 Relativity and Spacetime Physics",
+          "url": "https://ocw.mit.edu/courses/8-033-introduction-to-relativity-and-spacetime-physics-fall-2024/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "lorentz-transformations",
+      "title": "Lorentz Transformations",
+      "summary": "Changes of inertial frame preserving the spacetime interval.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "minkowski-spacetime",
+      "title": "Minkowski Spacetime",
+      "summary": "Events, intervals, light cones, and causal geometry.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "four-vectors",
+      "title": "Four-Vectors",
+      "summary": "Covariant position, velocity, momentum, and tensor notation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "relativistic-energy-momentum",
+      "title": "Relativistic Energy & Momentum",
+      "summary": "Four-momentum and E² = p²c² + m²c⁴.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "relativistic-electromagnetism",
+      "title": "Relativistic Electromagnetism",
+      "summary": "Electric and magnetic fields as parts of one covariant field.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "thermal-statistical-physics",
+      "title": "Thermal & Statistical Physics",
+      "summary": "Explain thermodynamics and macroscopic irreversibility through microscopic statistics.",
+      "duration": "2–3 months",
+      "completionCriteria": "You understand how thermodynamics and irreversible behavior emerge statistically.",
+      "resources": [
+        {
+          "label": "Schroeder — Thermal Physics"
+        },
+        {
+          "label": "MIT 8.044 Statistical Physics I"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "entropy",
+      "title": "Entropy",
+      "summary": "Thermodynamic and statistical meanings of entropy.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "statistical-ensembles",
+      "title": "Statistical Ensembles",
+      "summary": "Microcanonical, canonical, and grand-canonical descriptions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "partition-functions",
+      "title": "Partition Functions",
+      "summary": "Generating thermodynamic quantities from statistical weights.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "bose-statistics",
+      "title": "Bose Statistics",
+      "summary": "Indistinguishable bosons and Bose–Einstein distributions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "fermi-statistics",
+      "title": "Fermi Statistics",
+      "summary": "Fermions, exclusion, and Fermi–Dirac distributions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "black-body-radiation",
+      "title": "Black-Body Radiation",
+      "summary": "Thermal radiation, Planck spectrum, and quantum motivation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "statistical-phase-space",
+      "title": "Statistical Phase Space",
+      "summary": "Probability distributions over microscopic states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-mechanics-i",
+      "title": "Quantum Mechanics I",
+      "summary": "Learn wave mechanics and the structural principles of quantum states and observables.",
+      "duration": "3 months",
+      "completionCriteria": "You can solve one-dimensional quantum systems and treat superposition as a structural principle.",
+      "resources": [
+        {
+          "label": "Griffiths — Introduction to Quantum Mechanics"
+        },
+        {
+          "label": "Zwiebach — Mastering Quantum Mechanics"
+        },
+        {
+          "label": "MIT 8.04 Quantum Physics I",
+          "url": "https://ocw.mit.edu/courses/8-04-quantum-physics-i-spring-2016/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "quantum-states-amplitudes",
+      "title": "States & Amplitudes",
+      "summary": "Quantum states, probability amplitudes, and superposition.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "wavefunctions",
+      "title": "Wavefunctions",
+      "summary": "Position-space states, normalization, and probability density.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "schrodinger-equation",
+      "title": "Schrödinger Equation",
+      "summary": "Unitary time evolution and stationary states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-operators",
+      "title": "Quantum Operators",
+      "summary": "Observables, eigenstates, commutators, and measurement.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "uncertainty-principle",
+      "title": "Uncertainty Principle",
+      "summary": "Noncommuting observables and uncertainty relations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-tunneling",
+      "title": "Quantum Tunneling",
+      "summary": "Barrier penetration and classically forbidden behavior.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-harmonic-oscillator",
+      "title": "Quantum Harmonic Oscillator",
+      "summary": "Ladder operators, energy spectrum, and oscillator states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "advanced-quantum-mechanics",
+      "title": "Advanced Quantum Mechanics",
+      "summary": "Move from wave mechanics to the general operator and Hilbert-space formalism.",
+      "duration": "4–6 months",
+      "completionCriteria": "You think primarily in states, operators, and unitary evolution rather than particle-wave analogies.",
+      "resources": [
+        {
+          "label": "MIT 8.05 Quantum Physics II",
+          "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/"
+        },
+        {
+          "label": "MIT 8.06 Quantum Physics III",
+          "url": "https://ocw.mit.edu/courses/8-06-quantum-physics-iii-spring-2018/"
+        },
+        {
+          "label": "Shankar — Principles of Quantum Mechanics"
+        },
+        {
+          "label": "Sakurai — Modern Quantum Mechanics"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "hilbert-spaces",
+      "title": "Hilbert Spaces",
+      "summary": "Inner-product spaces, bases, completeness, and state geometry.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "bra-ket-notation",
+      "title": "Bra–Ket Notation",
+      "summary": "Abstract states, dual vectors, operators, and matrix elements.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-spin",
+      "title": "Quantum Spin",
+      "summary": "Intrinsic angular momentum and two-level systems.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "angular-momentum",
+      "title": "Angular Momentum",
+      "summary": "Rotation generators, addition rules, and spherical systems.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "identical-particles",
+      "title": "Identical Particles",
+      "summary": "Bosonic and fermionic symmetry and many-particle states.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "perturbation-theory",
+      "title": "Perturbation Theory",
+      "summary": "Approximate spectra and dynamics for weakly changed systems.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-scattering",
+      "title": "Quantum Scattering",
+      "summary": "Cross sections, amplitudes, partial waves, and interactions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "unitary-evolution",
+      "title": "Unitary Evolution",
+      "summary": "Quantum dynamics, pictures of motion, and conservation of probability.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "astrophysics",
+      "title": "Astrophysics",
+      "summary": "Apply mechanics, fields, quantum physics, and statistics to stars and compact objects.",
+      "duration": "3–4 months",
+      "completionCriteria": "You can trace astrophysical objects back to mechanics, E&M, quantum mechanics, and statistical mechanics.",
+      "resources": [
+        {
+          "label": "Carroll & Ostlie — An Introduction to Modern Astrophysics"
+        },
+        {
+          "label": "MIT 8.284 Modern Astrophysics",
+          "url": "https://ocw.mit.edu/courses/8-284-modern-astrophysics-spring-2006/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "stellar-structure",
+      "title": "Stellar Structure",
+      "summary": "Hydrostatic balance, transport, and stellar equilibrium.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "nuclear-burning",
+      "title": "Nuclear Burning",
+      "summary": "Fusion chains, reaction rates, and stellar energy production.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "degeneracy-pressure",
+      "title": "Degeneracy Pressure",
+      "summary": "Quantum statistics supporting dense astrophysical matter.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "white-dwarfs",
+      "title": "White Dwarfs",
+      "summary": "Electron degeneracy, mass limits, and stellar remnants.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "neutron-stars",
+      "title": "Neutron Stars",
+      "summary": "Dense nuclear matter, structure, and relativistic compactness.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "supernovae",
+      "title": "Supernovae",
+      "summary": "Core collapse, explosions, nucleosynthesis, and remnants.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "astrophysical-black-holes",
+      "title": "Astrophysical Black Holes",
+      "summary": "Formation, accretion, horizons, and observations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "galaxies",
+      "title": "Galaxies",
+      "summary": "Structure, dynamics, populations, and large-scale context.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "general-relativity",
+      "title": "General Relativity",
+      "summary": "Understand gravity as dynamical spacetime geometry.",
+      "duration": "4–6 months",
+      "completionCriteria": "You understand gravity as geometry rather than a force field living in spacetime.",
+      "resources": [
+        {
+          "label": "Carroll — Spacetime and Geometry"
+        },
+        {
+          "label": "MIT 8.962 General Relativity",
+          "url": "https://ocw.mit.edu/courses/8-962-general-relativity-spring-2020/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "tensors",
+      "title": "Tensors",
+      "summary": "Coordinate-independent multilinear objects and index notation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "manifolds",
+      "title": "Manifolds",
+      "summary": "Smooth spaces, charts, tangent vectors, and differential structure.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "metric-geometry",
+      "title": "Metric Geometry",
+      "summary": "Distances, causal structure, raising/lowering, and volume.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "spacetime-curvature",
+      "title": "Spacetime Curvature",
+      "summary": "Connections, Riemann curvature, Ricci tensors, and invariants.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "geodesics",
+      "title": "Geodesics",
+      "summary": "Free fall and extremal paths in curved spacetime.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "einstein-equation",
+      "title": "Einstein Equation",
+      "summary": "Geometry sourced by stress-energy and cosmological constant.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "schwarzschild-spacetime",
+      "title": "Schwarzschild Spacetime",
+      "summary": "Spherical vacuum gravity, horizons, and orbits.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "gravitational-waves",
+      "title": "Gravitational Waves",
+      "summary": "Linearized gravity, wave solutions, and observables.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "frw-geometry",
+      "title": "FRW Geometry",
+      "summary": "Homogeneous and isotropic expanding spacetimes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmology",
+      "title": "Cosmology",
+      "summary": "Connect relativistic expansion, thermal history, and particle physics to the universe.",
+      "duration": "2–4 months",
+      "completionCriteria": "You can derive the basic expansion history and connect particle physics to cosmology.",
+      "resources": [
+        {
+          "label": "Ryden — Introduction to Cosmology"
+        },
+        {
+          "label": "MIT 8.286 The Early Universe",
+          "url": "https://ocw.mit.edu/courses/8-286-the-early-universe-fall-2013/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "expanding-universe",
+      "title": "Expanding Universe",
+      "summary": "Cosmological redshift, scale factor, and observational expansion.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "friedmann-equations",
+      "title": "Friedmann Equations",
+      "summary": "Dynamics of homogeneous universes and cosmic components.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "thermal-history",
+      "title": "Thermal History",
+      "summary": "Cooling, freeze-out, transitions, and the early universe.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "nucleosynthesis",
+      "title": "Nucleosynthesis",
+      "summary": "Primordial element production and abundance constraints.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmic-microwave-background",
+      "title": "Cosmic Microwave Background",
+      "summary": "Recombination, anisotropies, and early-universe evidence.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "dark-matter",
+      "title": "Dark Matter",
+      "summary": "Gravitational evidence and candidate microscopic explanations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "dark-energy",
+      "title": "Dark Energy",
+      "summary": "Accelerated expansion and cosmological-constant phenomenology.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "inflation",
+      "title": "Inflation",
+      "summary": "Accelerated early expansion and quantum-seeded structure.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "classical-fields-qft",
+      "title": "Classical Fields & QFT",
+      "summary": "Quantize relativistic fields and develop the language of modern particle physics.",
+      "duration": "5–8 months",
+      "completionCriteria": "You understand why combining special relativity with quantum mechanics leads to quantum fields.",
+      "resources": [
+        {
+          "label": "Schwartz — Quantum Field Theory and the Standard Model"
+        },
+        {
+          "label": "MIT 8.323 Relativistic Quantum Field Theory I",
+          "url": "https://ocw.mit.edu/courses/8-323-relativistic-quantum-field-theory-i-spring-2023/"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "field-actions",
+      "title": "Field Actions",
+      "summary": "Lagrangian densities and equations of motion for fields.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "noether-theorem",
+      "title": "Noether Theorem",
+      "summary": "Continuous symmetries, currents, and conserved charges.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "canonical-quantization",
+      "title": "Canonical Quantization",
+      "summary": "Promoting fields and conjugate momenta to operators.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "creation-annihilation",
+      "title": "Creation & Annihilation Operators",
+      "summary": "Fock space and particle excitations of fields.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "propagators",
+      "title": "Propagators",
+      "summary": "Green functions, correlations, and relativistic propagation.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "path-integrals",
+      "title": "Path Integrals",
+      "summary": "Quantum amplitudes as weighted sums over field histories.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "feynman-diagrams",
+      "title": "Feynman Diagrams",
+      "summary": "Perturbative organization of interactions and amplitudes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "renormalization",
+      "title": "Renormalization",
+      "summary": "Scale dependence, divergences, counterterms, and effective theories.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "standard-model",
+      "title": "Particle Physics & Standard Model",
+      "summary": "Understand the Standard Model as a gauge quantum field theory.",
+      "duration": "3–4 months",
+      "completionCriteria": "You see the Standard Model as a structured gauge theory rather than a catalog of particles.",
+      "resources": [
+        {
+          "label": "Griffiths — Introduction to Elementary Particles"
+        },
+        {
+          "label": "Schwartz — Quantum Field Theory and the Standard Model"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "gauge-symmetry",
+      "title": "Gauge Symmetry",
+      "summary": "Local symmetry, gauge connections, and interactions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "u1-symmetry",
+      "title": "U(1)",
+      "summary": "Abelian gauge symmetry and electromagnetism.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "su2-symmetry",
+      "title": "SU(2)",
+      "summary": "Weak isospin and non-Abelian gauge structure.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "su3-symmetry",
+      "title": "SU(3)",
+      "summary": "Color symmetry and the gauge structure of QCD.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-electrodynamics",
+      "title": "Quantum Electrodynamics",
+      "summary": "Relativistic quantum theory of charged matter and photons.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "weak-interaction",
+      "title": "Weak Interaction",
+      "summary": "Charged and neutral currents, parity violation, and flavor.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-chromodynamics",
+      "title": "Quantum Chromodynamics",
+      "summary": "Quarks, gluons, confinement, and asymptotic freedom.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "higgs-mechanism",
+      "title": "Higgs Mechanism",
+      "summary": "Gauge-field masses through symmetry breaking.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "spontaneous-symmetry-breaking",
+      "title": "Spontaneous Symmetry Breaking",
+      "summary": "Vacuum structure, order parameters, and emergent excitations.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "qft-curved-spacetime",
+      "title": "QFT in Curved Spacetime",
+      "summary": "Study quantum fields when spacetime is curved and particle notions become observer-dependent.",
+      "duration": "2–4 months",
+      "completionCriteria": "You can work at the genuine semiclassical interface between quantum fields and gravity.",
+      "resources": [
+        {
+          "label": "Birrell & Davies — Quantum Fields in Curved Space"
+        },
+        {
+          "label": "Selected lecture notes and reviews"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "vacuum-ambiguity",
+      "title": "Vacuum Ambiguity",
+      "summary": "Why curved spacetime lacks a unique global particle vacuum.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "unruh-effect",
+      "title": "Unruh Effect",
+      "summary": "Acceleration, horizons, and observer-dependent thermality.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "hawking-radiation",
+      "title": "Hawking Radiation",
+      "summary": "Black-hole particle creation and thermal spectra.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmological-particle-creation",
+      "title": "Cosmological Particle Creation",
+      "summary": "Quantum fields and particles in expanding universes.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "semiclassical-einstein-equation",
+      "title": "Semiclassical Einstein Equation",
+      "summary": "Classical geometry sourced by quantum stress-energy expectation values.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "quantum-gravity-frontier",
+      "title": "Quantum-Gravity Frontier",
+      "summary": "Study where quantum field theory and dynamical spacetime demand a deeper description.",
+      "duration": "Ongoing",
+      "completionCriteria": "You can distinguish genuine open problems from rhetoric and evaluate what a proposed quantum-gravity theory must recover and predict.",
+      "resources": [
+        {
+          "label": "Donoghue — The Effective Field Theory Treatment of Quantum Gravity",
+          "url": "https://arxiv.org/abs/1209.3511"
+        },
+        {
+          "label": "Harlow — Black Holes in Quantum Gravity",
+          "url": "https://arxiv.org/abs/2304.10367"
+        },
+        {
+          "label": "General Relativity as an Effective Field Theory",
+          "url": "https://journals.aps.org/prd/abstract/10.1103/PhysRevD.50.3874"
+        }
+      ],
+      "tags": [
+        "physics",
+        "stage"
+      ]
+    },
+    {
+      "id": "effective-field-theory-gravity",
+      "title": "Effective-Field-Theory Gravity",
+      "summary": "Low-energy quantum gravity and the limits of perturbative Einstein theory.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "black-hole-entropy",
+      "title": "Black-Hole Entropy",
+      "summary": "Horizon area, microscopic states, and gravitational thermodynamics.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "black-hole-information",
+      "title": "Black-Hole Information",
+      "summary": "Evaporation, unitarity, entropy, and information recovery.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "cosmological-constant-problem",
+      "title": "Cosmological Constant Problem",
+      "summary": "Vacuum energy, gravity, naturalness, and observed acceleration.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "singularities",
+      "title": "Singularities",
+      "summary": "Classical breakdown in black holes and the early universe.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "problem-of-time",
+      "title": "Problem of Time",
+      "summary": "Quantum evolution without an external universal clock.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "locality-observables",
+      "title": "Locality & Observables",
+      "summary": "Gauge-invariant observables when coordinates are redundant.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "holography",
+      "title": "Holography",
+      "summary": "Encoding gravitational regions through lower-dimensional quantum descriptions.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "string-theory",
+      "title": "String Theory",
+      "summary": "Extended degrees of freedom and quantum-consistent gravity.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "loop-quantum-gravity",
+      "title": "Loop Quantum Gravity",
+      "summary": "Background-independent quantization of geometric variables.",
+      "tags": [
+        "physics"
+      ]
+    },
+    {
+      "id": "emergent-spacetime",
+      "title": "Emergent Spacetime",
+      "summary": "Geometry arising from more microscopic quantum degrees of freedom.",
+      "tags": [
+        "physics"
+      ]
+    }
+  ],
+  "curricula": [
+    {
+      "id": "physics",
+      "title": "Physics Foundations",
+      "description": "AP Physics C to the quantum-field-theory and general-relativity frontier.",
+      "color": "#7df9ff",
+      "goalTopicId": "physics-goal",
+      "topicIds": [
+        "physics-goal",
+        "mathematical-methods",
+        "multivariable-calculus",
+        "vector-calculus",
+        "linear-algebra",
+        "eigenvectors",
+        "ordinary-differential-equations",
+        "partial-differential-equations",
+        "complex-methods",
+        "fourier-analysis",
+        "probability",
+        "analytical-mechanics",
+        "calculus-of-variations",
+        "action-principle",
+        "lagrangian-mechanics",
+        "hamiltonian-mechanics",
+        "generalized-coordinates",
+        "phase-space",
+        "poisson-brackets",
+        "symmetry-conservation",
+        "waves-electromagnetism",
+        "normal-modes",
+        "wave-equation",
+        "fourier-modes",
+        "electrostatics",
+        "maxwell-equations",
+        "electromagnetic-potentials",
+        "electromagnetic-radiation",
+        "gauge-freedom",
+        "special-relativity",
+        "lorentz-transformations",
+        "minkowski-spacetime",
+        "four-vectors",
+        "relativistic-energy-momentum",
+        "relativistic-electromagnetism",
+        "thermal-statistical-physics",
+        "entropy",
+        "statistical-ensembles",
+        "partition-functions",
+        "bose-statistics",
+        "fermi-statistics",
+        "black-body-radiation",
+        "statistical-phase-space",
+        "quantum-mechanics-i",
+        "quantum-states-amplitudes",
+        "wavefunctions",
+        "schrodinger-equation",
+        "quantum-operators",
+        "uncertainty-principle",
+        "quantum-tunneling",
+        "quantum-harmonic-oscillator",
+        "advanced-quantum-mechanics",
+        "hilbert-spaces",
+        "bra-ket-notation",
+        "quantum-spin",
+        "angular-momentum",
+        "identical-particles",
+        "perturbation-theory",
+        "quantum-scattering",
+        "unitary-evolution",
+        "astrophysics",
+        "stellar-structure",
+        "nuclear-burning",
+        "degeneracy-pressure",
+        "white-dwarfs",
+        "neutron-stars",
+        "supernovae",
+        "astrophysical-black-holes",
+        "galaxies",
+        "general-relativity",
+        "tensors",
+        "manifolds",
+        "metric-geometry",
+        "spacetime-curvature",
+        "geodesics",
+        "einstein-equation",
+        "schwarzschild-spacetime",
+        "gravitational-waves",
+        "frw-geometry",
+        "cosmology",
+        "expanding-universe",
+        "friedmann-equations",
+        "thermal-history",
+        "nucleosynthesis",
+        "cosmic-microwave-background",
+        "dark-matter",
+        "dark-energy",
+        "inflation",
+        "classical-fields-qft",
+        "field-actions",
+        "noether-theorem",
+        "canonical-quantization",
+        "creation-annihilation",
+        "propagators",
+        "path-integrals",
+        "feynman-diagrams",
+        "renormalization",
+        "standard-model",
+        "gauge-symmetry",
+        "u1-symmetry",
+        "su2-symmetry",
+        "su3-symmetry",
+        "quantum-electrodynamics",
+        "weak-interaction",
+        "quantum-chromodynamics",
+        "higgs-mechanism",
+        "spontaneous-symmetry-breaking",
+        "qft-curved-spacetime",
+        "vacuum-ambiguity",
+        "unruh-effect",
+        "hawking-radiation",
+        "cosmological-particle-creation",
+        "semiclassical-einstein-equation",
+        "quantum-gravity-frontier",
+        "effective-field-theory-gravity",
+        "black-hole-entropy",
+        "black-hole-information",
+        "cosmological-constant-problem",
+        "singularities",
+        "problem-of-time",
+        "locality-observables",
+        "holography",
+        "string-theory",
+        "loop-quantum-gravity",
+        "emergent-spacetime"
+      ]
+    },
+    {
+      "id": "machine-learning",
+      "title": "ML Foundations",
+      "description": "Shared mathematical foundations leading to modern machine learning.",
+      "color": "#c58cff",
+      "goalTopicId": "ml-goal",
+      "topicIds": [
+        "mathematical-methods",
+        "multivariable-calculus",
+        "vector-calculus",
+        "linear-algebra",
+        "eigenvectors",
+        "ordinary-differential-equations",
+        "partial-differential-equations",
+        "complex-methods",
+        "fourier-analysis",
+        "probability",
+        "neural-networks",
+        "ml-goal",
+        "phase-space",
+        "symmetry-conservation",
+        "normal-modes",
+        "fourier-modes",
+        "entropy",
+        "statistical-ensembles",
+        "partition-functions",
+        "hilbert-spaces",
+        "tensors",
+        "manifolds",
+        "metric-geometry"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "physics-stage-0-1",
+      "source": "place-mathematical-methods",
+      "target": "place-analytical-mechanics",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-1-2",
+      "source": "place-analytical-mechanics",
+      "target": "place-waves-electromagnetism",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-2-3",
+      "source": "place-waves-electromagnetism",
+      "target": "place-special-relativity",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-3-4",
+      "source": "place-special-relativity",
+      "target": "place-thermal-statistical-physics",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-4-5",
+      "source": "place-thermal-statistical-physics",
+      "target": "place-quantum-mechanics-i",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-5-6",
+      "source": "place-quantum-mechanics-i",
+      "target": "place-advanced-quantum-mechanics",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-6-7",
+      "source": "place-advanced-quantum-mechanics",
+      "target": "place-astrophysics",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-7-8",
+      "source": "place-astrophysics",
+      "target": "place-general-relativity",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-8-9",
+      "source": "place-general-relativity",
+      "target": "place-cosmology",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-9-10",
+      "source": "place-cosmology",
+      "target": "place-classical-fields-qft",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-10-11",
+      "source": "place-classical-fields-qft",
+      "target": "place-standard-model",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-11-12",
+      "source": "place-standard-model",
+      "target": "place-qft-curved-spacetime",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-stage-12-13",
+      "source": "place-qft-curved-spacetime",
+      "target": "place-quantum-gravity-frontier",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "physics-frontier-goal",
+      "source": "place-quantum-gravity-frontier",
+      "target": "place-physics-goal",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "physics"
+      ]
+    },
+    {
+      "id": "math-neural",
+      "source": "place-mathematical-methods",
+      "target": "place-neural-networks",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "machine-learning"
+      ]
+    },
+    {
+      "id": "neural-ml",
+      "source": "place-neural-networks",
+      "target": "place-ml-goal",
+      "relation": "prerequisite",
+      "curriculumIds": [
+        "machine-learning"
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "id": "place-physics-goal",
+      "topicId": "physics-goal",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-ml-goal",
+      "topicId": "ml-goal",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-neural-networks",
+      "topicId": "neural-networks",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-mathematical-methods",
+      "topicId": "mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-multivariable-calculus",
+      "topicId": "multivariable-calculus",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-vector-calculus",
+      "topicId": "vector-calculus",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-linear-algebra",
+      "topicId": "linear-algebra",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-eigenvectors",
+      "topicId": "eigenvectors",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-ordinary-differential-equations",
+      "topicId": "ordinary-differential-equations",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-partial-differential-equations",
+      "topicId": "partial-differential-equations",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-complex-methods",
+      "topicId": "complex-methods",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-fourier-analysis",
+      "topicId": "fourier-analysis",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-probability",
+      "topicId": "probability",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "machine-learning"
+      ],
+      "order": 8
+    },
+    {
+      "id": "place-analytical-mechanics",
+      "topicId": "analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-calculus-of-variations",
+      "topicId": "calculus-of-variations",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-action-principle",
+      "topicId": "action-principle",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-lagrangian-mechanics",
+      "topicId": "lagrangian-mechanics",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-hamiltonian-mechanics",
+      "topicId": "hamiltonian-mechanics",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-generalized-coordinates",
+      "topicId": "generalized-coordinates",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-phase-space",
+      "topicId": "phase-space",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-poisson-brackets",
+      "topicId": "poisson-brackets",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-symmetry-conservation",
+      "topicId": "symmetry-conservation",
+      "parentPlacementId": "place-analytical-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-waves-electromagnetism",
+      "topicId": "waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-normal-modes",
+      "topicId": "normal-modes",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-wave-equation",
+      "topicId": "wave-equation",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-fourier-modes",
+      "topicId": "fourier-modes",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-electrostatics",
+      "topicId": "electrostatics",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-maxwell-equations",
+      "topicId": "maxwell-equations",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-electromagnetic-potentials",
+      "topicId": "electromagnetic-potentials",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-electromagnetic-radiation",
+      "topicId": "electromagnetic-radiation",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-gauge-freedom",
+      "topicId": "gauge-freedom",
+      "parentPlacementId": "place-waves-electromagnetism",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-special-relativity",
+      "topicId": "special-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-lorentz-transformations",
+      "topicId": "lorentz-transformations",
+      "parentPlacementId": "place-special-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-minkowski-spacetime",
+      "topicId": "minkowski-spacetime",
+      "parentPlacementId": "place-special-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-four-vectors",
+      "topicId": "four-vectors",
+      "parentPlacementId": "place-special-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-relativistic-energy-momentum",
+      "topicId": "relativistic-energy-momentum",
+      "parentPlacementId": "place-special-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-relativistic-electromagnetism",
+      "topicId": "relativistic-electromagnetism",
+      "parentPlacementId": "place-special-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-thermal-statistical-physics",
+      "topicId": "thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-entropy",
+      "topicId": "entropy",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-statistical-ensembles",
+      "topicId": "statistical-ensembles",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-partition-functions",
+      "topicId": "partition-functions",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-bose-statistics",
+      "topicId": "bose-statistics",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-fermi-statistics",
+      "topicId": "fermi-statistics",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-black-body-radiation",
+      "topicId": "black-body-radiation",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-statistical-phase-space",
+      "topicId": "statistical-phase-space",
+      "parentPlacementId": "place-thermal-statistical-physics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-quantum-mechanics-i",
+      "topicId": "quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 8
+    },
+    {
+      "id": "place-quantum-states-amplitudes",
+      "topicId": "quantum-states-amplitudes",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-wavefunctions",
+      "topicId": "wavefunctions",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-schrodinger-equation",
+      "topicId": "schrodinger-equation",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-quantum-operators",
+      "topicId": "quantum-operators",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-uncertainty-principle",
+      "topicId": "uncertainty-principle",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-quantum-tunneling",
+      "topicId": "quantum-tunneling",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-quantum-harmonic-oscillator",
+      "topicId": "quantum-harmonic-oscillator",
+      "parentPlacementId": "place-quantum-mechanics-i",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-advanced-quantum-mechanics",
+      "topicId": "advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 9
+    },
+    {
+      "id": "place-hilbert-spaces",
+      "topicId": "hilbert-spaces",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-bra-ket-notation",
+      "topicId": "bra-ket-notation",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-quantum-spin",
+      "topicId": "quantum-spin",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-angular-momentum",
+      "topicId": "angular-momentum",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-identical-particles",
+      "topicId": "identical-particles",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-perturbation-theory",
+      "topicId": "perturbation-theory",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-quantum-scattering",
+      "topicId": "quantum-scattering",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-unitary-evolution",
+      "topicId": "unitary-evolution",
+      "parentPlacementId": "place-advanced-quantum-mechanics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-astrophysics",
+      "topicId": "astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 10
+    },
+    {
+      "id": "place-stellar-structure",
+      "topicId": "stellar-structure",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-nuclear-burning",
+      "topicId": "nuclear-burning",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-degeneracy-pressure",
+      "topicId": "degeneracy-pressure",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-white-dwarfs",
+      "topicId": "white-dwarfs",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-neutron-stars",
+      "topicId": "neutron-stars",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-supernovae",
+      "topicId": "supernovae",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-astrophysical-black-holes",
+      "topicId": "astrophysical-black-holes",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-galaxies",
+      "topicId": "galaxies",
+      "parentPlacementId": "place-astrophysics",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-general-relativity",
+      "topicId": "general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 11
+    },
+    {
+      "id": "place-tensors",
+      "topicId": "tensors",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-manifolds",
+      "topicId": "manifolds",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-metric-geometry",
+      "topicId": "metric-geometry",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-spacetime-curvature",
+      "topicId": "spacetime-curvature",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-geodesics",
+      "topicId": "geodesics",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-einstein-equation",
+      "topicId": "einstein-equation",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-schwarzschild-spacetime",
+      "topicId": "schwarzschild-spacetime",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-gravitational-waves",
+      "topicId": "gravitational-waves",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-frw-geometry",
+      "topicId": "frw-geometry",
+      "parentPlacementId": "place-general-relativity",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 8
+    },
+    {
+      "id": "place-cosmology",
+      "topicId": "cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 12
+    },
+    {
+      "id": "place-expanding-universe",
+      "topicId": "expanding-universe",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-friedmann-equations",
+      "topicId": "friedmann-equations",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-thermal-history",
+      "topicId": "thermal-history",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-nucleosynthesis",
+      "topicId": "nucleosynthesis",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-cosmic-microwave-background",
+      "topicId": "cosmic-microwave-background",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-dark-matter",
+      "topicId": "dark-matter",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-dark-energy",
+      "topicId": "dark-energy",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-inflation",
+      "topicId": "inflation",
+      "parentPlacementId": "place-cosmology",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-classical-fields-qft",
+      "topicId": "classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 13
+    },
+    {
+      "id": "place-field-actions",
+      "topicId": "field-actions",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-noether-theorem",
+      "topicId": "noether-theorem",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-canonical-quantization",
+      "topicId": "canonical-quantization",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-creation-annihilation",
+      "topicId": "creation-annihilation",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-propagators",
+      "topicId": "propagators",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-path-integrals",
+      "topicId": "path-integrals",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-feynman-diagrams",
+      "topicId": "feynman-diagrams",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-renormalization",
+      "topicId": "renormalization",
+      "parentPlacementId": "place-classical-fields-qft",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-standard-model",
+      "topicId": "standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 14
+    },
+    {
+      "id": "place-gauge-symmetry",
+      "topicId": "gauge-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-u1-symmetry",
+      "topicId": "u1-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-su2-symmetry",
+      "topicId": "su2-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-su3-symmetry",
+      "topicId": "su3-symmetry",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-quantum-electrodynamics",
+      "topicId": "quantum-electrodynamics",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-weak-interaction",
+      "topicId": "weak-interaction",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-quantum-chromodynamics",
+      "topicId": "quantum-chromodynamics",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-higgs-mechanism",
+      "topicId": "higgs-mechanism",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-spontaneous-symmetry-breaking",
+      "topicId": "spontaneous-symmetry-breaking",
+      "parentPlacementId": "place-standard-model",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 8
+    },
+    {
+      "id": "place-qft-curved-spacetime",
+      "topicId": "qft-curved-spacetime",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 15
+    },
+    {
+      "id": "place-vacuum-ambiguity",
+      "topicId": "vacuum-ambiguity",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-unruh-effect",
+      "topicId": "unruh-effect",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-hawking-radiation",
+      "topicId": "hawking-radiation",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-cosmological-particle-creation",
+      "topicId": "cosmological-particle-creation",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-semiclassical-einstein-equation",
+      "topicId": "semiclassical-einstein-equation",
+      "parentPlacementId": "place-qft-curved-spacetime",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-quantum-gravity-frontier",
+      "topicId": "quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 16
+    },
+    {
+      "id": "place-effective-field-theory-gravity",
+      "topicId": "effective-field-theory-gravity",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 0
+    },
+    {
+      "id": "place-black-hole-entropy",
+      "topicId": "black-hole-entropy",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 1
+    },
+    {
+      "id": "place-black-hole-information",
+      "topicId": "black-hole-information",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 2
+    },
+    {
+      "id": "place-cosmological-constant-problem",
+      "topicId": "cosmological-constant-problem",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 3
+    },
+    {
+      "id": "place-singularities",
+      "topicId": "singularities",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 4
+    },
+    {
+      "id": "place-problem-of-time",
+      "topicId": "problem-of-time",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 5
+    },
+    {
+      "id": "place-locality-observables",
+      "topicId": "locality-observables",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 6
+    },
+    {
+      "id": "place-holography",
+      "topicId": "holography",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 7
+    },
+    {
+      "id": "place-string-theory",
+      "topicId": "string-theory",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 8
+    },
+    {
+      "id": "place-loop-quantum-gravity",
+      "topicId": "loop-quantum-gravity",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 9
+    },
+    {
+      "id": "place-emergent-spacetime",
+      "topicId": "emergent-spacetime",
+      "parentPlacementId": "place-quantum-gravity-frontier",
+      "curriculumIds": [
+        "physics"
+      ],
+      "order": 10
+    },
+    {
+      "id": "place-ml-phase-space",
+      "topicId": "phase-space",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 9,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-symmetry-conservation",
+      "topicId": "symmetry-conservation",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 10,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-normal-modes",
+      "topicId": "normal-modes",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 11,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-fourier-modes",
+      "topicId": "fourier-modes",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 12,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-entropy",
+      "topicId": "entropy",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 13,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-statistical-ensembles",
+      "topicId": "statistical-ensembles",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 14,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-partition-functions",
+      "topicId": "partition-functions",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 15,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-hilbert-spaces",
+      "topicId": "hilbert-spaces",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 16,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-tensors",
+      "topicId": "tensors",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 17,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-manifolds",
+      "topicId": "manifolds",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 18,
+      "contextLabel": "ML connection"
+    },
+    {
+      "id": "place-ml-metric-geometry",
+      "topicId": "metric-geometry",
+      "parentPlacementId": "place-mathematical-methods",
+      "curriculumIds": [
+        "machine-learning"
+      ],
+      "order": 19,
+      "contextLabel": "ML connection"
+    }
+  ]
+}

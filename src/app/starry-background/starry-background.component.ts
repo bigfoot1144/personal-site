@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as ort from 'onnxruntime-web';
 
@@ -8,7 +8,7 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
   selector: 'app-starry-background',
   standalone: true,
   template: `
-    <div class="starry-background" #starryBackground></div>
+    <div class="starry-background" [class.knowledge-mode]="knowledgeMode" #starryBackground></div>
   `,
   styles: [`
     .starry-background {
@@ -21,6 +21,24 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
       overflow: hidden;
     }
 
+    .starry-background::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      transition: background 900ms ease;
+      pointer-events: none;
+    }
+
+    .starry-background.knowledge-mode::after {
+      background: radial-gradient(circle at 50% 48%, rgba(28, 22, 100, .35), rgba(0, 0, 30, .25) 60%);
+    }
+
+    .starry-background.knowledge-mode > div {
+      opacity: .12 !important;
+      transition: opacity 700ms ease;
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -29,6 +47,8 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
   `]
 })
 export class StarryBackgroundComponent implements OnInit, OnDestroy {
+  @Input() knowledgeMode = false;
+
   private stars: HTMLElement[] = [];
   private shootingStars: HTMLElement[] = [];
   private shootingStarInterval: any;
@@ -188,8 +208,8 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       
       // Initialize the drawing recorder
       this.initializeDrawingRecorder();
+      await this.loadModel();
     }
-    await this.loadModel();
   }
 
   ngOnDestroy(): void {
