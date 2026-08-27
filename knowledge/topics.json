@@ -1211,8 +1211,8 @@
     },
     {
       "id": "ml-mathematical-foundations",
-      "title": "Mathematical Foundations",
-      "summary": "Rigorous shared mathematics for advanced machine learning.",
+      "title": "Mathematics",
+      "summary": "Shared foundations in calculus, linear algebra, probability, statistics, optimization, numerical methods, information theory, and geometry.",
       "tags": [
         "stage",
         "machine-learning"

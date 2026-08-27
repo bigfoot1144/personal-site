@@ -72,6 +72,7 @@ export interface PositionedTopic extends Topic {
   y: number;
   status: TopicStatus;
   curriculumIds: string[];
+  labelLines?: string[];
 }
 
 export interface KnowledgeRuntimeData extends CurriculaData {
@@ -87,5 +88,6 @@ export interface KnowledgeRuntimeData extends CurriculaData {
     placementPaths: Record<string, Record<string, string>>;
     searchRecords: Array<{ placementId: string; curriculumId: string; path: string; text: string }>;
     connectionPaths: Record<string, string>;
+    labelLines: Record<string, string[]>;
   };
 }

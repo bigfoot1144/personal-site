@@ -87,6 +87,20 @@
       "order": 11
     },
     {
+      "id": "place-machine-learning-ml-mathematical-foundations-numerical-methods",
+      "topicId": "numerical-methods",
+      "parentPlacementId": "place-machine-learning-ml-mathematical-foundations",
+      "order": 12,
+      "contextLabel": "Shared numerical foundations"
+    },
+    {
+      "id": "place-machine-learning-ml-mathematical-foundations-manifolds",
+      "topicId": "manifolds",
+      "parentPlacementId": "place-machine-learning-ml-mathematical-foundations",
+      "order": 13,
+      "contextLabel": "Shared geometry foundations"
+    },
+    {
       "id": "place-machine-learning-classical-machine-learning",
       "topicId": "classical-machine-learning",
       "order": 1

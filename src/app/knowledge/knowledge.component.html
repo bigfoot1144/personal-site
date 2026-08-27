@@ -1,5 +1,6 @@
 <section class="knowledge-shell"
   [class.motion-paused]="motionPaused"
+  [class.journey-focus-active]="!!focusedJourneyPlacementId"
   [class.overview-detail]="!selected && scale >= 1.3"
   aria-label="Knowledge constellation">
   <header class="constellation-header">
@@ -8,12 +9,20 @@
       <h1>Knowledge Constellation</h1>
       <p>Follow the paths. Select a star to explore its orbit.</p>
     </div>
-    <button class="reset-button" type="button" (click)="resetView()">Reset view</button>
   </header>
 
   <nav class="curriculum-filters" aria-label="Knowledge controls">
     <button class="search-trigger" type="button" (click)="openSearch()" aria-label="Search topics">
       <span aria-hidden="true">⌕</span> Search <kbd>/</kbd>
+    </button>
+    <button class="child-count-toggle" type="button"
+      [class.active]="showChildCounts" [attr.aria-pressed]="showChildCounts"
+      (click)="showChildCounts = !showChildCounts">
+      Child counts {{ showChildCounts ? 'on' : 'off' }}
+    </button>
+    <button class="deselect-all" type="button" (click)="deselectAllCurricula()"
+      [attr.aria-label]="activeCurricula.size ? 'Deselect all curriculum paths' : 'Reset all curriculum paths'">
+      {{ activeCurricula.size ? 'Deselect all' : 'Reset all' }}
     </button>
   </nav>
 
@@ -47,7 +56,8 @@
     <defs>
       <filter id="star-glow"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     </defs>
-    <g #graphStage class="graph-stage" [attr.transform]="'matrix(' + scale + ' 0 0 ' + scale + ' ' + panX + ' ' + panY + ')'">
+    <g #graphStage class="graph-stage" [attr.transform]="'matrix(' + scale + ' 0 0 ' + scale + ' ' + panX + ' ' + panY + ')'"
+      [style.--label-scale]="graphLabelScale">
       <g class="edges">
         <path *ngFor="let edge of visibleConnections"
           [attr.d]="edgePath(edge)"
@@ -79,6 +89,8 @@
         class="topic-node"
         [class.galaxy-node]="isGalaxyView"
         [class.hidden-node]="!nodeVisible(node)"
+        [class.center-node]="isCenterNode(node)"
+        [class.center-active]="centerNodeActive(node)"
         [class.journey-node]="!!journeyMarker(node)"
         [class.next-node]="journeyMarker(node) === 'next' || journeyMarker(node) === 'current'"
         [class.goal-node]="journeyMarker(node) === 'goal'"
@@ -88,7 +100,7 @@
         [class.in-progress]="node.status === 'in-progress'"
         [class.completed]="node.status === 'completed'"
         [attr.transform]="'translate(' + node.x + ' ' + node.y + ')'"
-        tabindex="0"
+        [attr.tabindex]="centerNodeActive(node) ? 0 : -1"
         role="button"
         [attr.aria-label]="node.title + ', ' + statusLabel(node.status)"
         [attr.data-placement-id]="node.placementId"
@@ -96,9 +108,9 @@
         (click)="select(node)"
         (keydown.enter)="select(node)"
         (keydown.space)="select(node); $event.preventDefault()"
-        (pointerenter)="hoveredPlacementId = node.placementId; setMotionPaused(true)"
-        (pointerleave)="hoveredPlacementId = null; setMotionPaused(false)"
-        (focusin)="setMotionPaused(true)"
+        (pointerenter)="setMotionPaused(!isSolarView)"
+        (pointerleave)="setMotionPaused(false)"
+        (focusin)="setMotionPaused(!isSolarView)"
         (focusout)="setMotionPaused(false)">
         <g class="star-gather"
           [style.--scatter-x]="spawnX(node) + 'px'"
@@ -111,7 +123,8 @@
             [attr.width]="starSize(node)"
             [attr.height]="starSize(node)"
             [attr.fill]="nodeColor(node)"/>
-          <g class="star-label">
+          <g class="star-label-scale">
+            <g class="star-label">
             <animateTransform *ngIf="isGalaxyView"
               attributeName="transform"
               type="rotate"
@@ -119,7 +132,8 @@
               to="-360"
               dur="24s"
               repeatCount="indefinite"/>
-            <text class="topic-title" [attr.y]="isGalaxyView ? 13 : 25" text-anchor="middle">{{ node.title }}</text>
+            <title>{{ node.title }}</title>
+            <text class="topic-title" [attr.y]="isGalaxyView ? 13 : 25" text-anchor="middle"><tspan *ngFor="let line of node.labelLines; let lineIndex = index" x="0" [attr.dy]="lineIndex ? 9 : 0">{{ line }}</tspan></text>
             <text *ngIf="journeyOrdinal(node) as ordinal" class="journey-ordinal" [attr.y]="isGalaxyView ? -9 : -13" text-anchor="middle">{{ ordinal < 10 ? '0' + ordinal : ordinal }}</text>
             <g *ngIf="journeyMarker(node) as marker" class="journey-marker"
               [class.marker-start]="marker === 'start'" [class.marker-next]="marker === 'next'"
@@ -130,7 +144,8 @@
               <line class="marker-rule" x1="-13" y1="7" x2="13" y2="7"/>
             </g>
           </g>
-          <g *ngIf="childCount(node) && selected?.id !== node.id"
+          </g>
+          <g *ngIf="showChildCounts && childCount(node) && selected?.id !== node.id"
             class="child-badge"
             transform="translate(10 -10)"
             tabindex="0"
@@ -179,30 +194,11 @@
           </g>
         </g>
       </g>
-      <g *ngIf="selected && alternatePlacements.length"
-        class="curriculum-bridges"
-        [attr.transform]="'translate(' + selected.x + ' ' + selected.y + ')'">
-        <g *ngFor="let placement of alternatePlacements; let bridgeIndex = index">
-          <line x1="0" y1="0" [attr.x2]="bridgeX(bridgeIndex)" [attr.y2]="bridgeY(bridgeIndex)" [attr.stroke]="placementColor(placement)"/>
-          <g class="curriculum-bridge"
-            [attr.transform]="'translate(' + bridgeX(bridgeIndex) + ' ' + bridgeY(bridgeIndex) + ')'"
-            tabindex="0"
-            role="button"
-            [attr.aria-label]="'Open ' + placementLabel(placement) + ' placement'"
-            (click)="activatePlacement(placement); $event.stopPropagation()"
-            (keydown.enter)="activatePlacement(placement)"
-            (keydown.space)="activatePlacement(placement); $event.preventDefault()">
-            <circle class="bridge-hit-area" r="18"/>
-            <circle class="bridge-core" r="7" [attr.fill]="placementColor(placement)"/>
-            <text y="22" text-anchor="middle">{{ placementLabel(placement) }}</text>
-          </g>
-        </g>
-      </g>
     </g>
   </svg>
 
   <section *ngIf="selectedJourney as progress" class="journey-hud" aria-label="Curriculum controls and journey progress">
-    <article class="journey-card"
+    <article *ngIf="journeyPanelVisible" class="journey-card"
       role="tabpanel"
       [id]="'curriculum-panel-' + progress.curriculumId"
       [attr.aria-labelledby]="'curriculum-tab-' + progress.curriculumId"
@@ -214,6 +210,8 @@
           <button class="journey-visibility" type="button"
             [attr.aria-pressed]="progress.active"
             (click)="toggleCurriculum(progress.curriculumId)">{{ progress.active ? 'Hide' : 'Show' }}</button>
+          <button class="journey-collapse" type="button" aria-label="Collapse curriculum progress"
+            (click)="journeyPanelVisible = false"><span aria-hidden="true">↓</span></button>
           <button class="next-up-button" type="button" (click)="jumpToNext(progress)">Next up</button>
         </div>
       </div>
@@ -237,10 +235,11 @@
         type="button"
         role="tab"
         [id]="'curriculum-tab-' + item.curriculumId"
-        [class.selected]="item.curriculumId === selectedCurriculumId"
+        [class.selected]="item.curriculumId === selectedCurriculumId && journeyPanelVisible"
         [class.visible]="item.active"
         [style.--journey-color]="item.color"
         [attr.aria-selected]="item.curriculumId === selectedCurriculumId"
+        [attr.aria-expanded]="item.curriculumId === selectedCurriculumId && journeyPanelVisible"
         [attr.aria-controls]="'curriculum-panel-' + item.curriculumId"
         [attr.aria-label]="item.title + (item.active ? ', constellation visible' : ', constellation hidden')"
         [attr.title]="item.title"
@@ -291,6 +290,7 @@
     <section *ngIf="selectedEntries.length">
       <h3>Activity</h3>
       <article *ngFor="let entry of selectedEntries"
+        [attr.data-entry-id]="entry.id"
         [class.highlighted]="highlightedEntryId === entry.id">
         <div><span>{{ entry.type }}</span><time>{{ entry.date | date:'mediumDate':'UTC' }}</time></div>
         <h4>{{ entry.title }}</h4>
@@ -333,5 +333,5 @@
     </section>
   </div>
 
-  <p class="interaction-hint">Drag to move · Zoom to reveal labels · Click or zoom deeply to enter · Backspace or Esc to go up</p>
+  <p class="interaction-hint">Drag to move · Zoom freely · Click to enter · Backspace or Esc to go up</p>
 </section>

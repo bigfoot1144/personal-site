@@ -74,6 +74,8 @@ export class KnowledgeComponent {
   private readonly curriculumDockOrder = ['machine-learning', 'agentic', 'inference', 'gpu', 'statistics', 'robotics', 'compilers', 'hpc', 'physics'];
   activeCurricula = new Set(this.data.curricula.map(curriculum => curriculum.id));
   selectedCurriculumId = 'machine-learning';
+  journeyPanelVisible = true;
+  showChildCounts = true;
   selected: PositionedTopic | null = null;
   scale = 1;
   panX = 0;
@@ -84,9 +86,7 @@ export class KnowledgeComponent {
   searchQuery = '';
   searchActiveIndex = 0;
   motionPaused = false;
-  hoveredPlacementId: string | null = null;
   focusedJourneyPlacementId: string | null = null;
-  private zoomTargetId: string | null = null;
   private dragging = false;
   private lastPointer = { x: 0, y: 0 };
   private pointerStartedAt = { x: 0, y: 0 };
@@ -99,6 +99,11 @@ export class KnowledgeComponent {
     return !!this.selected && !this.selected.parentPlacementId;
   }
 
+
+  get graphLabelScale(): number {
+    const screenScale = Math.max(.9, Math.min(1.28, 1 + (this.scale - 1) * .24));
+    return screenScale / this.scale;
+  }
   get isSolarView(): boolean {
     return !!this.selected?.parentPlacementId;
   }
@@ -122,7 +127,7 @@ export class KnowledgeComponent {
     const ids = new Set(this.visibleNodes.map(node => node.placementId));
     return this.data.connections.filter(edge =>
       ids.has(edge.source) && ids.has(edge.target) &&
-      edge.curriculumIds.some(id => this.activeCurricula.has(id))
+      (!!this.selected || edge.curriculumIds.some(id => this.activeCurricula.has(id)))
     );
   }
 
@@ -181,11 +186,6 @@ export class KnowledgeComponent {
     return results;
   }
 
-  get alternatePlacements(): TopicPlacement[] {
-    if (!this.selected) return [];
-    return (this.derived.placementsByTopic[this.selected.id] as string[]).filter(id => id !== this.selected!.placementId).map(id => this.placementById.get(id)!);
-  }
-
   get selectedPlacementPaths(): Array<{ placement: TopicPlacement; path: string }> {
     if (!this.selected) return [];
     return (this.derived.placementsByTopic[this.selected.id] as string[]).flatMap(id => {
@@ -208,20 +208,20 @@ export class KnowledgeComponent {
 
     const entries = this.selectedEntries.filter(entry => entry.type === 'note' || entry.type === 'project');
     return entries.map((entry, index) => {
-      const ring = Math.floor(index / 6);
-      const ringStart = ring * 6;
-      const ringCount = Math.min(6, entries.length - ringStart);
-      const position = index - ringStart;
+      const hash = this.stableNumber(entry.id);
+      const ring = hash % 5;
+      const ringPosition = Math.floor(index / 5);
+      const angleJitter = (hash >>> 8) % 29;
       const density = Math.ceil(entry.body.length / 90) + (entry.type === 'project' ? 2 : 0);
       return {
         id: 'entry-' + entry.id,
         kind: entry.type,
         title: entry.title,
         entry,
-        radius: 58 + ring * 44,
-        angle: position * (360 / Math.max(1, ringCount)) + ring * 22,
-        size: 3.5 + Math.min(5, density),
-        duration: 17 + ring * 6 + this.stableNumber(entry.id) % 8
+        radius: 52 + ring * 28,
+        angle: (ringPosition * 137.5 + ring * 31 + angleJitter) % 360,
+        size: 2.25 + Math.min(4.5, density * .55 + ((hash >>> 16) % 3) * .45),
+        duration: 15 + ring * 5 + (hash >>> 24) % 7
       };
     });
   }
@@ -301,28 +301,11 @@ export class KnowledgeComponent {
     this.select(this.nodeForPlacement(placement));
   }
 
-  bridgeX(index: number): number {
-    const angle = -Math.PI / 2 + index * Math.PI * 2 / Math.max(1, this.alternatePlacements.length);
-    return Math.cos(angle) * 105;
-  }
-
-  bridgeY(index: number): number {
-    const angle = -Math.PI / 2 + index * Math.PI * 2 / Math.max(1, this.alternatePlacements.length);
-    return Math.sin(angle) * 105;
-  }
-
-  placementColor(placement: TopicPlacement): string {
-    return this.curriculumById.get(placement.curriculumIds[0])?.color ?? '#7df9ff';
-  }
-
-  placementLabel(placement: TopicPlacement): string {
-    return placement.contextLabel
-      ?? placement.curriculumIds.map(id => this.data.curricula.find(curriculum => curriculum.id === id)?.title).filter(Boolean).join(' + ');
-  }
 
   select(node: PositionedTopic): void {
     this.focusedJourneyPlacementId = null;
     this.selected = node;
+    this.setMotionPaused(false);
     this.detailsVisible = true;
     this.highlightedEntryId = null;
     this.animateCamera(node, 1.75);
@@ -351,7 +334,13 @@ export class KnowledgeComponent {
   }
 
   selectCurriculum(id: string): void {
-    if (this.curriculumById.has(id)) this.selectedCurriculumId = id;
+    if (!this.curriculumById.has(id)) return;
+    if (id === this.selectedCurriculumId) {
+      this.journeyPanelVisible = !this.journeyPanelVisible;
+      return;
+    }
+    this.selectedCurriculumId = id;
+    this.journeyPanelVisible = true;
   }
 
   handleCurriculumDockKey(event: KeyboardEvent, index: number): void {
@@ -381,23 +370,44 @@ export class KnowledgeComponent {
     this.searchCache = null;
   }
 
+  deselectAllCurricula(): void {
+    if (this.activeCurricula.size) {
+      this.activeCurricula = new Set();
+    } else {
+      this.activeCurricula = new Set(this.data.curricula.map(curriculum => curriculum.id));
+      this.resetView();
+    }
+    this.journeyProgressCache = null;
+    this.searchCache = null;
+  }
+
   curriculumActive(id: string): boolean {
     return this.activeCurricula.has(id);
   }
 
   nodeVisible(node: PositionedTopic): boolean {
-    return node.placementCurriculumIds.some(id => this.activeCurricula.has(id));
+    return !!this.selected || node.placementCurriculumIds.some(id => this.activeCurricula.has(id));
+  }
+
+  isCenterNode(node: PositionedTopic): boolean {
+    return !node.parentPlacementId && node.x === 500 && node.y === 350;
+  }
+
+  centerNodeActive(node: PositionedTopic): boolean {
+    return !this.isCenterNode(node) || node.placementCurriculumIds.includes(this.selectedCurriculumId);
   }
 
   nodeColor(node: PositionedTopic): string {
-    const active = this.data.curricula.filter(c => node.placementCurriculumIds.includes(c.id) && this.activeCurricula.has(c.id));
-    return active[0]?.color ?? '#8090b8';
+    const matching = this.data.curricula.filter(c =>
+      node.placementCurriculumIds.includes(c.id) && (!!this.selected || this.activeCurricula.has(c.id))
+    );
+    return matching[0]?.color ?? '#8090b8';
   }
 
   planetColor(planet: OrbitPlanet): string {
     if (planet.topic) {
       return this.data.curricula.find(curriculum =>
-        curriculum.topicIds.includes(planet.topic!.id) && this.activeCurricula.has(curriculum.id)
+        curriculum.topicIds.includes(planet.topic!.id) && (!!this.selected || this.activeCurricula.has(curriculum.id))
       )?.color ?? '#9fb3d8';
     }
     if (planet.kind === 'project') return '#ffcf70';
@@ -406,7 +416,9 @@ export class KnowledgeComponent {
   }
 
   edgeColor(edge: Connection): string {
-    return this.data.curricula.find(c => edge.curriculumIds.includes(c.id) && this.activeCurricula.has(c.id))?.color ?? '#8090b8';
+    return this.data.curricula.find(c =>
+      edge.curriculumIds.includes(c.id) && (!!this.selected || this.activeCurricula.has(c.id))
+    )?.color ?? '#8090b8';
   }
 
   edgePath(edge: Connection): string {
@@ -449,7 +461,7 @@ export class KnowledgeComponent {
         : this.journeyProgress.some(progress => progress.start.id === node.placementId);
       return startsHere ? 'START · NEXT UP' : 'NEXT UP';
     }
-    if (role === 'current') return 'YOU ARE HERE';
+    if (role === 'current') return 'NEXT UP';
     if (role === 'goal') return 'DESTINATION';
     return 'START';
   }
@@ -483,7 +495,6 @@ export class KnowledgeComponent {
     this.selected = null;
     this.detailsVisible = false;
     this.highlightedEntryId = null;
-    this.zoomTargetId = null;
     this.focusedJourneyPlacementId = node.placementId;
     this.setMotionPaused(false);
     this.animateCamera(node, 1.55);
@@ -547,34 +558,6 @@ export class KnowledgeComponent {
     this.panX = anchor.x - worldX * nextScale;
     this.panY = anchor.y - worldY * nextScale;
     this.applyGraphTransform();
-
-    if (event.deltaY < 0 && !this.selected) {
-      const directTargetId = this.hoveredPlacementId
-        ?? (event.target as Element).closest<SVGGElement>('.topic-node')?.dataset['placementId']
-        ?? null;
-      if (directTargetId) this.zoomTargetId = directTargetId;
-
-      if (nextScale >= 2.15 && this.zoomTargetId) {
-        const targetNode = this.baseNodes.find(node =>
-          node.placementId === this.zoomTargetId && this.nodeVisible(node)
-        );
-        if (targetNode) {
-          this.selected = targetNode;
-          this.detailsVisible = true;
-          this.highlightedEntryId = null;
-          this.zoomTargetId = null;
-        }
-      }
-    } else if (event.deltaY > 0) {
-      this.zoomTargetId = null;
-      this.hoveredPlacementId = null;
-      this.detailsVisible = false;
-      if (this.selected && nextScale <= .7) {
-        this.selected = null;
-        this.highlightedEntryId = null;
-        this.setMotionPaused(false);
-      }
-    }
   }
 
   startPan(event: PointerEvent): void {
@@ -699,7 +682,10 @@ export class KnowledgeComponent {
   }
 
   private applyGraphTransform(): void {
-    this.graphStage?.nativeElement.setAttribute('transform', 'matrix(' + this.scale + ' 0 0 ' + this.scale + ' ' + this.panX + ' ' + this.panY + ')');
+    const stage = this.graphStage?.nativeElement;
+    if (!stage) return;
+    stage.setAttribute('transform', 'matrix(' + this.scale + ' 0 0 ' + this.scale + ' ' + this.panX + ' ' + this.panY + ')');
+    stage.style.setProperty('--label-scale', String(this.graphLabelScale));
   }
 
   private cancelCamera(): void {
@@ -753,7 +739,7 @@ export class KnowledgeComponent {
 
   private nodeForPlacement(placement: TopicPlacement): PositionedTopic {
     const position = this.derived.positions[placement.id] ?? { x: 500, y: 350 };
-    return this.positioned(this.topicForPlacement(placement), placement, position.x, position.y);
+    return { ...this.positioned(this.topicForPlacement(placement), placement, position.x, position.y), labelLines: this.derived.labelLines[placement.id] ?? [this.topicForPlacement(placement).title] };
   }
 
   private stableNumber(value: string): number {

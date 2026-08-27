@@ -88,9 +88,14 @@ h1 {
   margin-right: 6px;
 }
 
-.curriculum-filters .search-trigger {
+.curriculum-filters .search-trigger,
+.curriculum-filters .deselect-all {
   opacity: 1;
   border-color: rgba(125, 249, 255, .55);
+}
+.curriculum-filters .deselect-all:disabled {
+  cursor: default;
+  opacity: .35;
 }
 .search-trigger kbd {
   margin-left: 5px;
@@ -252,6 +257,11 @@ h1 {
 .project-node text { font-size: 11px; }
 
 /* Graph stars deliberately inherit the tiny, square pixel language of the ambient field. */
+.star-label-scale {
+  transform: scale(var(--label-scale, 1));
+  transform-origin: 0 0;
+}
+
 .star-gather {
   --scatter-x: 0px;
   --scatter-y: 0px;
@@ -319,6 +329,9 @@ h1 {
 .topic-node.goal-node .star-core { fill: var(--node-color); opacity: .82; filter: drop-shadow(0 0 3px var(--node-color)); }
 .topic-node.jump-focused .star-core { stroke: #fff; stroke-width: 1.2px; filter: drop-shadow(0 0 4px #ffcf70) drop-shadow(0 0 9px rgba(255, 207, 112, .65)); animation: jump-focus 1.15s ease-in-out infinite alternate; }
 .topic-node.jump-focused .topic-title { opacity: 1 !important; font-size: 9.5px !important; }
+.journey-focus-active .topic-node:not(.jump-focused) .star-label text { font-size: 3.5px !important; opacity: .14 !important; }
+.journey-focus-active .topic-node.jump-focused .star-label .topic-title { font-size: 10.5px !important; opacity: 1 !important; }
+.journey-focus-active .topic-node.jump-focused .journey-marker text { font-size: 6px; opacity: 1; }
 
 .topic-node .star-core {
   filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 7px currentColor);
@@ -428,30 +441,6 @@ h1 {
   pointer-events: none;
 }
 
-.curriculum-bridges > g > line {
-  stroke-width: .8;
-  stroke-dasharray: 3 5;
-  opacity: .55;
-}
-.curriculum-bridge { cursor: pointer; outline: none; }
-.bridge-hit-area { fill: transparent; pointer-events: all; }
-.bridge-core {
-  stroke: rgba(255, 255, 255, .75);
-  stroke-width: .8;
-}
-.curriculum-bridge:hover .bridge-core,
-.curriculum-bridge:focus .bridge-core {
-  stroke: white;
-  stroke-width: 1.7;
-}
-.curriculum-bridge text {
-  fill: #dceaff;
-  font-size: 6px;
-  paint-order: stroke;
-  stroke: #02051d;
-  stroke-width: 2px;
-  pointer-events: none;
-}
 
 @keyframes reveal-orbit { from { opacity: 0; } }
 @keyframes orbit-planet {
@@ -691,7 +680,14 @@ article.highlighted {
 .journey-title { display: flex; min-width: 0; align-items: center; gap: 7px; color: #edf7ff; font: .56rem 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: .08em; }
 .journey-title i { color: var(--journey-color); font-style: normal; }
 .journey-title span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.journey-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+.journey-collapse { width: 27px; height: 27px; padding: 0; border: 1px solid rgba(145, 167, 200, .42); border-radius: 50%; background: transparent; color: #b8c9e2; cursor: pointer; font-size: .8rem; line-height: 1; }
+.journey-collapse:hover,
+.journey-collapse:focus-visible { border-color: #fff; color: #fff; outline: none; }
+.journey-collapse span { display: inline-block; transform: translateY(-1px); }
+.journey-actions { display: flex; flex: 0 0 auto; align-items: center; gap: 6px; white-space: nowrap; }
+.journey-actions .journey-visibility { order: 1; }
+.journey-actions .next-up-button { order: 2; }
+.journey-actions .journey-collapse { order: 3; }
 .journey-current, .next-up-button, .journey-visibility { border: 0; background: transparent; cursor: pointer; }
 .next-up-button, .journey-visibility { min-height: 27px; padding: 4px 9px; border-radius: 999px; font: .5rem 'Orbitron', sans-serif; text-transform: uppercase; }
 .next-up-button { border: 1px solid rgba(255, 207, 112, .5); color: #ffcf70; }
@@ -791,4 +787,25 @@ article.highlighted {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* Nine journeys deliberately share the origin; only the dock-selected origin is legible/interactive. */
+.topic-node.center-node:not(.center-active) {
+  pointer-events: none;
+}
+.topic-node.center-node:not(.center-active) .star-core {
+  opacity: .08 !important;
+  filter: none !important;
+}
+.topic-node.center-node:not(.center-active) .star-label,
+.topic-node.center-node:not(.center-active) .child-badge {
+  display: none;
+}
+.topic-node.center-node.center-active .topic-title {
+  opacity: 1 !important;
+  font-size: 9.5px !important;
+}
+.topic-node.center-node.center-active .star-core {
+  stroke: #fff;
+  stroke-width: 1px;
 }

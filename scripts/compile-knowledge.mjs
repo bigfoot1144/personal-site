@@ -33,6 +33,7 @@ export async function compileKnowledge() {
 
   for (const module of modules) {
     const curriculum = module.curriculum;
+
     if (!curriculum?.id) fail('curriculum module lacks curriculum.id');
     if (typeof curriculum.shortTitle !== 'string' || !curriculum.shortTitle.trim() || curriculum.shortTitle.length > 12) fail('curriculum ' + curriculum.id + ' requires a shortTitle of at most 12 characters');
     const modulePlacements = module.placements.map(placement => ({ ...placement, curriculumIds: [curriculum.id] }));
@@ -41,6 +42,27 @@ export async function compileKnowledge() {
     curricula.push({ ...curriculum, topicIds: memberIds });
     placements.push(...modulePlacements);
     connections.push(...module.connections.map(connection => ({ ...connection, curriculumIds: [curriculum.id] })));
+  }
+
+  const mathematicsHubId = 'place-machine-learning-ml-mathematical-foundations';
+  const mathematicsTopicId = 'ml-mathematical-foundations';
+  const mathematicsCurriculumIds = ['machine-learning', 'physics', 'statistics', 'robotics', 'hpc', 'gpu', 'inference'];
+  const mathematicsEntrypoints = {
+    physics: 'place-mathematical-methods',
+    statistics: 'place-statistics-probability-theory',
+    robotics: 'place-robotics-robotics-mathematics',
+    hpc: 'place-hpc-numerical-methods',
+    gpu: 'place-gpu-performance-oriented-cpp',
+    inference: 'place-inference-transformer-inference-internals'
+  };
+  const mathematicsHub = placements.find(placement => placement.id === mathematicsHubId);
+  if (!mathematicsHub) fail('shared Mathematics placement is missing');
+  mathematicsHub.curriculumIds = mathematicsCurriculumIds;
+  for (const [curriculumId, target] of Object.entries(mathematicsEntrypoints)) {
+    connections.push({ id: curriculumId + '-root-mathematics', source: mathematicsHubId, target, relation: 'prerequisite', curriculumIds: [curriculumId] });
+  }
+  for (const curriculum of curricula.filter(item => mathematicsCurriculumIds.includes(item.id))) {
+    if (!curriculum.topicIds.includes(mathematicsTopicId)) curriculum.topicIds.unshift(mathematicsTopicId);
   }
 
   const placementIds = uniqueIds(placements, 'placements');
@@ -160,13 +182,25 @@ export async function compileKnowledge() {
     for (const character of value) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
     return hash >>> 0;
   };
+  const wrapLabel = title => {
+    const words = title.trim().split(/\s+/);
+    if (title.length <= 18 || words.length === 1) return [title];
+    let best = 1;
+    let difference = Infinity;
+    for (let index = 1; index < words.length; index++) {
+      const candidate = Math.abs(words.slice(0, index).join(' ').length - words.slice(index).join(' ').length);
+      if (candidate < difference) { best = index; difference = candidate; }
+    }
+    return [words.slice(0, best).join(' '), words.slice(best).join(' ')];
+  };
   curricula.forEach((curriculum, curriculumIndex) => {
     const path = orderedRootsByCurriculum[curriculum.id];
+    const sharesMathematicsCenter = path[0] === mathematicsHubId;
     const laneDirection = -.45 + curriculumIndex * Math.PI * 2 / laneCount;
     const lanePhase = stableNumber(curriculum.id + '-ray') / 0xffffffff * Math.PI * 2;
     path.forEach((placementId, index) => {
       const radiusJitter = index ? stableNumber(placementId + '-radial') % 9 - 4 : 0;
-      const radius = index === 0 ? 0 : 34 + index * 28 + radiusJitter;
+      const radius = sharesMathematicsCenter && index === 0 ? 0 : (sharesMathematicsCenter ? 34 + index * 28 : 72 + index * 28) + radiusJitter;
       const angle = laneDirection + (index ? Math.sin(index * .72 + lanePhase) * .105 : 0);
       const lateral = index ? stableNumber(placementId + curriculum.id + '-lateral') % 81 - 40 : 0;
       const candidates = positionCandidates.get(placementId) ?? [];
@@ -189,6 +223,7 @@ export async function compileKnowledge() {
     const angle = -Math.PI / 2 + index * .72 + (stableNumber(placement.id) % 9 - 4) * .018;
     positions[placement.id] = { x: parent.x + Math.cos(angle) * radius, y: parent.y + Math.sin(angle) * radius };
   }
+  const labelLines = Object.fromEntries(placements.map(placement => [placement.id, wrapLabel(topicById[placement.topicId].title)]));
 
   const placementPaths = {};
   for (const placement of placements) {
@@ -210,7 +245,7 @@ export async function compileKnowledge() {
 
   return {
     version: 1, topics, placements, curricula, connections, journal,
-    derived: { childrenByPlacement, placementsByTopic, orderedRootsByCurriculum, statusByTopic, aggregateStatusByPlacement, entriesByTopic, positions, placementPaths, searchRecords, connectionPaths }
+    derived: { childrenByPlacement, placementsByTopic, orderedRootsByCurriculum, statusByTopic, aggregateStatusByPlacement, entriesByTopic, positions, placementPaths, searchRecords, connectionPaths, labelLines }
   };
 }
 
