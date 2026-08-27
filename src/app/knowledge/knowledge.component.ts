@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import runtimeJson from './knowledge.runtime.json';
 import { Connection, CurriculaData, JournalData, JournalEntry, KnowledgeRuntimeData, PositionedTopic, Topic, TopicPlacement, TopicStatus } from './knowledge.types';
+import { ConstellationMorphStar, ConstellationTransitionService } from '../constellation-transition.service';
 
 interface TopicSearchResult {
   placement: TopicPlacement;
@@ -48,8 +49,12 @@ type JourneyMarkerRole = 'start' | 'next' | 'current' | 'goal';
   styleUrl: './knowledge.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class KnowledgeComponent {
-  constructor(private readonly zone: NgZone, private readonly changeDetector: ChangeDetectorRef) {}
+export class KnowledgeComponent implements AfterViewInit, OnDestroy {
+  constructor(
+    private readonly zone: NgZone,
+    private readonly changeDetector: ChangeDetectorRef,
+    private readonly constellationTransition: ConstellationTransitionService
+  ) {}
   @ViewChild('constellation') private graphSvg?: ElementRef<SVGSVGElement>;
   @ViewChild('graphStage') private graphStage?: ElementRef<SVGGElement>;
   @ViewChild('searchInput') private searchInput?: ElementRef<HTMLInputElement>;
@@ -85,8 +90,66 @@ export class KnowledgeComponent {
   private pointerStartedAt = { x: 0, y: 0 };
   private panMoved = false;
   private cameraFrame: number | null = null;
+  private unregisterSnapshotProvider: (() => void) | null = null;
+  private ambientParallaxSuspended = false;
+  private overviewCameraBeforeDrilldown: { scale: number; panX: number; panY: number } | null = null;
+  routeMorphing = true;
   private pointers = new Map<number, { x: number; y: number }>();
   private lastPinchDistance = 0;
+
+  ngAfterViewInit(): void {
+    this.unregisterSnapshotProvider = this.constellationTransition.registerSnapshotProvider(
+      () => this.constellationSnapshot(this.visibleNodes));
+    if (typeof requestAnimationFrame === 'undefined') {
+      this.routeMorphing = false;
+      return;
+    }
+    requestAnimationFrame(() => {
+      const targets = this.constellationSnapshot(this.baseNodes);
+      this.publishCameraState();
+      void this.constellationTransition.morphToConstellation(targets).then(() => {
+        this.routeMorphing = false;
+        this.changeDetector.markForCheck();
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unregisterSnapshotProvider?.();
+    this.cancelCamera();
+  }
+
+  private constellationSnapshot(nodes: PositionedTopic[]): ConstellationMorphStar[] {
+    const svg = this.graphSvg?.nativeElement;
+    if (!svg || typeof getComputedStyle === 'undefined') return [];
+    return nodes.flatMap(node => {
+      const group = svg.querySelector(`[data-placement-id="${node.placementId}"]`);
+      const core = group?.querySelector('.star-core') as SVGGraphicsElement | null;
+      if (!core) return [];
+      const bounds = core.getBoundingClientRect();
+      return [{
+        id: node.placementId,
+        x: bounds.left + bounds.width / 2,
+        y: bounds.top + bounds.height / 2,
+        size: Math.max(2, bounds.width),
+        color: getComputedStyle(core).fill || this.nodeColor(node)
+      }];
+    });
+  }
+
+  private publishCameraState(): void {
+    const svg = this.graphSvg?.nativeElement;
+    if (!svg) return;
+    const bounds = svg.getBoundingClientRect();
+    this.constellationTransition.updateKnowledgeCamera({
+      scale: this.scale,
+      panX: this.panX,
+      panY: this.panY,
+      viewportWidth: bounds.width || window.innerWidth,
+      viewportHeight: bounds.height || window.innerHeight,
+      parallaxActive: !this.selected && !this.ambientParallaxSuspended
+    });
+  }
 
   get isGalaxyView(): boolean {
     return !!this.selected && !this.selected.parentPlacementId;
@@ -289,7 +352,12 @@ export class KnowledgeComponent {
 
   select(node: PositionedTopic): void {
     this.focusedJourneyPlacementId = null;
+    if (!this.selected) {
+      this.overviewCameraBeforeDrilldown = { scale: this.scale, panX: this.panX, panY: this.panY };
+      this.ambientParallaxSuspended = true;
+    }
     this.selected = node;
+    this.publishCameraState();
     this.setMotionPaused(false);
     this.detailsVisible = true;
     this.highlightedEntryId = null;
@@ -321,6 +389,7 @@ export class KnowledgeComponent {
   selectCurriculum(id: string): void {
     if (!this.curriculumById.has(id)) return;
     const alreadySelected = id === this.selectedCurriculumId;
+    const leavingDrilldown = !!this.selected;
     this.selectedCurriculumId = id;
     this.journeyPanelVisible = alreadySelected ? !this.journeyPanelVisible : true;
     if (this.selected) {
@@ -330,7 +399,11 @@ export class KnowledgeComponent {
       this.focusedJourneyPlacementId = null;
       this.setMotionPaused(false);
     }
-    this.focusCurriculum(id);
+    this.focusCurriculum(id, leavingDrilldown ? () => {
+      this.ambientParallaxSuspended = false;
+      this.overviewCameraBeforeDrilldown = null;
+      this.publishCameraState();
+    } : undefined);
   }
 
   handleCurriculumDockKey(event: KeyboardEvent, index: number): void {
@@ -642,14 +715,19 @@ export class KnowledgeComponent {
   }
 
   resetView(): void {
+    const target = this.overviewCameraBeforeDrilldown ?? { scale: 1, panX: 0, panY: 0 };
     this.selected = null;
     this.focusedJourneyPlacementId = null;
     this.detailsVisible = false;
     this.highlightedEntryId = null;
-    this.animateView(1, 0, 0);
+    this.animateView(target.scale, target.panX, target.panY, () => {
+      this.ambientParallaxSuspended = false;
+      this.overviewCameraBeforeDrilldown = null;
+      this.publishCameraState();
+    });
   }
 
-  private focusCurriculum(curriculumId: string): void {
+  private focusCurriculum(curriculumId: string, onComplete?: () => void): void {
     const nodes = this.baseNodes.filter(node => node.placementCurriculumIds.includes(curriculumId));
     if (!nodes.length) return;
     const minX = Math.min(...nodes.map(node => node.x));
@@ -661,17 +739,19 @@ export class KnowledgeComponent {
     const targetScale = Math.max(.65, Math.min(1.45, 780 / paddedWidth, 450 / paddedHeight));
     const centerX = (minX + maxX) / 2;
     const centerY = (minY + maxY) / 2;
-    this.animateView(targetScale, 500 - centerX * targetScale, 320 - centerY * targetScale);
+    this.animateView(targetScale, 500 - centerX * targetScale, 320 - centerY * targetScale, onComplete);
   }
 
   private animateCamera(node: PositionedTopic, targetScale: number): void {
     this.animateView(targetScale, 500 - node.x * targetScale, 350 - node.y * targetScale);
   }
 
-  private animateView(targetScale: number, targetPanX: number, targetPanY: number): void {
+  private animateView(targetScale: number, targetPanX: number, targetPanY: number, onComplete?: () => void): void {
     this.cancelCamera();
     if (typeof requestAnimationFrame === 'undefined') {
       this.scale = targetScale; this.panX = targetPanX; this.panY = targetPanY;
+      this.applyGraphTransform();
+      onComplete?.();
       return;
     }
     const startScale = this.scale;
@@ -689,6 +769,7 @@ export class KnowledgeComponent {
         if (progress < 1) this.cameraFrame = requestAnimationFrame(step);
         else {
           this.cameraFrame = null;
+          onComplete?.();
           this.zone.run(() => this.changeDetector.markForCheck());
         }
       };
@@ -701,6 +782,7 @@ export class KnowledgeComponent {
     if (!stage) return;
     stage.setAttribute('transform', 'matrix(' + this.scale + ' 0 0 ' + this.scale + ' ' + this.panX + ' ' + this.panY + ')');
     stage.style.setProperty('--label-scale', String(this.graphLabelScale));
+    this.publishCameraState();
   }
 
   private cancelCamera(): void {
@@ -708,6 +790,11 @@ export class KnowledgeComponent {
       cancelAnimationFrame(this.cameraFrame);
       this.cameraFrame = null;
     }
+  }
+
+  @HostListener('window:resize')
+  onKnowledgeResize(): void {
+    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(() => this.publishCameraState());
   }
 
   @HostListener('document:keydown', ['$event'])

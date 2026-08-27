@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, Input, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import * as ort from 'onnxruntime-web';
+import { ConstellationMorphStar, ConstellationTransitionService, KnowledgeCameraState } from '../constellation-transition.service';
 
 ort.env.wasm.wasmPaths = 'onnxruntime/';
 
@@ -8,7 +9,7 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
   selector: 'app-starry-background',
   standalone: true,
   template: `
-    <div class="starry-background" [class.knowledge-mode]="knowledgeMode" #starryBackground></div>
+    <div class="starry-background" [class.knowledge-mode]="knowledgeMode" [class.scattering]="scattering" #starryBackground></div>
   `,
   styles: [`
     .starry-background {
@@ -34,9 +35,10 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
       background: radial-gradient(circle at 50% 48%, rgba(28, 22, 100, .35), rgba(0, 0, 30, .25) 60%);
     }
 
-    .starry-background.knowledge-mode > div {
-      opacity: .12 !important;
-      transition: opacity 700ms ease;
+    .starry-background.knowledge-mode .shooting-star,
+    .starry-background.scattering .shooting-star {
+      opacity: 0;
+      transition: opacity 300ms ease;
     }
 
     :host {
@@ -49,7 +51,18 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
 export class StarryBackgroundComponent implements OnInit, OnDestroy {
   @Input() knowledgeMode = false;
 
+  scattering = false;
   private stars: HTMLElement[] = [];
+  private ambientOrigins: Array<{ x: number; y: number }> = [];
+  private readonly ambientDepthLayers = [
+    { factor: .07, opacity: .38, glow: 'none' },
+    { factor: .15, opacity: .52, glow: '0 0 3px rgba(220, 235, 255, .55)' },
+    { factor: .28, opacity: .72, glow: '0 0 5px rgba(235, 245, 255, .72)' }
+  ];
+  private mappedStarCount = 0;
+  private transitionGeneration = 0;
+  private unregisterTransitionRenderer: (() => void) | null = null;
+  private lastKnowledgeCamera: KnowledgeCameraState | null = null;
   private shootingStars: HTMLElement[] = [];
   private shootingStarInterval: any;
   private drawingLines: HTMLElement[] = [];
@@ -190,6 +203,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
+    private readonly constellationTransition: ConstellationTransitionService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -200,6 +214,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       // Initialize main starry background
       this.generateStars();
+      this.unregisterTransitionRenderer = this.constellationTransition.registerRenderer(this);
       this.createShootingStars();
       this.shootingStarInterval = setInterval(() => this.createShootingStars(), this.shootingStarIntervalMs);
       
@@ -213,6 +228,8 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.transitionGeneration++;
+    this.unregisterTransitionRenderer?.();
     if (this.isBrowser) {
       if (this.shootingStarInterval) {
         clearInterval(this.shootingStarInterval);
@@ -722,15 +739,151 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     }, this.recordingDuration);
   }
 
+  async morphToConstellation(targets: ConstellationMorphStar[]): Promise<void> {
+    if (!this.isBrowser || !targets.length) return;
+    const generation = ++this.transitionGeneration;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.stopShootingStars();
+    this.mappedStarCount = Math.min(targets.length, this.stars.length);
+    const duration = reducedMotion ? 0 : 900;
+
+    this.stars.forEach((star, index) => {
+      star.style.animation = 'none';
+      const depth = this.ambientDepthLayers[index % this.ambientDepthLayers.length];
+      star.style.transition = duration
+        ? 'left 900ms cubic-bezier(.2,.82,.2,1), top 900ms cubic-bezier(.2,.82,.2,1), width 900ms ease, height 900ms ease, background-color 900ms ease, opacity 220ms ease'
+        : 'none';
+      if (index < this.mappedStarCount) {
+        const target = targets[index];
+        star.style.opacity = '1';
+        star.style.left = target.x - target.size / 2 + 'px';
+        star.style.top = target.y - target.size / 2 + 'px';
+        star.style.width = target.size + 'px';
+        star.style.height = target.size + 'px';
+        star.style.backgroundColor = target.color;
+        star.style.boxShadow = '0 0 6px ' + target.color;
+      } else {
+        star.style.opacity = String(depth.opacity);
+        star.style.boxShadow = depth.glow;
+      }
+    });
+
+    if (duration) await new Promise(resolve => setTimeout(resolve, duration));
+    if (generation !== this.transitionGeneration) return;
+    for (let index = 0; index < this.mappedStarCount; index++) {
+      this.stars[index].style.transition = 'opacity 180ms ease';
+      this.stars[index].style.opacity = '0';
+    }
+    if (this.lastKnowledgeCamera) this.updateKnowledgeCamera(this.lastKnowledgeCamera);
+  }
+
+  scatterToRandom(origins: ConstellationMorphStar[]): void {
+    if (!this.isBrowser) return;
+    const generation = ++this.transitionGeneration;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const duration = reducedMotion ? 0 : 900;
+    this.scattering = true;
+    this.stopShootingStars();
+
+    const destinations = this.stars.map(() => ({ x: Math.random(), y: Math.random() }));
+    this.ambientOrigins = destinations;
+    origins.slice(0, this.stars.length).forEach((origin, index) => {
+      const star = this.stars[index];
+      star.style.transition = 'none';
+      star.style.left = origin.x - origin.size / 2 + 'px';
+      star.style.top = origin.y - origin.size / 2 + 'px';
+      star.style.width = origin.size + 'px';
+      star.style.height = origin.size + 'px';
+      star.style.backgroundColor = origin.color;
+      star.style.opacity = '1';
+    });
+    for (let index = origins.length; index < this.mappedStarCount; index++) {
+      const star = this.stars[index];
+      star.style.transition = 'none';
+      star.style.left = destinations[index].x * 100 + '%';
+      star.style.top = destinations[index].y * 100 + '%';
+      star.style.opacity = '0';
+    }
+    void this.el.nativeElement.offsetWidth;
+    requestAnimationFrame(() => {
+      if (generation !== this.transitionGeneration) return;
+      this.stars.forEach((star, index) => {
+        const size = Number(star.dataset['ambientSize'] ?? 2);
+        star.style.transition = duration
+          ? 'left 900ms cubic-bezier(.2,.82,.2,1), top 900ms cubic-bezier(.2,.82,.2,1), width 700ms ease, height 700ms ease, background-color 700ms ease, opacity 400ms ease'
+          : 'none';
+        star.style.left = destinations[index].x * 100 + '%';
+        star.style.top = destinations[index].y * 100 + '%';
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.backgroundColor = '#ffffff';
+        star.style.boxShadow = 'none';
+        star.style.opacity = '1';
+      });
+    });
+
+    setTimeout(() => {
+      if (generation !== this.transitionGeneration) return;
+      this.mappedStarCount = 0;
+      this.scattering = false;
+      this.lastKnowledgeCamera = null;
+      this.stars.forEach(star => {
+        if (star.dataset['twinkle'] === 'true') {
+          star.style.animation = 'twinkle 3s infinite alternate';
+          star.style.animationDelay = Math.random() * 5 + 's';
+        }
+      });
+      this.createShootingStars();
+      this.shootingStarInterval = setInterval(() => this.createShootingStars(), this.shootingStarIntervalMs);
+    }, duration);
+  }
+
+  updateKnowledgeCamera(state: KnowledgeCameraState): void {
+    this.lastKnowledgeCamera = state;
+    if (!this.isBrowser || !state.parallaxActive || !this.knowledgeMode) return;
+    const unitScale = Math.min(state.viewportWidth / 1000, state.viewportHeight / 700);
+    const margin = 60;
+    const spanX = state.viewportWidth + margin * 2;
+    const spanY = state.viewportHeight + margin * 2;
+    const wrap = (value: number, span: number) => ((value % span) + span) % span;
+
+    for (let index = this.mappedStarCount; index < this.stars.length; index++) {
+      const depth = this.ambientDepthLayers[index % this.ambientDepthLayers.length];
+      const parallaxScale = 1 + (state.scale - 1) * depth.factor;
+      const translateX = state.panX * unitScale * depth.factor;
+      const translateY = state.panY * unitScale * depth.factor;
+      const origin = this.ambientOrigins[index] ?? { x: Math.random(), y: Math.random() };
+      const baseX = origin.x * state.viewportWidth;
+      const baseY = origin.y * state.viewportHeight;
+      const x = state.viewportWidth / 2 + (baseX - state.viewportWidth / 2) * parallaxScale + translateX;
+      const y = state.viewportHeight / 2 + (baseY - state.viewportHeight / 2) * parallaxScale + translateY;
+      const star = this.stars[index];
+      star.style.transition = 'none';
+      star.style.left = wrap(x + margin, spanX) - margin + 'px';
+      star.style.top = wrap(y + margin, spanY) - margin + 'px';
+      star.style.opacity = String(depth.opacity);
+      star.style.boxShadow = depth.glow;
+    }
+  }
+
+  private stopShootingStars(): void {
+    if (this.shootingStarInterval) clearInterval(this.shootingStarInterval);
+    this.shootingStarInterval = null;
+    this.shootingStars.forEach(star => star.remove());
+    this.shootingStars = [];
+  }
+
   private generateStars(): void {
     const container = this.el.nativeElement.querySelector('.starry-background');
     
     // Create stars
     for (let i = 0; i < 200; i++) {
       const star = document.createElement('div');
+      star.classList.add('ambient-star');
       
       // Make about 60% of stars twinkle
       const isTwinkle = Math.random() > 0.4;
+      star.dataset['twinkle'] = String(isTwinkle);
       
       // Set styles programmatically
       star.style.position = 'absolute';
@@ -744,6 +897,8 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       
       // Randomize star size (1-4px)
       const size = 1 + Math.floor(Math.random() * 4);
+      star.dataset['ambientSize'] = String(size);
+      star.dataset['depthLayer'] = String(i % this.ambientDepthLayers.length);
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
       
@@ -753,6 +908,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       
       container.appendChild(star);
       this.stars.push(star);
+      this.ambientOrigins.push({ x: parseFloat(star.style.left) / 100, y: parseFloat(star.style.top) / 100 });
     }
   }
 
@@ -771,6 +927,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     for (let i = 0; i < numberOfShootingStars; i++) {
       const pixelMatrix = this.pixelCharacters[this.current_pixel_val];
       const shootingStarContainer = document.createElement('div');
+      shootingStarContainer.classList.add('shooting-star');
       shootingStarContainer.style.position = 'absolute';
 
       shootingStarContainer.style.top = `${-(Math.random() * this.SHOOTING_STAR_TOP_OFFSET_RANDOM_NEGATIVE_PERCENT + this.SHOOTING_STAR_TOP_OFFSET_BASE_NEGATIVE_PERCENT)}%`;

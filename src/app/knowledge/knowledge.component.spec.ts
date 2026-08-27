@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { KnowledgeComponent } from './knowledge.component';
+import { ConstellationTransitionService } from '../constellation-transition.service';
 
 describe('KnowledgeComponent curriculum dock', () => {
   let fixture: ComponentFixture<KnowledgeComponent>;
@@ -98,6 +99,16 @@ describe('KnowledgeComponent curriculum dock', () => {
     component.select(nodes[0]);
     component.selectCurriculum('agentic');
     expect(component.selected).toBeNull();
+  });
+
+  it('publishes live overview camera state and freezes parallax in drill-down', () => {
+    const transition = TestBed.inject(ConstellationTransitionService);
+    const update = spyOn(transition, 'updateKnowledgeCamera');
+    (component as any).publishCameraState();
+
+    expect(update.calls.mostRecent().args[0].parallaxActive).toBeTrue();
+    component.select(component.baseNodes[0]);
+    expect(update.calls.mostRecent().args[0].parallaxActive).toBeFalse();
   });
 
   it('shows every star but only the selected curriculum annotations and lines', () => {

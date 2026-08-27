@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter } from 'rxjs';
+import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { ConstellationTransitionService } from './constellation-transition.service';
 import { StarryBackgroundComponent } from './starry-background/starry-background.component';
 import { SparkleCursorComponent } from './sparkle-cursor/sparkle-cursor.component';
 
@@ -13,11 +13,21 @@ import { SparkleCursorComponent } from './sparkle-cursor/sparkle-cursor.componen
 })
 export class AppComponent {
   knowledgeMode = false;
+  private wasKnowledgeMode = false;
 
-  constructor(router: Router) {
+  constructor(router: Router, private readonly constellationTransition: ConstellationTransitionService) {
     this.knowledgeMode = router.url.startsWith('/knowledge');
-    router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      this.knowledgeMode = (event as NavigationEnd).urlAfterRedirects.startsWith('/knowledge');
+    this.wasKnowledgeMode = this.knowledgeMode;
+    router.events.subscribe(event => {
+      if (event instanceof NavigationStart && this.wasKnowledgeMode && !event.url.startsWith('/knowledge')) {
+        this.constellationTransition.captureExitSnapshot();
+      }
+      if (event instanceof NavigationEnd) {
+        const nextKnowledgeMode = event.urlAfterRedirects.startsWith('/knowledge');
+        if (this.wasKnowledgeMode && !nextKnowledgeMode) this.constellationTransition.scatterFromKnowledge();
+        this.knowledgeMode = nextKnowledgeMode;
+        this.wasKnowledgeMode = nextKnowledgeMode;
+      }
     });
   }
 }

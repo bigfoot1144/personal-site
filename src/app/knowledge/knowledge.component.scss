@@ -194,6 +194,9 @@ h1 {
 
 .constellation:active { cursor: grabbing; }
 .graph-stage { transform-origin: 0 0; }
+.edges, .topic-layer { transition: opacity 180ms ease; }
+.route-morphing .edges, .route-morphing .topic-layer { opacity: 0; }
+.topic-node:not(.galaxy-node) .star-gather { animation: none; }
 .edges path {
   fill: none;
   stroke-width: 1.3;
