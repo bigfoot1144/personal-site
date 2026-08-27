@@ -38,13 +38,6 @@ interface JourneyProgress {
   active: boolean;
 }
 
-interface JourneySegment {
-  id: string;
-  source: PositionedTopic;
-  target: PositionedTopic;
-  status: TopicStatus;
-}
-
 type JourneyMarkerRole = 'start' | 'next' | 'current' | 'goal';
 
 @Component({
@@ -71,9 +64,9 @@ export class KnowledgeComponent {
   private journeyProgressCache: JourneyProgress[] | null = null;
   private galaxyStarsCache: { key: string; nodes: PositionedTopic[] } | null = null;
   private searchCache: { key: string; results: TopicSearchResult[] } | null = null;
-  private readonly curriculumDockOrder = ['machine-learning', 'agentic', 'inference', 'gpu', 'statistics', 'robotics', 'compilers', 'hpc', 'physics'];
+  private readonly curriculumDockOrder = ['ml-training', 'inference', 'gpu', 'agentic', 'robotics', 'data-science', 'portrait-drawing', 'physics'];
   activeCurricula = new Set(this.data.curricula.map(curriculum => curriculum.id));
-  selectedCurriculumId = 'machine-learning';
+  selectedCurriculumId = 'ml-training';
   journeyPanelVisible = true;
   showChildCounts = true;
   selected: PositionedTopic | null = null;
@@ -162,15 +155,6 @@ export class KnowledgeComponent {
 
   get selectedJourney(): JourneyProgress | null {
     return this.journeyProgress.find(progress => progress.curriculumId === this.selectedCurriculumId) ?? this.journeyProgress[0] ?? null;
-  }
-
-  get galaxyJourneySegments(): JourneySegment[] {
-    const stars = this.galaxyStars;
-    return stars.slice(1).map((target, index) => ({
-      id: stars[index].placementId + '-' + target.placementId,
-      source: stars[index], target,
-      status: this.segmentStatus(stars[index], target)
-    }));
   }
 
   get searchResults(): TopicSearchResult[] {
@@ -302,6 +286,7 @@ export class KnowledgeComponent {
   }
 
 
+
   select(node: PositionedTopic): void {
     this.focusedJourneyPlacementId = null;
     this.selected = node;
@@ -397,6 +382,10 @@ export class KnowledgeComponent {
     return !this.isCenterNode(node) || node.placementCurriculumIds.includes(this.selectedCurriculumId);
   }
 
+  nodeCurriculumColors(node: PositionedTopic): string[] {
+    return node.placementCurriculumIds.map(id => this.curriculumById.get(id)?.color ?? '#8090b8');
+  }
+
   nodeColor(node: PositionedTopic): string {
     const matching = this.data.curricula.filter(c =>
       node.placementCurriculumIds.includes(c.id) && (!!this.selected || this.activeCurricula.has(c.id))
@@ -423,10 +412,6 @@ export class KnowledgeComponent {
 
   edgePath(edge: Connection): string {
     return this.derived.connectionPaths[edge.id];
-  }
-
-  segmentPath(segment: JourneySegment): string {
-    return 'M ' + segment.source.x + ' ' + segment.source.y + ' L ' + segment.target.x + ' ' + segment.target.y;
   }
 
   edgeStatus(edge: Connection): TopicStatus {
@@ -505,7 +490,7 @@ export class KnowledgeComponent {
   }
 
   childCount(node: PositionedTopic): number {
-    return (this.derived.childrenByPlacement[node.placementId] as string[]).length;
+    return (this.derived.childrenByPlacement[node.placementId] as string[] | undefined)?.length ?? 0;
   }
 
   trackNode(_index: number, node: PositionedTopic): string {

@@ -1,0 +1,766 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "ml-training",
+    "title": "ML Training",
+    "description": "Language-model implementation, distributed training systems, numerics, data, reliability, and run design.",
+    "color": "#b986ff",
+    "goalTopicId": "ml-training-goal",
+    "shortTitle": "Training"
+  },
+  "placements": [
+    {
+      "id": "place-ml-training-language-modeling-foundations",
+      "topicId": "language-modeling-foundations",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-probability",
+      "topicId": "probability",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-next-token-prediction",
+      "topicId": "next-token-prediction",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-autoregressive-generation",
+      "topicId": "autoregressive-generation",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-cross-entropy",
+      "topicId": "cross-entropy",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-tokenization",
+      "topicId": "tokenization",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-byte-pair-encoding",
+      "topicId": "byte-pair-encoding",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-training-corpora",
+      "topicId": "training-corpora",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-context-length",
+      "topicId": "context-length",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-train-validation-test-splits",
+      "topicId": "train-validation-test-splits",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-data-contamination",
+      "topicId": "data-contamination",
+      "parentPlacementId": "place-ml-training-language-modeling-foundations",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-transformer-implementation",
+      "topicId": "transformer-implementation",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-linear-algebra",
+      "topicId": "linear-algebra",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-transformers",
+      "topicId": "transformers",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-embeddings",
+      "topicId": "embeddings",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-attention",
+      "topicId": "attention",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-causal-attention",
+      "topicId": "causal-attention",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-multi-head-attention",
+      "topicId": "multi-head-attention",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-grouped-query-attention",
+      "topicId": "grouped-query-attention",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-rope",
+      "topicId": "rope",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-rmsnorm",
+      "topicId": "rmsnorm",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-swiglu",
+      "topicId": "swiglu",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-residual-connections",
+      "topicId": "residual-connections",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 10
+    },
+    {
+      "id": "place-ml-training-weight-tying",
+      "topicId": "weight-tying",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 11
+    },
+    {
+      "id": "place-ml-training-weight-initialization",
+      "topicId": "weight-initialization",
+      "parentPlacementId": "place-ml-training-transformer-implementation",
+      "order": 12
+    },
+    {
+      "id": "place-ml-training-optimization-training-dynamics",
+      "topicId": "optimization-training-dynamics",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-deep-learning-optimization",
+      "topicId": "deep-learning-optimization",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-sgd",
+      "topicId": "sgd",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-adam",
+      "topicId": "adam",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-adamw",
+      "topicId": "adamw",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-learning-rate-schedules",
+      "topicId": "learning-rate-schedules",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-warmup",
+      "topicId": "warmup",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-weight-decay",
+      "topicId": "weight-decay",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-gradient-clipping",
+      "topicId": "gradient-clipping",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-gradient-accumulation",
+      "topicId": "gradient-accumulation",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-batch-size",
+      "topicId": "batch-size",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-training-instability",
+      "topicId": "training-instability",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 10
+    },
+    {
+      "id": "place-ml-training-regularization",
+      "topicId": "regularization",
+      "parentPlacementId": "place-ml-training-optimization-training-dynamics",
+      "order": 11
+    },
+    {
+      "id": "place-ml-training-training-numerics",
+      "topicId": "training-numerics",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-automatic-differentiation",
+      "topicId": "automatic-differentiation",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-backpropagation",
+      "topicId": "backpropagation",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-mixed-precision",
+      "topicId": "mixed-precision",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-fp16",
+      "topicId": "fp16",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-bfloat16",
+      "topicId": "bfloat16",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-loss-scaling",
+      "topicId": "loss-scaling",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-overflow-underflow",
+      "topicId": "overflow-underflow",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-stable-softmax",
+      "topicId": "stable-softmax",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-numerical-error-analysis",
+      "topicId": "numerical-error-analysis",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-random-seeds",
+      "topicId": "random-seeds",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-determinism",
+      "topicId": "determinism",
+      "parentPlacementId": "place-ml-training-training-numerics",
+      "order": 10
+    },
+    {
+      "id": "place-ml-training-llm-data-evaluation",
+      "topicId": "llm-data-evaluation",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-dataset-pipelines",
+      "topicId": "dataset-pipelines",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-dataset-sharding",
+      "topicId": "dataset-sharding",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-streaming-datasets",
+      "topicId": "streaming-datasets",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-sequence-packing",
+      "topicId": "sequence-packing",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-distributed-dataloading",
+      "topicId": "distributed-dataloading",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-checkpointable-dataloaders",
+      "topicId": "checkpointable-dataloaders",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-evaluation-metrics",
+      "topicId": "evaluation-metrics",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-perplexity",
+      "topicId": "perplexity",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-token-sampling",
+      "topicId": "token-sampling",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-evaluation-infrastructure",
+      "topicId": "evaluation-infrastructure",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-benchmark-contamination",
+      "topicId": "benchmark-contamination",
+      "parentPlacementId": "place-ml-training-llm-data-evaluation",
+      "order": 10
+    },
+    {
+      "id": "place-ml-training-single-gpu-training-systems",
+      "topicId": "single-gpu-training-systems",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-gpu-memory-accounting",
+      "topicId": "gpu-memory-accounting",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-benchmarking",
+      "topicId": "benchmarking",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-profiling",
+      "topicId": "profiling",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-tokens-per-second",
+      "topicId": "tokens-per-second",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-model-flops-utilization",
+      "topicId": "model-flops-utilization",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-activation-checkpointing",
+      "topicId": "activation-checkpointing",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-flash-attention",
+      "topicId": "flash-attention",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-torch-compile",
+      "topicId": "torch-compile",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-dataloader-starvation",
+      "topicId": "dataloader-starvation",
+      "parentPlacementId": "place-ml-training-single-gpu-training-systems",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-distributed-data-parallel",
+      "topicId": "distributed-data-parallel",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-distributed-systems",
+      "topicId": "distributed-systems",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-process-groups",
+      "topicId": "process-groups",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-rank-world-size",
+      "topicId": "rank-world-size",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-torchrun",
+      "topicId": "torchrun",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-nccl",
+      "topicId": "nccl",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-distributed-collectives",
+      "topicId": "distributed-collectives",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-all-reduce",
+      "topicId": "all-reduce",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-distributed-data-parallel-distributed-data-parallel",
+      "topicId": "distributed-data-parallel",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-gradient-bucketing",
+      "topicId": "gradient-bucketing",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-gradient-synchronization",
+      "topicId": "gradient-synchronization",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-stragglers",
+      "topicId": "stragglers",
+      "parentPlacementId": "place-ml-training-distributed-data-parallel",
+      "order": 10
+    },
+    {
+      "id": "place-ml-training-sharded-model-parallel-training",
+      "topicId": "sharded-model-parallel-training",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-device-mesh",
+      "topicId": "device-mesh",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-dtensor",
+      "topicId": "dtensor",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-parameter-sharding",
+      "topicId": "parameter-sharding",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-fsdp2",
+      "topicId": "fsdp2",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-tensor-parallelism",
+      "topicId": "tensor-parallelism",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-sequence-parallelism",
+      "topicId": "sequence-parallelism",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-pipeline-parallelism",
+      "topicId": "pipeline-parallelism",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-communication-computation-overlap",
+      "topicId": "communication-computation-overlap",
+      "parentPlacementId": "place-ml-training-sharded-model-parallel-training",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-training-reliability",
+      "topicId": "training-reliability",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-checkpointing",
+      "topicId": "checkpointing",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-optimizer-state",
+      "topicId": "optimizer-state",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-rng-state",
+      "topicId": "rng-state",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-dataloader-state",
+      "topicId": "dataloader-state",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-exact-resume",
+      "topicId": "exact-resume",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-experiment-tracking",
+      "topicId": "experiment-tracking",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-nan-debugging",
+      "topicId": "nan-debugging",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-failure-recovery",
+      "topicId": "failure-recovery",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-reproducibility",
+      "topicId": "reproducibility",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-training-health-metrics",
+      "topicId": "training-health-metrics",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-fault-tolerance",
+      "topicId": "fault-tolerance",
+      "parentPlacementId": "place-ml-training-training-reliability",
+      "order": 10
+    },
+    {
+      "id": "place-ml-training-scaling-run-design",
+      "topicId": "scaling-run-design",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-scaling-laws",
+      "topicId": "scaling-laws",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 0
+    },
+    {
+      "id": "place-ml-training-compute-budgets",
+      "topicId": "compute-budgets",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 1
+    },
+    {
+      "id": "place-ml-training-token-model-ratios",
+      "topicId": "token-model-ratios",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 2
+    },
+    {
+      "id": "place-ml-training-batch-size-scaling",
+      "topicId": "batch-size-scaling",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 3
+    },
+    {
+      "id": "place-ml-training-training-curves",
+      "topicId": "training-curves",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 4
+    },
+    {
+      "id": "place-ml-training-small-model-proxies",
+      "topicId": "small-model-proxies",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 5
+    },
+    {
+      "id": "place-ml-training-ablations",
+      "topicId": "ablations",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 6
+    },
+    {
+      "id": "place-ml-training-throughput-modeling",
+      "topicId": "throughput-modeling",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 7
+    },
+    {
+      "id": "place-ml-training-training-cost-estimation",
+      "topicId": "training-cost-estimation",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 8
+    },
+    {
+      "id": "place-ml-training-preflight-runs",
+      "topicId": "preflight-runs",
+      "parentPlacementId": "place-ml-training-scaling-run-design",
+      "order": 9
+    },
+    {
+      "id": "place-ml-training-ml-training-goal",
+      "topicId": "ml-training-goal",
+      "order": 10
+    }
+  ],
+  "connections": [
+    {
+      "id": "ml-training-root-0-0-1",
+      "source": "place-ml-training-language-modeling-foundations",
+      "target": "place-ml-training-transformer-implementation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-1-1-2",
+      "source": "place-ml-training-transformer-implementation",
+      "target": "place-ml-training-optimization-training-dynamics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-2-2-3",
+      "source": "place-ml-training-optimization-training-dynamics",
+      "target": "place-ml-training-training-numerics",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-3-3-4",
+      "source": "place-ml-training-training-numerics",
+      "target": "place-ml-training-llm-data-evaluation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-4-4-5",
+      "source": "place-ml-training-llm-data-evaluation",
+      "target": "place-ml-training-single-gpu-training-systems",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-5-5-6",
+      "source": "place-ml-training-single-gpu-training-systems",
+      "target": "place-ml-training-distributed-data-parallel",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-6-6-7",
+      "source": "place-ml-training-distributed-data-parallel",
+      "target": "place-ml-training-sharded-model-parallel-training",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-7-7-8",
+      "source": "place-ml-training-sharded-model-parallel-training",
+      "target": "place-ml-training-training-reliability",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-8-8-9",
+      "source": "place-ml-training-training-reliability",
+      "target": "place-ml-training-scaling-run-design",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "ml-training-root-9-9-goal",
+      "source": "place-ml-training-scaling-run-design",
+      "target": "place-ml-training-ml-training-goal",
+      "relation": "prerequisite"
+    }
+  ]
+}

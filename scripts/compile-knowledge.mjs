@@ -23,6 +23,7 @@ const uniqueIds = (items, label) => {
 export async function compileKnowledge() {
   const topicsSource = await readJson(new URL('topics.json', sourceRoot));
   const journal = await readJson(new URL('journal.json', sourceRoot));
+  const sharedGalaxiesSource = await readJson(new URL('shared-galaxies.json', sourceRoot));
   const curriculumFiles = (await readdir(curriculaRoot)).filter(name => name.endsWith('.json')).sort();
   const modules = await Promise.all(curriculumFiles.map(name => readJson(new URL(name, curriculaRoot))));
   const topics = topicsSource.topics;
@@ -44,25 +45,64 @@ export async function compileKnowledge() {
     connections.push(...module.connections.map(connection => ({ ...connection, curriculumIds: [curriculum.id] })));
   }
 
-  const mathematicsHubId = 'place-machine-learning-ml-mathematical-foundations';
-  const mathematicsTopicId = 'ml-mathematical-foundations';
-  const mathematicsCurriculumIds = ['machine-learning', 'physics', 'statistics', 'robotics', 'hpc', 'gpu', 'inference'];
-  const mathematicsEntrypoints = {
-    physics: 'place-mathematical-methods',
-    statistics: 'place-statistics-probability-theory',
-    robotics: 'place-robotics-robotics-mathematics',
-    hpc: 'place-hpc-numerical-methods',
-    gpu: 'place-gpu-performance-oriented-cpp',
-    inference: 'place-inference-transformer-inference-internals'
-  };
-  const mathematicsHub = placements.find(placement => placement.id === mathematicsHubId);
-  if (!mathematicsHub) fail('shared Mathematics placement is missing');
-  mathematicsHub.curriculumIds = mathematicsCurriculumIds;
-  for (const [curriculumId, target] of Object.entries(mathematicsEntrypoints)) {
-    connections.push({ id: curriculumId + '-root-mathematics', source: mathematicsHubId, target, relation: 'prerequisite', curriculumIds: [curriculumId] });
+  const sharedGalaxyIds = new Set();
+  const rootForTopic = (topicId, curriculumId) => placements.find(placement =>
+    !placement.parentPlacementId && placement.topicId === topicId && placement.curriculumIds.includes(curriculumId));
+  for (const galaxy of sharedGalaxiesSource.galaxies ?? []) {
+    if (sharedGalaxyIds.has(galaxy.id)) fail(`shared galaxies contains duplicate id ${galaxy.id}`);
+    sharedGalaxyIds.add(galaxy.id);
+    if (!topicIds.has(galaxy.topicId)) fail(`shared galaxy ${galaxy.id} references unknown topic ${galaxy.topicId}`);
+    if (galaxy.curriculumIds.length < 2) fail(`shared galaxy ${galaxy.id} requires at least two curricula`);
+    for (const curriculumId of galaxy.curriculumIds) {
+      const curriculum = curricula.find(item => item.id === curriculumId);
+      if (!curriculum) fail(`shared galaxy ${galaxy.id} references unknown curriculum ${curriculumId}`);
+      if (!curriculum.topicIds.includes(galaxy.topicId)) curriculum.topicIds.push(galaxy.topicId);
+    }
+
+    const rootOccurrences = placements.filter(placement => placement.topicId === galaxy.topicId);
+    let rootPlacement = rootOccurrences.find(placement => !placement.parentPlacementId);
+    const removedRootIds = new Set(rootOccurrences.filter(placement => placement !== rootPlacement).map(placement => placement.id));
+    for (let index = placements.length - 1; index >= 0; index--) if (removedRootIds.has(placements[index].id)) placements.splice(index, 1);
+    if (!rootPlacement) {
+      rootPlacement = { id: galaxy.placementId, topicId: galaxy.topicId, order: 0, curriculumIds: [...galaxy.curriculumIds] };
+      placements.push(rootPlacement);
+    } else {
+      if (rootPlacement.id !== galaxy.placementId) fail(`shared galaxy ${galaxy.id} expected placement ${galaxy.placementId}`);
+      rootPlacement.curriculumIds = [...galaxy.curriculumIds];
+    }
+
+    galaxy.topicIds.forEach((topicId, order) => {
+      if (!topicIds.has(topicId)) fail(`shared galaxy ${galaxy.id} references unknown child topic ${topicId}`);
+      const candidates = placements.filter(placement => placement.topicId === topicId &&
+        placement.curriculumIds.some(id => galaxy.curriculumIds.includes(id)));
+      const memberships = [...new Set(candidates.flatMap(placement => placement.curriculumIds).filter(id => galaxy.curriculumIds.includes(id)))];
+      if (memberships.length < 2) fail(`shared galaxy child ${topicId} is not shared within ${galaxy.id}`);
+      const preferred = candidates.find(placement => placement.parentPlacementId === rootPlacement.id);
+      const sharedChild = preferred ?? { id: `place-${galaxy.id}-${topicId}`, topicId, order };
+      const removedIds = new Set(candidates.filter(placement => placement !== sharedChild).map(placement => placement.id));
+      for (let index = placements.length - 1; index >= 0; index--) if (removedIds.has(placements[index].id)) placements.splice(index, 1);
+      sharedChild.parentPlacementId = rootPlacement.id;
+      sharedChild.curriculumIds = memberships;
+      sharedChild.order = order;
+      if (!placements.includes(sharedChild)) placements.push(sharedChild);
+    });
   }
-  for (const curriculum of curricula.filter(item => mathematicsCurriculumIds.includes(item.id))) {
-    if (!curriculum.topicIds.includes(mathematicsTopicId)) curriculum.topicIds.unshift(mathematicsTopicId);
+
+  for (const galaxy of sharedGalaxiesSource.galaxies ?? []) {
+    const sharedRoot = placements.find(placement => placement.id === galaxy.placementId);
+    for (const path of galaxy.paths ?? []) {
+      const after = path.after ? rootForTopic(path.after, path.curriculumId) : undefined;
+      const before = path.before.map(topicId => rootForTopic(topicId, path.curriculumId));
+      if (path.after && !after) fail(`shared galaxy path ${galaxy.id} has unknown after stage ${path.after}`);
+      if (before.some(item => !item)) fail(`shared galaxy path ${galaxy.id} has an unknown before stage`);
+      if (after) {
+        for (let index = connections.length - 1; index >= 0; index--) {
+          if (connections[index].curriculumIds.includes(path.curriculumId) && connections[index].source === after.id && before.some(item => item.id === connections[index].target)) connections.splice(index, 1);
+        }
+        connections.push({ id: `shared-${galaxy.id}-${path.curriculumId}-in`, source: after.id, target: sharedRoot.id, relation: 'prerequisite', curriculumIds: [path.curriculumId] });
+      }
+      before.forEach((target, index) => connections.push({ id: `shared-${galaxy.id}-${path.curriculumId}-out-${index}`, source: sharedRoot.id, target: target.id, relation: 'prerequisite', curriculumIds: [path.curriculumId] }));
+    }
   }
 
   const placementIds = uniqueIds(placements, 'placements');
@@ -109,8 +149,9 @@ export async function compileKnowledge() {
     for (const [source, target] of edges) adjacency.get(source)?.push(target);
     const visiting = new Set();
     const visited = new Set();
+    let cycleAt;
     const visit = id => {
-      if (visiting.has(id)) return true;
+      if (visiting.has(id)) { cycleAt = id; return true; }
       if (visited.has(id)) return false;
       visiting.add(id);
       if ((adjacency.get(id) ?? []).some(visit)) return true;
@@ -118,10 +159,14 @@ export async function compileKnowledge() {
       visited.add(id);
       return false;
     };
-    if ([...nodes].some(visit)) fail(`${label} contains a cycle`);
+    if ([...nodes].some(visit)) fail(`${label} contains a cycle at ${cycleAt}`);
   };
   detectCycle(placementIds, placements.filter(p => p.parentPlacementId).map(p => [p.parentPlacementId, p.id]), 'placement hierarchy');
-  detectCycle(placementIds, connections.filter(c => c.relation === 'prerequisite').map(c => [c.source, c.target]), 'prerequisites');
+  for (const curriculum of curricula) {
+    const memberPlacements = new Set(placements.filter(placement => placement.curriculumIds.includes(curriculum.id)).map(placement => placement.id));
+    const prerequisiteEdges = connections.filter(connection => connection.relation === 'prerequisite' && connection.curriculumIds.includes(curriculum.id)).map(connection => [connection.source, connection.target]);
+    detectCycle(memberPlacements, prerequisiteEdges, `prerequisites for ${curriculum.id}`);
+  }
 
   const childrenByPlacement = Object.fromEntries(placements.map(placement => [placement.id, []]));
   const placementsByTopic = Object.fromEntries(topics.map(topic => [topic.id, []]));
@@ -175,8 +220,6 @@ export async function compileKnowledge() {
   placements.forEach(placement => aggregate(placement.id));
 
   const positions = {};
-  const positionCandidates = new Map();
-  const laneCount = curricula.length;
   const stableNumber = value => {
     let hash = 2166136261;
     for (const character of value) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
@@ -193,29 +236,68 @@ export async function compileKnowledge() {
     }
     return [words.slice(0, best).join(' '), words.slice(best).join(' ')];
   };
+
+  const rootPlacements = placements.filter(placement => !placement.parentPlacementId);
+  const curriculumAngles = Object.fromEntries(curricula.map((curriculum, index) =>
+    [curriculum.id, -.55 + index * Math.PI * 2 / curricula.length]));
+  const curriculumCenters = Object.fromEntries(curricula.map(curriculum => {
+    const angle = curriculumAngles[curriculum.id];
+    return [curriculum.id, { x: 500 + Math.cos(angle) * 315, y: 350 + Math.sin(angle) * 220 }];
+  }));
+  const trackEndpoint = (curriculumId, direction) => {
+    const angle = curriculumAngles[curriculumId];
+    const center = curriculumCenters[curriculumId];
+    return { x: center.x + Math.cos(angle + Math.PI / 2) * 170 * direction, y: center.y + Math.sin(angle + Math.PI / 2) * 170 * direction };
+  };
+  for (const placement of rootPlacements.filter(placement => placement.curriculumIds.length > 1)) {
+    const configured = sharedGalaxiesSource.galaxies.find(galaxy => galaxy.placementId === placement.id)?.position;
+    if (!configured || !Number.isFinite(configured.x) || !Number.isFinite(configured.y)) fail(`shared galaxy ${placement.id} requires a finite position`);
+    positions[placement.id] = { x: configured.x, y: configured.y };
+  }
   curricula.forEach((curriculum, curriculumIndex) => {
     const path = orderedRootsByCurriculum[curriculum.id];
-    const sharesMathematicsCenter = path[0] === mathematicsHubId;
-    const laneDirection = -.45 + curriculumIndex * Math.PI * 2 / laneCount;
-    const lanePhase = stableNumber(curriculum.id + '-ray') / 0xffffffff * Math.PI * 2;
-    path.forEach((placementId, index) => {
-      const radiusJitter = index ? stableNumber(placementId + '-radial') % 9 - 4 : 0;
-      const radius = sharesMathematicsCenter && index === 0 ? 0 : (sharesMathematicsCenter ? 34 + index * 28 : 72 + index * 28) + radiusJitter;
-      const angle = laneDirection + (index ? Math.sin(index * .72 + lanePhase) * .105 : 0);
-      const lateral = index ? stableNumber(placementId + curriculum.id + '-lateral') % 81 - 40 : 0;
-      const candidates = positionCandidates.get(placementId) ?? [];
-      candidates.push({ x: 500 + Math.cos(angle) * radius + Math.cos(laneDirection + Math.PI / 2) * lateral, y: 350 + Math.sin(angle) * radius + Math.sin(laneDirection + Math.PI / 2) * lateral });
-      positionCandidates.set(placementId, candidates);
-    });
+    const sharedIndexes = path.map((id, index) => placementById[id].curriculumIds.length > 1 ? index : -1).filter(index => index >= 0);
+    const markers = [-1, ...sharedIndexes, path.length];
+    for (let marker = 0; marker < markers.length - 1; marker++) {
+      const first = markers[marker];
+      const last = markers[marker + 1];
+      const source = first < 0 ? trackEndpoint(curriculum.id, -1) : positions[path[first]];
+      const target = last >= path.length ? trackEndpoint(curriculum.id, 1) : positions[path[last]];
+      for (let index = first + 1; index < last; index++) {
+        const progress = (index - first) / (last - first);
+        const dx = target.x - source.x;
+        const dy = target.y - source.y;
+        const distance = Math.max(1, Math.hypot(dx, dy));
+        const bow = Math.sin(Math.PI * progress) * 35 * (curriculumIndex % 2 ? 1 : -1);
+        positions[path[index]] = {
+          x: source.x + dx * progress - dy / distance * bow,
+          y: source.y + dy * progress + dx / distance * bow
+        };
+      }
+    }
   });
-  for (const placement of placements.filter(p => !p.parentPlacementId)) {
-    const candidates = positionCandidates.get(placement.id) ?? [{ x: 500, y: 350 }];
-    positions[placement.id] = {
-      x: Math.max(80, Math.min(920, candidates.reduce((sum, point) => sum + point.x, 0) / candidates.length)),
-      y: Math.max(85, Math.min(615, candidates.reduce((sum, point) => sum + point.y, 0) / candidates.length))
-    };
+
+  for (const curriculum of curricula) {
+    const edges = connections.filter(connection => connection.relation === 'prerequisite' && connection.curriculumIds.includes(curriculum.id));
+    const outgoing = new Map();
+    for (const edge of edges) (outgoing.get(edge.source) ?? outgoing.set(edge.source, []).get(edge.source)).push(edge.target);
+    for (const [sourceId, branches] of outgoing) {
+      if (branches.length !== 2 || branches.some(id => placementById[id].curriculumIds.length > 1)) continue;
+      const firstTargets = outgoing.get(branches[0]) ?? [];
+      const secondTargets = outgoing.get(branches[1]) ?? [];
+      if (firstTargets.length !== 1 || secondTargets.length !== 1 || firstTargets[0] !== secondTargets[0]) continue;
+      const source = positions[sourceId];
+      const target = positions[firstTargets[0]];
+      const dx = target.x - source.x;
+      const dy = target.y - source.y;
+      const distance = Math.max(1, Math.hypot(dx, dy));
+      const midpoint = { x: (source.x + target.x) / 2, y: (source.y + target.y) / 2 };
+      positions[branches[0]] = { x: midpoint.x - dy / distance * 48, y: midpoint.y + dx / distance * 48 };
+      positions[branches[1]] = { x: midpoint.x + dy / distance * 48, y: midpoint.y - dx / distance * 48 };
+    }
   }
-  for (const placement of placements.filter(p => p.parentPlacementId)) {
+
+  for (const placement of placements.filter(placement => placement.parentPlacementId)) {
     const parent = positions[placement.parentPlacementId];
     const siblings = childrenByPlacement[placement.parentPlacementId];
     const index = siblings.indexOf(placement.id);
@@ -241,7 +323,8 @@ export async function compileKnowledge() {
     path: placementPaths[placement.id][curriculumId],
     text: `${topicById[placement.topicId].title} ${topicById[placement.topicId].summary} ${placementPaths[placement.id][curriculumId]}`.toLocaleLowerCase()
   })));
-  const connectionPaths = Object.fromEntries(connections.map(connection => [connection.id, `M ${positions[connection.source].x} ${positions[connection.source].y} L ${positions[connection.target].x} ${positions[connection.target].y}`]));
+  const connectionPaths = Object.fromEntries(connections.map(connection => [connection.id,
+    `M ${positions[connection.source].x} ${positions[connection.source].y} L ${positions[connection.target].x} ${positions[connection.target].y}`]));
 
   return {
     version: 1, topics, placements, curricula, connections, journal,

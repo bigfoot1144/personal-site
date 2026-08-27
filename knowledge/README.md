@@ -6,6 +6,7 @@ The files in this directory are the source of truth. The Angular application con
 
 - `topics.json`: canonical topic definitions. Progress always attaches to a topic ID.
 - `curricula/<id>.json`: one visual curriculum, its placements, and its connections.
+- `shared-galaxies.json`: top-level placements shared directly by multiple curricula, their canonical children, and path insertion points.
 - `journal.json`: dated work, notes, projects, and status updates.
 
 Curriculum modules omit redundant `curriculumIds` and `topicIds`. The compiler adds the module curriculum ID to each placement and connection, then derives membership from the placements.
@@ -49,6 +50,10 @@ Each file contains:
 A root placement is a stage in the overview. A placement with `parentPlacementId` is a topic inside that stage. Sibling `order` values control display order. Placement IDs are globally unique and remain stable because connections reference them.
 
 Connections use placement IDs. Use `prerequisite` only for a true directed dependency and `related` for a useful non-blocking association. The compiler rejects cycles and unknown endpoints.
+
+## Shared galaxies
+
+Use `shared-galaxies.json` when several curricula genuinely traverse the same body of knowledge. The compiler merges duplicate canonical child placements beneath one top-level galaxy, preserves curriculum membership on each child, and inserts the shared placement into each configured prerequisite path. Shared galaxies therefore appear once in the overview while remaining part of multiple curricula.
 
 ## Journal updates
 

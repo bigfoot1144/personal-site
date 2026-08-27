@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "galaxies": [
+    {
+      "id": "shared-mathematical-methods",
+      "placementId": "place-mathematical-methods",
+      "topicId": "mathematical-methods",
+      "curriculumIds": [
+        "physics",
+        "gpu",
+        "ml-training",
+        "robotics",
+        "data-science"
+      ],
+      "topicIds": [
+        "linear-algebra",
+        "probability",
+        "eigenvectors",
+        "ordinary-differential-equations",
+        "fourier-analysis"
+      ],
+      "paths": [
+        {
+          "curriculumId": "gpu",
+          "before": [
+            "gpu-architecture"
+          ]
+        },
+        {
+          "curriculumId": "ml-training",
+          "before": [
+            "language-modeling-foundations"
+          ]
+        },
+        {
+          "curriculumId": "robotics",
+          "before": [
+            "robot-kinematics"
+          ]
+        },
+        {
+          "curriculumId": "data-science",
+          "after": "exploratory-data-analysis",
+          "before": [
+            "probability-and-sampling"
+          ]
+        }
+      ],
+      "position": {
+        "x": 674.3231334248266,
+        "y": 80
+      }
+    },
+    {
+      "id": "shared-transformer-foundations",
+      "placementId": "place-shared-transformer-foundations",
+      "topicId": "transformer-foundations",
+      "curriculumIds": [
+        "gpu",
+        "inference",
+        "ml-training"
+      ],
+      "topicIds": [
+        "transformers",
+        "embeddings",
+        "attention",
+        "causal-attention",
+        "multi-head-attention",
+        "grouped-query-attention",
+        "rope",
+        "rmsnorm",
+        "swiglu"
+      ],
+      "paths": [
+        {
+          "curriculumId": "gpu",
+          "after": "advanced-cuda-execution",
+          "before": [
+            "transformer-gpu-kernels"
+          ]
+        },
+        {
+          "curriculumId": "inference",
+          "before": [
+            "transformer-inference"
+          ]
+        },
+        {
+          "curriculumId": "ml-training",
+          "after": "language-modeling-foundations",
+          "before": [
+            "transformer-implementation"
+          ]
+        }
+      ],
+      "position": {
+        "x": 820,
+        "y": 397.1867081601842
+      }
+    },
+    {
+      "id": "shared-gpu-numerics-performance",
+      "placementId": "place-shared-gpu-numerics-performance",
+      "topicId": "gpu-numerics-performance",
+      "curriculumIds": [
+        "gpu",
+        "inference",
+        "ml-training"
+      ],
+      "topicIds": [
+        "mixed-precision",
+        "fp16",
+        "bfloat16",
+        "fp8",
+        "numerical-error-analysis",
+        "flash-attention",
+        "benchmarking",
+        "profiling",
+        "roofline-model",
+        "arithmetic-intensity",
+        "kernel-fusion",
+        "tokens-per-second"
+      ],
+      "paths": [
+        {
+          "curriculumId": "gpu",
+          "after": "parallel-kernel-patterns",
+          "before": [
+            "gpu-performance-engineering"
+          ]
+        },
+        {
+          "curriculumId": "inference",
+          "after": "inference-performance-model",
+          "before": [
+            "inference-benchmarking"
+          ]
+        },
+        {
+          "curriculumId": "ml-training",
+          "after": "llm-data-evaluation",
+          "before": [
+            "single-gpu-training-systems"
+          ]
+        }
+      ],
+      "position": {
+        "x": 383.7094477935653,
+        "y": 261.79087033456625
+      }
+    },
+    {
+      "id": "shared-distributed-systems",
+      "placementId": "place-shared-distributed-systems",
+      "topicId": "distributed-systems-foundations",
+      "curriculumIds": [
+        "gpu",
+        "inference",
+        "ml-training",
+        "agentic"
+      ],
+      "topicIds": [
+        "distributed-systems",
+        "distributed-collectives",
+        "tensor-parallelism",
+        "pipeline-parallelism",
+        "communication-computation-overlap",
+        "fault-tolerance",
+        "load-balancing"
+      ],
+      "paths": [
+        {
+          "curriculumId": "gpu",
+          "after": "tensor-core-computing",
+          "before": [
+            "advanced-cuda-execution"
+          ]
+        },
+        {
+          "curriculumId": "inference",
+          "after": "advanced-decoding",
+          "before": [
+            "distributed-inference"
+          ]
+        },
+        {
+          "curriculumId": "ml-training",
+          "after": "single-gpu-training-systems",
+          "before": [
+            "distributed-data-parallel"
+          ]
+        },
+        {
+          "curriculumId": "agentic",
+          "after": "agent-observability-optimization",
+          "before": [
+            "production-agent-systems"
+          ]
+        }
+      ],
+      "position": {
+        "x": 482.80242979180724,
+        "y": 481.2567830206966
+      }
+    },
+    {
+      "id": "shared-data-evaluation-systems",
+      "placementId": "place-shared-data-evaluation-systems",
+      "topicId": "data-evaluation-systems",
+      "curriculumIds": [
+        "ml-training",
+        "robotics",
+        "agentic",
+        "data-science"
+      ],
+      "topicIds": [
+        "dataset-pipelines",
+        "evaluation-infrastructure",
+        "evaluation-metrics",
+        "experiment-tracking",
+        "reproducibility",
+        "train-validation-test-splits"
+      ],
+      "paths": [
+        {
+          "curriculumId": "ml-training",
+          "after": "training-numerics",
+          "before": [
+            "llm-data-evaluation"
+          ]
+        },
+        {
+          "curriculumId": "robotics",
+          "after": "robot-simulation",
+          "before": [
+            "robot-imitation-learning",
+            "robot-reinforcement-learning"
+          ]
+        },
+        {
+          "curriculumId": "agentic",
+          "after": "agent-reliability-security",
+          "before": [
+            "agent-evaluation"
+          ]
+        },
+        {
+          "curriculumId": "data-science",
+          "after": "longitudinal-analysis",
+          "before": [
+            "decision-and-communication"
+          ]
+        }
+      ],
+      "position": {
+        "x": 464.23152347437747,
+        "y": 274.2736354609519
+      }
+    },
+    {
+      "id": "shared-production-reliability",
+      "placementId": "place-shared-production-reliability",
+      "topicId": "production-reliability",
+      "curriculumIds": [
+        "inference",
+        "robotics",
+        "agentic"
+      ],
+      "topicIds": [
+        "model-deployment",
+        "observability",
+        "distributed-tracing",
+        "rate-limiting",
+        "failure-taxonomy"
+      ],
+      "paths": [
+        {
+          "curriculumId": "inference",
+          "after": "distributed-inference",
+          "before": [
+            "production-llm-serving"
+          ]
+        },
+        {
+          "curriculumId": "robotics",
+          "after": "sim-to-real",
+          "before": [
+            "real-robot-deployment"
+          ]
+        },
+        {
+          "curriculumId": "agentic",
+          "after": "agent-observability-optimization",
+          "before": [
+            "production-agent-systems"
+          ]
+        }
+      ],
+      "position": {
+        "x": 187.26332001450908,
+        "y": 620
+      }
+    },
+    {
+      "id": "shared-experimental-design",
+      "placementId": "place-data-science-experimental-design",
+      "topicId": "experimental-design",
+      "curriculumIds": [
+        "agentic",
+        "data-science"
+      ],
+      "topicIds": [],
+      "paths": [
+        {
+          "curriculumId": "agentic",
+          "after": "agent-reliability-security",
+          "before": [
+            "agent-evaluation"
+          ]
+        }
+      ],
+      "position": {
+        "x": 785.6648879517429,
+        "y": 168.67832764833912
+      }
+    }
+  ]
+}

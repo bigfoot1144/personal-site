@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "portrait-drawing",
+    "title": "Portrait Drawing",
+    "description": "Observation, construction, light, likeness, and integrated portrait practice without tracing or grids.",
+    "color": "#ff82ad",
+    "goalTopicId": "portrait-drawing-goal",
+    "shortTitle": "Portraits"
+  },
+  "placements": [
+    {
+      "id": "place-portrait-drawing-drawing-observation-measurement",
+      "topicId": "drawing-observation-measurement",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-line-control",
+      "topicId": "line-control",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-shape-comparison",
+      "topicId": "shape-comparison",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-negative-space",
+      "topicId": "negative-space",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-angle-comparison",
+      "topicId": "angle-comparison",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-comparative-measurement",
+      "topicId": "comparative-measurement",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-proportion",
+      "topicId": "proportion",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-envelope-block-in",
+      "topicId": "envelope-block-in",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-visual-error-correction",
+      "topicId": "visual-error-correction",
+      "parentPlacementId": "place-portrait-drawing-drawing-observation-measurement",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-perspective-and-form",
+      "topicId": "perspective-and-form",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-one-point-perspective",
+      "topicId": "one-point-perspective",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-two-point-perspective",
+      "topicId": "two-point-perspective",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-boxes-in-space",
+      "topicId": "boxes-in-space",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-ellipsoids",
+      "topicId": "ellipsoids",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-cylinders",
+      "topicId": "cylinders",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-cross-contours",
+      "topicId": "cross-contours",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-foreshortening",
+      "topicId": "foreshortening",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-turning-form",
+      "topicId": "turning-form",
+      "parentPlacementId": "place-portrait-drawing-perspective-and-form",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-head-construction",
+      "topicId": "head-construction",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-skull-structure",
+      "topicId": "skull-structure",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-cranial-mass",
+      "topicId": "cranial-mass",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-loomis-head",
+      "topicId": "loomis-head",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-facial-centerline",
+      "topicId": "facial-centerline",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-brow-nose-chin-landmarks",
+      "topicId": "brow-nose-chin-landmarks",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-head-planes",
+      "topicId": "head-planes",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-jaw-structure",
+      "topicId": "jaw-structure",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-neck-attachment",
+      "topicId": "neck-attachment",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-head-angles",
+      "topicId": "head-angles",
+      "parentPlacementId": "place-portrait-drawing-head-construction",
+      "order": 8
+    },
+    {
+      "id": "place-portrait-drawing-facial-features",
+      "topicId": "facial-features",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-eye-anatomy",
+      "topicId": "eye-anatomy",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-eye-socket",
+      "topicId": "eye-socket",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-nose-planes",
+      "topicId": "nose-planes",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-mouth-structure",
+      "topicId": "mouth-structure",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-lips",
+      "topicId": "lips",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-ears",
+      "topicId": "ears",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-brow-ridge",
+      "topicId": "brow-ridge",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-cheekbones",
+      "topicId": "cheekbones",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-muzzle-form",
+      "topicId": "muzzle-form",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 8
+    },
+    {
+      "id": "place-portrait-drawing-facial-asymmetry",
+      "topicId": "facial-asymmetry",
+      "parentPlacementId": "place-portrait-drawing-facial-features",
+      "order": 9
+    },
+    {
+      "id": "place-portrait-drawing-portrait-light-value",
+      "topicId": "portrait-light-value",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-value-scale",
+      "topicId": "value-scale",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-light-direction",
+      "topicId": "light-direction",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-form-shadow",
+      "topicId": "form-shadow",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-terminator",
+      "topicId": "terminator",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-core-shadow",
+      "topicId": "core-shadow",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-cast-shadow",
+      "topicId": "cast-shadow",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-halftones",
+      "topicId": "halftones",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-reflected-light",
+      "topicId": "reflected-light",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-edge-control",
+      "topicId": "edge-control",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 8
+    },
+    {
+      "id": "place-portrait-drawing-shadow-mapping",
+      "topicId": "shadow-mapping",
+      "parentPlacementId": "place-portrait-drawing-portrait-light-value",
+      "order": 9
+    },
+    {
+      "id": "place-portrait-drawing-portrait-likeness",
+      "topicId": "portrait-likeness",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-facial-landmarks",
+      "topicId": "facial-landmarks",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-relational-proportion",
+      "topicId": "relational-proportion",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-feature-spacing",
+      "topicId": "feature-spacing",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-shape-character",
+      "topicId": "shape-character",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-asymmetry",
+      "topicId": "asymmetry",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-silhouette",
+      "topicId": "silhouette",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-likeness",
+      "topicId": "likeness",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-proportion-drift",
+      "topicId": "proportion-drift",
+      "parentPlacementId": "place-portrait-drawing-portrait-likeness",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-portrait-integration",
+      "topicId": "portrait-integration",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-hair-as-mass",
+      "topicId": "hair-as-mass",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-neck-anatomy",
+      "topicId": "neck-anatomy",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-shoulders",
+      "topicId": "shoulders",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-lost-and-found-edges",
+      "topicId": "lost-and-found-edges",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-focal-hierarchy",
+      "topicId": "focal-hierarchy",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-value-simplification",
+      "topicId": "value-simplification",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-detail-selection",
+      "topicId": "detail-selection",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-background-integration",
+      "topicId": "background-integration",
+      "parentPlacementId": "place-portrait-drawing-portrait-integration",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-portrait-practice",
+      "topicId": "portrait-practice",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-gesture-heads",
+      "topicId": "gesture-heads",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 0
+    },
+    {
+      "id": "place-portrait-drawing-five-minute-heads",
+      "topicId": "five-minute-heads",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 1
+    },
+    {
+      "id": "place-portrait-drawing-thirty-minute-portraits",
+      "topicId": "thirty-minute-portraits",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 2
+    },
+    {
+      "id": "place-portrait-drawing-long-form-portraits",
+      "topicId": "long-form-portraits",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 3
+    },
+    {
+      "id": "place-portrait-drawing-self-portraits",
+      "topicId": "self-portraits",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 4
+    },
+    {
+      "id": "place-portrait-drawing-photo-reference",
+      "topicId": "photo-reference",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 5
+    },
+    {
+      "id": "place-portrait-drawing-drawing-from-life",
+      "topicId": "drawing-from-life",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 6
+    },
+    {
+      "id": "place-portrait-drawing-unfamiliar-angles",
+      "topicId": "unfamiliar-angles",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 7
+    },
+    {
+      "id": "place-portrait-drawing-age-variation",
+      "topicId": "age-variation",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 8
+    },
+    {
+      "id": "place-portrait-drawing-lighting-variation",
+      "topicId": "lighting-variation",
+      "parentPlacementId": "place-portrait-drawing-portrait-practice",
+      "order": 9
+    },
+    {
+      "id": "place-portrait-drawing-portrait-drawing-goal",
+      "topicId": "portrait-drawing-goal",
+      "order": 8
+    }
+  ],
+  "connections": [
+    {
+      "id": "portrait-drawing-root-0-0-1",
+      "source": "place-portrait-drawing-drawing-observation-measurement",
+      "target": "place-portrait-drawing-perspective-and-form",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-1-1-2",
+      "source": "place-portrait-drawing-perspective-and-form",
+      "target": "place-portrait-drawing-head-construction",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-2-2-3",
+      "source": "place-portrait-drawing-head-construction",
+      "target": "place-portrait-drawing-facial-features",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-3-3-4",
+      "source": "place-portrait-drawing-facial-features",
+      "target": "place-portrait-drawing-portrait-light-value",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-4-4-5",
+      "source": "place-portrait-drawing-portrait-light-value",
+      "target": "place-portrait-drawing-portrait-likeness",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-5-5-6",
+      "source": "place-portrait-drawing-portrait-likeness",
+      "target": "place-portrait-drawing-portrait-integration",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-6-6-7",
+      "source": "place-portrait-drawing-portrait-integration",
+      "target": "place-portrait-drawing-portrait-practice",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "portrait-drawing-root-7-7-goal",
+      "source": "place-portrait-drawing-portrait-practice",
+      "target": "place-portrait-drawing-portrait-drawing-goal",
+      "relation": "prerequisite"
+    }
+  ]
+}

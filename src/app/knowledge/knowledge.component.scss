@@ -200,14 +200,13 @@ h1 {
   opacity: .16;
   animation: reveal-edge .3s 1.12s ease-out both;
 }
-.edges path.edge-not-started, .galaxy-route path.edge-not-started { opacity: .16; }
-.edges path.edge-in-progress, .galaxy-route path.edge-in-progress { opacity: .58; stroke-width: 1.7; animation: reveal-edge .3s 1.12s ease-out both, journey-pulse 1.8s 1.45s ease-in-out infinite alternate; }
-.edges path.edge-completed, .galaxy-route path.edge-completed { opacity: .82; stroke-width: 1.7; }
+.edges path.edge-not-started { opacity: .16; }
+.edges path.edge-in-progress { opacity: .58; stroke-width: 1.7; animation: reveal-edge .3s 1.12s ease-out both, journey-pulse 1.8s 1.45s ease-in-out infinite alternate; }
+.edges path.edge-completed { opacity: .82; stroke-width: 1.7; }
 .edges path.related { stroke-dasharray: 5 8; }
 .edges path.related.edge-not-started { opacity: .08; }
 .edges path.related.edge-in-progress { opacity: .34; }
 .edges path.related.edge-completed { opacity: .48; }
-.galaxy-route path { fill: none; stroke: #9fb3d8; stroke-width: .7; }
 
 .topic-node {
   cursor: pointer;
@@ -809,3 +808,5 @@ article.highlighted {
   stroke: #fff;
   stroke-width: 1px;
 }
+
+.shared-galaxy-colors rect { filter: drop-shadow(0 0 2px currentColor); }

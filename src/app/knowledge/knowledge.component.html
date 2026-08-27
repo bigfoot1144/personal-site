@@ -79,12 +79,6 @@
           [attr.to]="'360 ' + selected.x + ' ' + selected.y"
           dur="24s"
           repeatCount="indefinite"/>
-      <g *ngIf="isGalaxyView" class="galaxy-route">
-        <path *ngFor="let segment of galaxyJourneySegments" [attr.d]="segmentPath(segment)"
-          [class.edge-not-started]="segment.status === 'not-started'"
-          [class.edge-in-progress]="segment.status === 'in-progress'"
-          [class.edge-completed]="segment.status === 'completed'"/>
-      </g>
       <g *ngFor="let node of visibleNodes; trackBy: trackNode"
         class="topic-node"
         [class.galaxy-node]="isGalaxyView"
@@ -123,6 +117,10 @@
             [attr.width]="starSize(node)"
             [attr.height]="starSize(node)"
             [attr.fill]="nodeColor(node)"/>
+          <g *ngIf="!node.parentPlacementId && node.placementCurriculumIds.length > 1" class="shared-galaxy-colors">
+            <rect *ngFor="let color of nodeCurriculumColors(node); let colorIndex = index"
+              [attr.x]="-nodeCurriculumColors(node).length * 2 + colorIndex * 4 + .5" y="6" width="3" height="1.5" [attr.fill]="color"/>
+          </g>
           <g class="star-label-scale">
             <g class="star-label">
             <animateTransform *ngIf="isGalaxyView"

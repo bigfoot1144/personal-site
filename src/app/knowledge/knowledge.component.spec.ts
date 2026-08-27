@@ -16,9 +16,9 @@ describe('KnowledgeComponent curriculum dock', () => {
     fixture.detectChanges();
   });
 
-  it('selects Machine Learning by default', () => {
-    expect(component.selectedCurriculumId).toBe('machine-learning');
-    expect(component.selectedJourney?.curriculumId).toBe('machine-learning');
+  it('selects ML Training by default', () => {
+    expect(component.selectedCurriculumId).toBe('ml-training');
+    expect(component.selectedJourney?.curriculumId).toBe('ml-training');
   });
 
   it('toggles child-count badges from the top controls', () => {
@@ -42,7 +42,7 @@ describe('KnowledgeComponent curriculum dock', () => {
   });
 
   it('collapses and reopens the progress menu from the active curriculum tab', () => {
-    const activeTab = fixture.nativeElement.querySelector('#curriculum-tab-machine-learning') as HTMLButtonElement;
+    const activeTab = fixture.nativeElement.querySelector('#curriculum-tab-ml-training') as HTMLButtonElement;
     activeTab.click();
     fixture.detectChanges();
 
@@ -87,15 +87,15 @@ describe('KnowledgeComponent curriculum dock', () => {
     visibility.click();
     fixture.detectChanges();
 
-    expect(component.selectedCurriculumId).toBe('machine-learning');
-    expect(component.activeCurricula.has('machine-learning')).toBeFalse();
+    expect(component.selectedCurriculumId).toBe('ml-training');
+    expect(component.activeCurricula.has('ml-training')).toBeFalse();
     expect(visibility.getAttribute('aria-pressed')).toBe('false');
   });
 
   it('supports arrow-key tab navigation', () => {
-    const selectedIndex = component.journeyProgress.findIndex(item => item.curriculumId === 'machine-learning');
+    const selectedIndex = component.journeyProgress.findIndex(item => item.curriculumId === 'ml-training');
     const expected = component.journeyProgress[(selectedIndex + 1) % component.journeyProgress.length];
-    const selectedTab = fixture.nativeElement.querySelector('#curriculum-tab-machine-learning') as HTMLButtonElement;
+    const selectedTab = fixture.nativeElement.querySelector('#curriculum-tab-ml-training') as HTMLButtonElement;
     selectedTab.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
     fixture.detectChanges();
 
@@ -118,7 +118,7 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(button.disabled).toBeFalse();
     expect(button.textContent).toContain('Reset all');
 
-    component.select(component.baseNodes.find(node => node.id === 'gpu-code-generation')!);
+    component.select(component.baseNodes.find(node => node.id === 'transformer-gpu-kernels')!);
     expect(component.selected).not.toBeNull();
     button.click();
     fixture.detectChanges();
@@ -131,22 +131,39 @@ describe('KnowledgeComponent curriculum dock', () => {
   });
 
   it('keeps focused galaxies and solar systems visible after deselecting all curricula', () => {
-    const galaxy = component.baseNodes.find(node => node.id === 'gpu-code-generation')!;
+    const galaxy = component.baseNodes.find(node => node.id === 'transformer-gpu-kernels')!;
     component.select(galaxy);
     component.deselectAllCurricula();
     fixture.detectChanges();
 
-    expect(component.galaxyJourneySegments.length).toBeGreaterThan(0);
     expect(component.galaxyStars.every(node => component.nodeVisible(node))).toBeTrue();
-    expect(fixture.nativeElement.querySelectorAll('.galaxy-route path').length).toBe(component.galaxyJourneySegments.length);
+    expect(fixture.nativeElement.querySelector('.galaxy-route')).toBeNull();
     expect(fixture.nativeElement.querySelectorAll('.topic-node.hidden-node').length).toBe(0);
 
-    const cuda = component.galaxyStars.find(node => node.id === 'cuda')!;
+    const cuda = component.galaxyStars.find(node => node.id === 'transformers')!;
     component.select(cuda);
     fixture.detectChanges();
 
     expect(component.selected?.placementId).toBe(cuda.placementId);
     expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
+  });
+
+  it('renders one multi-curriculum node for each shared galaxy', () => {
+    const transformerNodes = component.baseNodes.filter(node => node.id === 'transformer-foundations');
+    expect(transformerNodes.length).toBe(1);
+    expect(transformerNodes[0].placementCurriculumIds).toEqual(['gpu', 'inference', 'ml-training']);
+    expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
+    expect(fixture.nativeElement.querySelectorAll('.shared-galaxy-colors rect').length).toBeGreaterThan(0);
+  });
+
+  it('keeps shared galaxies visible for any participating active curriculum', () => {
+    const transformer = component.baseNodes.find(node => node.id === 'transformer-foundations')!;
+    component.activeCurricula = new Set(['inference']);
+    fixture.detectChanges();
+    expect(component.nodeVisible(transformer)).toBeTrue();
+    component.activeCurricula = new Set(['robotics']);
+    fixture.detectChanges();
+    expect(component.nodeVisible(transformer)).toBeFalse();
   });
 
   it('uses wheel input only to zoom, without entering or leaving a galaxy', () => {
@@ -163,7 +180,7 @@ describe('KnowledgeComponent curriculum dock', () => {
     for (let step = 0; step < 20; step++) component.onWheel(wheel(-100));
     expect(component.selected).toBeNull();
 
-    const galaxy = component.baseNodes.find(node => node.id === 'gpu-code-generation')!;
+    const galaxy = component.baseNodes.find(node => node.id === 'transformer-gpu-kernels')!;
     component.select(galaxy);
     for (let step = 0; step < 20; step++) component.onWheel(wheel(100));
     expect(component.selected?.placementId).toBe(galaxy.placementId);

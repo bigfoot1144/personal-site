@@ -2,629 +2,962 @@
   "version": 1,
   "curriculum": {
     "id": "inference",
-    "title": "LLM Inference Engineering",
-    "description": "Transformer execution, GPU kernels, serving engines, and distributed inference.",
-    "color": "#ff9f68",
-    "goalTopicId": "distributed-inference-architect",
+    "title": "Inference Engineering",
+    "description": "Quantitative, reliable, and cost-aware serving of real large language models.",
+    "color": "#ff9868",
+    "goalTopicId": "inference-engineering-goal",
     "shortTitle": "Inference"
   },
   "placements": [
     {
-      "id": "place-inference-transformer-inference-internals",
-      "topicId": "transformer-inference-internals",
+      "id": "place-inference-transformer-inference",
+      "topicId": "transformer-inference",
       "order": 0
     },
     {
-      "id": "place-inference-transformer-inference-internals-transformers",
+      "id": "place-inference-transformers",
       "topicId": "transformers",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 0
     },
     {
-      "id": "place-inference-transformer-inference-internals-decoder-only-transformers",
-      "topicId": "decoder-only-transformers",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
+      "id": "place-inference-embeddings",
+      "topicId": "embeddings",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 1
     },
     {
-      "id": "place-inference-transformer-inference-internals-attention",
+      "id": "place-inference-attention",
       "topicId": "attention",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 2
     },
     {
-      "id": "place-inference-transformer-inference-internals-rope",
-      "topicId": "rope",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
+      "id": "place-inference-autoregressive-generation",
+      "topicId": "autoregressive-generation",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 3
     },
     {
-      "id": "place-inference-transformer-inference-internals-multi-head-attention",
-      "topicId": "multi-head-attention",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 4
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-multi-query-attention",
-      "topicId": "multi-query-attention",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 5
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-grouped-query-attention",
-      "topicId": "grouped-query-attention",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 6
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-mixture-of-experts",
-      "topicId": "mixture-of-experts",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 7
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-kv-cache",
-      "topicId": "kv-cache",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 8
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-prefill",
+      "id": "place-inference-prefill",
       "topicId": "prefill",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 9
+      "parentPlacementId": "place-inference-transformer-inference",
+      "order": 4
     },
     {
-      "id": "place-inference-transformer-inference-internals-decode",
+      "id": "place-inference-decode",
       "topicId": "decode",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 10
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-autoregressive-execution",
-      "topicId": "autoregressive-execution",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 11
-    },
-    {
-      "id": "place-inference-transformer-inference-internals-model-memory-analysis",
-      "topicId": "model-memory-analysis",
-      "parentPlacementId": "place-inference-transformer-inference-internals",
-      "order": 12
-    },
-    {
-      "id": "place-inference-inference-performance-modeling",
-      "topicId": "inference-performance-modeling",
-      "order": 1
-    },
-    {
-      "id": "place-inference-inference-performance-modeling-floating-point-operations",
-      "topicId": "floating-point-operations",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
-      "order": 0
-    },
-    {
-      "id": "place-inference-inference-performance-modeling-memory-bandwidth",
-      "topicId": "memory-bandwidth",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
-      "order": 1
-    },
-    {
-      "id": "place-inference-inference-performance-modeling-arithmetic-intensity",
-      "topicId": "arithmetic-intensity",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
-      "order": 2
-    },
-    {
-      "id": "place-inference-inference-performance-modeling-roofline-model",
-      "topicId": "roofline-model",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
-      "order": 3
-    },
-    {
-      "id": "place-inference-inference-performance-modeling-latency-throughput",
-      "topicId": "latency-throughput",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
-      "order": 4
-    },
-    {
-      "id": "place-inference-inference-performance-modeling-memory-vs-compute-bound",
-      "topicId": "memory-vs-compute-bound",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 5
     },
     {
-      "id": "place-inference-inference-performance-modeling-batch-size-effects",
-      "topicId": "batch-size-effects",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
+      "id": "place-inference-kv-cache",
+      "topicId": "kv-cache",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 6
     },
     {
-      "id": "place-inference-inference-performance-modeling-sequence-length-effects",
-      "topicId": "sequence-length-effects",
-      "parentPlacementId": "place-inference-inference-performance-modeling",
+      "id": "place-inference-causal-attention",
+      "topicId": "causal-attention",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 7
     },
     {
-      "id": "place-inference-inference-model-compression",
-      "topicId": "inference-model-compression",
-      "order": 2
-    },
-    {
-      "id": "place-inference-inference-model-compression-model-compression",
-      "topicId": "model-compression",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 0
-    },
-    {
-      "id": "place-inference-inference-model-compression-fp32",
-      "topicId": "fp32",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 1
-    },
-    {
-      "id": "place-inference-inference-model-compression-fp16",
-      "topicId": "fp16",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 2
-    },
-    {
-      "id": "place-inference-inference-model-compression-bf16",
-      "topicId": "bf16",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 3
-    },
-    {
-      "id": "place-inference-inference-model-compression-fp8",
-      "topicId": "fp8",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 4
-    },
-    {
-      "id": "place-inference-inference-model-compression-int8",
-      "topicId": "int8",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 5
-    },
-    {
-      "id": "place-inference-inference-model-compression-int4",
-      "topicId": "int4",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 6
-    },
-    {
-      "id": "place-inference-inference-model-compression-fp4",
-      "topicId": "fp4",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 7
-    },
-    {
-      "id": "place-inference-inference-model-compression-weight-only-quantization",
-      "topicId": "weight-only-quantization",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-token-sampling",
+      "topicId": "token-sampling",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 8
     },
     {
-      "id": "place-inference-inference-model-compression-activation-quantization",
-      "topicId": "activation-quantization",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-temperature",
+      "topicId": "temperature",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 9
     },
     {
-      "id": "place-inference-inference-model-compression-kv-cache-quantization",
-      "topicId": "kv-cache-quantization",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-top-k-sampling",
+      "topicId": "top-k-sampling",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 10
     },
     {
-      "id": "place-inference-inference-model-compression-quantization-calibration",
-      "topicId": "quantization-calibration",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-top-p-sampling",
+      "topicId": "top-p-sampling",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 11
     },
     {
-      "id": "place-inference-inference-model-compression-quantization-error",
-      "topicId": "quantization-error",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-multi-head-attention",
+      "topicId": "multi-head-attention",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 12
     },
     {
-      "id": "place-inference-inference-model-compression-groupwise-quantization",
-      "topicId": "groupwise-quantization",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-multi-query-attention",
+      "topicId": "multi-query-attention",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 13
     },
     {
-      "id": "place-inference-inference-model-compression-mixed-precision",
-      "topicId": "mixed-precision",
-      "parentPlacementId": "place-inference-inference-model-compression",
+      "id": "place-inference-grouped-query-attention",
+      "topicId": "grouped-query-attention",
+      "parentPlacementId": "place-inference-transformer-inference",
       "order": 14
     },
     {
-      "id": "place-inference-gpu-inference-kernels",
-      "topicId": "gpu-inference-kernels",
-      "order": 3
+      "id": "place-inference-rope",
+      "topicId": "rope",
+      "parentPlacementId": "place-inference-transformer-inference",
+      "order": 15
     },
     {
-      "id": "place-inference-gpu-inference-kernels-cuda",
-      "topicId": "cuda",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
-      "order": 0
+      "id": "place-inference-context-length",
+      "topicId": "context-length",
+      "parentPlacementId": "place-inference-transformer-inference",
+      "order": 16
     },
     {
-      "id": "place-inference-gpu-inference-kernels-gemm",
-      "topicId": "gemm",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-inference-performance-model",
+      "topicId": "inference-performance-model",
       "order": 1
     },
     {
-      "id": "place-inference-gpu-inference-kernels-gemv",
-      "topicId": "gemv",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-model-memory-accounting",
+      "topicId": "model-memory-accounting",
+      "parentPlacementId": "place-inference-inference-performance-model",
+      "order": 0
+    },
+    {
+      "id": "place-inference-parameter-memory",
+      "topicId": "parameter-memory",
+      "parentPlacementId": "place-inference-inference-performance-model",
+      "order": 1
+    },
+    {
+      "id": "place-inference-activation-memory",
+      "topicId": "activation-memory",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 2
     },
     {
-      "id": "place-inference-gpu-inference-kernels-reductions",
-      "topicId": "reductions",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-kv-cache-memory",
+      "topicId": "kv-cache-memory",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 3
     },
     {
-      "id": "place-inference-gpu-inference-kernels-softmax",
-      "topicId": "softmax",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-memory-bandwidth",
+      "topicId": "memory-bandwidth",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 4
     },
     {
-      "id": "place-inference-gpu-inference-kernels-layer-normalization",
-      "topicId": "layer-normalization",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-arithmetic-intensity",
+      "topicId": "arithmetic-intensity",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 5
     },
     {
-      "id": "place-inference-gpu-inference-kernels-rmsnorm",
-      "topicId": "rmsnorm",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-roofline-model",
+      "topicId": "roofline-model",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 6
     },
     {
-      "id": "place-inference-gpu-inference-kernels-rope",
-      "topicId": "rope",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-compute-bound-inference",
+      "topicId": "compute-bound-inference",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 7
     },
     {
-      "id": "place-inference-gpu-inference-kernels-attention-kernels",
-      "topicId": "attention-kernels",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-memory-bound-inference",
+      "topicId": "memory-bound-inference",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 8
     },
     {
-      "id": "place-inference-gpu-inference-kernels-fused-kernels",
-      "topicId": "fused-kernels",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-batch-size-effects",
+      "topicId": "batch-size-effects",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 9
     },
     {
-      "id": "place-inference-gpu-inference-kernels-flash-attention",
-      "topicId": "flash-attention",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-sequence-length-effects",
+      "topicId": "sequence-length-effects",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 10
     },
     {
-      "id": "place-inference-gpu-inference-kernels-quantized-matmul",
-      "topicId": "quantized-matmul",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-latency-throughput-tradeoff",
+      "topicId": "latency-throughput-tradeoff",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 11
     },
     {
-      "id": "place-inference-gpu-inference-kernels-triton",
-      "topicId": "triton",
-      "parentPlacementId": "place-inference-gpu-inference-kernels",
+      "id": "place-inference-mixed-precision",
+      "topicId": "mixed-precision",
+      "parentPlacementId": "place-inference-inference-performance-model",
       "order": 12
     },
     {
-      "id": "place-inference-serving-engine-architecture",
-      "topicId": "serving-engine-architecture",
-      "order": 4
-    },
-    {
-      "id": "place-inference-serving-engine-architecture-batching",
-      "topicId": "batching",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
-      "order": 0
-    },
-    {
-      "id": "place-inference-serving-engine-architecture-dynamic-batching",
-      "topicId": "dynamic-batching",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
-      "order": 1
-    },
-    {
-      "id": "place-inference-serving-engine-architecture-continuous-batching",
-      "topicId": "continuous-batching",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-inference-benchmarking",
+      "topicId": "inference-benchmarking",
       "order": 2
     },
     {
-      "id": "place-inference-serving-engine-architecture-chunked-prefill",
-      "topicId": "chunked-prefill",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-benchmarking",
+      "topicId": "benchmarking",
+      "parentPlacementId": "place-inference-inference-benchmarking",
+      "order": 0
+    },
+    {
+      "id": "place-inference-profiling",
+      "topicId": "profiling",
+      "parentPlacementId": "place-inference-inference-benchmarking",
+      "order": 1
+    },
+    {
+      "id": "place-inference-time-to-first-token",
+      "topicId": "time-to-first-token",
+      "parentPlacementId": "place-inference-inference-benchmarking",
+      "order": 2
+    },
+    {
+      "id": "place-inference-inter-token-latency",
+      "topicId": "inter-token-latency",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 3
     },
     {
-      "id": "place-inference-serving-engine-architecture-paged-attention",
-      "topicId": "paged-attention",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-time-per-output-token",
+      "topicId": "time-per-output-token",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 4
     },
     {
-      "id": "place-inference-serving-engine-architecture-memory-paging",
-      "topicId": "memory-paging",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-end-to-end-latency",
+      "topicId": "end-to-end-latency",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 5
     },
     {
-      "id": "place-inference-serving-engine-architecture-prefix-caching",
-      "topicId": "prefix-caching",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-tokens-per-second",
+      "topicId": "tokens-per-second",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 6
     },
     {
-      "id": "place-inference-serving-engine-architecture-speculative-decoding",
-      "topicId": "speculative-decoding",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-requests-per-second",
+      "topicId": "requests-per-second",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 7
     },
     {
-      "id": "place-inference-serving-engine-architecture-scheduler-design",
-      "topicId": "scheduler-design",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-goodput",
+      "topicId": "goodput",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 8
     },
     {
-      "id": "place-inference-serving-engine-architecture-request-prioritization",
-      "topicId": "request-prioritization",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-concurrency",
+      "topicId": "concurrency",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 9
     },
     {
-      "id": "place-inference-serving-engine-architecture-gpu-memory-management",
-      "topicId": "gpu-memory-management",
-      "parentPlacementId": "place-inference-serving-engine-architecture",
+      "id": "place-inference-queue-time",
+      "topicId": "queue-time",
+      "parentPlacementId": "place-inference-inference-benchmarking",
       "order": 10
+    },
+    {
+      "id": "place-inference-latency-percentiles",
+      "topicId": "latency-percentiles",
+      "parentPlacementId": "place-inference-inference-benchmarking",
+      "order": 11
+    },
+    {
+      "id": "place-inference-service-level-objectives",
+      "topicId": "service-level-objectives",
+      "parentPlacementId": "place-inference-inference-benchmarking",
+      "order": 12
+    },
+    {
+      "id": "place-inference-traffic-distributions",
+      "topicId": "traffic-distributions",
+      "parentPlacementId": "place-inference-inference-benchmarking",
+      "order": 13
+    },
+    {
+      "id": "place-inference-llm-model-execution",
+      "topicId": "llm-model-execution",
+      "order": 3
+    },
+    {
+      "id": "place-inference-inference-mode",
+      "topicId": "inference-mode",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 0
+    },
+    {
+      "id": "place-inference-inference-tensor-shapes",
+      "topicId": "inference-tensor-shapes",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 1
+    },
+    {
+      "id": "place-inference-tensor-layouts",
+      "topicId": "tensor-layouts",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 2
+    },
+    {
+      "id": "place-inference-flash-attention",
+      "topicId": "flash-attention",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 3
+    },
+    {
+      "id": "place-inference-kernel-fusion",
+      "topicId": "kernel-fusion",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 4
+    },
+    {
+      "id": "place-inference-cuda-graphs",
+      "topicId": "cuda-graphs",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 5
+    },
+    {
+      "id": "place-inference-torch-compile",
+      "topicId": "torch-compile",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 6
+    },
+    {
+      "id": "place-inference-memory-allocation-overhead",
+      "topicId": "memory-allocation-overhead",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 7
+    },
+    {
+      "id": "place-inference-kernel-launch-overhead",
+      "topicId": "kernel-launch-overhead",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 8
+    },
+    {
+      "id": "place-inference-cpu-gpu-synchronization",
+      "topicId": "cpu-gpu-synchronization",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 9
+    },
+    {
+      "id": "place-inference-tokenizer-overhead",
+      "topicId": "tokenizer-overhead",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 10
+    },
+    {
+      "id": "place-inference-asynchronous-execution",
+      "topicId": "asynchronous-execution",
+      "parentPlacementId": "place-inference-llm-model-execution",
+      "order": 11
+    },
+    {
+      "id": "place-inference-kv-cache-memory-management",
+      "topicId": "kv-cache-memory-management",
+      "order": 4
+    },
+    {
+      "id": "place-inference-kv-cache-layout",
+      "topicId": "kv-cache-layout",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 0
+    },
+    {
+      "id": "place-inference-kv-cache-allocation",
+      "topicId": "kv-cache-allocation",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 1
+    },
+    {
+      "id": "place-inference-kv-cache-fragmentation",
+      "topicId": "kv-cache-fragmentation",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 2
+    },
+    {
+      "id": "place-inference-paged-kv-cache",
+      "topicId": "paged-kv-cache",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 3
+    },
+    {
+      "id": "place-inference-paged-attention",
+      "topicId": "paged-attention",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 4
+    },
+    {
+      "id": "place-inference-kv-block-allocation",
+      "topicId": "kv-block-allocation",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 5
+    },
+    {
+      "id": "place-inference-kv-block-eviction",
+      "topicId": "kv-block-eviction",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 6
+    },
+    {
+      "id": "place-inference-prefix-caching",
+      "topicId": "prefix-caching",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 7
+    },
+    {
+      "id": "place-inference-kv-cache-reuse",
+      "topicId": "kv-cache-reuse",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 8
+    },
+    {
+      "id": "place-inference-kv-cache-offloading",
+      "topicId": "kv-cache-offloading",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 9
+    },
+    {
+      "id": "place-inference-sliding-window-attention",
+      "topicId": "sliding-window-attention",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 10
+    },
+    {
+      "id": "place-inference-chunked-prefill",
+      "topicId": "chunked-prefill",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 11
+    },
+    {
+      "id": "place-inference-memory-pressure",
+      "topicId": "memory-pressure",
+      "parentPlacementId": "place-inference-kv-cache-memory-management",
+      "order": 12
+    },
+    {
+      "id": "place-inference-inference-scheduling-batching",
+      "topicId": "inference-scheduling-batching",
+      "order": 5
+    },
+    {
+      "id": "place-inference-static-batching",
+      "topicId": "static-batching",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 0
+    },
+    {
+      "id": "place-inference-dynamic-batching",
+      "topicId": "dynamic-batching",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 1
+    },
+    {
+      "id": "place-inference-continuous-batching",
+      "topicId": "continuous-batching",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 2
+    },
+    {
+      "id": "place-inference-request-scheduling",
+      "topicId": "request-scheduling",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 3
+    },
+    {
+      "id": "place-inference-iteration-level-scheduling",
+      "topicId": "iteration-level-scheduling",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 4
+    },
+    {
+      "id": "place-inference-prefill-scheduling",
+      "topicId": "prefill-scheduling",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 5
+    },
+    {
+      "id": "place-inference-decode-scheduling",
+      "topicId": "decode-scheduling",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 6
+    },
+    {
+      "id": "place-inference-request-preemption",
+      "topicId": "request-preemption",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 7
+    },
+    {
+      "id": "place-inference-scheduler-fairness",
+      "topicId": "scheduler-fairness",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 8
+    },
+    {
+      "id": "place-inference-admission-control",
+      "topicId": "admission-control",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 9
+    },
+    {
+      "id": "place-inference-backpressure",
+      "topicId": "backpressure",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 10
+    },
+    {
+      "id": "place-inference-queueing",
+      "topicId": "queueing",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 11
+    },
+    {
+      "id": "place-inference-streaming-responses",
+      "topicId": "streaming-responses",
+      "parentPlacementId": "place-inference-inference-scheduling-batching",
+      "order": 12
+    },
+    {
+      "id": "place-inference-inference-quantization",
+      "topicId": "inference-quantization",
+      "order": 6
+    },
+    {
+      "id": "place-inference-quantization",
+      "topicId": "quantization",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 0
+    },
+    {
+      "id": "place-inference-post-training-quantization",
+      "topicId": "post-training-quantization",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 1
+    },
+    {
+      "id": "place-inference-weight-only-quantization",
+      "topicId": "weight-only-quantization",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 2
+    },
+    {
+      "id": "place-inference-activation-quantization",
+      "topicId": "activation-quantization",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 3
+    },
+    {
+      "id": "place-inference-int8-inference",
+      "topicId": "int8-inference",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 4
+    },
+    {
+      "id": "place-inference-int4-inference",
+      "topicId": "int4-inference",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 5
+    },
+    {
+      "id": "place-inference-fp8",
+      "topicId": "fp8",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 6
+    },
+    {
+      "id": "place-inference-gptq",
+      "topicId": "gptq",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 7
+    },
+    {
+      "id": "place-inference-awq",
+      "topicId": "awq",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 8
+    },
+    {
+      "id": "place-inference-quantization-calibration",
+      "topicId": "quantization-calibration",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 9
+    },
+    {
+      "id": "place-inference-quantized-kernels",
+      "topicId": "quantized-kernels",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 10
+    },
+    {
+      "id": "place-inference-accuracy-performance-tradeoff",
+      "topicId": "accuracy-performance-tradeoff",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 11
+    },
+    {
+      "id": "place-inference-numerical-error-analysis",
+      "topicId": "numerical-error-analysis",
+      "parentPlacementId": "place-inference-inference-quantization",
+      "order": 12
+    },
+    {
+      "id": "place-inference-advanced-decoding",
+      "topicId": "advanced-decoding",
+      "order": 7
+    },
+    {
+      "id": "place-inference-greedy-decoding",
+      "topicId": "greedy-decoding",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 0
+    },
+    {
+      "id": "place-inference-advanced-decoding-token-sampling",
+      "topicId": "token-sampling",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 1
+    },
+    {
+      "id": "place-inference-beam-search",
+      "topicId": "beam-search",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 2
+    },
+    {
+      "id": "place-inference-speculative-decoding",
+      "topicId": "speculative-decoding",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 3
+    },
+    {
+      "id": "place-inference-draft-models",
+      "topicId": "draft-models",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 4
+    },
+    {
+      "id": "place-inference-target-model-verification",
+      "topicId": "target-model-verification",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 5
+    },
+    {
+      "id": "place-inference-speculative-acceptance-rate",
+      "topicId": "speculative-acceptance-rate",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 6
+    },
+    {
+      "id": "place-inference-ngram-speculation",
+      "topicId": "ngram-speculation",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 7
+    },
+    {
+      "id": "place-inference-structured-decoding",
+      "topicId": "structured-decoding",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 8
+    },
+    {
+      "id": "place-inference-constrained-decoding",
+      "topicId": "constrained-decoding",
+      "parentPlacementId": "place-inference-advanced-decoding",
+      "order": 9
     },
     {
       "id": "place-inference-distributed-inference",
       "topicId": "distributed-inference",
-      "order": 5
+      "order": 8
     },
     {
-      "id": "place-inference-distributed-inference-tensor-parallelism",
-      "topicId": "tensor-parallelism",
+      "id": "place-inference-distributed-systems",
+      "topicId": "distributed-systems",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 0
     },
     {
-      "id": "place-inference-distributed-inference-pipeline-parallelism",
-      "topicId": "pipeline-parallelism",
+      "id": "place-inference-distributed-collectives",
+      "topicId": "distributed-collectives",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 1
     },
     {
-      "id": "place-inference-distributed-inference-expert-parallelism",
-      "topicId": "expert-parallelism",
+      "id": "place-inference-inference-data-parallelism",
+      "topicId": "inference-data-parallelism",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 2
     },
     {
-      "id": "place-inference-distributed-inference-data-parallelism",
-      "topicId": "data-parallelism",
+      "id": "place-inference-tensor-parallelism",
+      "topicId": "tensor-parallelism",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 3
     },
     {
-      "id": "place-inference-distributed-inference-nccl",
-      "topicId": "nccl",
+      "id": "place-inference-pipeline-parallelism",
+      "topicId": "pipeline-parallelism",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 4
     },
     {
-      "id": "place-inference-distributed-inference-collectives",
-      "topicId": "collectives",
+      "id": "place-inference-expert-parallelism",
+      "topicId": "expert-parallelism",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 5
     },
     {
-      "id": "place-inference-distributed-inference-all-reduce",
-      "topicId": "all-reduce",
+      "id": "place-inference-model-sharding",
+      "topicId": "model-sharding",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 6
     },
     {
-      "id": "place-inference-distributed-inference-all-gather",
-      "topicId": "all-gather",
+      "id": "place-inference-replica-serving",
+      "topicId": "replica-serving",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 7
     },
     {
-      "id": "place-inference-distributed-inference-reduce-scatter",
-      "topicId": "reduce-scatter",
+      "id": "place-inference-load-balancing",
+      "topicId": "load-balancing",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 8
     },
     {
-      "id": "place-inference-distributed-inference-communication-computation-overlap",
-      "topicId": "communication-computation-overlap",
+      "id": "place-inference-nvlink",
+      "topicId": "nvlink",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 9
     },
     {
-      "id": "place-inference-distributed-inference-gpu-interconnects",
-      "topicId": "gpu-interconnects",
+      "id": "place-inference-pcie",
+      "topicId": "pcie",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 10
     },
     {
-      "id": "place-inference-distributed-inference-multi-gpu-topology",
-      "topicId": "multi-gpu-topology",
+      "id": "place-inference-rdma",
+      "topicId": "rdma",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 11
     },
     {
-      "id": "place-inference-distributed-inference-disaggregated-prefill-decode",
-      "topicId": "disaggregated-prefill-decode",
+      "id": "place-inference-communication-overhead",
+      "topicId": "communication-overhead",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 12
     },
     {
-      "id": "place-inference-distributed-inference-distributed-systems",
-      "topicId": "distributed-systems",
+      "id": "place-inference-communication-computation-overlap",
+      "topicId": "communication-computation-overlap",
       "parentPlacementId": "place-inference-distributed-inference",
       "order": 13
     },
     {
-      "id": "place-inference-production-inference-benchmarking",
-      "topicId": "production-inference-benchmarking",
-      "order": 6
+      "id": "place-inference-multi-node-inference",
+      "topicId": "multi-node-inference",
+      "parentPlacementId": "place-inference-distributed-inference",
+      "order": 14
     },
     {
-      "id": "place-inference-production-inference-benchmarking-time-to-first-token",
-      "topicId": "time-to-first-token",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 0
+      "id": "place-inference-disaggregated-prefill-decode",
+      "topicId": "disaggregated-prefill-decode",
+      "parentPlacementId": "place-inference-distributed-inference",
+      "order": 15
     },
     {
-      "id": "place-inference-production-inference-benchmarking-inter-token-latency",
-      "topicId": "inter-token-latency",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 1
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-tokens-per-second",
-      "topicId": "tokens-per-second",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 2
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-inference-throughput",
-      "topicId": "inference-throughput",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 3
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-tail-latency",
-      "topicId": "tail-latency",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 4
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-serving-concurrency",
-      "topicId": "serving-concurrency",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 5
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-gpu-utilization",
-      "topicId": "gpu-utilization",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 6
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-memory-utilization",
-      "topicId": "memory-utilization",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 7
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-cost-per-token",
-      "topicId": "cost-per-token",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
-      "order": 8
-    },
-    {
-      "id": "place-inference-production-inference-benchmarking-capacity-planning",
-      "topicId": "capacity-planning",
-      "parentPlacementId": "place-inference-production-inference-benchmarking",
+      "id": "place-inference-production-llm-serving",
+      "topicId": "production-llm-serving",
       "order": 9
     },
     {
-      "id": "place-inference-inference-career-milestones",
-      "topicId": "inference-career-milestones",
-      "order": 7
-    },
-    {
-      "id": "place-inference-inference-career-milestones-llm-inference-engineer",
-      "topicId": "llm-inference-engineer",
-      "parentPlacementId": "place-inference-inference-career-milestones",
+      "id": "place-inference-model-deployment",
+      "topicId": "model-deployment",
+      "parentPlacementId": "place-inference-production-llm-serving",
       "order": 0
     },
     {
-      "id": "place-inference-inference-career-milestones-ai-systems-architect",
-      "topicId": "ai-systems-architect",
-      "parentPlacementId": "place-inference-inference-career-milestones",
+      "id": "place-inference-inference-services",
+      "topicId": "inference-services",
+      "parentPlacementId": "place-inference-production-llm-serving",
       "order": 1
     },
     {
-      "id": "place-inference-distributed-inference-architect",
-      "topicId": "distributed-inference-architect",
+      "id": "place-inference-async-serving",
+      "topicId": "async-serving",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 2
+    },
+    {
+      "id": "place-inference-api-design",
+      "topicId": "api-design",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 3
+    },
+    {
+      "id": "place-inference-request-routing",
+      "topicId": "request-routing",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 4
+    },
+    {
+      "id": "place-inference-production-llm-serving-load-balancing",
+      "topicId": "load-balancing",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 5
+    },
+    {
+      "id": "place-inference-autoscaling",
+      "topicId": "autoscaling",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 6
+    },
+    {
+      "id": "place-inference-capacity-planning",
+      "topicId": "capacity-planning",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 7
+    },
+    {
+      "id": "place-inference-rate-limiting",
+      "topicId": "rate-limiting",
+      "parentPlacementId": "place-inference-production-llm-serving",
       "order": 8
     },
     {
-      "id": "place-inference-inference-model-compression-quantization",
-      "topicId": "quantization",
-      "parentPlacementId": "place-inference-inference-model-compression",
-      "order": 15,
-      "contextLabel": "Shared compression competency"
+      "id": "place-inference-fault-tolerance",
+      "topicId": "fault-tolerance",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 9
+    },
+    {
+      "id": "place-inference-health-checks",
+      "topicId": "health-checks",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 10
+    },
+    {
+      "id": "place-inference-rolling-deployment",
+      "topicId": "rolling-deployment",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 11
+    },
+    {
+      "id": "place-inference-observability",
+      "topicId": "observability",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 12
+    },
+    {
+      "id": "place-inference-distributed-tracing",
+      "topicId": "distributed-tracing",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 13
+    },
+    {
+      "id": "place-inference-production-metrics",
+      "topicId": "production-metrics",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 14
+    },
+    {
+      "id": "place-inference-cost-per-token",
+      "topicId": "cost-per-token",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 15
+    },
+    {
+      "id": "place-inference-prefix-aware-routing",
+      "topicId": "prefix-aware-routing",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 16
+    },
+    {
+      "id": "place-inference-request-priority",
+      "topicId": "request-priority",
+      "parentPlacementId": "place-inference-production-llm-serving",
+      "order": 17
+    },
+    {
+      "id": "place-inference-inference-engineering-goal",
+      "topicId": "inference-engineering-goal",
+      "order": 10
     }
   ],
   "connections": [
     {
-      "id": "inference-root-0-transformer-inference-internals-inference-performance-modeling",
-      "source": "place-inference-transformer-inference-internals",
-      "target": "place-inference-inference-performance-modeling",
+      "id": "inference-root-0-0-1",
+      "source": "place-inference-transformer-inference",
+      "target": "place-inference-inference-performance-model",
       "relation": "prerequisite"
     },
     {
-      "id": "inference-root-1-inference-performance-modeling-inference-model-compression",
-      "source": "place-inference-inference-performance-modeling",
-      "target": "place-inference-inference-model-compression",
+      "id": "inference-root-1-1-2",
+      "source": "place-inference-inference-performance-model",
+      "target": "place-inference-inference-benchmarking",
       "relation": "prerequisite"
     },
     {
-      "id": "inference-root-2-inference-model-compression-gpu-inference-kernels",
-      "source": "place-inference-inference-model-compression",
-      "target": "place-inference-gpu-inference-kernels",
+      "id": "inference-root-2-2-3",
+      "source": "place-inference-inference-benchmarking",
+      "target": "place-inference-llm-model-execution",
       "relation": "prerequisite"
     },
     {
-      "id": "inference-root-3-gpu-inference-kernels-serving-engine-architecture",
-      "source": "place-inference-gpu-inference-kernels",
-      "target": "place-inference-serving-engine-architecture",
+      "id": "inference-root-3-3-4",
+      "source": "place-inference-llm-model-execution",
+      "target": "place-inference-kv-cache-memory-management",
       "relation": "prerequisite"
     },
     {
-      "id": "inference-root-4-serving-engine-architecture-distributed-inference",
-      "source": "place-inference-serving-engine-architecture",
+      "id": "inference-root-4-4-5",
+      "source": "place-inference-kv-cache-memory-management",
+      "target": "place-inference-inference-scheduling-batching",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "inference-root-5-5-6",
+      "source": "place-inference-inference-scheduling-batching",
+      "target": "place-inference-inference-quantization",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "inference-root-6-6-7",
+      "source": "place-inference-inference-quantization",
+      "target": "place-inference-advanced-decoding",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "inference-root-7-7-8",
+      "source": "place-inference-advanced-decoding",
       "target": "place-inference-distributed-inference",
       "relation": "prerequisite"
     },
     {
-      "id": "inference-root-5-distributed-inference-production-inference-benchmarking",
+      "id": "inference-root-8-8-9",
       "source": "place-inference-distributed-inference",
-      "target": "place-inference-production-inference-benchmarking",
+      "target": "place-inference-production-llm-serving",
       "relation": "prerequisite"
     },
     {
-      "id": "inference-root-6-production-inference-benchmarking-inference-career-milestones",
-      "source": "place-inference-production-inference-benchmarking",
-      "target": "place-inference-inference-career-milestones",
-      "relation": "prerequisite"
-    },
-    {
-      "id": "inference-goal-0",
-      "source": "place-inference-inference-career-milestones",
-      "target": "place-inference-distributed-inference-architect",
+      "id": "inference-root-9-9-goal",
+      "source": "place-inference-production-llm-serving",
+      "target": "place-inference-inference-engineering-goal",
       "relation": "prerequisite"
     }
   ]
