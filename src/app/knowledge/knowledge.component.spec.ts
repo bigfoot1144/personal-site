@@ -82,6 +82,53 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(fixture.nativeElement.querySelector('.journey-card').getAttribute('aria-labelledby')).toBe('curriculum-tab-agentic');
   });
 
+  it('animates the camera to fit every star in the selected curriculum', () => {
+    const animate = spyOn<any>(component, 'animateView');
+    component.selectCurriculum('agentic');
+
+    expect(animate).toHaveBeenCalledTimes(1);
+    const [scale, panX, panY] = animate.calls.mostRecent().args as [number, number, number];
+    const nodes = component.baseNodes.filter(node => node.placementCurriculumIds.includes('agentic'));
+    const screenPoints = nodes.map(node => ({ x: node.x * scale + panX, y: node.y * scale + panY }));
+    expect(Math.min(...screenPoints.map(point => point.x))).toBeGreaterThanOrEqual(50);
+    expect(Math.max(...screenPoints.map(point => point.x))).toBeLessThanOrEqual(950);
+    expect(Math.min(...screenPoints.map(point => point.y))).toBeGreaterThanOrEqual(50);
+    expect(Math.max(...screenPoints.map(point => point.y))).toBeLessThanOrEqual(590);
+
+    component.select(nodes[0]);
+    component.selectCurriculum('agentic');
+    expect(component.selected).toBeNull();
+  });
+
+  it('shows every star but only the selected curriculum annotations and lines', () => {
+    const training = component.baseNodes.find(node =>
+      node.placementCurriculumIds.length === 1 && node.placementCurriculumIds.includes('ml-training'))!;
+    const shared = component.baseNodes.find(node =>
+      node.placementCurriculumIds.length > 1 && node.placementCurriculumIds.includes('ml-training'))!;
+    const agentic = component.baseNodes.find(node =>
+      node.placementCurriculumIds.length === 1 && node.placementCurriculumIds.includes('agentic'))!;
+
+    const agenticElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${agentic.placementId}"]`) as SVGGElement;
+    expect(component.nodeMuted(training)).toBeFalse();
+    expect(component.nodeMuted(shared)).toBeFalse();
+    expect(component.nodeMuted(agentic)).toBeTrue();
+    expect(agenticElement.classList).toContain('curriculum-muted');
+    expect(getComputedStyle(agenticElement).opacity).toBe('1');
+    expect(getComputedStyle(agenticElement.querySelector('.star-label')!).display).toBe('none');
+    expect(fixture.nativeElement.querySelector('.edges path.curriculum-muted')).not.toBeNull();
+    expect(getComputedStyle(fixture.nativeElement.querySelector('.edges path.curriculum-muted')).opacity)
+      .toBe('0');
+
+    component.selectCurriculum('agentic');
+    fixture.detectChanges();
+
+    expect(component.nodeMuted(agentic)).toBeFalse();
+    expect(component.nodeMuted(training)).toBeTrue();
+    expect(component.visibleNodes).toContain(training);
+    expect(getComputedStyle(agenticElement.querySelector('.star-label')!).display).not.toBe('none');
+  });
+
   it('toggles visibility without changing the selected curriculum', () => {
     const visibility = fixture.nativeElement.querySelector('.journey-visibility') as HTMLButtonElement;
     visibility.click();
@@ -148,12 +195,18 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
   });
 
-  it('renders one multi-curriculum node for each shared galaxy', () => {
+  it('shows shared-star colors only when the selected curriculum uses the star', () => {
     const transformerNodes = component.baseNodes.filter(node => node.id === 'transformer-foundations');
+    const production = component.baseNodes.find(node => node.id === 'production-reliability')!;
+    const transformerElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${transformerNodes[0].placementId}"]`) as SVGGElement;
+    const productionElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${production.placementId}"]`) as SVGGElement;
     expect(transformerNodes.length).toBe(1);
     expect(transformerNodes[0].placementCurriculumIds).toEqual(['gpu', 'inference', 'ml-training']);
     expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
-    expect(fixture.nativeElement.querySelectorAll('.shared-galaxy-colors rect').length).toBeGreaterThan(0);
+    expect(transformerElement.querySelector('.shared-galaxy-colors')).not.toBeNull();
+    expect(productionElement.querySelector('.shared-galaxy-colors')).toBeNull();
   });
 
   it('keeps shared galaxies visible for any participating active curriculum', () => {

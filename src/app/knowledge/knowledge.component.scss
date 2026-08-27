@@ -199,6 +199,7 @@ h1 {
   stroke-width: 1.3;
   opacity: .16;
   animation: reveal-edge .3s 1.12s ease-out both;
+  transition: opacity .3s ease, stroke-width .3s ease;
 }
 .edges path.edge-not-started { opacity: .16; }
 .edges path.edge-in-progress { opacity: .58; stroke-width: 1.7; animation: reveal-edge .3s 1.12s ease-out both, journey-pulse 1.8s 1.45s ease-in-out infinite alternate; }
@@ -207,12 +208,17 @@ h1 {
 .edges path.related.edge-not-started { opacity: .08; }
 .edges path.related.edge-in-progress { opacity: .34; }
 .edges path.related.edge-completed { opacity: .48; }
+.edges path.curriculum-muted { opacity: 0 !important; }
 
 .topic-node {
   cursor: pointer;
   outline: none;
   opacity: 1;
   transition: opacity .35s, transform .7s cubic-bezier(.2,.8,.2,1);
+}
+.topic-node.curriculum-muted .star-label,
+.topic-node.curriculum-muted .child-badge {
+  display: none;
 }
 .topic-node.hidden-node { opacity: .1; pointer-events: none; }
 .star-hit-area {

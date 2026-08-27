@@ -320,12 +320,17 @@ export class KnowledgeComponent {
 
   selectCurriculum(id: string): void {
     if (!this.curriculumById.has(id)) return;
-    if (id === this.selectedCurriculumId) {
-      this.journeyPanelVisible = !this.journeyPanelVisible;
-      return;
-    }
+    const alreadySelected = id === this.selectedCurriculumId;
     this.selectedCurriculumId = id;
-    this.journeyPanelVisible = true;
+    this.journeyPanelVisible = alreadySelected ? !this.journeyPanelVisible : true;
+    if (this.selected) {
+      this.selected = null;
+      this.detailsVisible = false;
+      this.highlightedEntryId = null;
+      this.focusedJourneyPlacementId = null;
+      this.setMotionPaused(false);
+    }
+    this.focusCurriculum(id);
   }
 
   handleCurriculumDockKey(event: KeyboardEvent, index: number): void {
@@ -372,6 +377,16 @@ export class KnowledgeComponent {
 
   nodeVisible(node: PositionedTopic): boolean {
     return !!this.selected || node.placementCurriculumIds.some(id => this.activeCurricula.has(id));
+  }
+
+  nodeMuted(node: PositionedTopic): boolean {
+    return !this.selected && this.activeCurricula.has(this.selectedCurriculumId) &&
+      !node.placementCurriculumIds.includes(this.selectedCurriculumId);
+  }
+
+  edgeMuted(edge: Connection): boolean {
+    return !this.selected && this.activeCurricula.has(this.selectedCurriculumId) &&
+      !edge.curriculumIds.includes(this.selectedCurriculumId);
   }
 
   isCenterNode(node: PositionedTopic): boolean {
@@ -632,6 +647,21 @@ export class KnowledgeComponent {
     this.detailsVisible = false;
     this.highlightedEntryId = null;
     this.animateView(1, 0, 0);
+  }
+
+  private focusCurriculum(curriculumId: string): void {
+    const nodes = this.baseNodes.filter(node => node.placementCurriculumIds.includes(curriculumId));
+    if (!nodes.length) return;
+    const minX = Math.min(...nodes.map(node => node.x));
+    const maxX = Math.max(...nodes.map(node => node.x));
+    const minY = Math.min(...nodes.map(node => node.y));
+    const maxY = Math.max(...nodes.map(node => node.y));
+    const paddedWidth = Math.max(1, maxX - minX + 110);
+    const paddedHeight = Math.max(1, maxY - minY + 120);
+    const targetScale = Math.max(.65, Math.min(1.45, 780 / paddedWidth, 450 / paddedHeight));
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+    this.animateView(targetScale, 500 - centerX * targetScale, 320 - centerY * targetScale);
   }
 
   private animateCamera(node: PositionedTopic, targetScale: number): void {

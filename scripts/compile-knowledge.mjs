@@ -24,6 +24,7 @@ export async function compileKnowledge() {
   const topicsSource = await readJson(new URL('topics.json', sourceRoot));
   const journal = await readJson(new URL('journal.json', sourceRoot));
   const sharedGalaxiesSource = await readJson(new URL('shared-galaxies.json', sourceRoot));
+  const constellationLayout = await readJson(new URL('constellation-layout.json', sourceRoot));
   const curriculumFiles = (await readdir(curriculaRoot)).filter(name => name.endsWith('.json')).sort();
   const modules = await Promise.all(curriculumFiles.map(name => readJson(new URL(name, curriculaRoot))));
   const topics = topicsSource.topics;
@@ -238,40 +239,43 @@ export async function compileKnowledge() {
   };
 
   const rootPlacements = placements.filter(placement => !placement.parentPlacementId);
-  const curriculumAngles = Object.fromEntries(curricula.map((curriculum, index) =>
-    [curriculum.id, -.55 + index * Math.PI * 2 / curricula.length]));
-  const curriculumCenters = Object.fromEntries(curricula.map(curriculum => {
-    const angle = curriculumAngles[curriculum.id];
-    return [curriculum.id, { x: 500 + Math.cos(angle) * 315, y: 350 + Math.sin(angle) * 220 }];
-  }));
-  const trackEndpoint = (curriculumId, direction) => {
-    const angle = curriculumAngles[curriculumId];
-    const center = curriculumCenters[curriculumId];
-    return { x: center.x + Math.cos(angle + Math.PI / 2) * 170 * direction, y: center.y + Math.sin(angle + Math.PI / 2) * 170 * direction };
+  if (constellationLayout.version !== 1) fail('constellation layout requires version 1');
+  const layoutBounds = constellationLayout.bounds;
+  if (!layoutBounds || !['left', 'right', 'top', 'bottom'].every(key => Number.isFinite(layoutBounds[key]))) fail('constellation layout requires finite bounds');
+  const validatePoint = (point, label) => {
+    if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) fail(`${label} requires a finite point`);
+    if (point.x < layoutBounds.left || point.x > layoutBounds.right || point.y < layoutBounds.top || point.y > layoutBounds.bottom) fail(`${label} is outside constellation bounds`);
   };
   for (const placement of rootPlacements.filter(placement => placement.curriculumIds.length > 1)) {
-    const configured = sharedGalaxiesSource.galaxies.find(galaxy => galaxy.placementId === placement.id)?.position;
-    if (!configured || !Number.isFinite(configured.x) || !Number.isFinite(configured.y)) fail(`shared galaxy ${placement.id} requires a finite position`);
+    const configured = constellationLayout.sharedPositions[placement.id];
+    validatePoint(configured, `shared galaxy ${placement.id}`);
     positions[placement.id] = { x: configured.x, y: configured.y };
   }
-  curricula.forEach((curriculum, curriculumIndex) => {
+  curricula.forEach(curriculum => {
+    const route = constellationLayout.curricula[curriculum.id];
+    if (!route) fail(`constellation layout omits curriculum ${curriculum.id}`);
+    validatePoint(route.start, `constellation ${curriculum.id} start`);
+    validatePoint(route.end, `constellation ${curriculum.id} end`);
+    if (!Array.isArray(route.offsets) || !route.offsets.length || route.offsets.some(offset => !Number.isFinite(offset))) fail(`constellation ${curriculum.id} requires numeric offsets`);
     const path = orderedRootsByCurriculum[curriculum.id];
     const sharedIndexes = path.map((id, index) => placementById[id].curriculumIds.length > 1 ? index : -1).filter(index => index >= 0);
     const markers = [-1, ...sharedIndexes, path.length];
     for (let marker = 0; marker < markers.length - 1; marker++) {
       const first = markers[marker];
       const last = markers[marker + 1];
-      const source = first < 0 ? trackEndpoint(curriculum.id, -1) : positions[path[first]];
-      const target = last >= path.length ? trackEndpoint(curriculum.id, 1) : positions[path[last]];
+      const source = first < 0 ? route.start : positions[path[first]];
+      const target = last >= path.length ? route.end : positions[path[last]];
       for (let index = first + 1; index < last; index++) {
         const progress = (index - first) / (last - first);
         const dx = target.x - source.x;
         const dy = target.y - source.y;
         const distance = Math.max(1, Math.hypot(dx, dy));
-        const bow = Math.sin(Math.PI * progress) * 35 * (curriculumIndex % 2 ? 1 : -1);
+        const configuredOffset = route.offsets[index % route.offsets.length] ?? 0;
+        const segmentScale = Math.min(72, Math.max(28, distance * .2));
+        const angularOffset = configuredOffset * segmentScale;
         positions[path[index]] = {
-          x: source.x + dx * progress - dy / distance * bow,
-          y: source.y + dy * progress + dx / distance * bow
+          x: source.x + dx * progress - dy / distance * angularOffset,
+          y: source.y + dy * progress + dx / distance * angularOffset
         };
       }
     }

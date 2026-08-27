@@ -62,6 +62,7 @@
         <path *ngFor="let edge of visibleConnections"
           [attr.d]="edgePath(edge)"
           [attr.stroke]="edgeColor(edge)"
+          [class.curriculum-muted]="edgeMuted(edge)"
           [class.related]="edge.relation === 'related'"
           [class.edge-not-started]="edgeStatus(edge) === 'not-started'"
           [class.edge-in-progress]="edgeStatus(edge) === 'in-progress'"
@@ -83,6 +84,7 @@
         class="topic-node"
         [class.galaxy-node]="isGalaxyView"
         [class.hidden-node]="!nodeVisible(node)"
+        [class.curriculum-muted]="nodeMuted(node)"
         [class.center-node]="isCenterNode(node)"
         [class.center-active]="centerNodeActive(node)"
         [class.journey-node]="!!journeyMarker(node)"
@@ -117,7 +119,8 @@
             [attr.width]="starSize(node)"
             [attr.height]="starSize(node)"
             [attr.fill]="nodeColor(node)"/>
-          <g *ngIf="!node.parentPlacementId && node.placementCurriculumIds.length > 1" class="shared-galaxy-colors">
+          <g *ngIf="!node.parentPlacementId && node.placementCurriculumIds.length > 1 && node.placementCurriculumIds.includes(selectedCurriculumId)"
+            class="shared-galaxy-colors">
             <rect *ngFor="let color of nodeCurriculumColors(node); let colorIndex = index"
               [attr.x]="-nodeCurriculumColors(node).length * 2 + colorIndex * 4 + .5" y="6" width="3" height="1.5" [attr.fill]="color"/>
           </g>

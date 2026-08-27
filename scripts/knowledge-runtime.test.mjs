@@ -92,6 +92,17 @@ test('overview layout is deterministic, bounded, direct, and planar within each 
     orientation(first, second, third) * orientation(first, second, fourth) < 0 &&
     orientation(third, fourth, first) * orientation(third, fourth, second) < 0;
   for (const curriculum of runtime.curricula) {
+    const curriculumRoots = roots.filter(placement => placement.curriculumIds.includes(curriculum.id));
+    for (let first = 0; first < curriculumRoots.length; first++) {
+      for (let second = first + 1; second < curriculumRoots.length; second++) {
+        const firstRoot = curriculumRoots[first];
+        const secondRoot = curriculumRoots[second];
+        const firstPoint = runtime.derived.positions[firstRoot.id];
+        const secondPoint = runtime.derived.positions[secondRoot.id];
+        assert.ok(Math.hypot(firstPoint.x - secondPoint.x, firstPoint.y - secondPoint.y) >= 20,
+          `${curriculum.id} places ${firstRoot.id} too close to ${secondRoot.id}`);
+      }
+    }
     const edges = runtime.connections.filter(connection =>
       connection.relation === 'prerequisite' && connection.curriculumIds.includes(curriculum.id));
     for (let first = 0; first < edges.length; first++) {

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "bounds": { "left": 70, "right": 930, "top": 72, "bottom": 625 },
+  "sharedPositions": {
+    "place-mathematical-methods": { "x": 502, "y": 106 },
+    "place-shared-transformer-foundations": { "x": 694, "y": 238 },
+    "place-shared-gpu-numerics-performance": { "x": 563, "y": 322 },
+    "place-shared-distributed-systems": { "x": 536, "y": 458 },
+    "place-shared-data-evaluation-systems": { "x": 472, "y": 342 },
+    "place-data-science-experimental-design": { "x": 302, "y": 219 },
+    "place-shared-production-reliability": { "x": 342, "y": 536 }
+  },
+  "curricula": {
+    "agentic": { "start": { "x": 823, "y": 92 }, "end": { "x": 755, "y": 548 }, "offsets": [0, 0.24, -0.18, 0.32, -0.26, 0.14, -0.2, 0.28, -0.12, 0.22, 0] },
+    "data-science": { "start": { "x": 310, "y": 82 }, "end": { "x": 246, "y": 408 }, "offsets": [0, -0.22, -0.35, -0.16, 0.2, -0.3, 0.16, -0.22, 0.28, -0.12, 0] },
+    "gpu": { "start": { "x": 735, "y": 84 }, "end": { "x": 822, "y": 585 }, "offsets": [0, 0.28, -0.2, 0.34, -0.26, 0.16, -0.3, 0.2, 0] },
+    "inference": { "start": { "x": 862, "y": 302 }, "end": { "x": 170, "y": 588 }, "offsets": [0, -0.24, 0.18, -0.3, 0.25, -0.16, 0.28, -0.2, 0.14, -0.25, 0] },
+    "ml-training": { "start": { "x": 612, "y": 76 }, "end": { "x": 449, "y": 612 }, "offsets": [0, 0.22, -0.28, 0.16, -0.24, 0.31, -0.18, 0.25, -0.14, 0.2, 0] },
+    "physics": { "start": { "x": 502, "y": 106 }, "end": { "x": 92, "y": 104 }, "offsets": [0, -0.3, 0.2, -0.18, 0.34, -0.24, 0.14, -0.32, 0.24, -0.16, 0.28, -0.22, 0.12, -0.26, 0] },
+    "portrait-drawing": { "start": { "x": 94, "y": 271 }, "end": { "x": 258, "y": 571 }, "offsets": [0, 0.32, -0.24, 0.18, -0.3, 0.26, -0.16, 0.22, 0] },
+    "robotics": { "start": { "x": 892, "y": 122 }, "end": { "x": 657, "y": 596 }, "offsets": [0, -0.28, 0.2, -0.34, 0.24, -0.16, 0.3, -0.22, 0.14, 0] }
+  }
+}
