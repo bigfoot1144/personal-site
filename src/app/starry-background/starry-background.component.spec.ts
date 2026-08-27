@@ -20,6 +20,12 @@ describe('StarryBackgroundComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('keeps an expanded reserve of random stars in the nearest foreground depth', () => {
+    const stars = Array.from(fixture.nativeElement.querySelectorAll('.ambient-star')) as HTMLElement[];
+    expect(stars.length).toBe(380);
+    expect(stars.slice(200).every(star => star.dataset['depthLayer'] === '2')).toBeTrue();
+  });
+
   it('moves faint stars with overview parallax and freezes them in detail views', () => {
     component.knowledgeMode = true;
     const stars = fixture.nativeElement.querySelectorAll('.ambient-star') as NodeListOf<HTMLElement>;
@@ -31,6 +37,8 @@ describe('StarryBackgroundComponent', () => {
       scale: 2,
       panX: 120,
       panY: -60,
+      parallaxX: 120,
+      parallaxY: -60,
       viewportWidth: 1000,
       viewportHeight: 700,
       parallaxActive: true
@@ -42,12 +50,23 @@ describe('StarryBackgroundComponent', () => {
     expect(parseFloat(stars[0].style.left)).toBeLessThan(parseFloat(stars[1].style.left));
     expect(parseFloat(stars[1].style.left)).toBeLessThan(parseFloat(stars[2].style.left));
 
+    const zoomStableLeft = star.style.left;
+    const zoomStableTop = star.style.top;
+    component.updateKnowledgeCamera({
+      scale: 3, panX: -500, panY: 240, parallaxX: 120, parallaxY: -60,
+      viewportWidth: 1000, viewportHeight: 700, parallaxActive: true
+    });
+    expect(star.style.left).toBe(zoomStableLeft);
+    expect(star.style.top).toBe(zoomStableTop);
+
     const frozenLeft = star.style.left;
     const frozenTop = star.style.top;
     component.updateKnowledgeCamera({
       scale: 3,
       panX: -400,
       panY: 300,
+      parallaxX: -400,
+      parallaxY: 300,
       viewportWidth: 1000,
       viewportHeight: 700,
       parallaxActive: false

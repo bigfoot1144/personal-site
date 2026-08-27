@@ -88,9 +88,29 @@ test('overview layout is deterministic, bounded, direct, and planar within each 
   }
   const orientation = (first, second, third) =>
     (second.x - first.x) * (third.y - first.y) - (second.y - first.y) * (third.x - first.x);
-  const intersects = (first, second, third, fourth) =>
-    orientation(first, second, third) * orientation(first, second, fourth) < 0 &&
-    orientation(third, fourth, first) * orientation(third, fourth, second) < 0;
+  const epsilon = 1e-7;
+  const onSegment = (point, start, end) =>
+    Math.abs(orientation(start, end, point)) <= epsilon &&
+    point.x >= Math.min(start.x, end.x) - epsilon && point.x <= Math.max(start.x, end.x) + epsilon &&
+    point.y >= Math.min(start.y, end.y) - epsilon && point.y <= Math.max(start.y, end.y) + epsilon;
+  const intersects = (first, second, third, fourth) => {
+    const firstThird = orientation(first, second, third);
+    const firstFourth = orientation(first, second, fourth);
+    const thirdFirst = orientation(third, fourth, first);
+    const thirdSecond = orientation(third, fourth, second);
+    if (firstThird * firstFourth < -epsilon && thirdFirst * thirdSecond < -epsilon) return true;
+    return onSegment(third, first, second) || onSegment(fourth, first, second) ||
+      onSegment(first, third, fourth) || onSegment(second, third, fourth);
+  };
+  const distanceToSegment = (point, start, end) => {
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+    const lengthSquared = dx * dx + dy * dy;
+    const progress = lengthSquared
+      ? Math.max(0, Math.min(1, ((point.x - start.x) * dx + (point.y - start.y) * dy) / lengthSquared))
+      : 0;
+    return Math.hypot(point.x - start.x - progress * dx, point.y - start.y - progress * dy);
+  };
   for (const curriculum of runtime.curricula) {
     const curriculumRoots = roots.filter(placement => placement.curriculumIds.includes(curriculum.id));
     for (let first = 0; first < curriculumRoots.length; first++) {
@@ -105,6 +125,16 @@ test('overview layout is deterministic, bounded, direct, and planar within each 
     }
     const edges = runtime.connections.filter(connection =>
       connection.relation === 'prerequisite' && connection.curriculumIds.includes(curriculum.id));
+    for (const root of curriculumRoots) {
+      for (const edge of edges) {
+        if (root.id === edge.source || root.id === edge.target) continue;
+        assert.ok(distanceToSegment(
+          runtime.derived.positions[root.id],
+          runtime.derived.positions[edge.source],
+          runtime.derived.positions[edge.target]) >= 18,
+        `${curriculum.id} places ${root.id} too close to edge ${edge.id}`);
+      }
+    }
     for (let first = 0; first < edges.length; first++) {
       for (let second = first + 1; second < edges.length; second++) {
         const firstEdge = edges[first];
@@ -117,6 +147,9 @@ test('overview layout is deterministic, bounded, direct, and planar within each 
       }
     }
   }
+  assert.deepEqual(runtime.derived.positions['place-data-science-causal-inference'], { x: 390, y: 256 });
+  assert.deepEqual(runtime.derived.positions['place-physics-goal'], { x: 350, y: 148 });
+  assert.deepEqual(runtime.derived.positions['place-portrait-drawing-facial-features'], { x: 205, y: 356 });
   assert.equal(Object.keys(runtime.derived.connectionPaths).length, runtime.connections.length);
   for (const connection of runtime.connections) {
     const source = runtime.derived.positions[connection.source];

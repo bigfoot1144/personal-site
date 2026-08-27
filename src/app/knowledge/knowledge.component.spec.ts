@@ -24,21 +24,27 @@ describe('KnowledgeComponent curriculum dock', () => {
 
   it('toggles child-count badges from the top controls', () => {
     const toggle = fixture.nativeElement.querySelector('.child-count-toggle') as HTMLButtonElement;
-    expect(fixture.nativeElement.querySelectorAll('.child-badge').length).toBeGreaterThan(0);
-
-    toggle.click();
-    fixture.detectChanges();
     expect(component.showChildCounts).toBeFalse();
     expect(toggle.getAttribute('aria-pressed')).toBe('false');
     expect(fixture.nativeElement.querySelectorAll('.child-badge').length).toBe(0);
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(component.showChildCounts).toBeTrue();
+    expect(toggle.getAttribute('aria-pressed')).toBe('true');
+    expect(fixture.nativeElement.querySelectorAll('.child-badge').length).toBeGreaterThan(0);
   });
 
   it('collapses the progress menu from its top-right arrow', () => {
+    component.focusedJourneyPlacementId = component.baseNodes[0].placementId;
+    fixture.detectChanges();
     const collapse = fixture.nativeElement.querySelector('.journey-collapse') as HTMLButtonElement;
     collapse.click();
     fixture.detectChanges();
 
     expect(component.journeyPanelVisible).toBeFalse();
+    expect(component.focusedJourneyPlacementId).toBeNull();
+    expect(fixture.nativeElement.querySelector('.knowledge-shell').classList).not.toContain('journey-focus-active');
     expect(fixture.nativeElement.querySelector('.journey-card')).toBeNull();
   });
 
@@ -69,16 +75,23 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(component.focusedJourneyPlacementId).toBe(progress.current.id);
     expect(fixture.nativeElement.querySelector('.knowledge-shell').classList).toContain('journey-focus-active');
     expect(fixture.nativeElement.querySelector('.topic-node.jump-focused')).not.toBeNull();
+    const otherTitle = fixture.nativeElement.querySelector(
+      '.topic-node:not(.jump-focused) .topic-title') as SVGTextElement;
+    expect(getComputedStyle(otherTitle).fontSize).not.toBe('3.5px');
     expect(component.journeyMarkerLabel('current', focused)).toBe('NEXT UP');
   });
 
   it('changes the progress card without changing graph visibility', () => {
     const activeBefore = [...component.activeCurricula].sort();
+    component.focusedJourneyPlacementId = component.baseNodes[0].placementId;
+    fixture.detectChanges();
     const agentTab = fixture.nativeElement.querySelector('#curriculum-tab-agentic') as HTMLButtonElement;
     agentTab.click();
     fixture.detectChanges();
 
     expect(component.selectedCurriculumId).toBe('agentic');
+    expect(component.focusedJourneyPlacementId).toBeNull();
+    expect(fixture.nativeElement.querySelector('.knowledge-shell').classList).not.toContain('journey-focus-active');
     expect([...component.activeCurricula].sort()).toEqual(activeBefore);
     expect(fixture.nativeElement.querySelector('.journey-card').getAttribute('aria-labelledby')).toBe('curriculum-tab-agentic');
   });
@@ -99,6 +112,29 @@ describe('KnowledgeComponent curriculum dock', () => {
     component.select(nodes[0]);
     component.selectCurriculum('agentic');
     expect(component.selected).toBeNull();
+  });
+
+  it('suppresses star activation after dragging from a star or its label', () => {
+    const node = component.baseNodes[0];
+    const select = spyOn(component, 'select');
+    const draggedClick = { detail: 1, preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
+    (component as any).panMoved = true;
+    component.activateNodeFromClick(node, draggedClick as unknown as MouseEvent);
+    expect(select).not.toHaveBeenCalled();
+    expect(draggedClick.preventDefault).toHaveBeenCalled();
+
+    (component as any).panMoved = false;
+    component.activateNodeFromClick(node, { detail: 1 } as MouseEvent);
+    expect(select).toHaveBeenCalledOnceWith(node);
+  });
+
+  it('limits overview zoom-out without restricting panning', () => {
+    const svg = fixture.nativeElement.querySelector('.constellation') as SVGSVGElement;
+    component.scale = .76;
+    component.onWheel({
+      preventDefault: () => undefined, currentTarget: svg, clientX: 500, clientY: 350, deltaY: 10000
+    } as unknown as WheelEvent);
+    expect(component.scale).toBe(.75);
   });
 
   it('publishes live overview camera state and freezes parallax in drill-down', () => {

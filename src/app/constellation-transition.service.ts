@@ -12,6 +12,8 @@ export interface KnowledgeCameraState {
   scale: number;
   panX: number;
   panY: number;
+  parallaxX: number;
+  parallaxY: number;
   viewportWidth: number;
   viewportHeight: number;
   parallaxActive: boolean;

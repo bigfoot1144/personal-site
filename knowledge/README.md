@@ -7,7 +7,7 @@ The files in this directory are the source of truth. The Angular application con
 - `topics.json`: canonical topic definitions. Progress always attaches to a topic ID.
 - `curricula/<id>.json`: one visual curriculum, its placements, and its connections.
 - `shared-galaxies.json`: top-level placements shared directly by multiple curricula, their canonical children, and path insertion points.
-- `constellation-layout.json`: overview bounds, shared-star anchors, and the angular route profile for each curriculum.
+- `constellation-layout.json`: overview bounds, shared-star anchors, angular route profiles, and optional root-star position overrides.
 - `journal.json`: dated work, notes, projects, and status updates.
 
 Curriculum modules omit redundant `curriculumIds` and `topicIds`. The compiler adds the module curriculum ID to each placement and connection, then derives membership from the placements.
@@ -58,7 +58,7 @@ Use `shared-galaxies.json` when several curricula genuinely traverse the same bo
 
 ## Overview layout
 
-Use `constellation-layout.json` to shape the overview without changing curriculum semantics. Shared positions are keyed by canonical root placement ID. Each curriculum route has start/end anchors and perpendicular offsets that fan its ordered stages into an angular constellation; the compiler validates bounds, and the graph tests enforce minimum spacing and within-curriculum planarity.
+Use `constellation-layout.json` to shape the overview without changing curriculum semantics. Shared positions are keyed by canonical root placement ID. Each curriculum route has start/end anchors and perpendicular offsets that fan its ordered stages into an angular constellation. `positionOverrides` may fine-tune exclusive root placements after route generation; shared roots must remain in `sharedPositions`. The compiler validates bounds, and the graph tests enforce minimum spacing and within-curriculum planarity.
 
 ## Journal updates
 

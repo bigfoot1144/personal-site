@@ -337,7 +337,7 @@ h1 {
 .topic-node.goal-node .star-core { fill: var(--node-color); opacity: .82; filter: drop-shadow(0 0 3px var(--node-color)); }
 .topic-node.jump-focused .star-core { stroke: #fff; stroke-width: 1.2px; filter: drop-shadow(0 0 4px #ffcf70) drop-shadow(0 0 9px rgba(255, 207, 112, .65)); animation: jump-focus 1.15s ease-in-out infinite alternate; }
 .topic-node.jump-focused .topic-title { opacity: 1 !important; font-size: 9.5px !important; }
-.journey-focus-active .topic-node:not(.jump-focused) .star-label text { font-size: 3.5px !important; opacity: .14 !important; }
+.journey-focus-active .topic-node:not(.jump-focused) .star-label text { opacity: .14 !important; }
 .journey-focus-active .topic-node.jump-focused .star-label .topic-title { font-size: 10.5px !important; opacity: 1 !important; }
 .journey-focus-active .topic-node.jump-focused .journey-marker text { font-size: 6px; opacity: 1; }
 

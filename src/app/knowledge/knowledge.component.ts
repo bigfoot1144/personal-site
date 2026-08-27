@@ -73,11 +73,15 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
   activeCurricula = new Set(this.data.curricula.map(curriculum => curriculum.id));
   selectedCurriculumId = 'ml-training';
   journeyPanelVisible = true;
-  showChildCounts = true;
+  showChildCounts = false;
   selected: PositionedTopic | null = null;
   scale = 1;
+  private readonly overviewMinScale = .75;
+  private readonly detailMinScale = .55;
   panX = 0;
   panY = 0;
+  private parallaxX = 0;
+  private parallaxY = 0;
   highlightedEntryId: string | null = null;
   detailsVisible = false;
   searchOpen = false;
@@ -89,6 +93,7 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
   private lastPointer = { x: 0, y: 0 };
   private pointerStartedAt = { x: 0, y: 0 };
   private panMoved = false;
+  private pointerStartedOnTopic = false;
   private cameraFrame: number | null = null;
   private unregisterSnapshotProvider: (() => void) | null = null;
   private ambientParallaxSuspended = false;
@@ -145,6 +150,8 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
       scale: this.scale,
       panX: this.panX,
       panY: this.panY,
+      parallaxX: this.parallaxX,
+      parallaxY: this.parallaxY,
       viewportWidth: bounds.width || window.innerWidth,
       viewportHeight: bounds.height || window.innerHeight,
       parallaxActive: !this.selected && !this.ambientParallaxSuspended
@@ -350,6 +357,15 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
 
 
 
+  activateNodeFromClick(node: PositionedTopic, event: MouseEvent): void {
+    if (event.detail > 0 && this.panMoved) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    this.select(node);
+  }
+
   select(node: PositionedTopic): void {
     this.focusedJourneyPlacementId = null;
     if (!this.selected) {
@@ -390,6 +406,7 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
     if (!this.curriculumById.has(id)) return;
     const alreadySelected = id === this.selectedCurriculumId;
     const leavingDrilldown = !!this.selected;
+    this.focusedJourneyPlacementId = null;
     this.selectedCurriculumId = id;
     this.journeyPanelVisible = alreadySelected ? !this.journeyPanelVisible : true;
     if (this.selected) {
@@ -404,6 +421,11 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
       this.overviewCameraBeforeDrilldown = null;
       this.publishCameraState();
     } : undefined);
+  }
+
+  collapseJourneyPanel(): void {
+    this.journeyPanelVisible = false;
+    this.focusedJourneyPlacementId = null;
   }
 
   handleCurriculumDockKey(event: KeyboardEvent, index: number): void {
@@ -625,7 +647,8 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
     const worldY = (anchor.y - this.panY) / previousScale;
     const rawZoomFactor = Math.exp(-event.deltaY * .001);
     const zoomFactor = Math.max(.94, Math.min(1.06, rawZoomFactor));
-    const nextScale = Math.max(.55, Math.min(3.2, previousScale * zoomFactor));
+    const minimumScale = this.selected ? this.detailMinScale : this.overviewMinScale;
+    const nextScale = Math.max(minimumScale, Math.min(3.2, previousScale * zoomFactor));
 
     this.scale = nextScale;
     this.panX = anchor.x - worldX * nextScale;
@@ -635,12 +658,12 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
 
   startPan(event: PointerEvent): void {
     const target = event.target as Element;
-    if (target.closest('.topic-node, .child-badge, .planet-node, a, button')) {
+    if (target.closest('.planet-node, a, button')) {
       return;
     }
 
+    this.pointerStartedOnTopic = !!target.closest('.topic-node');
     this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-    (event.currentTarget as Element).setPointerCapture(event.pointerId);
     if (this.pointers.size === 2) {
       this.cancelCamera();
       this.dragging = false;
@@ -658,30 +681,38 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
     if (!this.pointers.has(event.pointerId)) return;
     this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (this.pointers.size === 2) {
+      if (!this.panMoved) (event.currentTarget as Element).setPointerCapture(event.pointerId);
       this.panMoved = true;
       const distance = this.pointerDistance();
       if (this.lastPinchDistance) {
-        this.scale = Math.max(.55, Math.min(3.2, this.scale * distance / this.lastPinchDistance));
+        const minimumScale = this.selected ? this.detailMinScale : this.overviewMinScale;
+        this.scale = Math.max(minimumScale, Math.min(3.2, this.scale * distance / this.lastPinchDistance));
         this.applyGraphTransform();
       }
       this.lastPinchDistance = distance;
       return;
     }
     if (!this.dragging) return;
-    if (Math.hypot(event.clientX - this.pointerStartedAt.x, event.clientY - this.pointerStartedAt.y) > 5) {
+    if (!this.panMoved && Math.hypot(event.clientX - this.pointerStartedAt.x, event.clientY - this.pointerStartedAt.y) > 5) {
       this.panMoved = true;
+      (event.currentTarget as Element).setPointerCapture(event.pointerId);
     }
     const svg = event.currentTarget as SVGSVGElement;
-    const unitScale = 1000 / Math.max(1, svg.clientWidth);
-    this.panX += (event.clientX - this.lastPointer.x) * unitScale;
-    this.panY += (event.clientY - this.lastPointer.y) * unitScale;
+    const currentPoint = this.svgPoint(svg, event.clientX, event.clientY);
+    const previousPoint = this.svgPoint(svg, this.lastPointer.x, this.lastPointer.y);
+    const deltaX = currentPoint.x - previousPoint.x;
+    const deltaY = currentPoint.y - previousPoint.y;
+    this.panX += deltaX;
+    this.panY += deltaY;
+    this.parallaxX += deltaX;
+    this.parallaxY += deltaY;
     this.applyGraphTransform();
     this.lastPointer = { x: event.clientX, y: event.clientY };
   }
 
   endPan(event: PointerEvent): void {
     const navigateUp = this.pointers.size === 1 && this.pointers.has(event.pointerId)
-      && !this.panMoved && !!this.selected;
+      && !this.panMoved && !this.pointerStartedOnTopic && !!this.selected;
     this.pointers.delete(event.pointerId);
     this.lastPinchDistance = 0;
     this.dragging = false;
@@ -736,7 +767,7 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
     const maxY = Math.max(...nodes.map(node => node.y));
     const paddedWidth = Math.max(1, maxX - minX + 110);
     const paddedHeight = Math.max(1, maxY - minY + 120);
-    const targetScale = Math.max(.65, Math.min(1.45, 780 / paddedWidth, 450 / paddedHeight));
+    const targetScale = Math.max(this.overviewMinScale, Math.min(1.45, 780 / paddedWidth, 450 / paddedHeight));
     const centerX = (minX + maxX) / 2;
     const centerY = (minY + maxY) / 2;
     this.animateView(targetScale, 500 - centerX * targetScale, 320 - centerY * targetScale, onComplete);

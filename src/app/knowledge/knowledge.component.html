@@ -102,7 +102,7 @@
         [attr.aria-label]="node.title + ', ' + statusLabel(node.status)"
         [attr.data-placement-id]="node.placementId"
         [style.--node-color]="nodeColor(node)"
-        (click)="select(node)"
+        (click)="activateNodeFromClick(node, $event)"
         (keydown.enter)="select(node)"
         (keydown.space)="select(node); $event.preventDefault()"
         (pointerenter)="setMotionPaused(!isSolarView)"
@@ -153,7 +153,7 @@
             tabindex="0"
             role="button"
             [attr.aria-label]="'Focus ' + node.title + ' and reveal ' + childCount(node) + ' child topic'"
-            (click)="select(node); $event.stopPropagation()"
+            (click)="activateNodeFromClick(node, $event); $event.stopPropagation()"
             (keydown.enter)="select(node); $event.stopPropagation()"
             (keydown.space)="select(node); $event.preventDefault(); $event.stopPropagation()">
             <circle class="child-badge-hit-area" r="11"/>
@@ -213,7 +213,7 @@
             [attr.aria-pressed]="progress.active"
             (click)="toggleCurriculum(progress.curriculumId)">{{ progress.active ? 'Hide' : 'Show' }}</button>
           <button class="journey-collapse" type="button" aria-label="Collapse curriculum progress"
-            (click)="journeyPanelVisible = false"><span aria-hidden="true">↓</span></button>
+            (click)="collapseJourneyPanel()"><span aria-hidden="true">↓</span></button>
           <button class="next-up-button" type="button" (click)="jumpToNext(progress)">Next up</button>
         </div>
       </div>

@@ -54,6 +54,9 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   scattering = false;
   private stars: HTMLElement[] = [];
   private ambientOrigins: Array<{ x: number; y: number }> = [];
+  private readonly baseAmbientStarCount = 200;
+  private readonly foregroundReserveCount = 180;
+  private readonly foregroundDepthIndex = 2;
   private readonly ambientDepthLayers = [
     { factor: .07, opacity: .38, glow: 'none' },
     { factor: .15, opacity: .52, glow: '0 0 3px rgba(220, 235, 255, .55)' },
@@ -749,7 +752,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
     this.stars.forEach((star, index) => {
       star.style.animation = 'none';
-      const depth = this.ambientDepthLayers[index % this.ambientDepthLayers.length];
+      const depth = this.depthForStar(star, index);
       star.style.transition = duration
         ? 'left 900ms cubic-bezier(.2,.82,.2,1), top 900ms cubic-bezier(.2,.82,.2,1), width 900ms ease, height 900ms ease, background-color 900ms ease, opacity 220ms ease'
         : 'none';
@@ -848,15 +851,14 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     const wrap = (value: number, span: number) => ((value % span) + span) % span;
 
     for (let index = this.mappedStarCount; index < this.stars.length; index++) {
-      const depth = this.ambientDepthLayers[index % this.ambientDepthLayers.length];
-      const parallaxScale = 1 + (state.scale - 1) * depth.factor;
-      const translateX = state.panX * unitScale * depth.factor;
-      const translateY = state.panY * unitScale * depth.factor;
+      const depth = this.depthForStar(this.stars[index], index);
+      const translateX = state.parallaxX * unitScale * depth.factor;
+      const translateY = state.parallaxY * unitScale * depth.factor;
       const origin = this.ambientOrigins[index] ?? { x: Math.random(), y: Math.random() };
       const baseX = origin.x * state.viewportWidth;
       const baseY = origin.y * state.viewportHeight;
-      const x = state.viewportWidth / 2 + (baseX - state.viewportWidth / 2) * parallaxScale + translateX;
-      const y = state.viewportHeight / 2 + (baseY - state.viewportHeight / 2) * parallaxScale + translateY;
+      const x = baseX + translateX;
+      const y = baseY + translateY;
       const star = this.stars[index];
       star.style.transition = 'none';
       star.style.left = wrap(x + margin, spanX) - margin + 'px';
@@ -873,11 +875,18 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     this.shootingStars = [];
   }
 
+  private depthForStar(star: HTMLElement, fallbackIndex: number) {
+    const configuredIndex = Number(star.dataset['depthLayer']);
+    const index = Number.isInteger(configuredIndex) ? configuredIndex : fallbackIndex % this.ambientDepthLayers.length;
+    return this.ambientDepthLayers[index] ?? this.ambientDepthLayers[0];
+  }
+
   private generateStars(): void {
     const container = this.el.nativeElement.querySelector('.starry-background');
     
     // Create stars
-    for (let i = 0; i < 200; i++) {
+    const starCount = this.baseAmbientStarCount + this.foregroundReserveCount;
+    for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.classList.add('ambient-star');
       
@@ -898,7 +907,10 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       // Randomize star size (1-4px)
       const size = 1 + Math.floor(Math.random() * 4);
       star.dataset['ambientSize'] = String(size);
-      star.dataset['depthLayer'] = String(i % this.ambientDepthLayers.length);
+      const depthIndex = i < this.baseAmbientStarCount
+        ? i % this.ambientDepthLayers.length
+        : this.foregroundDepthIndex;
+      star.dataset['depthLayer'] = String(depthIndex);
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
       

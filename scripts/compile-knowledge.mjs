@@ -301,6 +301,15 @@ export async function compileKnowledge() {
     }
   }
 
+  for (const [placementId, configured] of Object.entries(constellationLayout.positionOverrides ?? {})) {
+    const placement = placementById[placementId];
+    if (!placement) fail(`constellation position override references unknown placement ${placementId}`);
+    if (placement.parentPlacementId) fail(`constellation position override ${placementId} must target a root placement`);
+    if (placement.curriculumIds.length > 1) fail(`shared galaxy ${placementId} must use sharedPositions instead of positionOverrides`);
+    validatePoint(configured, `constellation position override ${placementId}`);
+    positions[placementId] = { x: configured.x, y: configured.y };
+  }
+
   for (const placement of placements.filter(placement => placement.parentPlacementId)) {
     const parent = positions[placement.parentPlacementId];
     const siblings = childrenByPlacement[placement.parentPlacementId];
