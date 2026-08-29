@@ -68,6 +68,8 @@ Append entries to `journal.json`; do not rewrite prior history. Entry IDs are st
 - `note`: durable content rendered as a planet.
 - `project`: an artifact, optionally with a URL, rendered as a planet.
 
+Use the `add-project` skill (`.opencode/skills/add-project/SKILL.md`) to add a project as a planet; it ensures the topic exists, is placed as a child of a stage in the target curriculum, and regenerates the runtime artifact.
+
 Allowed statuses are `not-started`, `in-progress`, and `completed`. Every status update topic must also appear in the entry's `topicIds`. The latest dated update wins, and canonical status automatically appears in every curriculum placement.
 
 ## Completion checklist

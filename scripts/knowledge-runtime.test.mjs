@@ -15,12 +15,26 @@ test('compiled knowledge artifact is current and structurally indexed', async ()
   assert.equal(Object.keys(runtime.derived.entriesByTopic).length, runtime.topics.length);
 });
 
-test('all canonical progress starts blank and shared topics retain every placement', async () => {
+test('shared topics retain every placement', async () => {
   const runtime = JSON.parse(await readFile(runtimeUrl, 'utf8'));
   assert.ok(runtime.derived.placementsByTopic.quantization.length > 1);
-  assert.equal(runtime.journal.entries.length, 0);
-  assert.ok(Object.values(runtime.derived.statusByTopic).every(status => status === 'not-started'));
-  assert.ok(Object.values(runtime.derived.aggregateStatusByPlacement).every(status => status === 'not-started'));
+});
+
+test('journal entries are well-formed, planet-capable, and statuses stay in the allowed set', async () => {
+  const runtime = JSON.parse(await readFile(runtimeUrl, 'utf8'));
+  const placementById = new Map(runtime.placements.map(placement => [placement.id, placement]));
+  const isPlanetTopic = topicId => (runtime.derived.placementsByTopic[topicId] ?? [])
+    .some(placementId => placementById.get(placementId)?.parentPlacementId !== undefined);
+  for (const entry of runtime.journal.entries) {
+    assert.ok(Array.isArray(entry.topicIds) && entry.topicIds.length > 0, `entry ${entry.id} has no topics`);
+    if (entry.type === 'project' || entry.type === 'note') {
+      assert.ok(entry.topicIds.some(isPlanetTopic),
+        `entry ${entry.id} is not planet-capable: none of its topics has a child placement`);
+    }
+  }
+  const allowedStatuses = new Set(['not-started', 'in-progress', 'completed']);
+  assert.ok(Object.values(runtime.derived.statusByTopic).every(status => allowedStatuses.has(status)));
+  assert.ok(Object.values(runtime.derived.aggregateStatusByPlacement).every(status => allowedStatuses.has(status)));
 });
 
 test('runtime JSON parses and indexes within the initialization budget', async () => {
