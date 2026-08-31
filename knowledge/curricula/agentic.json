@@ -1,0 +1,659 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "agentic",
+    "title": "Agentic Engineering",
+    "description": "Measurable, secure, long-horizon tool-using systems engineered around stochastic models.",
+    "color": "#55d9bb",
+    "goalTopicId": "agentic-engineering-goal",
+    "shortTitle": "Agents"
+  },
+  "placements": [
+    {
+      "id": "place-agentic-llm-application-primitives",
+      "topicId": "llm-application-primitives",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-llm-apis",
+      "topicId": "llm-apis",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-messages-and-context",
+      "topicId": "messages-and-context",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-structured-outputs",
+      "topicId": "structured-outputs",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-tool-calling",
+      "topicId": "tool-calling",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-streaming",
+      "topicId": "streaming",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-token-accounting",
+      "topicId": "token-accounting",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-model-selection",
+      "topicId": "model-selection",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-token-sampling",
+      "topicId": "token-sampling",
+      "parentPlacementId": "place-agentic-llm-application-primitives",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-tool-interface-engineering",
+      "topicId": "tool-interface-engineering",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-tool-schemas",
+      "topicId": "tool-schemas",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-tool-contracts",
+      "topicId": "tool-contracts",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-argument-validation",
+      "topicId": "argument-validation",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-idempotency",
+      "topicId": "idempotency",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-retries",
+      "topicId": "retries",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-timeouts",
+      "topicId": "timeouts",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-error-semantics",
+      "topicId": "error-semantics",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-sandboxing",
+      "topicId": "sandboxing",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-side-effects",
+      "topicId": "side-effects",
+      "parentPlacementId": "place-agentic-tool-interface-engineering",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-agent-control-loops",
+      "topicId": "agent-control-loops",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-plan-act-observe",
+      "topicId": "plan-act-observe",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-agent-state",
+      "topicId": "agent-state",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-stop-conditions",
+      "topicId": "stop-conditions",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-task-decomposition",
+      "topicId": "task-decomposition",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-error-recovery",
+      "topicId": "error-recovery",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agent-checkpoints",
+      "topicId": "agent-checkpoints",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-workflow-vs-agent",
+      "topicId": "workflow-vs-agent",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-deterministic-control",
+      "topicId": "deterministic-control",
+      "parentPlacementId": "place-agentic-agent-control-loops",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-context-engineering",
+      "topicId": "context-engineering",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-context-selection",
+      "topicId": "context-selection",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-retrieval",
+      "topicId": "retrieval",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-embeddings",
+      "topicId": "embeddings",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-context-ranking",
+      "topicId": "context-ranking",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-context-compaction",
+      "topicId": "context-compaction",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-summarization",
+      "topicId": "summarization",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-working-memory",
+      "topicId": "working-memory",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-persistent-memory",
+      "topicId": "persistent-memory",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-provenance",
+      "topicId": "provenance",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-repository-context",
+      "topicId": "repository-context",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 9
+    },
+    {
+      "id": "place-agentic-long-horizon-context",
+      "topicId": "long-horizon-context",
+      "parentPlacementId": "place-agentic-context-engineering",
+      "order": 10
+    },
+    {
+      "id": "place-agentic-agent-orchestration",
+      "topicId": "agent-orchestration",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-routing",
+      "topicId": "routing",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-sequential-workflows",
+      "topicId": "sequential-workflows",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-parallel-workflows",
+      "topicId": "parallel-workflows",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-evaluator-optimizer",
+      "topicId": "evaluator-optimizer",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-subagents",
+      "topicId": "subagents",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-delegation",
+      "topicId": "delegation",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-supervisor-worker",
+      "topicId": "supervisor-worker",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-agent-handoffs",
+      "topicId": "agent-handoffs",
+      "parentPlacementId": "place-agentic-agent-orchestration",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-agent-reliability-security",
+      "topicId": "agent-reliability-security",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-prompt-injection",
+      "topicId": "prompt-injection",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-tool-output-injection",
+      "topicId": "tool-output-injection",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-least-privilege",
+      "topicId": "least-privilege",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-permission-boundaries",
+      "topicId": "permission-boundaries",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-human-approval",
+      "topicId": "human-approval",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-secret-management",
+      "topicId": "secret-management",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-transactional-side-effects",
+      "topicId": "transactional-side-effects",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-rollback",
+      "topicId": "rollback",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-rate-limiting",
+      "topicId": "rate-limiting",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-failure-containment",
+      "topicId": "failure-containment",
+      "parentPlacementId": "place-agentic-agent-reliability-security",
+      "order": 9
+    },
+    {
+      "id": "place-agentic-agent-evaluation",
+      "topicId": "agent-evaluation",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-evaluation-infrastructure",
+      "topicId": "evaluation-infrastructure",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-evaluation-metrics",
+      "topicId": "evaluation-metrics",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-experimental-design",
+      "topicId": "experimental-design",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-task-datasets",
+      "topicId": "task-datasets",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-deterministic-graders",
+      "topicId": "deterministic-graders",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-rubric-graders",
+      "topicId": "rubric-graders",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-llm-judges",
+      "topicId": "llm-judges",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-trajectory-evaluation",
+      "topicId": "trajectory-evaluation",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-adversarial-evaluation",
+      "topicId": "adversarial-evaluation",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-regression-suites",
+      "topicId": "regression-suites",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 9
+    },
+    {
+      "id": "place-agentic-offline-online-evaluation",
+      "topicId": "offline-online-evaluation",
+      "parentPlacementId": "place-agentic-agent-evaluation",
+      "order": 10
+    },
+    {
+      "id": "place-agentic-agent-observability-optimization",
+      "topicId": "agent-observability-optimization",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-observability",
+      "topicId": "observability",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-distributed-tracing",
+      "topicId": "distributed-tracing",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-benchmarking",
+      "topicId": "benchmarking",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-profiling",
+      "topicId": "profiling",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-agent-traces",
+      "topicId": "agent-traces",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-tool-call-traces",
+      "topicId": "tool-call-traces",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-failure-taxonomy",
+      "topicId": "failure-taxonomy",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-latency-analysis",
+      "topicId": "latency-analysis",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-token-cost",
+      "topicId": "token-cost",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-caching",
+      "topicId": "caching",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 9
+    },
+    {
+      "id": "place-agentic-concurrency",
+      "topicId": "concurrency",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 10
+    },
+    {
+      "id": "place-agentic-model-routing",
+      "topicId": "model-routing",
+      "parentPlacementId": "place-agentic-agent-observability-optimization",
+      "order": 11
+    },
+    {
+      "id": "place-agentic-production-agent-systems",
+      "topicId": "production-agent-systems",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-distributed-systems",
+      "topicId": "distributed-systems",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 0
+    },
+    {
+      "id": "place-agentic-persistent-agent-state",
+      "topicId": "persistent-agent-state",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 1
+    },
+    {
+      "id": "place-agentic-resumable-execution",
+      "topicId": "resumable-execution",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 2
+    },
+    {
+      "id": "place-agentic-job-queues",
+      "topicId": "job-queues",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 3
+    },
+    {
+      "id": "place-agentic-model-deployment",
+      "topicId": "model-deployment",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 4
+    },
+    {
+      "id": "place-agentic-agent-versioning",
+      "topicId": "agent-versioning",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 5
+    },
+    {
+      "id": "place-agentic-prompt-versioning",
+      "topicId": "prompt-versioning",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 6
+    },
+    {
+      "id": "place-agentic-tool-versioning",
+      "topicId": "tool-versioning",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 7
+    },
+    {
+      "id": "place-agentic-canary-deployment",
+      "topicId": "canary-deployment",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 8
+    },
+    {
+      "id": "place-agentic-monitoring",
+      "topicId": "monitoring",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 9
+    },
+    {
+      "id": "place-agentic-fault-tolerance",
+      "topicId": "fault-tolerance",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 10
+    },
+    {
+      "id": "place-agentic-production-agent-systems-rollback",
+      "topicId": "rollback",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 11
+    },
+    {
+      "id": "place-agentic-load-balancing",
+      "topicId": "load-balancing",
+      "parentPlacementId": "place-agentic-production-agent-systems",
+      "order": 12
+    },
+    {
+      "id": "place-agentic-agentic-engineering-goal",
+      "topicId": "agentic-engineering-goal",
+      "order": 9
+    }
+  ],
+  "connections": [
+    {
+      "id": "agentic-root-0-0-1",
+      "source": "place-agentic-llm-application-primitives",
+      "target": "place-agentic-tool-interface-engineering",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-1-1-2",
+      "source": "place-agentic-tool-interface-engineering",
+      "target": "place-agentic-agent-control-loops",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-2-2-3",
+      "source": "place-agentic-agent-control-loops",
+      "target": "place-agentic-context-engineering",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-3-3-4",
+      "source": "place-agentic-context-engineering",
+      "target": "place-agentic-agent-orchestration",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-4-4-5",
+      "source": "place-agentic-agent-orchestration",
+      "target": "place-agentic-agent-reliability-security",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-5-5-6",
+      "source": "place-agentic-agent-reliability-security",
+      "target": "place-agentic-agent-evaluation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-6-6-7",
+      "source": "place-agentic-agent-evaluation",
+      "target": "place-agentic-agent-observability-optimization",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-7-7-8",
+      "source": "place-agentic-agent-observability-optimization",
+      "target": "place-agentic-production-agent-systems",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "agentic-root-8-8-goal",
+      "source": "place-agentic-production-agent-systems",
+      "target": "place-agentic-agentic-engineering-goal",
+      "relation": "prerequisite"
+    }
+  ]
+}

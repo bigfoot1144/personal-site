@@ -1,0 +1,341 @@
+<section class="knowledge-shell"
+  [class.motion-paused]="motionPaused"
+  [class.route-morphing]="routeMorphing"
+  [class.journey-focus-active]="!!focusedJourneyPlacementId"
+  [class.overview-detail]="!selected && scale >= 1.3"
+  aria-label="Knowledge constellation">
+  <header class="constellation-header">
+    <div>
+      <a routerLink="/" class="back-link" aria-label="Return to homepage">← Home</a>
+      <h1>Knowledge Constellation</h1>
+      <p>Follow the paths. Select a star to explore its orbit.</p>
+    </div>
+  </header>
+
+  <nav class="curriculum-filters" aria-label="Knowledge controls">
+    <button class="search-trigger" type="button" (click)="openSearch()" aria-label="Search topics">
+      <span aria-hidden="true">⌕</span> Search <kbd>/</kbd>
+    </button>
+    <button class="child-count-toggle" type="button"
+      [class.active]="showChildCounts" [attr.aria-pressed]="showChildCounts"
+      (click)="showChildCounts = !showChildCounts">
+      Child counts {{ showChildCounts ? 'on' : 'off' }}
+    </button>
+    <button class="deselect-all" type="button" (click)="deselectAllCurricula()"
+      [attr.aria-label]="activeCurricula.size ? 'Deselect all curriculum paths' : 'Reset all curriculum paths'">
+      {{ activeCurricula.size ? 'Deselect all' : 'Reset all' }}
+    </button>
+  </nav>
+
+  <nav *ngIf="selected" class="focus-breadcrumbs" aria-label="Focused topic path">
+    <button class="level-up" type="button" (click)="goUpLevel()" aria-label="Go up one level">
+      <span aria-hidden="true">↑</span> Up one level
+    </button>
+    <span class="breadcrumb-divider" aria-hidden="true"></span>
+    <button type="button" (click)="resetView()">Overview</button>
+    <ng-container *ngFor="let node of breadcrumbs">
+      <span>›</span>
+      <button type="button" (click)="navigateBreadcrumb(node)">{{ node.title }}</button>
+    </ng-container>
+  </nav>
+
+  <div class="legend" aria-label="Progress legend">
+    <span><i class="not-started"></i>Not started</span>
+    <span><i class="in-progress"></i>In progress</span>
+    <span><i class="completed"></i>Completed</span>
+  </div>
+
+  <svg #constellation class="constellation"
+    viewBox="0 0 1000 700"
+    role="group"
+    aria-label="Interactive curriculum graph"
+    (wheel)="onWheel($event)"
+    (pointerdown)="startPan($event)"
+    (pointermove)="movePan($event)"
+    (pointerup)="endPan($event)"
+    (pointercancel)="cancelPan($event)">
+    <defs>
+      <filter id="star-glow"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g #graphStage class="graph-stage" [attr.transform]="'matrix(' + scale + ' 0 0 ' + scale + ' ' + panX + ' ' + panY + ')'"
+      [style.--label-scale]="graphLabelScale">
+      <g class="edges">
+        <path *ngFor="let edge of visibleConnections"
+          [attr.d]="edgePath(edge)"
+          [attr.stroke]="edgeColor(edge)"
+          [class.curriculum-muted]="edgeMuted(edge)"
+          [class.curriculum-focus]="edgeFocus(edge)"
+          [class.related]="edge.relation === 'related'"
+          [class.edge-not-started]="edgeStatus(edge) === 'not-started'"
+          [class.edge-in-progress]="edgeStatus(edge) === 'in-progress'"
+          [class.edge-completed]="edgeStatus(edge) === 'completed'"/>
+      </g>
+
+      <g class="topic-layer"
+        [class.galaxy-field]="isGalaxyView"
+        [style.--galaxy-x]="(selected?.x || 500) + 'px'"
+        [style.--galaxy-y]="(selected?.y || 350) + 'px'">
+        <animateTransform *ngIf="isGalaxyView && selected"
+          attributeName="transform"
+          type="rotate"
+          [attr.from]="'0 ' + selected.x + ' ' + selected.y"
+          [attr.to]="'360 ' + selected.x + ' ' + selected.y"
+          dur="24s"
+          repeatCount="indefinite"/>
+      <g *ngFor="let node of visibleNodes; trackBy: trackNode"
+        class="topic-node"
+        [class.galaxy-node]="isGalaxyView"
+        [class.hidden-node]="!nodeVisible(node)"
+        [class.curriculum-muted]="nodeMuted(node)"
+        [class.center-node]="isCenterNode(node)"
+        [class.center-active]="centerNodeActive(node)"
+        [class.journey-node]="!!journeyMarker(node)"
+        [class.next-node]="journeyMarker(node) === 'next' || journeyMarker(node) === 'current'"
+        [class.goal-node]="journeyMarker(node) === 'goal'"
+        [class.jump-focused]="focusedJourneyPlacementId === node.placementId"
+        [class.selected]="selected?.placementId === node.placementId"
+        [class.goal]="node.tags?.includes('goal')"
+        [class.in-progress]="node.status === 'in-progress'"
+        [class.completed]="node.status === 'completed'"
+        [class.curriculum-focus]="nodeFocus(node)"
+        [attr.transform]="'translate(' + node.x + ' ' + node.y + ')'"
+        [attr.tabindex]="centerNodeActive(node) ? 0 : -1"
+        role="button"
+        [attr.aria-label]="node.title + ', ' + statusLabel(node.status)"
+        [attr.data-placement-id]="node.placementId"
+        [style.--node-color]="nodeColor(node)"
+        (click)="activateNodeFromClick(node, $event)"
+        (keydown.enter)="select(node)"
+        (keydown.space)="select(node); $event.preventDefault()"
+        (pointerenter)="setMotionPaused(!isSolarView)"
+        (pointerleave)="setMotionPaused(false)"
+        (focusin)="setMotionPaused(!isSolarView)"
+        (focusout)="setMotionPaused(false)">
+        <g class="star-gather"
+          [style.--scatter-x]="spawnX(node) + 'px'"
+          [style.--scatter-y]="spawnY(node) + 'px'"
+          [style.--galaxy-delay]="galaxyDelay(node) + 'ms'">
+          <circle class="star-hit-area" r="22"/>
+          <rect class="star-core"
+            [attr.x]="-starSize(node) / 2"
+            [attr.y]="-starSize(node) / 2"
+            [attr.width]="starSize(node)"
+            [attr.height]="starSize(node)"
+            [attr.fill]="nodeColor(node)"/>
+          <g *ngIf="!node.parentPlacementId && node.placementCurriculumIds.length > 1 && node.placementCurriculumIds.includes(selectedCurriculumId)"
+            class="shared-galaxy-colors">
+            <rect *ngFor="let color of nodeCurriculumColors(node); let colorIndex = index"
+              [attr.x]="-nodeCurriculumColors(node).length * 2 + colorIndex * 4 + .5" y="6" width="3" height="1.5" [attr.fill]="color"/>
+          </g>
+          <g class="star-label-scale">
+            <g class="star-label">
+            <animateTransform *ngIf="isGalaxyView"
+              attributeName="transform"
+              type="rotate"
+              from="0"
+              to="-360"
+              dur="24s"
+              repeatCount="indefinite"/>
+            <title>{{ node.title }}</title>
+            <text class="topic-title" [attr.y]="isGalaxyView ? 13 : 25" text-anchor="middle"><tspan *ngFor="let line of node.labelLines; let lineIndex = index" x="0" [attr.dy]="lineIndex ? 9 : 0">{{ line }}</tspan></text>
+            <text *ngIf="journeyOrdinal(node) as ordinal" class="journey-ordinal" [attr.y]="isGalaxyView ? -9 : -13" text-anchor="middle">{{ ordinal < 10 ? '0' + ordinal : ordinal }}</text>
+            <g *ngIf="journeyMarker(node) as marker" class="journey-marker"
+              [class.marker-start]="marker === 'start'" [class.marker-next]="marker === 'next'"
+              [class.marker-current]="marker === 'current'" [class.marker-goal]="marker === 'goal'"
+              [attr.transform]="isGalaxyView ? 'translate(0 22)' : 'translate(0 37)'">
+              <line class="marker-stem" x1="0" y1="-8" x2="0" y2="-3"/>
+              <text x="0" y="3" text-anchor="middle">{{ journeyMarkerLabel(marker, node) }}</text>
+              <line class="marker-rule" x1="-13" y1="7" x2="13" y2="7"/>
+            </g>
+          </g>
+          </g>
+          <g *ngIf="showChildCounts && childCount(node) && selected?.id !== node.id"
+            class="child-badge"
+            transform="translate(10 -10)"
+            tabindex="0"
+            role="button"
+            [attr.aria-label]="'Focus ' + node.title + ' and reveal ' + childCount(node) + ' child topic'"
+            (click)="activateNodeFromClick(node, $event); $event.stopPropagation()"
+            (keydown.enter)="select(node); $event.stopPropagation()"
+            (keydown.space)="select(node); $event.preventDefault(); $event.stopPropagation()">
+            <circle class="child-badge-hit-area" r="11"/>
+            <text text-anchor="middle" dominant-baseline="central">+{{ childCount(node) }}</text>
+          </g>
+        </g>
+      </g>
+      </g>
+
+      <g *ngIf="selected && orbitPlanets.length"
+        class="planet-system"
+        [attr.transform]="'translate(' + selected.x + ' ' + selected.y + ')'">
+        <circle *ngFor="let radius of orbitRadii" class="orbit-path" [attr.r]="radius"/>
+        <g *ngFor="let planet of orbitPlanets; trackBy: trackPlanet"
+          class="planet-orbit"
+          [style.--planet-angle]="planet.angle + 'deg'"
+          [style.--planet-duration]="planet.duration + 's'">
+          <g [attr.transform]="'translate(' + planet.radius + ' 0)'">
+            <g class="planet-facing"
+              [style.--planet-counter-angle]="(-planet.angle) + 'deg'"
+              [style.--planet-duration]="planet.duration + 's'">
+              <g class="planet-node"
+                [class.topic-planet]="planet.kind === 'topic'"
+                [class.highlighted]="highlightedEntryId === planet.entry?.id"
+                tabindex="0"
+                role="button"
+                [attr.aria-label]="planet.kind + ': ' + planet.title"
+                (click)="activatePlanet(planet)"
+                (keydown.enter)="activatePlanet(planet)"
+                (keydown.space)="activatePlanet(planet); $event.preventDefault()"
+                (pointerenter)="setMotionPaused(true)"
+                (pointerleave)="setMotionPaused(false)"
+                (focusin)="setMotionPaused(true)"
+                (focusout)="setMotionPaused(false)">
+                <circle class="planet-hit-area" [attr.r]="planet.size + 8"/>
+                <circle class="planet-core" [attr.r]="planet.size" [attr.fill]="planetColor(planet)"/>
+                <text class="planet-title" [attr.y]="planet.size + 11" text-anchor="middle">{{ planet.title }}</text>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <section *ngIf="selectedJourney as progress" class="journey-hud" aria-label="Curriculum controls and journey progress">
+    <article *ngIf="journeyPanelVisible" class="journey-card"
+      role="tabpanel"
+      [id]="'curriculum-panel-' + progress.curriculumId"
+      [attr.aria-labelledby]="'curriculum-tab-' + progress.curriculumId"
+      [class.active]="progress.active"
+      [style.--journey-color]="progress.color">
+      <div class="journey-heading">
+        <div class="journey-title"><i aria-hidden="true">✦</i><span>{{ progress.title }}</span></div>
+        <div class="journey-actions">
+          <button class="journey-visibility" type="button"
+            [attr.aria-pressed]="progress.active"
+            (click)="toggleCurriculum(progress.curriculumId)">{{ progress.active ? 'Hide' : 'Show' }}</button>
+          <button class="journey-collapse" type="button" aria-label="Collapse curriculum progress"
+            (click)="collapseJourneyPanel()"><span aria-hidden="true">↓</span></button>
+          <button class="next-up-button" type="button" (click)="jumpToNext(progress)">Next up</button>
+        </div>
+      </div>
+      <button class="journey-current" type="button" (click)="jumpToNext(progress)">{{ progress.currentTitle }}</button>
+      <div class="journey-summary"><span>Stage {{ progress.currentIndex + 1 }} of {{ progress.total }}</span><span>{{ progress.completedCount }}/{{ progress.total }} complete</span></div>
+      <span class="journey-track" role="progressbar"
+        [attr.aria-label]="progress.title + ' completion'"
+        [attr.aria-valuenow]="progress.completedCount"
+        aria-valuemin="0"
+        [attr.aria-valuemax]="progress.total">
+        <i [style.width.%]="progress.percent"></i><b [style.left.%]="progress.total ? progress.currentIndex / progress.total * 100 : 0"></b>
+      </span>
+      <div class="journey-jumps">
+        <button type="button" (click)="focusJourneyPlacement(progress.start, progress.curriculumId)">Start</button>
+        <button type="button" (click)="focusJourneyPlacement(progress.goal, progress.curriculumId)">Goal</button>
+      </div>
+    </article>
+
+    <nav class="curriculum-dock" role="tablist" aria-label="Choose curriculum progress">
+      <button *ngFor="let item of journeyProgress; let index = index; trackBy: trackJourney"
+        type="button"
+        role="tab"
+        [id]="'curriculum-tab-' + item.curriculumId"
+        [class.selected]="item.curriculumId === selectedCurriculumId && journeyPanelVisible"
+        [class.visible]="item.active"
+        [style.--journey-color]="item.color"
+        [attr.aria-selected]="item.curriculumId === selectedCurriculumId"
+        [attr.aria-expanded]="item.curriculumId === selectedCurriculumId && journeyPanelVisible"
+        [attr.aria-controls]="'curriculum-panel-' + item.curriculumId"
+        [attr.aria-label]="item.title + (item.active ? ', constellation visible' : ', constellation hidden')"
+        [attr.title]="item.title"
+        [attr.tabindex]="item.curriculumId === selectedCurriculumId ? 0 : -1"
+        (click)="selectCurriculum(item.curriculumId)"
+        (keydown)="handleCurriculumDockKey($event, index)">
+        <i aria-hidden="true">✦</i><span>{{ item.shortTitle }}</span>
+      </button>
+    </nav>
+  </section>  <aside *ngIf="detailTopic as topic" class="detail-panel" aria-live="polite">
+    <div class="detail-heading">
+      <span class="eyebrow">{{ topic.parentPlacementId ? 'Topic system' : 'Galaxy' }} · {{ statusLabel(topic.status) }}</span>
+      <button class="panel-up" type="button" (click)="goUpLevel()"><span aria-hidden="true">↑</span> Up</button>
+    </div>
+    <h2>{{ topic.title }}</h2>
+    <p>{{ topic.summary }}</p>
+    <dl class="topic-metadata" *ngIf="topic.duration || topic.completionCriteria">
+      <div *ngIf="topic.duration">
+        <dt>Estimated time</dt>
+        <dd>{{ topic.duration }}</dd>
+      </div>
+      <div *ngIf="topic.completionCriteria">
+        <dt>Ready to advance when</dt>
+        <dd>{{ topic.completionCriteria }}</dd>
+      </div>
+    </dl>
+    <div class="membership">
+      <span *ngFor="let curriculum of data.curricula"
+        [hidden]="!topic.curriculumIds.includes(curriculum.id)"
+        [style.border-color]="curriculum.color">{{ curriculum.title }}</span>
+    </div>
+    <section class="placement-paths" *ngIf="selectedPlacementPaths.length > 1">
+      <h3>Used in</h3>
+      <button *ngFor="let item of selectedPlacementPaths"
+        type="button"
+        [class.current]="item.placement.id === topic.placementId"
+        (click)="activatePlacement(item.placement)">{{ item.path }}</button>
+    </section>
+    <section class="topic-resources" *ngIf="topic.resources?.length">
+      <h3>Primary resources</h3>
+      <ul>
+        <li *ngFor="let resource of topic.resources">
+          <a *ngIf="resource.url; else resourceLabel" [href]="resource.url" target="_blank" rel="noopener">{{ resource.label }} ↗</a>
+          <ng-template #resourceLabel>{{ resource.label }}</ng-template>
+        </li>
+      </ul>
+    </section>
+    <section *ngIf="selectedEntries.length">
+      <h3>Activity</h3>
+      <article *ngFor="let entry of selectedEntries"
+        [attr.data-entry-id]="entry.id"
+        [class.highlighted]="highlightedEntryId === entry.id">
+        <div><span>{{ entry.type }}</span><time>{{ entry.date | date:'mediumDate':'UTC' }}</time></div>
+        <h4>{{ entry.title }}</h4>
+        <p>{{ entry.body }}</p>
+        <a *ngIf="entry.url" [href]="entry.url" target="_blank" rel="noopener">Open project ↗</a>
+      </article>
+    </section>
+    <p class="empty-activity" *ngIf="!selectedEntries.length">No activity logged yet.</p>
+  </aside>
+
+  <div *ngIf="searchOpen" class="search-backdrop" (pointerdown)="closeSearch()">
+    <section class="search-palette" role="dialog" aria-modal="true" aria-label="Search knowledge topics" (pointerdown)="$event.stopPropagation()">
+      <label for="knowledge-search">Jump to a topic</label>
+      <div class="search-input-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input #searchInput
+          id="knowledge-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search titles and summaries…"
+          [value]="searchQuery"
+          (input)="updateSearch($any($event.target).value)"
+          (keydown)="handleSearchKey($event)"/>
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" role="listbox" *ngIf="searchQuery.trim()">
+        <button *ngFor="let result of searchResults; let index = index"
+          type="button"
+          role="option"
+          [class.active]="index === searchActiveIndex"
+          [attr.aria-selected]="index === searchActiveIndex"
+          (pointerenter)="searchActiveIndex = index"
+          (click)="selectSearchResult(result)">
+          <strong>{{ result.topic.title }}</strong>
+          <span>{{ result.path }}</span>
+        </button>
+        <p *ngIf="!searchResults.length">No matching topics in the active curricula.</p>
+      </div>
+      <p class="search-help" *ngIf="!searchQuery.trim()">Type to search the active curricula.</p>
+    </section>
+  </div>
+
+  <p class="interaction-hint">Drag to move · Zoom freely · Click to enter · Backspace or Esc to go up</p>
+</section>

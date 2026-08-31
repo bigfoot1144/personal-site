@@ -1,0 +1,434 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "robotics",
+    "title": "Robotics / SO-101 Arm",
+    "description": "A fun, simulation-first path to a real SO-101 arm: model the hardware and its STS3215 servos, train a PPO policy on thousands of domain-randomized MuJoCo-Warp sims, then deploy it to the real servos.",
+    "color": "#f1c84b",
+    "goalTopicId": "robotics-goal",
+    "shortTitle": "Robotics"
+  },
+  "placements": [
+    {
+      "id": "place-robotics-so101-hardware",
+      "topicId": "so101-hardware",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-servo-actuators",
+      "topicId": "servo-actuators",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-motor-buses",
+      "topicId": "motor-buses",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 1
+    },
+    {
+      "id": "place-robotics-joint-limits",
+      "topicId": "joint-limits",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-so101-assembly",
+      "topicId": "so101-assembly",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-so101-calibration",
+      "topicId": "so101-calibration",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-teleoperation",
+      "topicId": "teleoperation",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 5
+    },
+    {
+      "id": "place-robotics-robot-safety",
+      "topicId": "robot-safety",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 6
+    },
+    {
+      "id": "place-robotics-control-loop-io",
+      "topicId": "control-loop-io",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 7
+    },
+    {
+      "id": "place-robotics-lerobot",
+      "topicId": "lerobot",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 8
+    },
+    {
+      "id": "place-robotics-rustypot",
+      "topicId": "rustypot",
+      "parentPlacementId": "place-robotics-so101-hardware",
+      "order": 9
+    },
+    {
+      "id": "place-robotics-robot-control",
+      "topicId": "robot-control",
+      "order": 1
+    },
+    {
+      "id": "place-robotics-feedback-control",
+      "topicId": "feedback-control",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-joint-position-control",
+      "topicId": "joint-position-control",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 1
+    },
+    {
+      "id": "place-robotics-velocity-control",
+      "topicId": "velocity-control",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-pid-control",
+      "topicId": "pid-control",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-trajectory-interpolation",
+      "topicId": "trajectory-interpolation",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-velocity-limits",
+      "topicId": "velocity-limits",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 5
+    },
+    {
+      "id": "place-robotics-acceleration-limits",
+      "topicId": "acceleration-limits",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 6
+    },
+    {
+      "id": "place-robotics-closed-loop-control",
+      "topicId": "closed-loop-control",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 7
+    },
+    {
+      "id": "place-robotics-control-frequency",
+      "topicId": "control-frequency",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 8
+    },
+    {
+      "id": "place-robotics-control-latency",
+      "topicId": "control-latency",
+      "parentPlacementId": "place-robotics-robot-control",
+      "order": 9
+    },
+    {
+      "id": "place-robotics-robot-simulation",
+      "topicId": "robot-simulation",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-urdf",
+      "topicId": "urdf",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-mjcf",
+      "topicId": "mjcf",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 1
+    },
+    {
+      "id": "place-robotics-mujoco",
+      "topicId": "mujoco",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-mujoco-warp",
+      "topicId": "mujoco-warp",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-mjlab",
+      "topicId": "mjlab",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-rigid-body-dynamics",
+      "topicId": "rigid-body-dynamics",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 5
+    },
+    {
+      "id": "place-robotics-contact-models",
+      "topicId": "contact-models",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 6
+    },
+    {
+      "id": "place-robotics-friction",
+      "topicId": "friction",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 7
+    },
+    {
+      "id": "place-robotics-actuator-modeling",
+      "topicId": "actuator-modeling",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 8
+    },
+    {
+      "id": "place-robotics-simulated-sensors",
+      "topicId": "simulated-sensors",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 9
+    },
+    {
+      "id": "place-robotics-task-environments",
+      "topicId": "task-environments",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 10
+    },
+    {
+      "id": "place-robotics-simulation-validation",
+      "topicId": "simulation-validation",
+      "parentPlacementId": "place-robotics-robot-simulation",
+      "order": 11
+    },
+    {
+      "id": "place-robotics-robot-reinforcement-learning",
+      "topicId": "robot-reinforcement-learning",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-reinforcement-learning",
+      "topicId": "reinforcement-learning",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-markov-decision-processes",
+      "topicId": "markov-decision-processes",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-rewards",
+      "topicId": "rewards",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-policy-gradients",
+      "topicId": "policy-gradients",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-actor-critic",
+      "topicId": "actor-critic",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 5
+    },
+    {
+      "id": "place-robotics-ppo",
+      "topicId": "ppo",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 6
+    },
+    {
+      "id": "place-robotics-exploration",
+      "topicId": "exploration",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 7
+    },
+    {
+      "id": "place-robotics-reward-design",
+      "topicId": "reward-design",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 8
+    },
+    {
+      "id": "place-robotics-vectorized-environments",
+      "topicId": "vectorized-environments",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 9
+    },
+    {
+      "id": "place-robotics-curriculum-learning",
+      "topicId": "curriculum-learning",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 10
+    },
+    {
+      "id": "place-robotics-rsl-rl",
+      "topicId": "rsl-rl",
+      "parentPlacementId": "place-robotics-robot-reinforcement-learning",
+      "order": 11
+    },
+    {
+      "id": "place-robotics-sim-to-real",
+      "topicId": "sim-to-real",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-system-identification",
+      "topicId": "system-identification",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-domain-randomization",
+      "topicId": "domain-randomization",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 1
+    },
+    {
+      "id": "place-robotics-visual-randomization",
+      "topicId": "visual-randomization",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-dynamics-randomization",
+      "topicId": "dynamics-randomization",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-friction-randomization",
+      "topicId": "friction-randomization",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-observation-noise",
+      "topicId": "observation-noise",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 5
+    },
+    {
+      "id": "place-robotics-actuator-mismatch",
+      "topicId": "actuator-mismatch",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 6
+    },
+    {
+      "id": "place-robotics-latency-randomization",
+      "topicId": "latency-randomization",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 7
+    },
+    {
+      "id": "place-robotics-policy-robustness",
+      "topicId": "policy-robustness",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 8
+    },
+    {
+      "id": "place-robotics-reality-gap",
+      "topicId": "reality-gap",
+      "parentPlacementId": "place-robotics-sim-to-real",
+      "order": 9
+    },
+    {
+      "id": "place-robotics-real-robot-deployment",
+      "topicId": "real-robot-deployment",
+      "order": 5
+    },
+    {
+      "id": "place-robotics-model-deployment",
+      "topicId": "model-deployment",
+      "parentPlacementId": "place-robotics-real-robot-deployment",
+      "order": 0
+    },
+    {
+      "id": "place-robotics-real-time-inference",
+      "topicId": "real-time-inference",
+      "parentPlacementId": "place-robotics-real-robot-deployment",
+      "order": 1
+    },
+    {
+      "id": "place-robotics-deployment-control-loop",
+      "topicId": "deployment-control-loop",
+      "parentPlacementId": "place-robotics-real-robot-deployment",
+      "order": 2
+    },
+    {
+      "id": "place-robotics-onnx-deployment",
+      "topicId": "onnx-deployment",
+      "parentPlacementId": "place-robotics-real-robot-deployment",
+      "order": 3
+    },
+    {
+      "id": "place-robotics-jetson-orin-nano",
+      "topicId": "jetson-orin-nano",
+      "parentPlacementId": "place-robotics-real-robot-deployment",
+      "order": 4
+    },
+    {
+      "id": "place-robotics-robotics-goal",
+      "topicId": "robotics-goal",
+      "order": 6
+    }
+  ],
+  "connections": [
+    {
+      "id": "robotics-root-0-so101-hardware-robot-control",
+      "source": "place-robotics-so101-hardware",
+      "target": "place-robotics-robot-control",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "robotics-root-1-robot-control-robot-simulation",
+      "source": "place-robotics-robot-control",
+      "target": "place-robotics-robot-simulation",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "robotics-root-2-robot-simulation-robot-reinforcement-learning",
+      "source": "place-robotics-robot-simulation",
+      "target": "place-robotics-robot-reinforcement-learning",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "robotics-root-3-robot-reinforcement-learning-sim-to-real",
+      "source": "place-robotics-robot-reinforcement-learning",
+      "target": "place-robotics-sim-to-real",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "robotics-root-4-sim-to-real-real-robot-deployment",
+      "source": "place-robotics-sim-to-real",
+      "target": "place-robotics-real-robot-deployment",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "robotics-root-5-real-robot-deployment-robotics-goal",
+      "source": "place-robotics-real-robot-deployment",
+      "target": "place-robotics-robotics-goal",
+      "relation": "prerequisite"
+    }
+  ]
+}

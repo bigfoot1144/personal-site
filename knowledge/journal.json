@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "proj-so101-arm",
+      "date": "2026-08-29",
+      "type": "project",
+      "title": "SO-101 Arm",
+      "body": "Kicking off the SO-101 Arm build: a small PPO policy trained on domain-randomized MuJoCo-Warp sims of the SO-101 (BAM STS3215 actuator model), exported to ONNX, and deployed onto the real arm's STS3215 servos via rustypot on a Jetson Orin Nano. Started today — each pipeline stage is tracked as its own piece.",
+      "topicIds": [
+        "mjcf",
+        "actuator-modeling"
+      ],
+      "statusUpdates": [
+        {
+          "topicId": "mjcf",
+          "status": "in-progress"
+        },
+        {
+          "topicId": "actuator-modeling",
+          "status": "in-progress"
+        }
+      ]
+    }
+  ]
+}

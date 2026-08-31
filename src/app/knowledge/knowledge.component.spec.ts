@@ -1,0 +1,348 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { KnowledgeComponent } from './knowledge.component';
+import { ConstellationTransitionService } from '../constellation-transition.service';
+
+describe('KnowledgeComponent curriculum dock', () => {
+  let fixture: ComponentFixture<KnowledgeComponent>;
+  let component: KnowledgeComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [KnowledgeComponent],
+      providers: [provideRouter([])]
+    }).compileComponents();
+    fixture = TestBed.createComponent(KnowledgeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('selects ML Training by default', () => {
+    expect(component.selectedCurriculumId).toBe('ml-training');
+    expect(component.selectedJourney?.curriculumId).toBe('ml-training');
+  });
+
+  it('toggles child-count badges from the top controls', () => {
+    const toggle = fixture.nativeElement.querySelector('.child-count-toggle') as HTMLButtonElement;
+    expect(component.showChildCounts).toBeFalse();
+    expect(toggle.getAttribute('aria-pressed')).toBe('false');
+    expect(fixture.nativeElement.querySelectorAll('.child-badge').length).toBe(0);
+
+    toggle.click();
+    fixture.detectChanges();
+    expect(component.showChildCounts).toBeTrue();
+    expect(toggle.getAttribute('aria-pressed')).toBe('true');
+    expect(fixture.nativeElement.querySelectorAll('.child-badge').length).toBeGreaterThan(0);
+  });
+
+  it('collapses the progress menu from its top-right arrow', () => {
+    component.focusedJourneyPlacementId = component.baseNodes[0].placementId;
+    fixture.detectChanges();
+    const collapse = fixture.nativeElement.querySelector('.journey-collapse') as HTMLButtonElement;
+    collapse.click();
+    fixture.detectChanges();
+
+    expect(component.journeyPanelVisible).toBeFalse();
+    expect(component.focusedJourneyPlacementId).toBeNull();
+    expect(fixture.nativeElement.querySelector('.knowledge-shell').classList).not.toContain('journey-focus-active');
+    expect(fixture.nativeElement.querySelector('.journey-card')).toBeNull();
+  });
+
+  it('collapses and reopens the progress menu from the active curriculum tab', () => {
+    const activeTab = fixture.nativeElement.querySelector('#curriculum-tab-ml-training') as HTMLButtonElement;
+    activeTab.click();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.journey-card')).toBeNull();
+    expect(activeTab.getAttribute('aria-expanded')).toBe('false');
+    expect(activeTab.classList).not.toContain('selected');
+    expect(activeTab.classList).toContain('visible');
+
+    activeTab.click();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.journey-card')).not.toBeNull();
+    expect(activeTab.getAttribute('aria-expanded')).toBe('true');
+    expect(activeTab.classList).toContain('selected');
+  });
+
+  it('makes the next-up star dominant and uses one marker label', () => {
+    const progress = component.selectedJourney!;
+    const button = fixture.nativeElement.querySelector('.next-up-button') as HTMLButtonElement;
+    button.click();
+    fixture.detectChanges();
+
+    const focused = component.baseNodes.find(node => node.placementId === progress.current.id)!;
+    expect(component.focusedJourneyPlacementId).toBe(progress.current.id);
+    expect(fixture.nativeElement.querySelector('.knowledge-shell').classList).toContain('journey-focus-active');
+    expect(fixture.nativeElement.querySelector('.topic-node.jump-focused')).not.toBeNull();
+    const otherTitle = fixture.nativeElement.querySelector(
+      '.topic-node:not(.jump-focused) .topic-title') as SVGTextElement;
+    expect(getComputedStyle(otherTitle).fontSize).not.toBe('3.5px');
+    expect(component.journeyMarkerLabel('current', focused)).toBe('NEXT UP');
+  });
+
+  it('changes the progress card without changing graph visibility', () => {
+    const activeBefore = [...component.activeCurricula].sort();
+    component.focusedJourneyPlacementId = component.baseNodes[0].placementId;
+    fixture.detectChanges();
+    const agentTab = fixture.nativeElement.querySelector('#curriculum-tab-agentic') as HTMLButtonElement;
+    agentTab.click();
+    fixture.detectChanges();
+
+    expect(component.selectedCurriculumId).toBe('agentic');
+    expect(component.focusedJourneyPlacementId).toBeNull();
+    expect(fixture.nativeElement.querySelector('.knowledge-shell').classList).not.toContain('journey-focus-active');
+    expect([...component.activeCurricula].sort()).toEqual(activeBefore);
+    expect(fixture.nativeElement.querySelector('.journey-card').getAttribute('aria-labelledby')).toBe('curriculum-tab-agentic');
+  });
+
+  it('animates the camera to fit every star in the selected curriculum', () => {
+    const animate = spyOn<any>(component, 'animateView');
+    component.selectCurriculum('agentic');
+
+    expect(animate).toHaveBeenCalledTimes(1);
+    const [scale, panX, panY] = animate.calls.mostRecent().args as [number, number, number];
+    const nodes = component.baseNodes.filter(node => node.placementCurriculumIds.includes('agentic'));
+    const screenPoints = nodes.map(node => ({ x: node.x * scale + panX, y: node.y * scale + panY }));
+    expect(Math.min(...screenPoints.map(point => point.x))).toBeGreaterThanOrEqual(50);
+    expect(Math.max(...screenPoints.map(point => point.x))).toBeLessThanOrEqual(950);
+    expect(Math.min(...screenPoints.map(point => point.y))).toBeGreaterThanOrEqual(50);
+    expect(Math.max(...screenPoints.map(point => point.y))).toBeLessThanOrEqual(590);
+
+    component.select(nodes[0]);
+    component.selectCurriculum('agentic');
+    expect(component.selected).toBeNull();
+  });
+
+  it('suppresses star activation after dragging from a star or its label', () => {
+    const node = component.baseNodes[0];
+    const select = spyOn(component, 'select');
+    const draggedClick = { detail: 1, preventDefault: jasmine.createSpy(), stopPropagation: jasmine.createSpy() };
+    (component as any).panMoved = true;
+    component.activateNodeFromClick(node, draggedClick as unknown as MouseEvent);
+    expect(select).not.toHaveBeenCalled();
+    expect(draggedClick.preventDefault).toHaveBeenCalled();
+
+    (component as any).panMoved = false;
+    component.activateNodeFromClick(node, { detail: 1 } as MouseEvent);
+    expect(select).toHaveBeenCalledOnceWith(node);
+  });
+
+  it('limits overview zoom-out without restricting panning', () => {
+    const svg = fixture.nativeElement.querySelector('.constellation') as SVGSVGElement;
+    component.scale = .76;
+    component.onWheel({
+      preventDefault: () => undefined, currentTarget: svg, clientX: 500, clientY: 350, deltaY: 10000
+    } as unknown as WheelEvent);
+    expect(component.scale).toBe(.75);
+  });
+
+  it('publishes live overview camera state and freezes parallax in drill-down', () => {
+    const transition = TestBed.inject(ConstellationTransitionService);
+    const update = spyOn(transition, 'updateKnowledgeCamera');
+    (component as any).publishCameraState();
+
+    expect(update.calls.mostRecent().args[0].parallaxActive).toBeTrue();
+    component.select(component.baseNodes[0]);
+    expect(update.calls.mostRecent().args[0].parallaxActive).toBeFalse();
+  });
+
+  it('shows every star but only the selected curriculum annotations and lines', () => {
+    const training = component.baseNodes.find(node =>
+      node.placementCurriculumIds.length === 1 && node.placementCurriculumIds.includes('ml-training'))!;
+    const shared = component.baseNodes.find(node =>
+      node.placementCurriculumIds.length > 1 && node.placementCurriculumIds.includes('ml-training'))!;
+    const agentic = component.baseNodes.find(node =>
+      node.placementCurriculumIds.length === 1 && node.placementCurriculumIds.includes('agentic'))!;
+
+    const agenticElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${agentic.placementId}"]`) as SVGGElement;
+    expect(component.nodeMuted(training)).toBeFalse();
+    expect(component.nodeMuted(shared)).toBeFalse();
+    expect(component.nodeMuted(agentic)).toBeTrue();
+    expect(agenticElement.classList).toContain('curriculum-muted');
+    expect(getComputedStyle(agenticElement).opacity).toBe('1');
+    expect(getComputedStyle(agenticElement.querySelector('.star-label')!).display).toBe('none');
+    expect(fixture.nativeElement.querySelector('.edges path.curriculum-muted')).not.toBeNull();
+    expect(getComputedStyle(fixture.nativeElement.querySelector('.edges path.curriculum-muted')).opacity)
+      .toBe('0');
+
+    component.selectCurriculum('agentic');
+    fixture.detectChanges();
+
+    expect(component.nodeMuted(agentic)).toBeFalse();
+    expect(component.nodeMuted(training)).toBeTrue();
+    expect(component.visibleNodes).toContain(training);
+    expect(getComputedStyle(agenticElement.querySelector('.star-label')!).display).not.toBe('none');
+  });
+
+  it('gates the in-progress glow and pulse to the selected curriculum', () => {
+    const robotics = component.baseNodes.find(node => node.id === 'robot-simulation')!;
+    expect(robotics.status).toBe('in-progress');
+    const roboticsElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${robotics.placementId}"]`) as SVGGElement;
+    const roboticsCore = roboticsElement.querySelector('.star-core') as SVGGraphicsElement;
+
+    // Robotics is not the selected curriculum (default is ml-training) → calm: same amber
+    // color, a slight glow, but no pulse.
+    expect(roboticsElement.classList).not.toContain('curriculum-focus');
+    expect(getComputedStyle(roboticsCore).animationName).toBe('none');
+    expect(getComputedStyle(roboticsCore).filter).not.toBe('none');
+    expect(getComputedStyle(roboticsCore).filter).not.toContain('8px');
+    expect(getComputedStyle(roboticsCore).fill).toBe('rgb(255, 207, 112)');
+
+    // Selecting robotics → its in-progress star gets the full glow and the pulse.
+    component.selectCurriculum('robotics');
+    fixture.detectChanges();
+    expect(roboticsElement.classList).toContain('curriculum-focus');
+    expect(getComputedStyle(roboticsCore).animationName).toBe('status-pulse');
+    expect(getComputedStyle(roboticsCore).filter).toContain('8px');
+    expect(getComputedStyle(roboticsCore).fill).toBe('rgb(255, 207, 112)');
+
+    // Switching back to another curriculum quiets it again.
+    component.selectCurriculum('ml-training');
+    fixture.detectChanges();
+    expect(roboticsElement.classList).not.toContain('curriculum-focus');
+    expect(getComputedStyle(roboticsCore).animationName).toBe('none');
+    expect(getComputedStyle(roboticsCore).filter).not.toContain('8px');
+  });
+
+  it('gates the completed glow to the selected curriculum', () => {
+    const completed = component.baseNodes.find(node => node.status === 'completed');
+    if (!completed) return;
+    const element = fixture.nativeElement.querySelector(
+      `[data-placement-id="${completed.placementId}"]`) as SVGGElement;
+    const core = element.querySelector('.star-core') as SVGGraphicsElement;
+
+    if (component.nodeFocus(completed)) {
+      expect(getComputedStyle(core).filter).toContain('10px');
+    } else {
+      expect(getComputedStyle(core).filter).not.toBe('none');
+      expect(getComputedStyle(core).filter).not.toContain('10px');
+    }
+  });
+
+  it('toggles visibility without changing the selected curriculum', () => {
+    const visibility = fixture.nativeElement.querySelector('.journey-visibility') as HTMLButtonElement;
+    visibility.click();
+    fixture.detectChanges();
+
+    expect(component.selectedCurriculumId).toBe('ml-training');
+    expect(component.activeCurricula.has('ml-training')).toBeFalse();
+    expect(visibility.getAttribute('aria-pressed')).toBe('false');
+  });
+
+  it('supports arrow-key tab navigation', () => {
+    const selectedIndex = component.journeyProgress.findIndex(item => item.curriculumId === 'ml-training');
+    const expected = component.journeyProgress[(selectedIndex + 1) % component.journeyProgress.length];
+    const selectedTab = fixture.nativeElement.querySelector('#curriculum-tab-ml-training') as HTMLButtonElement;
+    selectedTab.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    fixture.detectChanges();
+
+    expect(component.selectedCurriculumId).toBe(expected.curriculumId);
+    expect(document.activeElement?.id).toBe('curriculum-tab-' + expected.curriculumId);
+  });
+
+  it('renders all curricula without a horizontal scrolling HUD', () => {
+    expect(fixture.nativeElement.querySelectorAll('.curriculum-dock [role="tab"]').length).toBe(component.journeyProgress.length);
+    expect(getComputedStyle(fixture.nativeElement.querySelector('.journey-hud')).overflowX).not.toBe('auto');
+  });
+
+  it('deselects and resets every curriculum path', () => {
+    const button = fixture.nativeElement.querySelector('.deselect-all') as HTMLButtonElement;
+    button.click();
+    fixture.detectChanges();
+
+    expect(component.activeCurricula.size).toBe(0);
+    expect(component.visibleConnections.length).toBe(0);
+    expect(button.disabled).toBeFalse();
+    expect(button.textContent).toContain('Reset all');
+
+    component.select(component.baseNodes.find(node => node.id === 'transformer-gpu-kernels')!);
+    expect(component.selected).not.toBeNull();
+    button.click();
+    fixture.detectChanges();
+
+    expect(component.activeCurricula.size).toBe(component.data.curricula.length);
+    expect(component.visibleConnections.length).toBeGreaterThan(0);
+    expect(component.selected).toBeNull();
+    expect(fixture.nativeElement.querySelector('.reset-button')).toBeNull();
+    expect(button.textContent).toContain('Deselect all');
+  });
+
+  it('keeps focused galaxies and solar systems visible after deselecting all curricula', () => {
+    const galaxy = component.baseNodes.find(node => node.id === 'transformer-gpu-kernels')!;
+    component.select(galaxy);
+    component.deselectAllCurricula();
+    fixture.detectChanges();
+
+    expect(component.galaxyStars.every(node => component.nodeVisible(node))).toBeTrue();
+    expect(fixture.nativeElement.querySelector('.galaxy-route')).toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('.topic-node.hidden-node').length).toBe(0);
+
+    const cuda = component.galaxyStars.find(node => node.id === 'transformers')!;
+    component.select(cuda);
+    fixture.detectChanges();
+
+    expect(component.selected?.placementId).toBe(cuda.placementId);
+    expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
+  });
+
+  it('shows shared-star colors only when the selected curriculum uses the star', () => {
+    const transformerNodes = component.baseNodes.filter(node => node.id === 'transformer-foundations');
+    const production = component.baseNodes.find(node => node.id === 'production-reliability')!;
+    const transformerElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${transformerNodes[0].placementId}"]`) as SVGGElement;
+    const productionElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${production.placementId}"]`) as SVGGElement;
+    expect(transformerNodes.length).toBe(1);
+    expect(transformerNodes[0].placementCurriculumIds).toEqual(['gpu', 'inference', 'ml-training']);
+    expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
+    expect(transformerElement.querySelector('.shared-galaxy-colors')).not.toBeNull();
+    expect(productionElement.querySelector('.shared-galaxy-colors')).toBeNull();
+  });
+
+  it('keeps shared galaxies visible for any participating active curriculum', () => {
+    const transformer = component.baseNodes.find(node => node.id === 'transformer-foundations')!;
+    component.activeCurricula = new Set(['inference']);
+    fixture.detectChanges();
+    expect(component.nodeVisible(transformer)).toBeTrue();
+    component.activeCurricula = new Set(['robotics']);
+    fixture.detectChanges();
+    expect(component.nodeVisible(transformer)).toBeFalse();
+  });
+
+  it('uses wheel input only to zoom, without entering or leaving a galaxy', () => {
+    spyOn<any>(component, 'svgPoint').and.returnValue({ x: 500, y: 350 });
+    const svg = fixture.nativeElement.querySelector('svg') as SVGSVGElement;
+    const wheel = (deltaY: number) => ({
+      preventDefault: jasmine.createSpy('preventDefault'),
+      currentTarget: svg,
+      clientX: 500,
+      clientY: 350,
+      deltaY
+    } as unknown as WheelEvent);
+
+    for (let step = 0; step < 20; step++) component.onWheel(wheel(-100));
+    expect(component.selected).toBeNull();
+
+    const galaxy = component.baseNodes.find(node => node.id === 'transformer-gpu-kernels')!;
+    component.select(galaxy);
+    for (let step = 0; step < 20; step++) component.onWheel(wheel(100));
+    expect(component.selected?.placementId).toBe(galaxy.placementId);
+  });
+
+  it('grows labels gently on screen and caps their size while zooming', () => {
+    component.scale = 1;
+    const initialScreenScale = component.graphLabelScale * component.scale;
+    component.scale = 2;
+    const grownScreenScale = component.graphLabelScale * component.scale;
+    component.scale = 3.2;
+    const cappedScreenScale = component.graphLabelScale * component.scale;
+
+    expect(initialScreenScale).toBeCloseTo(1, 5);
+    expect(grownScreenScale).toBeGreaterThan(initialScreenScale);
+    expect(cappedScreenScale).toBeCloseTo(1.28, 5);
+  });
+
+});

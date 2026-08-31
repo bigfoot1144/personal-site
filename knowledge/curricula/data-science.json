@@ -1,0 +1,843 @@
+{
+  "version": 1,
+  "curriculum": {
+    "id": "data-science",
+    "title": "Data Science",
+    "description": "Measurement, statistical and causal analysis, longitudinal reasoning, and defensible real-world decisions.",
+    "color": "#ff7bb5",
+    "goalTopicId": "data-science-goal",
+    "shortTitle": "Data"
+  },
+  "placements": [
+    {
+      "id": "place-data-science-data-querying-modeling",
+      "topicId": "data-querying-modeling",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-databases",
+      "topicId": "databases",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-relational-data-model",
+      "topicId": "relational-data-model",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-sql",
+      "topicId": "sql",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-joins",
+      "topicId": "joins",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-group-by",
+      "topicId": "group-by",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-window-functions",
+      "topicId": "window-functions",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-ctes",
+      "topicId": "ctes",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-event-data",
+      "topicId": "event-data",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-data-grain",
+      "topicId": "data-grain",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-analytical-data-modeling",
+      "topicId": "analytical-data-modeling",
+      "parentPlacementId": "place-data-science-data-querying-modeling",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-data-quality-measurement",
+      "topicId": "data-quality-measurement",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-instrumentation",
+      "topicId": "instrumentation",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-metric-definition",
+      "topicId": "metric-definition",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-missing-data",
+      "topicId": "missing-data",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-duplicates",
+      "topicId": "duplicates",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-outliers",
+      "topicId": "outliers",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-data-types",
+      "topicId": "data-types",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-unit-consistency",
+      "topicId": "unit-consistency",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-data-lineage",
+      "topicId": "data-lineage",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-selection-bias",
+      "topicId": "selection-bias",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-data-leakage",
+      "topicId": "data-leakage",
+      "parentPlacementId": "place-data-science-data-quality-measurement",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-exploratory-data-analysis",
+      "topicId": "exploratory-data-analysis",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-descriptive-statistics",
+      "topicId": "descriptive-statistics",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-distributions",
+      "topicId": "distributions",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-segmentation",
+      "topicId": "segmentation",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-correlation",
+      "topicId": "correlation",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-data-visualization",
+      "topicId": "data-visualization",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-temporal-patterns",
+      "topicId": "temporal-patterns",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-cohort-analysis",
+      "topicId": "cohort-analysis",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-funnels",
+      "topicId": "funnels",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-missingness-analysis",
+      "topicId": "missingness-analysis",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-robust-summary-statistics",
+      "topicId": "robust-summary-statistics",
+      "parentPlacementId": "place-data-science-exploratory-data-analysis",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-probability-and-sampling",
+      "topicId": "probability-and-sampling",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-probability",
+      "topicId": "probability",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-conditional-probability",
+      "topicId": "conditional-probability",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-bayes-theorem",
+      "topicId": "bayes-theorem",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-expectation",
+      "topicId": "expectation",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-variance",
+      "topicId": "variance",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-probability-distributions",
+      "topicId": "probability-distributions",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-sampling-theory",
+      "topicId": "sampling-theory",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-law-of-large-numbers",
+      "topicId": "law-of-large-numbers",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-central-limit-theorem",
+      "topicId": "central-limit-theorem",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-sampling-distributions",
+      "topicId": "sampling-distributions",
+      "parentPlacementId": "place-data-science-probability-and-sampling",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-statistical-inference",
+      "topicId": "statistical-inference",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-estimators",
+      "topicId": "estimators",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-bias-variance",
+      "topicId": "bias-variance",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-standard-errors",
+      "topicId": "standard-errors",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-confidence-intervals",
+      "topicId": "confidence-intervals",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-bootstrap",
+      "topicId": "bootstrap",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-hypothesis-testing",
+      "topicId": "hypothesis-testing",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-p-values",
+      "topicId": "p-values",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-effect-sizes",
+      "topicId": "effect-sizes",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-multiple-testing",
+      "topicId": "multiple-testing",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-bayesian-inference",
+      "topicId": "bayesian-inference",
+      "parentPlacementId": "place-data-science-statistical-inference",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-regression-modeling",
+      "topicId": "regression-modeling",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-linear-algebra",
+      "topicId": "linear-algebra",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-linear-regression",
+      "topicId": "linear-regression",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-logistic-regression",
+      "topicId": "logistic-regression",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-generalized-linear-models",
+      "topicId": "generalized-linear-models",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-interactions",
+      "topicId": "interactions",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-nonlinear-terms",
+      "topicId": "nonlinear-terms",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-regularization",
+      "topicId": "regularization",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-model-diagnostics",
+      "topicId": "model-diagnostics",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-residual-analysis",
+      "topicId": "residual-analysis",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-prediction-vs-inference",
+      "topicId": "prediction-vs-inference",
+      "parentPlacementId": "place-data-science-regression-modeling",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-predictive-modeling",
+      "topicId": "predictive-modeling",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-train-validation-test-splits",
+      "topicId": "train-validation-test-splits",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-cross-validation",
+      "topicId": "cross-validation",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-feature-engineering",
+      "topicId": "feature-engineering",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-decision-trees",
+      "topicId": "decision-trees",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-random-forests",
+      "topicId": "random-forests",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-gradient-boosting",
+      "topicId": "gradient-boosting",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-classification-metrics",
+      "topicId": "classification-metrics",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-regression-metrics",
+      "topicId": "regression-metrics",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-model-calibration",
+      "topicId": "model-calibration",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-model-interpretation",
+      "topicId": "model-interpretation",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-dimensionality-reduction",
+      "topicId": "dimensionality-reduction",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 10
+    },
+    {
+      "id": "place-data-science-eigenvectors",
+      "topicId": "eigenvectors",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 11
+    },
+    {
+      "id": "place-data-science-principal-component-analysis",
+      "topicId": "principal-component-analysis",
+      "parentPlacementId": "place-data-science-predictive-modeling",
+      "order": 12
+    },
+    {
+      "id": "place-data-science-experimental-design",
+      "topicId": "experimental-design",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-randomization",
+      "topicId": "randomization",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-unit-of-randomization",
+      "topicId": "unit-of-randomization",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-metric-selection",
+      "topicId": "metric-selection",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-power-analysis",
+      "topicId": "power-analysis",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-sample-size",
+      "topicId": "sample-size",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-ab-testing",
+      "topicId": "ab-testing",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-variance-reduction",
+      "topicId": "variance-reduction",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-cuped",
+      "topicId": "cuped",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-sequential-testing",
+      "topicId": "sequential-testing",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-guardrail-metrics",
+      "topicId": "guardrail-metrics",
+      "parentPlacementId": "place-data-science-experimental-design",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-causal-inference",
+      "topicId": "causal-inference",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-causal-graphs",
+      "topicId": "causal-graphs",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-potential-outcomes",
+      "topicId": "potential-outcomes",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-treatment-effects",
+      "topicId": "treatment-effects",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-confounding",
+      "topicId": "confounding",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-backdoor-adjustment",
+      "topicId": "backdoor-adjustment",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-propensity-scores",
+      "topicId": "propensity-scores",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-inverse-probability-weighting",
+      "topicId": "inverse-probability-weighting",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-difference-in-differences",
+      "topicId": "difference-in-differences",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-regression-discontinuity",
+      "topicId": "regression-discontinuity",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-instrumental-variables",
+      "topicId": "instrumental-variables",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-sensitivity-analysis",
+      "topicId": "sensitivity-analysis",
+      "parentPlacementId": "place-data-science-causal-inference",
+      "order": 10
+    },
+    {
+      "id": "place-data-science-longitudinal-analysis",
+      "topicId": "longitudinal-analysis",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-retention-analysis",
+      "topicId": "retention-analysis",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-churn",
+      "topicId": "churn",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-survival-analysis",
+      "topicId": "survival-analysis",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-hazard-functions",
+      "topicId": "hazard-functions",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-time-series",
+      "topicId": "time-series",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-seasonality",
+      "topicId": "seasonality",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-forecasting",
+      "topicId": "forecasting",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-interrupted-time-series",
+      "topicId": "interrupted-time-series",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-metric-decomposition",
+      "topicId": "metric-decomposition",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-fourier-analysis",
+      "topicId": "fourier-analysis",
+      "parentPlacementId": "place-data-science-longitudinal-analysis",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-decision-and-communication",
+      "topicId": "decision-and-communication",
+      "order": 10
+    },
+    {
+      "id": "place-data-science-evaluation-metrics",
+      "topicId": "evaluation-metrics",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 0
+    },
+    {
+      "id": "place-data-science-evaluation-infrastructure",
+      "topicId": "evaluation-infrastructure",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 1
+    },
+    {
+      "id": "place-data-science-uncertainty-communication",
+      "topicId": "uncertainty-communication",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 2
+    },
+    {
+      "id": "place-data-science-practical-significance",
+      "topicId": "practical-significance",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 3
+    },
+    {
+      "id": "place-data-science-expected-value",
+      "topicId": "expected-value",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 4
+    },
+    {
+      "id": "place-data-science-decision-thresholds",
+      "topicId": "decision-thresholds",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 5
+    },
+    {
+      "id": "place-data-science-cost-benefit-analysis",
+      "topicId": "cost-benefit-analysis",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 6
+    },
+    {
+      "id": "place-data-science-dashboards",
+      "topicId": "dashboards",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 7
+    },
+    {
+      "id": "place-data-science-reproducible-reports",
+      "topicId": "reproducible-reports",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 8
+    },
+    {
+      "id": "place-data-science-stakeholder-memos",
+      "topicId": "stakeholder-memos",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 9
+    },
+    {
+      "id": "place-data-science-post-launch-monitoring",
+      "topicId": "post-launch-monitoring",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 10
+    },
+    {
+      "id": "place-data-science-reproducibility",
+      "topicId": "reproducibility",
+      "parentPlacementId": "place-data-science-decision-and-communication",
+      "order": 11
+    },
+    {
+      "id": "place-data-science-data-science-goal",
+      "topicId": "data-science-goal",
+      "order": 11
+    }
+  ],
+  "connections": [
+    {
+      "id": "data-science-root-0-data-querying-modeling-data-quality-measurement",
+      "source": "place-data-science-data-querying-modeling",
+      "target": "place-data-science-data-quality-measurement",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-1-data-quality-measurement-exploratory-data-analysis",
+      "source": "place-data-science-data-quality-measurement",
+      "target": "place-data-science-exploratory-data-analysis",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-2-exploratory-data-analysis-probability-and-sampling",
+      "source": "place-data-science-exploratory-data-analysis",
+      "target": "place-data-science-probability-and-sampling",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-3-probability-and-sampling-statistical-inference",
+      "source": "place-data-science-probability-and-sampling",
+      "target": "place-data-science-statistical-inference",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-4-statistical-inference-regression-modeling",
+      "source": "place-data-science-statistical-inference",
+      "target": "place-data-science-regression-modeling",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-5-regression-modeling-predictive-modeling",
+      "source": "place-data-science-regression-modeling",
+      "target": "place-data-science-predictive-modeling",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-6-predictive-modeling-experimental-design",
+      "source": "place-data-science-predictive-modeling",
+      "target": "place-data-science-experimental-design",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-7-predictive-modeling-causal-inference",
+      "source": "place-data-science-predictive-modeling",
+      "target": "place-data-science-causal-inference",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-8-experimental-design-longitudinal-analysis",
+      "source": "place-data-science-experimental-design",
+      "target": "place-data-science-longitudinal-analysis",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-9-causal-inference-longitudinal-analysis",
+      "source": "place-data-science-causal-inference",
+      "target": "place-data-science-longitudinal-analysis",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-10-longitudinal-analysis-decision-and-communication",
+      "source": "place-data-science-longitudinal-analysis",
+      "target": "place-data-science-decision-and-communication",
+      "relation": "prerequisite"
+    },
+    {
+      "id": "data-science-root-11-decision-and-communication-data-science-goal",
+      "source": "place-data-science-decision-and-communication",
+      "target": "place-data-science-data-science-goal",
+      "relation": "prerequisite"
+    }
+  ]
+}
