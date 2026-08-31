@@ -30,21 +30,6 @@
       "summary": "Accuracy Performance Tradeoff encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "act-policy",
-      "title": "ACT Policy",
-      "summary": "ACT Policy encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "action-chunking",
-      "title": "Action Chunking",
-      "summary": "Action Chunking encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "action-normalization",
-      "title": "Action Normalization",
-      "summary": "Action Normalization encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "action-principle",
       "title": "Action Principle",
       "summary": "Dynamics organized by δS = 0 and the action functional.",
@@ -436,14 +421,6 @@
       "summary": "Beam Search encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "behavior-cloning",
-      "title": "Behavior Cloning",
-      "summary": "Develop practical and theoretical command of Behavior Cloning.",
-      "tags": [
-        "robotics"
-      ]
-    },
-    {
       "id": "benchmark-contamination",
       "title": "Benchmark Contamination",
       "summary": "Benchmark Contamination encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -548,16 +525,6 @@
       "tags": [
         "physics"
       ]
-    },
-    {
-      "id": "camera-extrinsics",
-      "title": "Camera Extrinsics",
-      "summary": "Camera Extrinsics encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "camera-intrinsics",
-      "title": "Camera Intrinsics",
-      "summary": "Camera Intrinsics encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "canary-deployment",
@@ -721,16 +688,6 @@
       "summary": "Compute Budgets encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "computer-vision",
-      "title": "Computer Vision",
-      "summary": "Develop practical and theoretical command of Computer Vision.",
-      "tags": [
-        "machine-learning",
-        "robotics",
-        "background"
-      ]
-    },
-    {
       "id": "concurrency",
       "title": "Concurrency",
       "summary": "Correct and efficient shared-memory concurrency.",
@@ -835,14 +792,6 @@
       "id": "cooperative-groups",
       "title": "Cooperative Groups",
       "summary": "Cooperative Groups encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "coordinate-frames",
-      "title": "Coordinate Frames",
-      "summary": "Develop practical and theoretical command of Coordinate Frames.",
-      "tags": [
-        "robotics"
-      ]
     },
     {
       "id": "core-shadow",
@@ -1181,11 +1130,6 @@
       "summary": "Delegation encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "demonstration-collection",
-      "title": "Demonstration Collection",
-      "summary": "Demonstration Collection encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "deployment-control-loop",
       "title": "Deployment Control Loop",
       "summary": "Deployment Control Loop encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -1227,11 +1171,6 @@
       "tags": [
         "statistics"
       ]
-    },
-    {
-      "id": "diffusion-policy",
-      "title": "Diffusion Policy",
-      "summary": "Diffusion Policy encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "dimensionality-reduction",
@@ -1697,14 +1636,6 @@
       "summary": "Form Shadow encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "forward-kinematics",
-      "title": "Forward Kinematics",
-      "summary": "Develop practical and theoretical command of Forward Kinematics.",
-      "tags": [
-        "robotics"
-      ]
-    },
-    {
       "id": "four-vectors",
       "title": "Four-Vectors",
       "summary": "Covariant position, velocity, momentum, and tensor notation.",
@@ -2016,11 +1947,6 @@
       ]
     },
     {
-      "id": "hand-eye-calibration",
-      "title": "Hand Eye Calibration",
-      "summary": "Hand Eye Calibration encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "hawking-radiation",
       "title": "Hawking Radiation",
       "summary": "Black-hole particle creation and thermal spectra.",
@@ -2078,14 +2004,6 @@
       ]
     },
     {
-      "id": "homogeneous-transforms",
-      "title": "Homogeneous Transforms",
-      "summary": "Develop practical and theoretical command of Homogeneous Transforms.",
-      "tags": [
-        "robotics"
-      ]
-    },
-    {
       "id": "host-device-execution",
       "title": "Host Device Execution",
       "summary": "Host Device Execution encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -2123,11 +2041,6 @@
       "tags": [
         "physics"
       ]
-    },
-    {
-      "id": "image-preprocessing",
-      "title": "Image Preprocessing",
-      "summary": "Image Preprocessing encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "inference-benchmarking",
@@ -2234,14 +2147,6 @@
       "summary": "Interrupted Time Series encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "inverse-kinematics",
-      "title": "Inverse Kinematics",
-      "summary": "Develop practical and theoretical command of Inverse Kinematics.",
-      "tags": [
-        "robotics"
-      ]
-    },
-    {
       "id": "inverse-probability-weighting",
       "title": "Inverse Probability Weighting",
       "summary": "Inverse Probability Weighting encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -2250,14 +2155,6 @@
       "id": "iteration-level-scheduling",
       "title": "Iteration Level Scheduling",
       "summary": "Iteration Level Scheduling encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "jacobians",
-      "title": "Jacobians",
-      "summary": "Develop practical and theoretical command of Jacobians.",
-      "tags": [
-        "robotics"
-      ]
     },
     {
       "id": "jaw-structure",
@@ -2285,6 +2182,11 @@
       "summary": "Joint Position Control encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
+      "id": "jetson-orin-nano",
+      "title": "Jetson Orin Nano",
+      "summary": "The edge deployment target for the SO-101 perception and policy stack."
+    },
+    {
       "id": "kernel-fusion",
       "title": "Kernel Fusion",
       "summary": "Kernel Fusion encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -2298,14 +2200,6 @@
       "id": "kernel-launches",
       "title": "Kernel Launches",
       "summary": "Kernel Launches encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "kinematic-singularities",
-      "title": "Kinematic Singularities",
-      "summary": "Develop practical and theoretical command of Kinematic Singularities.",
-      "tags": [
-        "robotics"
-      ]
     },
     {
       "id": "kv-block-allocation",
@@ -2707,6 +2601,11 @@
       "summary": "MJCF encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
+      "id": "mjlab",
+      "title": "MJLab",
+      "summary": "RL environment framework wrapping MuJoCo physics for parallel robot policy learning."
+    },
+    {
       "id": "ml-training-goal",
       "title": "Ml Training Goal",
       "summary": "Train a decoder-only language model from random initialization across multiple GPUs using a distributed training system understood end-to-end.",
@@ -2804,6 +2703,11 @@
       "id": "mujoco",
       "title": "MuJoCo",
       "summary": "MuJoCo encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
+    },
+    {
+      "id": "mujoco-warp",
+      "title": "MuJoCo-Warp",
+      "summary": "GPU (Warp/CUDA) port of MuJoCo physics enabling thousands of parallel simulated robots."
     },
     {
       "id": "multi-head-attention",
@@ -2988,11 +2892,6 @@
       "summary": "Observation Noise encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "observation-normalization",
-      "title": "Observation Normalization",
-      "summary": "Observation Normalization encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "occupancy",
       "title": "Occupancy",
       "summary": "Develop practical and theoretical command of Occupancy.",
@@ -3009,11 +2908,6 @@
       "id": "offline-online-evaluation",
       "title": "Offline Online Evaluation",
       "summary": "Offline Online Evaluation encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "offline-policy-evaluation",
-      "title": "Offline Policy Evaluation",
-      "summary": "Offline Policy Evaluation encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "one-point-perspective",
@@ -3039,6 +2933,11 @@
         "robotics",
         "background"
       ]
+    },
+    {
+      "id": "onnx-deployment",
+      "title": "ONNX Deployment",
+      "summary": "Exporting a trained policy to ONNX and running it on-device via ONNX Runtime or TensorRT."
     },
     {
       "id": "outliers",
@@ -3198,11 +3097,6 @@
       ]
     },
     {
-      "id": "pinhole-camera-model",
-      "title": "Pinhole Camera Model",
-      "summary": "Pinhole Camera Model encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "pinned-host-memory",
       "title": "Pinned Host Memory",
       "summary": "Pinned Host Memory encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -3227,11 +3121,6 @@
       "tags": [
         "physics"
       ]
-    },
-    {
-      "id": "policy-finetuning",
-      "title": "Policy Finetuning",
-      "summary": "Policy Finetuning encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "policy-gradients",
@@ -3686,16 +3575,6 @@
       "summary": "Real Time Inference encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "real-world-adaptation",
-      "title": "Real World Adaptation",
-      "summary": "Real World Adaptation encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "real-world-evaluation",
-      "title": "Real World Evaluation",
-      "summary": "Real World Evaluation encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "reality-gap",
       "title": "Reality Gap",
       "summary": "Reality Gap encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -3892,11 +3771,6 @@
       "summary": "Rewards encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "rgb-observations",
-      "title": "RGB Observations",
-      "summary": "RGB Observations encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "rigid-body-dynamics",
       "title": "Rigid Body Dynamics",
       "summary": "Rigid Body Dynamics encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -3908,6 +3782,16 @@
       "tags": [
         "inference"
       ]
+    },
+    {
+      "id": "rsl-rl",
+      "title": "RSL-RL",
+      "summary": "RL training library (PPO) used to train robot policies from parallel simulated rollouts."
+    },
+    {
+      "id": "rustypot",
+      "title": "RustyPot",
+      "summary": "Rust servo I/O driver that commands the STS3215 servos on the SO-101."
     },
     {
       "id": "rng-state",
@@ -3923,31 +3807,6 @@
         "robotics"
       ],
       "completionCriteria": "You can apply the core ideas in Signals & Control independently and explain the relevant tradeoffs."
-    },
-    {
-      "id": "robot-datasets",
-      "title": "Robot Datasets",
-      "summary": "Robot Datasets encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "robot-imitation-learning",
-      "title": "Robot Imitation Learning",
-      "summary": "Robot Imitation Learning encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "robot-kinematics",
-      "title": "Robot Kinematics",
-      "summary": "Position and velocity relationships in articulated robots.",
-      "tags": [
-        "stage",
-        "robotics"
-      ],
-      "completionCriteria": "You can apply the core ideas in Robot Kinematics independently and explain the relevant tradeoffs."
-    },
-    {
-      "id": "robot-perception-calibration",
-      "title": "Robot Perception Calibration",
-      "summary": "Robot Perception Calibration encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "robot-reinforcement-learning",
@@ -3969,13 +3828,14 @@
     },
     {
       "id": "robotics-goal",
-      "title": "Robotics Goal",
-      "summary": "Train a manipulation policy using simulation and inexpensive demonstrations and deploy it reliably onto a physical SO-101.",
+      "title": "SO-101 Arm",
+      "summary": "Train a small PPO policy on thousands of domain-randomized MuJoCo-Warp SO-101 simulations with a physically faithful STS3215 actuator model, export it as ONNX, and run the resulting control policy on the real SO-101 arm's STS3215 servos via rustypot on a Jetson Orin Nano.",
       "tags": [
         "goal"
       ],
       "completionCriteria": [
-        "Train a manipulation policy using simulation and inexpensive demonstrations and deploy it reliably onto a physical SO-101."
+        "An rsl_rl PPO policy trained in MuJoCo-Warp with domain randomization (friction, voltage, latency, backlash, joint offsets) reliably controls the simulated SO-101 arm through the STS3215 actuator model.",
+        "The ONNX policy (normalization embedded) runs on the Jetson Orin Nano and reliably drives the real SO-101 arm's STS3215 servos via rustypot."
       ]
     },
     {
@@ -4010,14 +3870,6 @@
       ]
     },
     {
-      "id": "rotation-matrices",
-      "title": "Rotation Matrices",
-      "summary": "Develop practical and theoretical command of Rotation Matrices.",
-      "tags": [
-        "robotics"
-      ]
-    },
-    {
       "id": "routing",
       "title": "Routing",
       "summary": "Routing encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -4026,11 +3878,6 @@
       "id": "rubric-graders",
       "title": "Rubric Graders",
       "summary": "Rubric Graders encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "safety-limits",
-      "title": "Safety Limits",
-      "summary": "Safety Limits encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "sample-size",
@@ -4087,14 +3934,6 @@
       ]
     },
     {
-      "id": "se3",
-      "title": "SE(3)",
-      "summary": "Develop practical and theoretical command of SE(3).",
-      "tags": [
-        "robotics"
-      ]
-    },
-    {
       "id": "seasonality",
       "title": "Seasonality",
       "summary": "Seasonality encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -4131,11 +3970,6 @@
       "id": "sensitivity-analysis",
       "title": "Sensitivity Analysis",
       "summary": "Sensitivity Analysis encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "sensor-synchronization",
-      "title": "Sensor Synchronization",
-      "summary": "Sensor Synchronization encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "sequence-length-effects",
@@ -4553,11 +4387,6 @@
       "id": "target-model-verification",
       "title": "Target Model Verification",
       "summary": "Target Model Verification encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "targeted-data-collection",
-      "title": "Targeted Data Collection",
-      "summary": "Targeted Data Collection encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
       "id": "task-datasets",
@@ -5056,11 +4885,6 @@
       "summary": "Visual Randomization encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     },
     {
-      "id": "visual-state-estimation",
-      "title": "Visual State Estimation",
-      "summary": "Visual State Estimation encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
       "id": "warmup",
       "title": "Warmup",
       "summary": "Warmup encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
@@ -5170,11 +4994,6 @@
       "id": "working-memory",
       "title": "Working Memory",
       "summary": "Working Memory encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
-    },
-    {
-      "id": "workspace",
-      "title": "Workspace",
-      "summary": "Workspace encompasses its core concepts, mechanisms, assumptions, and practical tradeoffs."
     }
   ]
 }

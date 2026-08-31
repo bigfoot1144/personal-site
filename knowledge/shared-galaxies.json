@@ -9,14 +9,12 @@
         "physics",
         "gpu",
         "ml-training",
-        "robotics",
         "data-science"
       ],
       "topicIds": [
         "linear-algebra",
         "probability",
         "eigenvectors",
-        "ordinary-differential-equations",
         "fourier-analysis"
       ],
       "paths": [
@@ -30,12 +28,6 @@
           "curriculumId": "ml-training",
           "before": [
             "language-modeling-foundations"
-          ]
-        },
-        {
-          "curriculumId": "robotics",
-          "before": [
-            "robot-kinematics"
           ]
         },
         {
@@ -209,15 +201,12 @@
       "topicId": "data-evaluation-systems",
       "curriculumIds": [
         "ml-training",
-        "robotics",
         "agentic",
         "data-science"
       ],
       "topicIds": [
-        "dataset-pipelines",
         "evaluation-infrastructure",
         "evaluation-metrics",
-        "experiment-tracking",
         "reproducibility",
         "train-validation-test-splits"
       ],
@@ -227,14 +216,6 @@
           "after": "training-numerics",
           "before": [
             "llm-data-evaluation"
-          ]
-        },
-        {
-          "curriculumId": "robotics",
-          "after": "robot-simulation",
-          "before": [
-            "robot-imitation-learning",
-            "robot-reinforcement-learning"
           ]
         },
         {
@@ -263,15 +244,13 @@
       "topicId": "production-reliability",
       "curriculumIds": [
         "inference",
-        "robotics",
         "agentic"
       ],
       "topicIds": [
         "model-deployment",
         "observability",
         "distributed-tracing",
-        "rate-limiting",
-        "failure-taxonomy"
+        "rate-limiting"
       ],
       "paths": [
         {
@@ -279,13 +258,6 @@
           "after": "distributed-inference",
           "before": [
             "production-llm-serving"
-          ]
-        },
-        {
-          "curriculumId": "robotics",
-          "after": "sim-to-real",
-          "before": [
-            "real-robot-deployment"
           ]
         },
         {

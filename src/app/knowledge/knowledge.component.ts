@@ -484,6 +484,16 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
       !edge.curriculumIds.includes(this.selectedCurriculumId);
   }
 
+  nodeFocus(node: PositionedTopic): boolean {
+    return !!this.selected || (this.activeCurricula.has(this.selectedCurriculumId) &&
+      node.placementCurriculumIds.includes(this.selectedCurriculumId));
+  }
+
+  edgeFocus(edge: Connection): boolean {
+    return !!this.selected || (this.activeCurricula.has(this.selectedCurriculumId) &&
+      edge.curriculumIds.includes(this.selectedCurriculumId));
+  }
+
   isCenterNode(node: PositionedTopic): boolean {
     return !node.parentPlacementId && node.x === 500 && node.y === 350;
   }

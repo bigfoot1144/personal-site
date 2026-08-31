@@ -205,12 +205,16 @@ h1 {
   transition: opacity .3s ease, stroke-width .3s ease;
 }
 .edges path.edge-not-started { opacity: .16; }
-.edges path.edge-in-progress { opacity: .58; stroke-width: 1.7; animation: reveal-edge .3s 1.12s ease-out both, journey-pulse 1.8s 1.45s ease-in-out infinite alternate; }
-.edges path.edge-completed { opacity: .82; stroke-width: 1.7; }
+.edges path.edge-in-progress { opacity: .3; stroke-width: 1.3; animation: reveal-edge .3s 1.12s ease-out both; }
+.edges path.curriculum-focus.edge-in-progress { opacity: .58; stroke-width: 1.7; animation: reveal-edge .3s 1.12s ease-out both, journey-pulse 1.8s 1.45s ease-in-out infinite alternate; }
+.edges path.edge-completed { opacity: .4; stroke-width: 1.3; }
+.edges path.curriculum-focus.edge-completed { opacity: .82; stroke-width: 1.7; }
 .edges path.related { stroke-dasharray: 5 8; }
 .edges path.related.edge-not-started { opacity: .08; }
-.edges path.related.edge-in-progress { opacity: .34; }
-.edges path.related.edge-completed { opacity: .48; }
+.edges path.related.edge-in-progress { opacity: .17; }
+.edges path.related.curriculum-focus.edge-in-progress { opacity: .34; }
+.edges path.related.edge-completed { opacity: .24; }
+.edges path.related.curriculum-focus.edge-completed { opacity: .48; }
 .edges path.curriculum-muted { opacity: 0 !important; }
 
 .topic-node {
@@ -333,8 +337,11 @@ h1 {
 .star-label .marker-goal line { stroke: var(--node-color); }
 .star-label .marker-goal text { fill: var(--node-color); letter-spacing: .2em; }
 .marker-rule { opacity: .72; }
-.topic-node.next-node .star-core { fill: #ffcf70; opacity: .92; filter: drop-shadow(0 0 3px rgba(255, 207, 112, .8)); }
-.topic-node.goal-node .star-core { fill: var(--node-color); opacity: .82; filter: drop-shadow(0 0 3px var(--node-color)); }
+.topic-node:not(.curriculum-focus) .journey-marker { opacity: .3; }
+.topic-node.next-node .star-core { fill: #ffcf70; opacity: .8; filter: drop-shadow(0 0 2px rgba(255, 207, 112, .3)); }
+.topic-node.curriculum-focus.next-node .star-core { opacity: .92; filter: drop-shadow(0 0 3px rgba(255, 207, 112, .8)); }
+.topic-node.goal-node .star-core { fill: var(--node-color); opacity: .6; filter: drop-shadow(0 0 1.5px color-mix(in srgb, var(--node-color) 40%, transparent)); }
+.topic-node.curriculum-focus.goal-node .star-core { opacity: .82; filter: drop-shadow(0 0 3px var(--node-color)); }
 .topic-node.jump-focused .star-core { stroke: #fff; stroke-width: 1.2px; filter: drop-shadow(0 0 4px #ffcf70) drop-shadow(0 0 9px rgba(255, 207, 112, .65)); animation: jump-focus 1.15s ease-in-out infinite alternate; }
 .topic-node.jump-focused .topic-title { opacity: 1 !important; font-size: 9.5px !important; }
 .journey-focus-active .topic-node:not(.jump-focused) .star-label text { opacity: .14 !important; }
@@ -344,6 +351,7 @@ h1 {
 .topic-node .star-core {
   filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 7px currentColor);
   animation: pixel-twinkle 2.8s ease-in-out infinite alternate;
+  transition: filter .3s ease;
 }
 
 .topic-node:not(.in-progress):not(.completed) .star-core {
@@ -354,6 +362,12 @@ h1 {
 
 .topic-node.in-progress .star-core {
   fill: #ffcf70;
+  opacity: .8;
+  filter: drop-shadow(0 0 2px rgba(255, 207, 112, .35));
+  animation: none;
+}
+
+.topic-node.curriculum-focus.in-progress .star-core {
   opacity: 1;
   filter: drop-shadow(0 0 3px #ffcf70) drop-shadow(0 0 8px rgba(255, 207, 112, .75));
   animation: status-pulse 1.4s ease-in-out infinite alternate;
@@ -361,6 +375,12 @@ h1 {
 
 .topic-node.completed .star-core {
   fill: #8dffcb;
+  opacity: .75;
+  filter: drop-shadow(0 0 2.5px rgba(141, 255, 203, .3));
+  animation: none;
+}
+
+.topic-node.curriculum-focus.completed .star-core {
   opacity: 1;
   filter: drop-shadow(0 0 4px #8dffcb) drop-shadow(0 0 10px rgba(141, 255, 203, .8));
   animation: none;

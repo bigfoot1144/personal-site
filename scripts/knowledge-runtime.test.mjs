@@ -75,17 +75,17 @@ test('shared galaxies appear once and participate in every configured curriculum
   }
   assert.equal(runtime.placements.filter(placement => placement.topicId === 'linear-algebra').length, 1);
   assert.deepEqual(runtime.placements.find(placement => placement.topicId === 'linear-algebra').curriculumIds,
-    ['data-science', 'gpu', 'ml-training', 'physics', 'robotics']);
+    ['data-science', 'gpu', 'ml-training', 'physics']);
 });
 
 test('Robotics and Data Science use only the intended stage branches', async () => {
   const runtime = JSON.parse(await readFile(runtimeUrl, 'utf8'));
   const edgesFor = curriculumId => runtime.connections.filter(edge => edge.curriculumIds.includes(curriculumId)).map(edge => [edge.source, edge.target]);
   const robotics = edgesFor('robotics');
-  assert.ok(robotics.some(edge => edge[0] === 'place-robotics-robot-simulation' && edge[1] === 'place-shared-data-evaluation-systems'));
-  assert.ok(robotics.some(edge => edge[0] === 'place-shared-data-evaluation-systems' && edge[1] === 'place-robotics-robot-imitation-learning'));
-  assert.ok(robotics.some(edge => edge[0] === 'place-shared-data-evaluation-systems' && edge[1] === 'place-robotics-robot-reinforcement-learning'));
-  assert.ok(!robotics.some(edge => edge[0] === 'place-robotics-robot-kinematics' && edge[1] === 'place-robotics-robot-perception-calibration'));
+  assert.ok(robotics.some(edge => edge[0] === 'place-robotics-robot-simulation' && edge[1] === 'place-robotics-robot-reinforcement-learning'));
+  assert.ok(robotics.some(edge => edge[0] === 'place-robotics-robot-reinforcement-learning' && edge[1] === 'place-robotics-sim-to-real'));
+  assert.ok(robotics.some(edge => edge[0] === 'place-robotics-sim-to-real' && edge[1] === 'place-robotics-real-robot-deployment'));
+  assert.ok(!robotics.some(edge => edge[0] === 'place-robotics-robot-simulation' && edge[1] === 'place-robotics-robot-imitation-learning'));
   const dataScience = edgesFor('data-science');
   assert.ok(dataScience.some(edge => edge[0] === 'place-data-science-predictive-modeling' && edge[1] === 'place-data-science-experimental-design'));
   assert.ok(dataScience.some(edge => edge[0] === 'place-data-science-predictive-modeling' && edge[1] === 'place-data-science-causal-inference'));

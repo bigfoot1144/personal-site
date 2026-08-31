@@ -34,7 +34,14 @@
     "place-portrait-drawing-portrait-integration": { "x": 158, "y": 440 },
     "place-portrait-drawing-portrait-practice": { "x": 132, "y": 487 },
     "place-portrait-drawing-portrait-drawing-goal": { "x": 220, "y": 535 },
-    "place-data-science-causal-inference": { "x": 390, "y": 256 }
+    "place-data-science-causal-inference": { "x": 390, "y": 256 },
+    "place-robotics-so101-hardware": { "x": 459, "y": 204 },
+    "place-robotics-robot-control": { "x": 424, "y": 239 },
+    "place-robotics-robot-simulation": { "x": 494, "y": 274 },
+    "place-robotics-robot-reinforcement-learning": { "x": 424, "y": 309 },
+    "place-robotics-sim-to-real": { "x": 494, "y": 344 },
+    "place-robotics-real-robot-deployment": { "x": 424, "y": 379 },
+    "place-robotics-robotics-goal": { "x": 359, "y": 351 }
   },
   "curricula": {
     "agentic": { "start": { "x": 823, "y": 92 }, "end": { "x": 755, "y": 548 }, "offsets": [0, 0.24, -0.18, 0.32, -0.26, 0.14, -0.2, 0.28, -0.12, 0.22, 0] },
@@ -44,6 +51,6 @@
     "ml-training": { "start": { "x": 612, "y": 76 }, "end": { "x": 449, "y": 612 }, "offsets": [0, 0.22, -0.28, 0.16, -0.24, 0.31, -0.18, 0.25, -0.14, 0.2, 0] },
     "physics": { "start": { "x": 502, "y": 106 }, "end": { "x": 92, "y": 104 }, "offsets": [0, -0.3, 0.2, -0.18, 0.34, -0.24, 0.14, -0.32, 0.24, -0.16, 0.28, -0.22, 0.12, -0.26, 0] },
     "portrait-drawing": { "start": { "x": 94, "y": 271 }, "end": { "x": 258, "y": 571 }, "offsets": [0, 0.32, -0.24, 0.18, -0.3, 0.26, -0.16, 0.22, 0] },
-    "robotics": { "start": { "x": 892, "y": 122 }, "end": { "x": 657, "y": 596 }, "offsets": [0, -0.28, 0.2, -0.34, 0.24, -0.16, 0.3, -0.22, 0.14, 0] }
+    "robotics": { "start": { "x": 459, "y": 204 }, "end": { "x": 359, "y": 351 }, "offsets": [0, -0.28, 0.2, -0.34, 0.24, -0.16, 0.3, -0.22, 0.14, 0] }
   }
 }

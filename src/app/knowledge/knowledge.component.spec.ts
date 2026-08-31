@@ -176,6 +176,52 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(getComputedStyle(agenticElement.querySelector('.star-label')!).display).not.toBe('none');
   });
 
+  it('gates the in-progress glow and pulse to the selected curriculum', () => {
+    const robotics = component.baseNodes.find(node => node.id === 'robot-simulation')!;
+    expect(robotics.status).toBe('in-progress');
+    const roboticsElement = fixture.nativeElement.querySelector(
+      `[data-placement-id="${robotics.placementId}"]`) as SVGGElement;
+    const roboticsCore = roboticsElement.querySelector('.star-core') as SVGGraphicsElement;
+
+    // Robotics is not the selected curriculum (default is ml-training) → calm: same amber
+    // color, a slight glow, but no pulse.
+    expect(roboticsElement.classList).not.toContain('curriculum-focus');
+    expect(getComputedStyle(roboticsCore).animationName).toBe('none');
+    expect(getComputedStyle(roboticsCore).filter).not.toBe('none');
+    expect(getComputedStyle(roboticsCore).filter).not.toContain('8px');
+    expect(getComputedStyle(roboticsCore).fill).toBe('rgb(255, 207, 112)');
+
+    // Selecting robotics → its in-progress star gets the full glow and the pulse.
+    component.selectCurriculum('robotics');
+    fixture.detectChanges();
+    expect(roboticsElement.classList).toContain('curriculum-focus');
+    expect(getComputedStyle(roboticsCore).animationName).toBe('status-pulse');
+    expect(getComputedStyle(roboticsCore).filter).toContain('8px');
+    expect(getComputedStyle(roboticsCore).fill).toBe('rgb(255, 207, 112)');
+
+    // Switching back to another curriculum quiets it again.
+    component.selectCurriculum('ml-training');
+    fixture.detectChanges();
+    expect(roboticsElement.classList).not.toContain('curriculum-focus');
+    expect(getComputedStyle(roboticsCore).animationName).toBe('none');
+    expect(getComputedStyle(roboticsCore).filter).not.toContain('8px');
+  });
+
+  it('gates the completed glow to the selected curriculum', () => {
+    const completed = component.baseNodes.find(node => node.status === 'completed');
+    if (!completed) return;
+    const element = fixture.nativeElement.querySelector(
+      `[data-placement-id="${completed.placementId}"]`) as SVGGElement;
+    const core = element.querySelector('.star-core') as SVGGraphicsElement;
+
+    if (component.nodeFocus(completed)) {
+      expect(getComputedStyle(core).filter).toContain('10px');
+    } else {
+      expect(getComputedStyle(core).filter).not.toBe('none');
+      expect(getComputedStyle(core).filter).not.toContain('10px');
+    }
+  });
+
   it('toggles visibility without changing the selected curriculum', () => {
     const visibility = fixture.nativeElement.querySelector('.journey-visibility') as HTMLButtonElement;
     visibility.click();
