@@ -1,0 +1,26 @@
+services:
+  codex:
+    build:
+      context: .
+      args:
+        LOCAL_UID: ${LOCAL_UID:-1000}
+        LOCAL_GID: ${LOCAL_GID:-1000}
+    init: true
+    stdin_open: true
+    tty: true
+    network_mode: ${DOCKER_NETWORK_MODE:-bridge}
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 512
+    environment:
+      BLENDER_HOST: ${BLENDER_HOST:-host.docker.internal}
+      BLENDER_PORT: ${BLENDER_PORT:-9876}
+      BLENDER_PROJECT_DIR: ${BLENDER_PROJECT_DIR:?Set the absolute host path of the work folder in .env}
+    volumes:
+      - ./work:/workspace
+      - codex-state:/home/node/.codex
+      - ./config.toml:/opt/blender-docker/config.default.toml:ro
+
+volumes:
+  codex-state:

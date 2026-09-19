@@ -1,0 +1,33 @@
+# Regenerable output and local safety history
+/renders/
+/.checkpoints/
+/frames/
+
+# Blender automatic backups and temporary files
+*.blend[0-9]*
+*.blend@
+*.tmp
+*.autosave
+
+/.mcp-tmp
+
+# Prevent a return to root-level working copies and previews
+/[0-9][0-9]_*.blend
+/*.png
+/*.jpg
+/*.jpeg
+/*.mp4
+
+# Python, editor, and operating-system caches
+__pycache__/
+*.py[cod]
+.venv/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local machine configuration
+.env
+.env.*
+!.env.example
