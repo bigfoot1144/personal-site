@@ -1,0 +1,21 @@
+<main #surface class="storefront" [class.has-frame]="firstFrame()" [class.is-error]="state() === 'error'"
+  [attr.aria-busy]="state() === 'loading' || state() === 'approaching' || state() === 'navigating'"
+  aria-labelledby="storefront-title">
+  <h1 id="storefront-title" class="sr-only">Explore Bigfoot’s street</h1>
+  <div #canvasMount class="canvas-mount"></div>
+  <img class="poster" [src]="manifest.assets.poster.url" [width]="manifest.assets.poster.width"
+    [height]="manifest.assets.poster.height" alt="" fetchpriority="high" decoding="async"
+    [class.poster-revealed]="firstFrame()" draggable="false">
+  <p class="sr-only" aria-live="polite" aria-atomic="true">{{ statusText }}</p>
+  <nav class="shop-links" aria-label="Street destinations">
+    <a *ngFor="let shop of shops" class="shop-link" [attr.data-shop]="shop.id" [href]="shop.href"
+      [attr.aria-label]="shop.label" (mouseenter)="prefetchShop(shop.id)" (focus)="focusShop(shop.id, $event)"
+      (click)="linkClick(shop.id, $event)">
+      <span>{{ shop.name }}</span>
+    </a>
+  </nav>
+  <div *ngIf="state() === 'error'" class="fallback-message">
+    <p>{{ errorMessage() }}</p>
+    <button type="button" (click)="retry()">Try the 3D street again</button>
+  </div>
+</main>

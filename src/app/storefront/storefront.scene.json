@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "source": "blender-codex-docker/work/scene/lantern_lane.blend#Lantern Lane • storefront tour",
+  "background": "#03182b",
+  "bounds": {
+    "min": [
+      -10.5,
+      -0.3,
+      -1
+    ],
+    "max": [
+      10.5,
+      11.4,
+      6
+    ]
+  },
+  "overview": {
+    "position": [
+      0,
+      5.802319526672363,
+      26.626405715942383
+    ],
+    "target": [
+      0,
+      4.573606967926025,
+      0.6000003814697266
+    ],
+    "fov": 32.7116342020345
+  },
+  "storefronts": [
+    {
+      "id": "learning",
+      "hitBox": {
+        "min": [
+          -7.95,
+          0.2,
+          0.35
+        ],
+        "max": [
+          -4.05,
+          4.55,
+          1.05
+        ]
+      },
+      "focus": {
+        "position": [
+          -6,
+          2.9000000953674316,
+          8.899999618530273
+        ],
+        "target": [
+          -6,
+          2.57521653175354,
+          0.6000003814697266
+        ],
+        "fov": 32.7116342020345
+      },
+      "sign": {
+        "position": [
+          -6,
+          4.01,
+          0.91
+        ],
+        "width": 3.8,
+        "height": 0.92
+      }
+    },
+    {
+      "id": "blog",
+      "hitBox": {
+        "min": [
+          -3.95,
+          0.2,
+          0.35
+        ],
+        "max": [
+          -0.05,
+          4.55,
+          1.05
+        ]
+      },
+      "focus": {
+        "position": [
+          -2,
+          2.9000000953674316,
+          8.899999618530273
+        ],
+        "target": [
+          -2,
+          2.57521653175354,
+          0.6000003814697266
+        ],
+        "fov": 32.7116342020345
+      },
+      "sign": {
+        "position": [
+          -2,
+          4.01,
+          0.91
+        ],
+        "width": 3.8,
+        "height": 0.92
+      }
+    },
+    {
+      "id": "about",
+      "hitBox": {
+        "min": [
+          0.05,
+          0.2,
+          0.35
+        ],
+        "max": [
+          3.95,
+          4.55,
+          1.05
+        ]
+      },
+      "focus": {
+        "position": [
+          2,
+          2.9000000953674316,
+          8.899999618530273
+        ],
+        "target": [
+          2,
+          2.57521653175354,
+          0.6000003814697266
+        ],
+        "fov": 32.7116342020345
+      },
+      "sign": {
+        "position": [
+          2,
+          4.01,
+          0.91
+        ],
+        "width": 3.8,
+        "height": 0.92
+      }
+    },
+    {
+      "id": "projects",
+      "hitBox": {
+        "min": [
+          4.05,
+          0.2,
+          0.35
+        ],
+        "max": [
+          7.95,
+          4.55,
+          1.05
+        ]
+      },
+      "focus": {
+        "position": [
+          6,
+          2.9000000953674316,
+          8.899999618530273
+        ],
+        "target": [
+          6,
+          2.57521653175354,
+          0.6000003814697266
+        ],
+        "fov": 32.7116342020345
+      },
+      "sign": {
+        "position": [
+          6,
+          4.01,
+          0.91
+        ],
+        "width": 3.8,
+        "height": 0.92
+      }
+    }
+  ],
+  "assets": {
+    "poster": {
+      "url": "/assets/storefront/poster.54854b4d8136.webp",
+      "bytes": 193906,
+      "width": 1600,
+      "height": 1200
+    },
+    "desktop": {
+      "url": "/assets/storefront/lantern-lane.desktop.60d8e40c4f94.glb",
+      "bytes": 10358620
+    },
+    "mobile": {
+      "url": "/assets/storefront/lantern-lane.mobile.46aed52d6dce.glb",
+      "bytes": 5378708
+    },
+    "environment": "/assets/storefront/environment.755011be95de.hdr"
+  },
+  "sourceSha256": "c456f5ef20bfc249d2d8e7d2bbdd363be5987e165b44fa26d7c2b7c97b7d6db1"
+}

@@ -1,5 +1,5 @@
-import { Component, DestroyRef, ViewEncapsulation, inject } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { afterNextRender, ChangeDetectorRef, Component, DestroyRef, ElementRef, NgZone, PLATFORM_ID, ViewEncapsulation, inject } from '@angular/core';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { switchMap } from 'rxjs/operators';
@@ -26,9 +26,15 @@ export class MarkdownPostComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly http = inject(HttpClient);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly zone = inject(NgZone);
+  private readonly changeDetector = inject(ChangeDetectorRef);
+  private destroyed = false;
 
   constructor() {
-    this.setupReadingProgressTracking();
+    this.destroyRef.onDestroy(() => { this.destroyed = true; });
+    afterNextRender(() => this.setupReadingProgressTracking());
 
     this.route.paramMap
       .pipe(
@@ -67,16 +73,17 @@ export class MarkdownPostComponent {
   }
 
   private setupReadingProgressTracking(): void {
-    const scrollHost = document.querySelector('.content-overlay');
-    if (!(scrollHost instanceof HTMLElement)) {
-      return;
-    }
+    if (!this.isBrowser || this.destroyed) return;
+    const scrollHost = this.element.nativeElement.closest<HTMLElement>('.content-overlay');
+    if (!scrollHost) return;
 
     fromEvent(scrollHost, 'scroll')
       .pipe(startWith(null), takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.readingProgress = calculateReadingProgress(scrollHost);
-      });
+      .subscribe(() => this.zone.run(() => {
+        const article = this.element.nativeElement.querySelector<HTMLElement>('.post-page');
+        this.readingProgress = article ? calculateReadingProgress(scrollHost, article) : 0;
+        this.changeDetector.markForCheck();
+      }));
   }
 }
 
@@ -91,12 +98,7 @@ function estimateReadingTime(markdown: string): number {
   return Math.max(1, Math.ceil(words / 220));
 }
 
-function calculateReadingProgress(scrollHost: HTMLElement): number {
-  const article = document.querySelector('.post-page');
-  if (!(article instanceof HTMLElement)) {
-    return 0;
-  }
-
+function calculateReadingProgress(scrollHost: HTMLElement, article: HTMLElement): number {
   const scrollTop = scrollHost.scrollTop;
   const viewportHeight = scrollHost.clientHeight;
   const articleTop = article.offsetTop;

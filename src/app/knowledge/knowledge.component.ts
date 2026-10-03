@@ -95,6 +95,11 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
   private panMoved = false;
   private pointerStartedOnTopic = false;
   private cameraFrame: number | null = null;
+  private cameraGeneration = 0;
+  private startupFrame: number | null = null;
+  private resizeFrame: number | null = null;
+  private searchFocusTimer: ReturnType<typeof setTimeout> | null = null;
+  private destroyed = false;
   private unregisterSnapshotProvider: (() => void) | null = null;
   private ambientParallaxSuspended = false;
   private overviewCameraBeforeDrilldown: { scale: number; panX: number; panY: number } | null = null;
@@ -109,19 +114,33 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
       this.routeMorphing = false;
       return;
     }
-    requestAnimationFrame(() => {
+    this.startupFrame = this.zone.runOutsideAngular(() => requestAnimationFrame(() => {
+      if (this.destroyed) return;
+      this.startupFrame = null;
       const targets = this.constellationSnapshot(this.baseNodes);
       this.publishCameraState();
       void this.constellationTransition.morphToConstellation(targets).then(() => {
-        this.routeMorphing = false;
-        this.changeDetector.markForCheck();
+        if (this.destroyed) return;
+        this.zone.run(() => {
+          this.routeMorphing = false;
+          this.changeDetector.markForCheck();
+        });
       });
-    });
+    }));
   }
 
   ngOnDestroy(): void {
+    this.destroyed = true;
     this.unregisterSnapshotProvider?.();
+    this.unregisterSnapshotProvider = null;
+    if (this.startupFrame !== null) cancelAnimationFrame(this.startupFrame);
+    if (this.resizeFrame !== null) cancelAnimationFrame(this.resizeFrame);
+    this.startupFrame = null;
+    this.resizeFrame = null;
+    if (this.searchFocusTimer !== null) clearTimeout(this.searchFocusTimer);
+    this.searchFocusTimer = null;
     this.cancelCamera();
+    this.constellationTransition.cancelKnowledgeTransition();
   }
 
   private constellationSnapshot(nodes: PositionedTopic[]): ConstellationMorphStar[] {
@@ -144,7 +163,7 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
 
   private publishCameraState(): void {
     const svg = this.graphSvg?.nativeElement;
-    if (!svg) return;
+    if (this.destroyed || !svg || typeof window === 'undefined') return;
     const bounds = svg.getBoundingClientRect();
     this.constellationTransition.updateKnowledgeCamera({
       scale: this.scale,
@@ -309,7 +328,11 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
   openSearch(): void {
     this.searchOpen = true;
     this.searchActiveIndex = 0;
-    setTimeout(() => this.searchInput?.nativeElement.focus());
+    if (this.searchFocusTimer !== null) clearTimeout(this.searchFocusTimer);
+    this.searchFocusTimer = setTimeout(() => {
+      this.searchFocusTimer = null;
+      if (!this.destroyed && this.searchOpen) this.searchInput?.nativeElement.focus();
+    });
   }
 
   closeSearch(): void {
@@ -788,7 +811,9 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
   }
 
   private animateView(targetScale: number, targetPanX: number, targetPanY: number, onComplete?: () => void): void {
+    if (this.destroyed) return;
     this.cancelCamera();
+    const generation = this.cameraGeneration;
     if (typeof requestAnimationFrame === 'undefined') {
       this.scale = targetScale; this.panX = targetPanX; this.panY = targetPanY;
       this.applyGraphTransform();
@@ -801,6 +826,7 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
     const started = performance.now();
     this.zone.runOutsideAngular(() => {
       const step = (now: number) => {
+        if (this.destroyed || generation !== this.cameraGeneration) return;
         const progress = Math.min(1, (now - started) / 700);
         const eased = 1 - Math.pow(1 - progress, 3);
         this.scale = startScale + (targetScale - startScale) * eased;
@@ -827,6 +853,7 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
   }
 
   private cancelCamera(): void {
+    this.cameraGeneration++;
     if (this.cameraFrame !== null && typeof cancelAnimationFrame !== 'undefined') {
       cancelAnimationFrame(this.cameraFrame);
       this.cameraFrame = null;
@@ -835,7 +862,11 @@ export class KnowledgeComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onKnowledgeResize(): void {
-    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(() => this.publishCameraState());
+    if (this.destroyed || this.resizeFrame !== null || typeof requestAnimationFrame === 'undefined') return;
+    this.resizeFrame = this.zone.runOutsideAngular(() => requestAnimationFrame(() => {
+      this.resizeFrame = null;
+      if (!this.destroyed) this.publishCameraState();
+    }));
   }
 
   @HostListener('document:keydown', ['$event'])

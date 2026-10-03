@@ -1,0 +1,43 @@
+{
+  "source": "blender-codex-docker/work/scene/lantern_lane.blend#Lantern Lane • storefront tour",
+  "sourceSha256": "c456f5ef20bfc249d2d8e7d2bbdd363be5987e165b44fa26d7c2b7c97b7d6db1",
+  "sourceGlbSha256": "0fd3d8d091bf67c9d446499f52b8a86bf2983a72b4e3692f553fd938691bd847",
+  "tools": {
+    "node": "v22.23.2",
+    "gltfTransform": "4.5.1",
+    "ktx": "4.4.2",
+    "three": "0.180.0"
+  },
+  "poster": {
+    "url": "/assets/storefront/poster.54854b4d8136.webp",
+    "bytes": 193906,
+    "width": 1600,
+    "height": 1200
+  },
+  "profiles": {
+    "desktop": {
+      "url": "/assets/storefront/lantern-lane.desktop.60d8e40c4f94.glb",
+      "bytes": 10358620,
+      "triangles": 1111615,
+      "vertices": 992888,
+      "primitives": 9,
+      "materials": 9,
+      "textures": 9,
+      "transferBudget": 12000000,
+      "withinTransferBudget": true,
+      "environmentBytes": 295064
+    },
+    "mobile": {
+      "url": "/assets/storefront/lantern-lane.mobile.46aed52d6dce.glb",
+      "bytes": 5378708,
+      "triangles": 378135,
+      "vertices": 432132,
+      "primitives": 9,
+      "materials": 9,
+      "textures": 9,
+      "transferBudget": 6000000,
+      "withinTransferBudget": true,
+      "environmentBytes": 295064
+    }
+  }
+}

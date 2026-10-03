@@ -1,17 +1,66 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Dependencies (including nested tooling packages)
+node_modules/
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Compiled output and build caches
+/dist/
+/out-tsc/
+/bazel-out/
+/.angular/
+.sass-cache/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Local scratch, export intermediates and test reports
+/tmp/
+/.tmp/
+/coverage/
+/playwright-report/
+/test-results/
+/blob-report/
+/playwright/.cache/
 
-# IDEs and editors
+# Generated knowledge runtime: compiled automatically before dev/build
+/src/app/knowledge/knowledge.runtime.json
+
+# Logs and local service state
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/.firebase/
+/connect.lock
+/typings/
+
+# Local environment files; keep safe templates versioned
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+!.env-example
+
+# OpenCode bootstrap files are machine-local; shared skills remain versioned
+/.opencode/.gitignore
+/.opencode/package.json
+/.opencode/package-lock.json
+
+# Python tooling used by the Blender helpers
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Blender automatic backups, not the canonical .blend source
+*.blend[0-9]*
+*.blend@
+*.autosave
+# Blender renders/checkpoints are scoped in blender-codex-docker/work/.gitignore.
+# DO NOT ignore *.blend, *.glb, *.hdr, *.webp or *.wasm globally:
+# the editable scene and published src/assets/storefront/ files belong in Git.
+
+# IDEs, editor backups and local history
 .idea/
 .project
 .classpath
@@ -19,29 +68,18 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.history/
+*.swp
+*.swo
+*~
 
-# Visual Studio Code
+# Keep shared VS Code project configuration
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
-# System files
+# Operating-system metadata
 .DS_Store
 Thumbs.db
-
-.tmp/
-
-# Generated knowledge runtime
-/src/app/knowledge/knowledge.runtime.json

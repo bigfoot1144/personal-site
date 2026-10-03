@@ -1,9 +1,12 @@
-import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, Input, PLATFORM_ID } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, OnDestroy, ElementRef, HostListener, Inject, InjectionToken, Input, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import * as ort from 'onnxruntime-web';
+import type * as ort from 'onnxruntime-web';
 import { ConstellationMorphStar, ConstellationTransitionService, KnowledgeCameraState } from '../constellation-transition.service';
 
-ort.env.wasm.wasmPaths = 'onnxruntime/';
+export const ONNX_RUNTIME_LOADER = new InjectionToken<() => Promise<typeof ort>>('ONNX_RUNTIME_LOADER', {
+  providedIn: 'root',
+  factory: () => () => import('onnxruntime-web')
+});
 
 @Component({
   selector: 'app-starry-background',
@@ -48,7 +51,7 @@ ort.env.wasm.wasmPaths = 'onnxruntime/';
     }
   `]
 })
-export class StarryBackgroundComponent implements OnInit, OnDestroy {
+export class StarryBackgroundComponent implements OnDestroy {
   @Input() knowledgeMode = false;
 
   scattering = false;
@@ -76,6 +79,14 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   private mouseY = 0;
   private current_pixel_val = 10;
   private session: ort.InferenceSession | null = null;
+  private runtime: typeof ort | null = null;
+  private initialized = false;
+  private destroyed = false;
+  private animationStyle: HTMLStyleElement | null = null;
+  private readonly timeouts = new Set<ReturnType<typeof setTimeout>>();
+  private transitionFrame: number | null = null;
+  private transitionTimer: ReturnType<typeof setTimeout> | null = null;
+  private resolveTransition: (() => void) | null = null;
 
   // star config!
   // -------------------------------
@@ -207,61 +218,96 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   constructor(
     private el: ElementRef,
     private readonly constellationTransition: ConstellationTransitionService,
+    private readonly zone: NgZone,
+    private readonly changeDetector: ChangeDetectorRef,
+    @Inject(ONNX_RUNTIME_LOADER) private readonly loadRuntime: () => Promise<typeof ort>,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+    // Do not mutate Angular's server-rendered DOM before hydration has finished.
+    afterNextRender(() => this.zone.runOutsideAngular(() => this.initializeBackground()));
   }
 
-  async ngOnInit() {
-    // Only execute browser-specific code if we're in a browser
-    if (this.isBrowser) {
-      // Initialize main starry background
-      this.generateStars();
-      this.unregisterTransitionRenderer = this.constellationTransition.registerRenderer(this);
-      this.createShootingStars();
-      this.shootingStarInterval = setInterval(() => this.createShootingStars(), this.shootingStarIntervalMs);
-      
-      // Create styles for animations
-      this.createAnimationStyles();
-      
-      // Initialize the drawing recorder
-      this.initializeDrawingRecorder();
-      await this.loadModel();
-    }
+  private initializeBackground(): void {
+    if (!this.isBrowser || this.destroyed || this.initialized) return;
+    this.initialized = true;
+    this.generateStars();
+    this.createAnimationStyles();
+    this.initializeDrawingRecorder();
+    this.restartShootingStarEffect();
+    this.unregisterTransitionRenderer = this.constellationTransition.registerRenderer(this);
+    void this.loadModel();
   }
 
   ngOnDestroy(): void {
-    this.transitionGeneration++;
+    this.destroyed = true;
+    this.cancelTransition();
     this.unregisterTransitionRenderer?.();
-    if (this.isBrowser) {
-      if (this.shootingStarInterval) {
-        clearInterval(this.shootingStarInterval);
+    this.unregisterTransitionRenderer = null;
+    this.stopShootingStars();
+    this.timeouts.forEach(handle => clearTimeout(handle));
+    this.timeouts.clear();
+    this.animationStyle?.remove();
+    this.animationStyle = null;
+    this.removeBoundingBox();
+    this.drawingLines.forEach(line => line.remove());
+    this.drawingLines = [];
+    this.stars.forEach(star => star.remove());
+    this.stars = [];
+    this.ambientOrigins = [];
+    this.drawingRecorder = [];
+    this.resized = [];
+    this.lastKnowledgeCamera = null;
+    const session = this.session;
+    this.session = null;
+    this.runtime = null;
+    if (session) void this.releaseSession(session);
+  }
+
+  private async loadModel(): Promise<void> {
+    try {
+      const runtime = await this.loadRuntime();
+      if (this.destroyed) return;
+      runtime.env.wasm.wasmPaths = '/onnxruntime/';
+      const session = await runtime.InferenceSession.create('assets/mnist-12-int8.onnx');
+      if (this.destroyed) {
+        await this.releaseSession(session);
+        return;
       }
-      if (this.recordingTimeout) {
-        clearTimeout(this.recordingTimeout);
-      }
+      this.runtime = runtime;
+      this.session = session;
+    } catch (error) {
+      if (!this.destroyed) console.error('Error loading model:', error);
     }
   }
 
-  private async loadModel() {
+  private async releaseSession(session: ort.InferenceSession): Promise<void> {
     try {
-      ort.env.wasm.wasmPaths = "/onnxruntime/"
-      this.session = await ort.InferenceSession.create('assets/mnist-12-int8.onnx');
-      console.log('Model loaded successfully');
+      await session.release();
     } catch (error) {
-      console.error('Error loading model:', error);
+      console.warn('Unable to release the drawing model:', error);
     }
+  }
+
+  private scheduleTimeout(callback: () => void, delay: number): ReturnType<typeof setTimeout> {
+    return this.zone.runOutsideAngular(() => {
+      const handle = setTimeout(() => {
+        this.timeouts.delete(handle);
+        if (!this.destroyed) callback();
+      }, delay);
+      this.timeouts.add(handle);
+      return handle;
+    });
   }
 
   public restartShootingStarEffect(): void {
-    if (this.shootingStarInterval) {
-      clearInterval(this.shootingStarInterval);
-    }
-    this.createShootingStars();
-
-    this.shootingStarInterval = setInterval(() => {
+    if (this.shootingStarInterval) clearInterval(this.shootingStarInterval);
+    this.shootingStarInterval = null;
+    if (this.destroyed || !this.initialized || this.knowledgeMode || this.scattering) return;
+    this.zone.runOutsideAngular(() => {
       this.createShootingStars();
-    }, this.shootingStarIntervalMs);
+      this.shootingStarInterval = setInterval(() => this.createShootingStars(), this.shootingStarIntervalMs);
+    });
   }
   
   private getMnistInputArray(lineThickness = 1): void {
@@ -625,7 +671,10 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
   private async runInference(){ // Added Promise<void> for async
     // --- 1. Check if session and input are ready ---
-    if (!this.session) {
+    const session = this.session;
+    const runtime = this.runtime;
+    if (this.destroyed) return;
+    if (!session || !runtime) {
       console.error("Inference session not initialized yet.");
       return;
     }
@@ -639,8 +688,8 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       // IMPORTANT: Replace 'Input3' and 'Plus214_Output_0' with the actual names
       //            logged from `this.session.inputNames[0]` and `this.session.outputNames[0]`
       //            after loading your specific model.
-      const inputName = this.session.inputNames[0];
-      const outputName = this.session.outputNames[0];
+      const inputName = session.inputNames[0];
+      const outputName = session.outputNames[0];
       // console.log(`Using Input: ${inputName}, Output: ${outputName}`); // Uncomment for debugging
   
       // --- 3. Prepare Input Tensor ---
@@ -667,7 +716,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   
       // Create the ONNX Runtime Tensor
       // Assuming 'float32' input type, which is common. Change if your model differs.
-      const inputTensor = new ort.Tensor('float32', flattenedData, expectedInputShape);
+      const inputTensor = new runtime.Tensor('float32', flattenedData, expectedInputShape);
   
       // --- 4. Prepare Feeds Object ---
       // The key MUST match the model's input name
@@ -676,7 +725,8 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   
       // --- 5. Run Inference ---
       // console.log('Running inference...'); // Uncomment for debugging
-      const results = await this.session.run(feeds);
+      const results = await session.run(feeds);
+      if (this.destroyed || this.session !== session) return;
       // console.log('Inference completed.'); // Uncomment for debugging
   
       // --- 6. Process Output ---
@@ -705,7 +755,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   
   
     } catch (error) {
-      console.error('Error during inference:', error);
+      if (!this.destroyed) console.error('Error during inference:', error);
       // Consider updating UI to show an error message
     }
   }
@@ -713,6 +763,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   private startRecording(): void {
     if (this.recordingTimeout) {
       clearTimeout(this.recordingTimeout);
+      this.timeouts.delete(this.recordingTimeout);
     }
     
     // Reset the recording array
@@ -725,7 +776,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     //this.removeBoundingBox();
     
     // Set a timeout to stop recording after 2 seconds
-    this.recordingTimeout = setTimeout(() => {
+    this.recordingTimeout = this.scheduleTimeout(() => {
       this.isRecording = false;
       console.log('Recording completed. Array contains drawing data.');
       
@@ -742,9 +793,22 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     }, this.recordingDuration);
   }
 
+  cancelTransition(): void {
+    this.transitionGeneration++;
+    if (this.transitionFrame !== null) cancelAnimationFrame(this.transitionFrame);
+    this.transitionFrame = null;
+    if (this.transitionTimer !== null) clearTimeout(this.transitionTimer);
+    this.transitionTimer = null;
+    this.resolveTransition?.();
+    this.resolveTransition = null;
+    this.scattering = false;
+    if (!this.destroyed) this.changeDetector.markForCheck();
+  }
+
   async morphToConstellation(targets: ConstellationMorphStar[]): Promise<void> {
-    if (!this.isBrowser || !targets.length) return;
-    const generation = ++this.transitionGeneration;
+    if (!this.isBrowser || this.destroyed || !this.initialized || !targets.length) return;
+    this.cancelTransition();
+    const generation = this.transitionGeneration;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.stopShootingStars();
     this.mappedStarCount = Math.min(targets.length, this.stars.length);
@@ -771,8 +835,21 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       }
     });
 
-    if (duration) await new Promise(resolve => setTimeout(resolve, duration));
-    if (generation !== this.transitionGeneration) return;
+    if (duration) {
+      await new Promise<void>(resolve => {
+        this.resolveTransition = resolve;
+        this.transitionTimer = this.zone.runOutsideAngular(() => setTimeout(() => {
+          if (this.destroyed || generation !== this.transitionGeneration) {
+            resolve();
+            return;
+          }
+          this.transitionTimer = null;
+          this.resolveTransition = null;
+          resolve();
+        }, duration));
+      });
+    }
+    if (this.destroyed || generation !== this.transitionGeneration) return;
     for (let index = 0; index < this.mappedStarCount; index++) {
       this.stars[index].style.transition = 'opacity 180ms ease';
       this.stars[index].style.opacity = '0';
@@ -781,8 +858,9 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   }
 
   scatterToRandom(origins: ConstellationMorphStar[]): void {
-    if (!this.isBrowser) return;
-    const generation = ++this.transitionGeneration;
+    if (!this.isBrowser || this.destroyed || !this.initialized) return;
+    this.cancelTransition();
+    const generation = this.transitionGeneration;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const duration = reducedMotion ? 0 : 900;
     this.scattering = true;
@@ -808,8 +886,10 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
       star.style.opacity = '0';
     }
     void this.el.nativeElement.offsetWidth;
-    requestAnimationFrame(() => {
-      if (generation !== this.transitionGeneration) return;
+    this.changeDetector.markForCheck();
+    this.transitionFrame = this.zone.runOutsideAngular(() => requestAnimationFrame(() => {
+      if (this.destroyed || generation !== this.transitionGeneration) return;
+      this.transitionFrame = null;
       this.stars.forEach((star, index) => {
         const size = Number(star.dataset['ambientSize'] ?? 2);
         star.style.transition = duration
@@ -823,10 +903,11 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
         star.style.boxShadow = 'none';
         star.style.opacity = '1';
       });
-    });
+    }));
 
-    setTimeout(() => {
-      if (generation !== this.transitionGeneration) return;
+    this.transitionTimer = this.zone.runOutsideAngular(() => setTimeout(() => {
+      if (this.destroyed || generation !== this.transitionGeneration) return;
+      this.transitionTimer = null;
       this.mappedStarCount = 0;
       this.scattering = false;
       this.lastKnowledgeCamera = null;
@@ -836,12 +917,13 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
           star.style.animationDelay = Math.random() * 5 + 's';
         }
       });
-      this.createShootingStars();
-      this.shootingStarInterval = setInterval(() => this.createShootingStars(), this.shootingStarIntervalMs);
-    }, duration);
+      this.restartShootingStarEffect();
+      this.zone.run(() => this.changeDetector.markForCheck());
+    }, duration));
   }
 
   updateKnowledgeCamera(state: KnowledgeCameraState): void {
+    if (this.destroyed) return;
     this.lastKnowledgeCamera = state;
     if (!this.isBrowser || !state.parallaxActive || !this.knowledgeMode) return;
     const unitScale = Math.min(state.viewportWidth / 1000, state.viewportHeight / 700);
@@ -926,6 +1008,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
 
   private createShootingStars(): void {
+    if (this.destroyed || this.knowledgeMode || this.scattering) return;
     const container = this.el.nativeElement.querySelector('.starry-background');
     if (!container) {
       console.error('Starry background container not found!'); // Kept specific error message inline
@@ -1037,11 +1120,11 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
     }
     
     // Fade out the line after a delay
-    setTimeout(() => {
+    this.scheduleTimeout(() => {
       line.style.opacity = '0';
       
       // Remove the line after fade completes
-      setTimeout(() => {
+      this.scheduleTimeout(() => {
         line.remove();
         const index = this.drawingLines.indexOf(line);
         if (index !== -1) {
@@ -1083,12 +1166,14 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
         }
       }
     `;
+    style.dataset['starryBackground'] = '';
     document.head.appendChild(style);
+    this.animationStyle = style;
   }
 
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || this.destroyed || !this.initialized) return;
     
     this.mouseX = event.clientX;
     this.mouseY = event.clientY;
@@ -1104,7 +1189,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
   @HostListener('mousedown')
   onMouseDown(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || this.destroyed || !this.initialized) return;
     
     this.isDrawing = true;
     
@@ -1114,7 +1199,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
   @HostListener('mouseup')
   onMouseUp(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || this.destroyed || !this.initialized) return;
     
     this.isDrawing = false;
     this.lastX = 0;
@@ -1123,7 +1208,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
 
   @HostListener('mouseleave')
   onMouseLeave(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || this.destroyed || !this.initialized) return;
     
     this.isDrawing = false;
     this.lastX = 0;
@@ -1132,7 +1217,7 @@ export class StarryBackgroundComponent implements OnInit, OnDestroy {
   
   @HostListener('window:resize')
   onResize(): void {
-    if (!this.isBrowser) return;
+    if (!this.isBrowser || this.destroyed || !this.initialized) return;
     
     // Update the dimensions when the window is resized
     this.canvasWidth = window.innerWidth;

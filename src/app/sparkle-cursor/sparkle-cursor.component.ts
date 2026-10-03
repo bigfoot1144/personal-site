@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { afterNextRender, Component, OnDestroy, HostListener, Inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -8,38 +8,35 @@ import { isPlatformBrowser } from '@angular/common';
   template: '',
   styleUrl: './sparkle-cursor.component.scss'
 })
-export class SparkleCursorComponent implements OnInit, OnDestroy {
+export class SparkleCursorComponent implements OnDestroy {
   private customCursor: HTMLElement | null = null;
   private sparkles: HTMLElement[] = [];
   private isBrowser: boolean;
-  private sparkleInterval: any;
+  private sparkleInterval: ReturnType<typeof setInterval> | null = null;
+  private destroyed = false;
   private mouseX = 0;
   private mouseY = 0;
 
   constructor(
-    private el: ElementRef,
+    private readonly zone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
-  }
-
-  async ngOnInit() {
-    // Only execute browser-specific code if we're in a browser
-    if (this.isBrowser) {
+    afterNextRender(() => this.zone.runOutsideAngular(() => {
+      if (!this.isBrowser || this.destroyed) return;
       this.createCustomCursor();
-      document.body.appendChild(this.customCursor!); // Append cursor to the body
+      document.body.appendChild(this.customCursor!);
       this.sparkleInterval = setInterval(() => this.updateSparkles(), 50);
-    }
+    }));
   }
 
   ngOnDestroy(): void {
+    this.destroyed = true;
     if (this.isBrowser) {
-      if (this.sparkleInterval) {
-        clearInterval(this.sparkleInterval);
-      }
-      if (this.customCursor) {
-        document.body.removeChild(this.customCursor);
-      }
+      if (this.sparkleInterval !== null) clearInterval(this.sparkleInterval);
+      this.sparkleInterval = null;
+      this.customCursor?.remove();
+      this.customCursor = null;
       this.sparkles.forEach(sparkle => {
         if (sparkle.parentNode) {
           sparkle.parentNode.removeChild(sparkle);
@@ -80,6 +77,7 @@ export class SparkleCursorComponent implements OnInit, OnDestroy {
   }
 
   private updateSparkles(): void {
+    if (this.destroyed) return;
     // Append sparkles directly to the body
     const container = document.body;
 

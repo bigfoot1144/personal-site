@@ -1,12 +1,20 @@
 import { Routes } from '@angular/router';
-import { BioComponent } from './bio/bio.component';
-import { BlogIndexComponent } from './blog/blog-index.component';
-import { MarkdownPostComponent } from './blog/markdown-post.component';
 
 export const routes: Routes = [
-  { path: '', component: BioComponent },
-  { path: 'knowledge', loadComponent: () => import('./knowledge/knowledge.component').then(module => module.KnowledgeComponent), data: { preload: true } },
-  { path: 'blog', component: BlogIndexComponent },
-  { path: 'blog/:slug', component: MarkdownPostComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./storefront/storefront.component').then(module => module.StorefrontComponent)
+  },
+  {
+    path: '',
+    loadComponent: () => import('./content-layout/content-layout.component').then(module => module.ContentLayoutComponent),
+    children: [
+      { path: 'about', loadComponent: () => import('./bio/bio.component').then(module => module.BioComponent) },
+      { path: 'knowledge', loadComponent: () => import('./knowledge/knowledge.component').then(module => module.KnowledgeComponent) },
+      { path: 'blog', loadComponent: () => import('./blog/blog-index.component').then(module => module.BlogIndexComponent) },
+      { path: 'blog/:slug', loadComponent: () => import('./blog/markdown-post.component').then(module => module.MarkdownPostComponent) }
+    ]
+  },
   { path: '**', redirectTo: '' }
 ];

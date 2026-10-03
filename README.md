@@ -1,5 +1,18 @@
 # PersonalSite
 
+## Storefront homepage
+
+`/` is the interactive Lantern Lane scene rendered with Three.js. Select a shop to zoom in and enter:
+
+- **Learning Curriculum** → `/knowledge`
+- **Blog** → `/blog`
+- **About Me** → `/about` (the former homepage)
+- **Projects** → [GitHub](https://github.com/bigfoot1144)
+
+Portrait screens swipe horizontally between shops. Keyboard navigation, reduced motion, and a same-scene poster/link fallback are supported. The original starfield and drawing experience remain on the content pages, not the storefront.
+
+See [Storefront implementation and asset workflow](docs/storefront.md) for Blender export, optimization, debugging and browser checks. Normal development uses the published web assets and does not require Blender.
+
 ## Local Dev (Docker)
 
 To serve locally, run:
@@ -30,7 +43,38 @@ npm run build        # Production build
 npm run test         # Angular/Karma tests
 npm run test:markdown # Markdown converter fixture tests
 npm run test:knowledge # Knowledge compiler and performance tests
+npm run test:unit     # Complete headless unit suite
+npm run test:e2e      # Production SSR/browser checks
+npm run validate:storefront # Validate published scene assets and budgets
 ```
+
+## Git and scene revisions
+
+Keep scene/site work on your feature branch (currently `3d-storefront`). **Save in Blender before committing**: Git only records the file on disk, not unsaved scene edits.
+
+Commit these together when publishing a scene revision:
+
+- The editable master, `blender-codex-docker/work/scene/lantern_lane.blend`, and its original reference, `blender-codex-docker/work/references/Scene.png`.
+- Website code, tests, documentation, export scripts, camera metadata, `package.json`, and `package-lock.json`.
+- **All published files in `src/assets/storefront/`**, including both GLBs, poster, HDR, decoder files and asset report, plus `src/app/storefront/storefront.scene.json`. These are intentionally versioned so a fresh checkout can run without Blender.
+
+Dependencies, build caches, test reports, raw bakes/renders, automatic `.blend1` backups, `.checkpoints/`, and machine-local environment/configuration files are ignored. Shared OpenCode skills and safe environment templates remain versioned. `.gitattributes` marks scene/media assets as ordinary Git binaries; no Git LFS setup is required for the current files.
+
+Checkpoints stay on your machine; they are **not a remote backup**. Commit important milestones of the master `.blend`. Do not use `git clean -fdx` to tidy this workspace: it would delete ignored checkpoints and other local recovery data.
+
+From the repository root, review and commit:
+
+```bash
+git status --short --branch
+npm run validate:storefront
+git diff --check
+git add --dry-run .       # Preview: no caches, credentials or raw renders
+git add .
+git diff --cached --stat  # Review the exact staged changes
+git commit -m "Add interactive Blender storefront homepage"
+```
+
+For later scene-only work-in-progress commits, the existing web assets can stay unchanged; [publish a new web revision](docs/storefront.md#publish-optimized-browser-assets) when ready. Blender edits do not live-sync to the site.
 
 ## Blog Workflow
 

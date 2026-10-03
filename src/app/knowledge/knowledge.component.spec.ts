@@ -167,7 +167,7 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(getComputedStyle(fixture.nativeElement.querySelector('.edges path.curriculum-muted')).opacity)
       .toBe('0');
 
-    component.selectCurriculum('agentic');
+    (fixture.nativeElement.querySelector('#curriculum-tab-agentic') as HTMLButtonElement).click();
     fixture.detectChanges();
 
     expect(component.nodeMuted(agentic)).toBeFalse();
@@ -182,6 +182,8 @@ describe('KnowledgeComponent curriculum dock', () => {
     const roboticsElement = fixture.nativeElement.querySelector(
       `[data-placement-id="${robotics.placementId}"]`) as SVGGElement;
     const roboticsCore = roboticsElement.querySelector('.star-core') as SVGGraphicsElement;
+    // Assert settled styles, not an arbitrary frame of the filter transition.
+    roboticsCore.style.transition = 'none';
 
     // Robotics is not the selected curriculum (default is ml-training) → calm: same amber
     // color, a slight glow, but no pulse.
@@ -192,15 +194,15 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(getComputedStyle(roboticsCore).fill).toBe('rgb(255, 207, 112)');
 
     // Selecting robotics → its in-progress star gets the full glow and the pulse.
-    component.selectCurriculum('robotics');
+    (fixture.nativeElement.querySelector('#curriculum-tab-robotics') as HTMLButtonElement).click();
     fixture.detectChanges();
     expect(roboticsElement.classList).toContain('curriculum-focus');
-    expect(getComputedStyle(roboticsCore).animationName).toBe('status-pulse');
+    expect(getComputedStyle(roboticsCore).animationName).toContain('status-pulse');
     expect(getComputedStyle(roboticsCore).filter).toContain('8px');
     expect(getComputedStyle(roboticsCore).fill).toBe('rgb(255, 207, 112)');
 
     // Switching back to another curriculum quiets it again.
-    component.selectCurriculum('ml-training');
+    (fixture.nativeElement.querySelector('#curriculum-tab-ml-training') as HTMLButtonElement).click();
     fixture.detectChanges();
     expect(roboticsElement.classList).not.toContain('curriculum-focus');
     expect(getComputedStyle(roboticsCore).animationName).toBe('none');
@@ -280,11 +282,14 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(fixture.nativeElement.querySelector('.galaxy-route')).toBeNull();
     expect(fixture.nativeElement.querySelectorAll('.topic-node.hidden-node').length).toBe(0);
 
-    const cuda = component.galaxyStars.find(node => node.id === 'transformers')!;
-    component.select(cuda);
+    // Use a real child from the current compiled curriculum rather than a removed topic ID.
+    const child = component.galaxyStars[0];
+    expect(child).toBeDefined();
+    component.select(child);
+    fixture.changeDetectorRef.markForCheck();
     fixture.detectChanges();
 
-    expect(component.selected?.placementId).toBe(cuda.placementId);
+    expect(component.selected?.placementId).toBe(child.placementId);
     expect(fixture.nativeElement.querySelectorAll('.curriculum-bridge').length).toBe(0);
   });
 
@@ -345,4 +350,63 @@ describe('KnowledgeComponent curriculum dock', () => {
     expect(cappedScreenScale).toBeCloseTo(1.28, 5);
   });
 
+});
+
+describe('KnowledgeComponent transition lifetime', () => {
+  let fixture: ComponentFixture<KnowledgeComponent>;
+  let component: KnowledgeComponent;
+  let callbacks: FrameRequestCallback[];
+  let transition: ConstellationTransitionService;
+
+  beforeEach(async () => {
+    callbacks = [];
+    spyOn(window, 'requestAnimationFrame').and.callFake(callback => callbacks.push(callback));
+    spyOn(window, 'cancelAnimationFrame');
+    await TestBed.configureTestingModule({
+      imports: [KnowledgeComponent], providers: [provideRouter([])]
+    }).compileComponents();
+    transition = TestBed.inject(ConstellationTransitionService);
+    fixture = TestBed.createComponent(KnowledgeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('cancels startup and coalesced resize frames, including callbacks already queued for delivery', () => {
+    const morph = spyOn(transition, 'morphToConstellation').and.resolveTo();
+    const camera = spyOn(transition, 'updateKnowledgeCamera');
+    component.onKnowledgeResize();
+    component.onKnowledgeResize();
+    expect(callbacks.length).toBe(2);
+    fixture.destroy();
+    expect(window.cancelAnimationFrame).toHaveBeenCalledWith(1);
+    expect(window.cancelAnimationFrame).toHaveBeenCalledWith(2);
+    callbacks.forEach(callback => callback(0));
+    expect(morph).not.toHaveBeenCalled();
+    expect(camera).not.toHaveBeenCalled();
+  });
+
+  it('ignores a morph that completes after the knowledge view has been destroyed', async () => {
+    let finish!: () => void;
+    spyOn(transition, 'morphToConstellation').and.returnValue(new Promise<void>(resolve => { finish = resolve; }));
+    const mark = spyOn((component as any).changeDetector, 'markForCheck');
+    callbacks[0](0);
+    fixture.destroy();
+    finish();
+    await Promise.resolve();
+    expect(component.routeMorphing).toBeTrue();
+    expect(mark).not.toHaveBeenCalled();
+  });
+
+  it('rejects stale camera frames after replacement or destruction', () => {
+    component.selectCurriculum('agentic');
+    const oldCameraFrame = callbacks[callbacks.length - 1];
+    component.selectCurriculum('gpu');
+    const latestCameraFrame = callbacks[callbacks.length - 1];
+    const before = [component.scale, component.panX, component.panY];
+    oldCameraFrame(performance.now() + 1000);
+    expect([component.scale, component.panX, component.panY]).toEqual(before);
+    fixture.destroy();
+    latestCameraFrame(performance.now() + 1000);
+    expect([component.scale, component.panX, component.panY]).toEqual(before);
+  });
 });

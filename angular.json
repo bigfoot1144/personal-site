@@ -98,7 +98,11 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/onnxruntime"
+              {
+                "glob": "**/*",
+                "input": "./node_modules/onnxruntime-web/dist/",
+                "output": "onnxruntime/"
+              }
             ],
             "styles": [
               "src/styles.scss"

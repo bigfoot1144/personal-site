@@ -1,0 +1,14 @@
+# Keep authored scenes and published browser assets as ordinary Git binaries.
+# No Git LFS filters or history migration are required for the current assets.
+*.blend binary
+*.glb binary
+*.hdr binary
+*.exr binary
+*.ktx2 binary
+*.wasm binary
+*.onnx binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
