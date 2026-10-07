@@ -1,5 +1,5 @@
 {
-  "source": "blender-codex-docker/work/scene/lantern_lane.blend#Lantern Lane • storefront tour",
+  "source": "blender/scene/lantern_lane.blend#Lantern Lane • storefront tour",
   "sourceSha256": "c456f5ef20bfc249d2d8e7d2bbdd363be5987e165b44fa26d7c2b7c97b7d6db1",
   "sourceGlbSha256": "0fd3d8d091bf67c9d446499f52b8a86bf2983a72b4e3692f553fd938691bd847",
   "tools": {

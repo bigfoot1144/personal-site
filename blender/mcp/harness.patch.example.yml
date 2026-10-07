@@ -1,0 +1,28 @@
+# Merge this entry into the local DeepSeek Harness profile patch.
+# Replace /ABSOLUTE/PATH/TO/personal-site/blender with this checkout's blender/ path.
+# Linux host networking reaches Blender's loopback-only MCP listener.
+- insert:
+    - id: mcp-blender
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: blender
+        transport: stdio
+        command: docker
+        args:
+          - run
+          - --rm
+          - -i
+          - --init
+          - --pull=never
+          - --network=host
+          - --cap-drop=ALL
+          - --security-opt=no-new-privileges:true
+          - --pids-limit=512
+          - --env=BLENDER_HOST=127.0.0.1
+          - --env=BLENDER_PORT=9876
+          - --env=BLENDER_PROJECT_DIR=/ABSOLUTE/PATH/TO/personal-site/blender
+          - --env=DISABLE_TELEMETRY=true
+          - --env=BLENDER_MCP_SAFE_MODE=1
+          - --volume=/ABSOLUTE/PATH/TO/personal-site/blender:/workspace
+          - personal-site-blender-mcp:1.9.1
+        toolCallTimeoutMs: 180000

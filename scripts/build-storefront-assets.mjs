@@ -16,7 +16,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { values } = parseArgs({ options: {
   input: { type: 'string' }, 'ktx-bin': { type: 'string' }, 'poster-only': { type: 'boolean' }
 } });
-const work = pathJoin(root, 'blender-codex-docker/work/renders/web-export');
+const work = pathJoin(root, 'blender/renders/web-export');
 const output = pathJoin(root, 'src/assets/storefront');
 const temporary = pathJoin(root, '.tmp/storefront');
 const input = resolve(root, values.input ?? pathJoin(work, 'lantern-lane.baked.glb'));
@@ -35,7 +35,7 @@ async function publish(label, extension, data) {
   return { url: `/assets/storefront/${filename}`, bytes: data.length };
 }
 
-const posterInput = pathJoin(root, 'blender-codex-docker/work/renders/review/lower_surface_weathering/final_wide.png');
+const posterInput = pathJoin(root, 'blender/renders/review/lower_surface_weathering/final_wide.png');
 const posterData = await sharp(posterInput).webp({ quality: 86 }).toBuffer();
 const poster = { ...(await publish('poster', 'webp', posterData)), width: 1600, height: 1200 };
 if (values['poster-only']) {
@@ -155,7 +155,7 @@ await mkdir(pathJoin(output, 'basis'), { recursive: true });
 for (const file of ['basis_transcoder.js', 'basis_transcoder.wasm', 'README.md']) {
   await copyFile(pathJoin(root, 'node_modules/three/examples/jsm/libs/basis', file), pathJoin(output, 'basis', file));
 }
-const sourceHash = hash(await readFile(pathJoin(root, 'blender-codex-docker/work/scene/lantern_lane.blend')));
+const sourceHash = hash(await readFile(pathJoin(root, 'blender/scene/lantern_lane.blend')));
 const manifest = { ...source, assets, sourceSha256: sourceHash };
 const report = { source: source.source, sourceSha256: sourceHash, sourceGlbSha256: hash(await readFile(input)),
   tools: { node: process.version, gltfTransform: '4.5.1', ktx: '4.4.2', three: '0.180.0' },

@@ -56,7 +56,7 @@ venv/
 *.blend[0-9]*
 *.blend@
 *.autosave
-# Blender renders/checkpoints are scoped in blender-codex-docker/work/.gitignore.
+# Blender renders/checkpoints are scoped in blender/.gitignore.
 # DO NOT ignore *.blend, *.glb, *.hdr, *.webp or *.wasm globally:
 # the editable scene and published src/assets/storefront/ files belong in Git.
 

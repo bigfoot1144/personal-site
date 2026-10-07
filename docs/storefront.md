@@ -29,19 +29,21 @@ No browser-specific code executes during SSR. The old ONNX drawing runtime is lo
 
 ## Asset source and regeneration
 
-Canonical source: `blender-codex-docker/work/scene/lantern_lane.blend`, scene `Lantern Lane • storefront tour`.
+Canonical source: `blender/scene/lantern_lane.blend`, scene `Lantern Lane • storefront tour`.
 
 Normal `npm start` / `npm run build` consumes published files in `src/assets/storefront/`; **it does not require Blender or rebaking**. Both variants and their decoder files must be committed with the manifest.
 
+The workspace relocation updates source paths only. Published `sourceSha256` and baked-asset hashes still identify the last real export; they are not recomputed from newer scene edits or historical intermediate bakes. Rebuild those hashes only as part of a matched bake/export/publication.
+
 Regeneration requires the existing Blender session, Node 22+, installed npm development dependencies, and [KTX Software 4.4.2](https://github.com/KhronosGroup/KTX-Software/releases/tag/v4.4.2). Set `KTX_BIN` to its `bin/` directory, or place it at `.tmp/storefront/ktx/bin/`.
 
-Read `blender-codex-docker/work/AGENTS.md` before Blender work. Keep safe mode enabled, do not launch another Blender instance, and save a new numbered checkpoint. `BLENDER_PROJECT_DIR` may be unset: use the confirmed open `.blend` location, never an assumed container `/workspace` path.
+Read `blender/AGENTS.md` before Blender work. Use DeepSeek Harness's connected Blender MCP tools, keep safe mode enabled, do not launch another Blender instance, and save a new numbered checkpoint. Confirm the open host `.blend` location; the transport container's `/workspace` path is not a host Blender path. The optional Blender-only transport is documented in `blender/mcp/README.md`.
 
 ### Blender stages
 
-Helpers are in `blender-codex-docker/work/scripts/export_storefront.py`. They are intentionally **not automatically executed**. Use the connected session in small stages, or load them in Blender's own Text Editor. MCP safe mode requires explicit supported Python code, not `exec()` of an external script.
+Helpers are in `blender/scripts/export_storefront.py`. They are intentionally **not automatically executed**. Use the connected session in small stages, or load them in Blender's own Text Editor. MCP safe mode requires explicit supported Python code, not `exec()` of an external script.
 
-1. Save a **new numbered safety checkpoint** under `blender-codex-docker/work/.checkpoints/`, then `prepare()`. It copies evaluated visible source meshes, private materials, lights and world into a separate export scene. Source collections, construction inputs, font, camera animation and original scene remain intact.
+1. Save a **new numbered safety checkpoint** under `blender/.checkpoints/`, then `prepare()`. It copies evaluated visible source meshes, private materials, lights and world into a separate export scene. Source collections, construction inputs, font, camera animation and original scene remain intact.
 2. `preserve_coordinates()` retains per-source-object Generated/Object coordinates as geometry attributes, with private shader-group copies, before joining meshes. This prevents procedural textures from changing scale across an entire merged building.
 3. `reduce_foliage(0.16)` simplifies only export-copy curved leaves. Batch the eight bake groups and glass with `batch_group(id)`. The default skips UV unwrapping for **foliage and glass**; the other seven groups receive the explicit `WEB_UV` layer.
 4. `repair_normals(id)` clears custom split normals and recalculates normals outside for **all eight non-glass export batches**. The source has inward cube normals; leaving those in place corrupts illumination and road normal maps. Do **not** repair glass or edit the canonical meshes. Global recalc also reverses open striped cloth: run `restore_awning_faces('learning')` and `restore_awning_faces('about')` as described below. Inspect both corrected awnings, then save a new geometry checkpoint **before any bake**.
@@ -52,7 +54,7 @@ Helpers are in `blender-codex-docker/work/scripts/export_storefront.py`. They ar
 9. `finish_materials()` assigns the seven texture-based groups (`WEB baked • …`, with the existing reflective-road exception), thin PBR glass, and `WEB baked vertex • foliage`. Foliage uses `ShaderNodeVertexColor` (`WEB_Light`) → Emission → Output; all foliage UV layers and the temporary `WEB_Generated`/`WEB_Object` attributes are removed, while `WEB_Light` remains the active color and render color index 0. PNGs are reloaded with **`check_existing=False`** so an earlier failed bake cannot survive in Blender's image cache. The final export preview uses **Standard / None / exposure 0 / gamma 1**.
 10. `export_glb()` writes the real geometry to `renders/web-export/lantern-lane.baked.glb`. **`export_vertex_color='ACTIVE'` is required**: the default `MATERIAL` mode misses color used through the foliage Emission shader. Normals and tangents are exported; only the reflective road requires tangents, and warnings for unlit material data subsequently discarded by optimization are not missing-lighting errors. Inspect the overview and close approaches, save a numbered final checkpoint, and restore the original source scene in the UI. **Never save the derivative over the canonical source.**
 
-The current final review checkpoint is `blender-codex-docker/work/.checkpoints/159_web_final_review.blend`; future runs must use a new number, not overwrite it.
+The current final review checkpoint is `blender/.checkpoints/159_web_final_review.blend`; future runs must use a new number, not overwrite it.
 
 #### Open-cloth normal correction
 
@@ -75,7 +77,7 @@ Baked unlit materials and the baked-lit road opt out of a second runtime tone ma
 
 ### Publish optimized browser assets
 
-The poster input is `blender-codex-docker/work/renders/review/lower_surface_weathering/final_wide.png`. If that ignored render is absent in a fresh clone, render the original frame-1 overview at 1600×1200 to that location first, preserving/restoring the source settings. Normal website builds use the already-published WebP and do not need this intermediate.
+The poster input is `blender/renders/review/lower_surface_weathering/final_wide.png`. If that ignored render is absent in a fresh clone, render the original frame-1 overview at 1600×1200 to that location first, preserving/restoring the source settings. Normal website builds use the already-published WebP and do not need this intermediate.
 
 From the website root:
 

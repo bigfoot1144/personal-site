@@ -1,0 +1,5 @@
+*
+!Dockerfile
+!mcp_bridge.py
+!check.py
+!export_addon.py

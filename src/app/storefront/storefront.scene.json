@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "blender-codex-docker/work/scene/lantern_lane.blend#Lantern Lane • storefront tour",
+  "source": "blender/scene/lantern_lane.blend#Lantern Lane • storefront tour",
   "background": "#03182b",
   "bounds": {
     "min": [

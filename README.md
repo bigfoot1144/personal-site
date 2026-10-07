@@ -13,27 +13,22 @@ Portrait screens swipe horizontally between shops. Keyboard navigation, reduced 
 
 See [Storefront implementation and asset workflow](docs/storefront.md) for Blender export, optimization, debugging and browser checks. Normal development uses the published web assets and does not require Blender.
 
-## Local Dev (Docker)
+## Local development
 
-To serve locally, run:
-
-```bash
-docker run --rm -it \
-  -v "$PWD":/workspace \
-  -w /workspace \
-  benyamin/codex-sandbox:latest
-```
-
-Inside the container, start the app:
+Use Node 22+ and run these commands from the repository root:
 
 ```bash
-npm install -g ng
-cd /workspace/personal-site
-npm install
-npm run start -- --host 0.0.0.0
+npm ci
+npm start
 ```
 
-Then open: `http://localhost:4200`
+Then open `http://localhost:4200`. Angular CLI is installed locally with the project dependencies; no global CLI or agent container is required.
+
+## DeepSeek Harness and Blender
+
+Open this repository in DeepSeek Harness and use its configured Blender MCP tools with your existing desktop Blender session. The editable project lives in `blender/`; read [blender/AGENTS.md](blender/AGENTS.md) before scene work.
+
+The optional [Blender-only MCP bridge](blender/mcp/README.md) supplies the transport container and a portable Harness connector example. Model selection, authentication and machine-local Harness settings are managed outside this repository. Normal website builds use the published assets and do not require Blender.
 
 ## Useful Commands
 
@@ -54,7 +49,7 @@ Keep scene/site work on your feature branch (currently `3d-storefront`). **Save 
 
 Commit these together when publishing a scene revision:
 
-- The editable master, `blender-codex-docker/work/scene/lantern_lane.blend`, and its original reference, `blender-codex-docker/work/references/Scene.png`.
+- The editable master, `blender/scene/lantern_lane.blend`, and its original reference, `blender/references/Scene.png`.
 - Website code, tests, documentation, export scripts, camera metadata, `package.json`, and `package-lock.json`.
 - **All published files in `src/assets/storefront/`**, including both GLBs, poster, HDR, decoder files and asset report, plus `src/app/storefront/storefront.scene.json`. These are intentionally versioned so a fresh checkout can run without Blender.
 

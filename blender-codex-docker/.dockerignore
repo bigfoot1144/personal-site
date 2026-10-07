@@ -1,7 +1,0 @@
-*
-!Dockerfile
-!entrypoint.sh
-!mcp_bridge.py
-!check.py
-!export_addon.py
-!config.toml
